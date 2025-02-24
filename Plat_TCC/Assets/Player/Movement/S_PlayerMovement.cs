@@ -1,3 +1,4 @@
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,15 @@ public class S_PlayerMovement : MonoBehaviour
     [SerializeField, Range(1, 50), Tooltip("force which the player uses to doubleJump")]
     private float doubleJumpForce;
 
+    [SerializeField, Range(1, 20), Tooltip("Max Ground Speed Allowed ")]
+    private float maxGroundSpeed;
+
+    [SerializeField]
+    private float angularSpeed;
+
+    [SerializeField]
+    private Transform groundPoint;
+
     private InputSystem_Actions inputs;
 
     private Rigidbody rb;
@@ -18,9 +28,10 @@ public class S_PlayerMovement : MonoBehaviour
 
     private bool jumping = false;
     private bool jump = false;
+    private bool moving = false;
 
     private bool doubleJumping = false;
-    private bool doubleJump = false;
+    private bool doubleJump = false;    
 
     private void Awake()
     {
@@ -37,7 +48,7 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void Jump_performed(InputAction.CallbackContext obj)
     {
-        if (!jumping)
+        if (IsGrounded())
             jump = true;
         else if (!doubleJumping)
             doubleJump = true;
@@ -52,14 +63,16 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void Move_canceled(InputAction.CallbackContext obj)
     {
-        Debug.Log("Canceled");
+        //Debug.Log("Canceled");
         movementDirection = Vector2.zero;
+        moving = false;
     }
 
     private void Move_performed(InputAction.CallbackContext obj)
     {
-        Debug.Log(obj.ReadValue<Vector2>());
+        //Debug.Log(obj.ReadValue<Vector2>());
         movementDirection = obj.ReadValue<Vector2>();
+        moving = true;
     }
 
     void Start()
@@ -68,8 +81,11 @@ public class S_PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        rb.AddForce(new Vector3(movementDirection.x, 0, movementDirection.y) * accelerationForce, ForceMode.Acceleration);
+    {        
+        if(rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
+            rb.AddForce(transform.forward * accelerationForce, ForceMode.Acceleration);
+
+        
 
         if (jump)
         {
@@ -79,7 +95,8 @@ public class S_PlayerMovement : MonoBehaviour
         }
         else if (doubleJump)
         {
-            rb.AddForce(new Vector3(0, 0.5f, 0.5f) * doubleJumpForce, ForceMode.Impulse);
+            Vector3 doubleJumpDirection = (transform.forward * 1f) + (transform.up * 0.5f);
+            rb.AddForce(doubleJumpDirection.normalized * doubleJumpForce, ForceMode.Impulse);
             doubleJumping = true;
             doubleJump = false;
         }
@@ -87,6 +104,32 @@ public class S_PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!moving) return;
+
+        Vector3 moveDir = new Vector3(movementDirection.x, 0 , movementDirection.y);
+        Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * angularSpeed);
+    }
+
+    bool IsGrounded()
+    {
+        bool ret = false;
+        LayerMask groundMask = 1<<6;
+        Collider[] results = Physics.OverlapSphere(groundPoint.position, 0.5f, groundMask);
+        if (results != null && results.Length > 0)
+        {
+            ret = true;
+            jumping = false;
+            doubleJumping = false;
+        }
+
+        return ret;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundPoint.position, 0.5f);
     }
 }
