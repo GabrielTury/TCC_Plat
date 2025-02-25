@@ -31,12 +31,15 @@ public class S_PlayerMovement : MonoBehaviour
     private bool moving = false;
 
     private bool doubleJumping = false;
-    private bool doubleJump = false;    
+    private bool doubleJump = false;
+
+    private IMoveState[] moveStates;
 
     private void Awake()
     {
         inputs = new InputSystem_Actions();
         rb = GetComponent<Rigidbody>();
+        moveStates = GetComponents<IMoveState>();
     }
     private void OnEnable()
     {
@@ -44,6 +47,12 @@ public class S_PlayerMovement : MonoBehaviour
         inputs.Player.Move.performed += Move_performed;
         inputs.Player.Move.canceled += Move_canceled;
         inputs.Player.Jump.performed += Jump_performed;
+        inputs.Player.Attack.performed += Attack_performed;
+    }
+
+    private void Attack_performed(InputAction.CallbackContext obj)
+    {
+        throw new System.NotImplementedException();
     }
 
     private void Jump_performed(InputAction.CallbackContext obj)
@@ -59,6 +68,8 @@ public class S_PlayerMovement : MonoBehaviour
         inputs.Disable();
         inputs.Player.Move.performed -= Move_performed;
         inputs.Player.Move.canceled -= Move_canceled;
+        inputs.Player.Jump.performed -= Jump_performed;
+        inputs.Player.Attack.performed -= Attack_performed;
     }
 
     private void Move_canceled(InputAction.CallbackContext obj)
