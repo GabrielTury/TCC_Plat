@@ -11,11 +11,7 @@ public interface IMoveState
 
     public void Attack_Perform(InputAction.CallbackContext obj);
 
-    public void MoveFixedUpdate();
+    public void StateFixedUpdate();
 
-    public void JumpFixedUpdate();
-
-    public void AttackFixedUpdate();
-
-    public void MoveUpdate();
+    public void StateUpdate();
 }
