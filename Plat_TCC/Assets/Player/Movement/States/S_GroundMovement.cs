@@ -2,11 +2,14 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(S_PlayerMovement))]
+[RequireComponent(typeof(S_PlayerMovement), typeof(Rigidbody))]
 public class S_GroundMovement : MonoBehaviour, IMoveState
 {
     #region Components
     private Rigidbody rb;
+
+    private S_PlayerMovement playerMovement;
+    private S_GrapplingMovement grapplingMovement;
     #endregion
     #region Movement Variables
     [Header("Ground Movement")]
@@ -40,7 +43,8 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     #endregion
     public void Attack_Perform(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        if (grapplingMovement)
+            playerMovement.ChangeState(grapplingMovement);
     }
 
     public void Jump_Perform(InputAction.CallbackContext obj)
@@ -97,6 +101,8 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerMovement = GetComponent<S_PlayerMovement>();
+        grapplingMovement = GetComponent<S_GrapplingMovement>();
     }
 
     bool IsGrounded()
@@ -117,6 +123,12 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundPoint.position, 0.5f);
+    }
+
+    public void Attack_Cancel(InputAction.CallbackContext obj)
+    {
+        Debug.Log("(S_GroundMovement::Attack_Cancel) This does nothing and should not be called");
+        return;
     }
 #endif
     //@todo colocar gravidade extra, alterar o controle do personagem quando no ar, tempo de parada após perder input

@@ -23,11 +23,17 @@ public class S_PlayerMovement : MonoBehaviour
         inputs.Player.Move.canceled += Move_canceled;
         inputs.Player.Jump.performed += Jump_performed;
         inputs.Player.Attack.performed += Attack_performed;
+        inputs.Player.Attack.canceled += Attack_canceled;
+    }
+
+    private void Attack_canceled(InputAction.CallbackContext obj)
+    {
+        activeState.Attack_Cancel(obj);
     }
 
     private void Attack_performed(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        activeState.Attack_Perform(obj);
     }
 
     private void Jump_performed(InputAction.CallbackContext obj)
@@ -42,6 +48,7 @@ public class S_PlayerMovement : MonoBehaviour
         inputs.Player.Move.canceled -= Move_canceled;
         inputs.Player.Jump.performed -= Jump_performed;
         inputs.Player.Attack.performed -= Attack_performed;
+        inputs.Player.Attack.canceled -= Attack_canceled;
     }
 
     private void Move_canceled(InputAction.CallbackContext obj)
@@ -68,6 +75,19 @@ public class S_PlayerMovement : MonoBehaviour
     void Update()
     {
         activeState.StateUpdate();
+    }
+
+    public void ChangeState(IMoveState state)
+    {
+        foreach (IMoveState m in moveStates)
+        {
+            if (m == state)
+            {
+                Debug.Log("Changed State to: "+ state.ToString());
+                activeState = state;
+                break;
+            }
+        }
     }
 
 }
