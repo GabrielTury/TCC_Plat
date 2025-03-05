@@ -58,7 +58,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     public void StateFixedUpdate()
     {
         if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
-            rb.AddForce(transform.forward * accelerationForce, ForceMode.Acceleration);
+        {
+            Vector3 moveDirection = GetCameraRelativeDirection();
+            rb.AddForce(moveDirection * accelerationForce, ForceMode.Acceleration);
+        }
 
         if (jump)
         {
@@ -79,10 +82,13 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         if (!moving) return;
 
-        Vector3 moveDir = new Vector3(movementDirection.x, 0, movementDirection.y);
-        Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+        Vector3 moveDir = GetCameraRelativeDirection();
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * angularSpeed);
+        if (moveDir != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * angularSpeed);
+        }
     }
 
     public void Move_Cancel(InputAction.CallbackContext obj)
@@ -105,7 +111,8 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         grapplingMovement = GetComponent<S_GrapplingMovement>();
     }
 
-    bool IsGrounded()
+    #region Private Specific Methods
+    private bool IsGrounded()
     {
         bool ret = false;
         LayerMask groundMask = 1 << 6;
@@ -118,6 +125,23 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
         return ret;
     }
+
+    private Vector3 GetCameraRelativeDirection()
+    {
+        if (Camera.main == null) return Vector3.zero;
+
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+
+        // Flatten the vectors to avoid unwanted vertical movement
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+
+        return (forward * movementDirection.y + right * movementDirection.x).normalized;
+    }
+    #endregion//Private Specific Methods
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
