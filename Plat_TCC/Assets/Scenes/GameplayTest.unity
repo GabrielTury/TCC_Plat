@@ -628,10 +628,11 @@ MonoBehaviour:
   hookStart: {fileID: 1036568274}
   grappable:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 128
   maxGrappleDistance: 25
   maxHangingRangeMultiplier: 0.8
   minHangingRangeMultiplier: 0.23
+  aimRadius: 1.83
   lineDrawSpeed: 0.86
 --- !u!1 &677111346
 GameObject:
@@ -645,6 +646,7 @@ GameObject:
   - component: {fileID: 677111349}
   - component: {fileID: 677111353}
   - component: {fileID: 677111352}
+  - component: {fileID: 677111354}
   - component: {fileID: 677111351}
   m_Layer: 0
   m_Name: CinemachineCamera
@@ -845,6 +847,36 @@ MonoBehaviour:
       Wait: 1
       Time: 2
     Restrictions: 0
+--- !u!114 &677111354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677111346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraRadius: 0.4
+  Decollision:
+    Enabled: 1
+    ObstacleLayers:
+      serializedVersion: 2
+      m_Bits: 65
+    UseFollowTarget:
+      Enabled: 0
+      YOffset: 0
+    Damping: 0.5
+    SmoothingTime: 0
+  TerrainResolution:
+    Enabled: 1
+    TerrainLayers:
+      serializedVersion: 2
+      m_Bits: 65
+    MaximumRaycast: 10
+    Damping: 0.5
 --- !u!1 &1036568273
 GameObject:
   m_ObjectHideFlags: 0
@@ -978,7 +1010,7 @@ Transform:
   m_GameObject: {fileID: 1145426563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.64, y: 1.83, z: 5.23}
+  m_LocalPosition: {x: 1.64, y: 1.8, z: 4.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

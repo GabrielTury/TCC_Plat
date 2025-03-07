@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,6 +24,10 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     [SerializeField, Tooltip("The minimum distance the player can stay on the rope (This is a multiplier that takes the start position as base, so 0.2 = 20% of the distance from starting point to the attachPoint)"), Range(0, 1)]
     private float minHangingRangeMultiplier;
+
+    [InspectorLabel("Aim Assist Strength")]
+    [SerializeField, Tooltip("The radius of the aim assist"), Range(0.1f, 3f)]
+    private float aimRadius;
 
     private Vector3 anchorPoint;
 
@@ -69,6 +74,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     public void StateUpdate()
     {
         DrawLine();
+        
     }
 
     private void StartSwing()
@@ -76,8 +82,8 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         if(joint == null)
             joint = gameObject.AddComponent<SpringJoint>();
 
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxGrappleDistance, grappable))
+        RaycastHit hit;        
+        if (Physics.SphereCast(Camera.main.transform.position, aimRadius, Camera.main.transform.forward, out hit, maxGrappleDistance, grappable))
         {
             anchorPoint = hit.point;
             joint.autoConfigureConnectedAnchor = false;
@@ -113,6 +119,14 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
         lr.SetPosition(0, hookStart.position);
         lr.SetPosition(1, currentHookPoint);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.forward * maxGrappleDistance);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(Camera.main.transform.position + (Camera.main.transform.forward * (maxGrappleDistance / 2)), aimRadius);
     }
 
 }
