@@ -12,11 +12,15 @@ O jogo é primariamente jogado com controle, mas também será possivel jogar co
 - Câmera: Joystick direito/ Mouse
 - Grappling Hook: R2 / LMB
 ## Referências
-As principais referências para o projeto são jogos como *Super Mario 64*, *A Hat in Time* e *Astro Bot*, assim como o projeto *Leaf Hopper* feito por alguns membros desse grupo em 2023.
+*Super Mario 64* é a principal referência para o level design devido a seus levels famosos e que servem de base até hoje para jogos da plataforma 3D, e casam muito bem com a ideia do jogo.
+*A Hat in Time* é uma referência artística pelo seu estilo cartoonizado e design de personagens.
+*Snake Pass* é um jogo com o visual cartoonizado e bonito, parecido com oque queremos atingir com o projeto.
+*Astro Bot* e *Super Mario Odyssey* são exemplos de jogos no estilo com mecânicas mais modernas que completam o jogo e mantém o game design atual, mecânicas como o movimento e câmera usam de referência estes jogos mais modernos.
+*Leaf Hopper* é um jogo feito por alguns membros do grupo no módulo de Unreal do curso, que serve como inspiração e experiência no projeto do TCC.
 # Membros da Equipe
 - Artur Amorim Damasio da Silva (RA00318690) - Enemy Design, Environment Design
 - Gabriel Tury (RA00318926) - Gameplay Programmer, Game Design
-- Gabriel W. - Music, SFX, VFX
+- Gabriel W. (RA00320450) - Music, SFX, VFX
 - Mateus Martins Torres (RA00318801) - Level Design, Environment Design
 - Ryann Thierry Passos de Medeiros (RA00320452) - UI/UX Programming & Design
 - Vitor Hickmann (RA00319948) - 3D Artist
