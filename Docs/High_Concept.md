@@ -8,7 +8,7 @@ O jogo é em 3D com visão em terceira pessoa. O jogador poderá mover a câmera
 ## Interação/Gameplay
 O jogo é primariamente jogado com controle, mas também será possivel jogar com teclado e mouse.
 - Movimentação: Joystick esquerdo / WASD
-- Pulo: Botão X / Barra de espaço
+- Pulo/Dash: Botão X / Barra de espaço
 - Câmera: Joystick direito/ Mouse
 - Grappling Hook: R2 / LMB
 ## Referências
