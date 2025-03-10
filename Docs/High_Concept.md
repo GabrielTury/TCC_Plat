@@ -16,7 +16,7 @@ O jogo é primariamente jogado com controle, mas também será possivel jogar co
 *A Hat in Time* é uma referência artística pelo seu estilo cartoonizado e design de personagens.
 *Snake Pass* é um jogo com o visual cartoonizado e bonito, parecido com oque queremos atingir com o projeto.
 *Astro Bot* e *Super Mario Odyssey* são exemplos de jogos no estilo com mecânicas mais modernas que completam o jogo e mantém o game design atual, mecânicas como o movimento e câmera usam de referência estes jogos mais modernos.
-*Leaf Hopper* é um jogo feito por alguns membros do grupo no módulo de Unreal do curso, que serve como inspiração e experiência no projeto do TCC.
+*Leaf Hopper* é um jogo feito por alguns membros do grupo no módulo de Unreal do curso, que serve como inspiração e experiência no projeto do TCC, link: gh repo clone Gigamatts/Forest-Game
 # Membros da Equipe
 - Artur Amorim Damasio da Silva (RA00318690) - Enemy Design, Environment Design
 - Gabriel Tury (RA00318926) - Gameplay Programmer, Game Design
