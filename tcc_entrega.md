@@ -19,4 +19,4 @@ As principais referências para o projeto são jogos como *Super Mario 64*, *A H
 - Gabriel W. - Music, SFX, VFX
 - Mateus Martins Torres (RA00318801) - Level Design, Environment Design
 - Ryann Thierry Passos de Medeiros (RA00320452) - UI/UX Programming & Design
-- Vitor Hickmann (RA00319948) - Character Design
+- Vitor Hickmann (RA00319948) - 3D Artist
