@@ -142,6 +142,26 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         return (forward * movementDirection.y + right * movementDirection.x).normalized;
     }
     #endregion//Private Specific Methods
+
+#region Unused Methods
+    public void MoveCable_Cancel(InputAction.CallbackContext obj)
+    {
+        //throw new System.NotImplementedException();
+        return;
+    }
+
+    public void MoveCable_Perform(InputAction.CallbackContext obj)
+    {
+        //throw new System.NotImplementedException();
+        return;
+    }
+
+    public void Attack_Cancel(InputAction.CallbackContext obj)
+    {        
+        return;
+    }
+    #endregion// Unused Methods
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
@@ -149,11 +169,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         Gizmos.DrawWireSphere(groundPoint.position, 0.5f);
     }
 
-    public void Attack_Cancel(InputAction.CallbackContext obj)
-    {
-        Debug.Log("(S_GroundMovement::Attack_Cancel) This does nothing and should not be called");
-        return;
-    }
+
 #endif
     //@todo colocar gravidade extra, alterar o controle do personagem quando no ar, tempo de parada após perder input
 }

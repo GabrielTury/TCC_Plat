@@ -6,8 +6,11 @@ using UnityEngine.InputSystem;
 public class S_GrapplingMovement : MonoBehaviour, IMoveState
 {
     #region Components
+    private Rigidbody rb;
+
     private SpringJoint joint;
     private LineRenderer lr;
+
     [Header("Components")]
     [SerializeField]
     private Transform hookStart;
@@ -35,6 +38,19 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     [Space(2), Header("Visuals"), Range(0,5), SerializeField]
     private float lineDrawSpeed;
+
+    private Vector2 inputDirection;
+
+    [InspectorLabel("Movement Swing Force")]
+    [Space(2), Header("Movement"), SerializeField, Tooltip("Force which the player can mvoe while swinging")]
+    private float moveForce;
+
+    [InspectorLabel("Player Vertical Speed")]
+    [SerializeField, Tooltip("Speed which the player can extend/retract the cable")]
+    private float cableSpeed;
+
+    private float cableMoveDir;
+
     #endregion
     private void Awake()
     {
@@ -58,17 +74,21 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     public void Move_Cancel(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        inputDirection = Vector3.zero;
     }
 
     public void Move_Perform(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        inputDirection = obj.ReadValue<Vector2>();
     }
 
     public void StateFixedUpdate()
     {
-        //throw new System.NotImplementedException();
+        if (joint != null)
+        {
+            SwingMovement();
+            CableMovement();
+        }
     }
 
     public void StateUpdate()
@@ -76,7 +96,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         DrawLine();
         
     }
-
+#region Swing
     private void StartSwing()
     {
         if(joint == null)
@@ -110,7 +130,64 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         if(joint != null)
             Destroy(joint);
     }
+    #endregion//Swing
+#region Swing Movement
+    private void SwingMovement()
+    {
+        rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Force);
+    }
 
+    private Vector3 GetCameraRelativeDirection()
+    {
+        if (Camera.main == null) return Vector3.zero;
+
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+
+        // Flatten the vectors to avoid unwanted vertical movement
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+
+        return (forward * inputDirection.y + right * inputDirection.x).normalized;
+    }
+    #endregion //Swing Movement
+#region Cable Movement
+
+    private void CableMovement()
+    {
+        if (cableMoveDir == 0) return;
+
+        if (cableMoveDir > 0)
+        {
+            Vector3 dirToPoint = anchorPoint - transform.position;
+            rb.AddForce(dirToPoint.normalized * moveForce, ForceMode.Force);
+
+            float distFromPoint = Vector3.Distance(transform.position, anchorPoint);
+
+            joint.maxDistance = distFromPoint * 0.8f;
+            joint.minDistance = distFromPoint * 0.25f;
+        }
+        else if (cableMoveDir < 0)
+        {
+            float distFromPoint = Vector3.Distance(transform.position, anchorPoint) + cableSpeed;
+
+            joint.maxDistance = distFromPoint * 0.8f;
+            joint.minDistance = distFromPoint * 0.25f;
+        }
+    }
+    public void MoveCable_Perform(InputAction.CallbackContext obj)
+    {
+        cableMoveDir = obj.ReadValue<float>();
+    }
+
+    public void MoveCable_Cancel(InputAction.CallbackContext obj)
+    {
+        cableMoveDir = 0;
+    }
+
+#endregion //Cable Movement
     private void DrawLine()
     {
         if (!joint) return;

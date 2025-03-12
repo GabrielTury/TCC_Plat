@@ -2,7 +2,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public interface IMoveState
-{    
+{
+    /// <summary>
+    /// Needs to be called when Input "MoveCable".cancel is executed
+    /// </summary>
+    /// <param name="obj">Input System action callback value</param>
+    public void MoveCable_Cancel(InputAction.CallbackContext obj);
+    /// <summary>
+    /// Needs to be called when Input "MoveCable".perform is executed
+    /// </summary>
+    /// <param name="obj">Input System action callback value</param>
+    public void MoveCable_Perform(InputAction.CallbackContext obj);
     /// <summary>
     /// Needs to be called when Input "Move".perform is executed
     /// </summary>
