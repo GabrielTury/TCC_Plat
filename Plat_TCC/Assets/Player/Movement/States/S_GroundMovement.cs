@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,7 +10,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     private Rigidbody rb;
 
     private S_PlayerMovement playerMovement;
-    private S_GrapplingMovement grapplingMovement;
+    private S_GrapplingMovement grapplingMovement;//see S_PlayerMovement ChangeState() note
     #endregion
     #region Movement Variables
     [Header("Ground Movement")]
@@ -40,11 +41,17 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     [SerializeField, Range(1, 50), Tooltip("force which the player uses to doubleJump")]
     private float doubleJumpForce;
+
+    [SerializeField, Header("Temporary"), Range(0,20)]
+    private float gravityForce;
     #endregion
     public void Attack_Perform(InputAction.CallbackContext obj)
     {
         if (grapplingMovement)
+        {
             playerMovement.ChangeState(grapplingMovement);
+            grapplingMovement.Attack_Perform(obj);
+        }
     }
 
     public void Jump_Perform(InputAction.CallbackContext obj)
@@ -75,7 +82,12 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             rb.AddForce(doubleJumpDirection.normalized * doubleJumpForce, ForceMode.Impulse);
             doubleJumping = true;
             doubleJump = false;
-        }        
+        }      
+        
+        if(!IsGrounded())
+        {
+            rb.AddForce(Vector3.down * gravityForce, ForceMode.Acceleration);
+        }
     }
 
     public void StateUpdate()

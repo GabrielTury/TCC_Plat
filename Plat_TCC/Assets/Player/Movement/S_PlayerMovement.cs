@@ -6,6 +6,9 @@ public class S_PlayerMovement : MonoBehaviour
 {
     private InputSystem_Actions inputs;
 
+    [SerializeField]
+    private Transform groundPoint;
+
 
     private IMoveState[] moveStates;
     private IMoveState activeState;
@@ -30,12 +33,12 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void MoveCable_canceled(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        activeState.MoveCable_Cancel(obj);
     }
 
     private void MoveCable_performed(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        activeState.MoveCable_Perform(obj);
     }
 
     private void Attack_canceled(InputAction.CallbackContext obj)
@@ -91,7 +94,7 @@ public class S_PlayerMovement : MonoBehaviour
         activeState.StateUpdate();
     }
 
-    public void ChangeState(IMoveState state)
+    public void ChangeState(IMoveState state)//change this to work with a enum
     {
         foreach (IMoveState m in moveStates)
         {
@@ -103,5 +106,4 @@ public class S_PlayerMovement : MonoBehaviour
             }
         }
     }
-
 }

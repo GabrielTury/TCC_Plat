@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody), typeof(S_PlayerMovement), typeof(LineRenderer))]
 public class S_GrapplingMovement : MonoBehaviour, IMoveState
 {
+    
+    S_PlayerMovement playerMovement;
+    S_GroundMovement groundMovement;//See S_PlayerMovement ChangeState() note
     #region Components
     private Rigidbody rb;
 
@@ -29,7 +32,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     private float minHangingRangeMultiplier;
 
     [InspectorLabel("Aim Assist Strength")]
-    [SerializeField, Tooltip("The radius of the aim assist"), Range(0.1f, 3f)]
+    [SerializeField, Tooltip("The radius of the aim assist"), Range(0.1f, 5f)]
     private float aimRadius;
 
     private Vector3 anchorPoint;
@@ -54,17 +57,21 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     #endregion
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         lr = GetComponent<LineRenderer>(); 
         lr.positionCount = 0;
+        playerMovement = GetComponent<S_PlayerMovement>();
+        groundMovement = GetComponent<S_GroundMovement>();
     }
     public void Attack_Perform(InputAction.CallbackContext obj)
     {
-        StartSwing();
+        StartSwing();        
     }
 
     public void Attack_Cancel(InputAction.CallbackContext obj)
     {
         StopSwing();
+        playerMovement.ChangeState(groundMovement);
     }
 
     public void Jump_Perform(InputAction.CallbackContext obj)
@@ -99,9 +106,11 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 #region Swing
     private void StartSwing()
     {
+        Debug.Log("Start Swing");
         if(joint == null)
             joint = gameObject.AddComponent<SpringJoint>();
 
+        Debug.Log("Before Cast");
         RaycastHit hit;        
         if (Physics.SphereCast(Camera.main.transform.position, aimRadius, Camera.main.transform.forward, out hit, maxGrappleDistance, grappable))
         {
@@ -120,7 +129,9 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
             lr.positionCount = 2;
             currentHookPoint = hookStart.position;
+            Debug.Log(anchorPoint);
         }
+            Debug.Log(hit.collider.name);
 
     }
 
