@@ -549,7 +549,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522056218}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b0f051babd32f37419198472b849c54d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -761,8 +761,20 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3338506916138432338, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: grappleForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338506916138432338, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: lineDrawSpeed
-      value: 2.02
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338506916138432338, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: maxHangingRangeMultiplier
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338506916138432338, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: minHangingRangeMultiplier
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3989175100169348947, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -807,6 +819,10 @@ PrefabInstance:
     - target: {fileID: 6415675410843183998, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719966718222377910, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: doubleJumpAngle
+      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

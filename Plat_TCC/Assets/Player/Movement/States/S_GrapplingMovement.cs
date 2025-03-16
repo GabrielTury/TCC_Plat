@@ -39,7 +39,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     private Vector3 currentHookPoint;
 
-    [Space(2), Header("Visuals"), Range(0,5), SerializeField]
+    [Space(2), Header("Visuals"), Range(0,15), SerializeField]
     private float lineDrawSpeed;
 
     private Vector2 inputDirection;
@@ -51,6 +51,10 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     [InspectorLabel("Player Vertical Speed")]
     [SerializeField, Tooltip("Speed which the player can extend/retract the cable")]
     private float cableSpeed;
+
+
+    [SerializeField, InspectorLabel("Innital Grappling Force"), Tooltip("Force towards the anchor point when starting the grapple")]
+    private float grappleForce = 5;
 
     private float cableMoveDir;
 
@@ -130,6 +134,8 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             lr.positionCount = 2;
             currentHookPoint = hookStart.position;
             Debug.Log(anchorPoint);
+
+            rb.AddForce((anchorPoint - transform.position) * grappleForce, ForceMode.Impulse);//add movement to the player towards the grapple point
         }
             Debug.Log(hit.collider.name);
 

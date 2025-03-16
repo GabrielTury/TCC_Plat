@@ -17,6 +17,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     [SerializeField, Range(1, 50), Tooltip("Rate at which the player will accelerate when moving")]
     private float accelerationForce;
 
+    [SerializeField, Range(0, 1), Tooltip("Percentage of movement efficiency compared to the ground movement")]
+    private float airMovementMultiplier = 1f;
+    private float airMultiplier = 1f;
+
     [SerializeField, Range(1, 20), Tooltip("Max Ground Speed Allowed ")]
     private float maxGroundSpeed;
 
@@ -42,6 +46,9 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     [SerializeField, Range(1, 50), Tooltip("force which the player uses to doubleJump")]
     private float doubleJumpForce;
 
+    [SerializeField, Range(0, 90), Tooltip("Double Jump angle of movement 90 is straigth up and 0 straigth forward")]
+    private float doubleJumpAngle;
+
     [SerializeField, Header("Temporary"), Range(0,20)]
     private float gravityForce;
     #endregion
@@ -64,12 +71,13 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     public void StateFixedUpdate()
     {
+        //Ground Movement
         if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
         {
             Vector3 moveDirection = GetCameraRelativeDirection();
-            rb.AddForce(moveDirection * accelerationForce, ForceMode.Acceleration);
+            rb.AddForce(moveDirection * accelerationForce * airMultiplier, ForceMode.Acceleration);
         }
-
+        //Jump and double jump physics
         if (jump)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -77,8 +85,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         }
         else if (doubleJump)
         {
+            float normalizedAngle = doubleJumpAngle / 90f;
+            
             rb.linearVelocity = Vector3.zero;
-            Vector3 doubleJumpDirection = (transform.forward * 1f) + (transform.up * 0.5f);
+            Vector3 doubleJumpDirection = (transform.forward * (1 - normalizedAngle)) + (transform.up * normalizedAngle);
             rb.AddForce(doubleJumpDirection.normalized * doubleJumpForce, ForceMode.Impulse);
             doubleJumping = true;
             doubleJump = false;
@@ -107,6 +117,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         movementDirection = Vector2.zero;
         moving = false;
+        rb.linearVelocity = rb.linearVelocity/2f;
     }
 
     public void Move_Perform(InputAction.CallbackContext obj)
@@ -133,6 +144,11 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         {
             ret = true;
             doubleJumping = false;
+            airMultiplier = 1f; //efficiency of air movement, turns 1 to not affect ground movement
+        }
+        else
+        {
+            airMultiplier = airMovementMultiplier; //on air movement
         }
 
         return ret;
