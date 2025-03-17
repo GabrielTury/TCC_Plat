@@ -26,8 +26,9 @@ public class S_SettingsManager : MonoBehaviour
         previousMenuScript = originMenu;
     }
 
-    private void CloseSettings()
+    public void CloseSettings()
     {
+        StartCoroutine(HF.SmoothRectMove(settingsPanel, new Vector2(-1000, 0), 0.5f));
         previousMenuScript?.ResumeOperation();
     }
 }

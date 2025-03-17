@@ -9,6 +9,9 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
     private Camera mainCamera;
 
     [SerializeField]
+    private RectTransform mainPanel;
+
+    [SerializeField]
     private RawImage shadowScroller;
 
     [SerializeField]
@@ -77,12 +80,13 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
     public void ResumeOperation()
     {
-        Debug.Log("TitleScreen MyFunction called");
+        StartCoroutine(HF.SmoothRectMove(mainPanel, new Vector2(0, 0), 0.5f));
     }
 
     public void OpenSettingsMenu()
     {
         S_SettingsManager.instance.OpenSettings(this);
+        StartCoroutine(HF.SmoothRectMove(mainPanel, new Vector2(-800, 0), 0.5f));
     }
     #endregion
 }
