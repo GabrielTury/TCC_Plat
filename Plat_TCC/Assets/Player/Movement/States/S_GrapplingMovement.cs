@@ -31,6 +31,9 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     [SerializeField, Tooltip("The minimum distance the player can stay on the rope (This is a multiplier that takes the start position as base, so 0.2 = 20% of the distance from starting point to the attachPoint)"), Range(0, 1)]
     private float minHangingRangeMultiplier;
 
+    [SerializeField]
+    private float rotationSpeed;
+
     [InspectorLabel("Aim Assist Strength")]
     [SerializeField, Tooltip("The radius of the aim assist"), Range(0.1f, 5f)]
     private float aimRadius;
@@ -48,9 +51,13 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     [Space(2), Header("Movement"), SerializeField, Tooltip("Force which the player can mvoe while swinging")]
     private float moveForce;
 
-    [InspectorLabel("Player Vertical Speed")]
-    [SerializeField, Tooltip("Speed which the player can extend/retract the cable")]
+    [InspectorLabel("Hook Extend Speed")]
+    [SerializeField, Tooltip("Speed which the player can extend the cable")]
     private float cableSpeed;
+
+    [InspectorLabel("Hook Retract Force")]
+    [SerializeField, Tooltip("Force which the player can retract the cable")]
+    private float retractForce = 5;
 
 
     [SerializeField, InspectorLabel("Innital Grappling Force"), Tooltip("Force towards the anchor point when starting the grapple")]
@@ -105,7 +112,14 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     public void StateUpdate()
     {
         DrawLine();
-        
+
+        Vector3 moveDir = GetCameraRelativeDirection();
+
+        if (moveDir != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
     }
 #region Swing
     private void StartSwing()
@@ -135,7 +149,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             currentHookPoint = hookStart.position;
             Debug.Log(anchorPoint);
 
-            rb.AddForce((anchorPoint - transform.position) * grappleForce, ForceMode.Impulse);//add movement to the player towards the grapple point
+            rb.AddForce((anchorPoint - transform.position) * retractForce, ForceMode.Impulse);//add movement to the player towards the grapple point
         }
             Debug.Log(hit.collider.name);
 
