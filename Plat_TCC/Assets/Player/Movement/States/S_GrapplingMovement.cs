@@ -51,6 +51,9 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     [Space(2), Header("Movement"), SerializeField, Tooltip("Force which the player can mvoe while swinging")]
     private float moveForce;
 
+    [SerializeField]
+    private float maxSpeed;
+
     [InspectorLabel("Hook Extend Speed")]
     [SerializeField, Tooltip("Speed which the player can extend the cable")]
     private float cableSpeed;
@@ -124,14 +127,14 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 #region Swing
     private void StartSwing()
     {
-        Debug.Log("Start Swing");
-        if(joint == null)
-            joint = gameObject.AddComponent<SpringJoint>();
 
         Debug.Log("Before Cast");
         RaycastHit hit;        
         if (Physics.SphereCast(Camera.main.transform.position, aimRadius, Camera.main.transform.forward, out hit, maxGrappleDistance, grappable))
         {
+            if (joint == null)
+                joint = gameObject.AddComponent<SpringJoint>();
+
             anchorPoint = hit.point;
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = anchorPoint;
@@ -149,22 +152,34 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             currentHookPoint = hookStart.position;
             Debug.Log(anchorPoint);
 
-            rb.AddForce((anchorPoint - transform.position) * retractForce, ForceMode.Impulse);//add movement to the player towards the grapple point
+            rb.AddForce((anchorPoint - transform.position) * grappleForce, ForceMode.Impulse);//add movement to the player towards the grapple point
         }
-            Debug.Log(hit.collider.name);
+        else
+            StopSwing();
+            //Debug.Log(hit.collider.name);
 
     }
 
     private void StopSwing()
     {
         lr.positionCount = 0;
+        
+
         if(joint != null)
             Destroy(joint);
+        else
+        {
+            playerMovement.ChangeState(groundMovement); //case it has no joint (case it missed)
+            if (groundMovement != null)
+                groundMovement.RefreshDoubleJump();
+        }
     }
     #endregion//Swing
 #region Swing Movement
     private void SwingMovement()
     {
+        if (rb.linearVelocity.magnitude > maxSpeed) return;
+
         rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Force);
     }
 
@@ -193,7 +208,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         if (cableMoveDir > 0)
         {
             Vector3 dirToPoint = anchorPoint - transform.position;
-            rb.AddForce(dirToPoint.normalized * moveForce, ForceMode.Force);
+            rb.AddForce(dirToPoint.normalized * retractForce, ForceMode.Acceleration);
 
             float distFromPoint = Vector3.Distance(transform.position, anchorPoint);
 

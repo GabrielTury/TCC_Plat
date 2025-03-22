@@ -190,6 +190,11 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     }
     #endregion// Unused Methods
 
+    public void RefreshDoubleJump()
+    {
+        doubleJump = false;
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
