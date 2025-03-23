@@ -8,6 +8,25 @@ using UnityEngine.UI;
 
 public static class S_HelperFunctions
 {
+    public static float Wrap(float x, float x_min, float x_max)
+    {
+        return (((x - x_min) % (x_max - x_min)) + (x_max - x_min)) % (x_max - x_min) + x_min;
+    }
+
+    public static float WrapVolume(float value, float step, float min, float max)
+    {
+        value += step;
+        if (value > max)
+        {
+            value = min;
+        }
+        else if (value < min)
+        {
+            value = max;
+        }
+        return value;
+    }
+
     public static IEnumerator SmoothMove(Image objImage, Vector2 targetPosition, float duration)
     {
         Vector2 startPosition = objImage.rectTransform.anchoredPosition;
