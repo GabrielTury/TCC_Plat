@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using HF = S_HelperFunctions;
 
@@ -40,6 +41,20 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
     private Coroutine mainMenuAnimationCoroutine;
 
+    [SerializeField]
+    private InputGuideIcons inputGuideIcons;
+
+    [System.Serializable]
+    private struct InputGuideIcons
+    {
+        public Image navigateUpDown;
+        public Image confirm;
+        public Image cancel;
+    }
+
+    [SerializeField]
+    private UIControllerIcons[] inputIcons; // The icons for each input type
+
     private void Awake()
     {
         inputs = new InputSystem_Actions();
@@ -47,11 +62,15 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
     private void OnEnable()
     {
+        //GameEvents.UIInputMade += UpdateControllerIcons;
+        InputSystem.onActionChange += UpdateControllerIcons;
         inputs.Enable();
     }
 
     private void OnDisable()
     {
+        //GameEvents.UIInputMade -= UpdateControllerIcons;
+        InputSystem.onActionChange -= UpdateControllerIcons;
         inputs.Disable();
     }
 
@@ -106,7 +125,7 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         StartCoroutine(HF.SmoothRotateCamera(mainCamera, new Vector3(30+360, 50, 0), 5));
 
         // Move the shadow scroller to the right
-        StartCoroutine(HF.SmoothRawMove(shadowScroller, new Vector2(-750, 0), 1.5f));
+        StartCoroutine(HF.SmoothRawMove(shadowScroller, new Vector2(-550, 0), 1.5f));
 
         StartCoroutine(HF.SmoothMove(gameLogo, new Vector2(-570, 315), 1.5f));
         StartCoroutine(HF.SmoothScale(gameLogo, new Vector2(1f, 1f), 1.5f));
@@ -173,6 +192,53 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         }
         buttonAnimationCoroutine[buttonIndex] = StartCoroutine(HighlightAnimation(buttonIndex));
         lastButtonHighlighted = buttonIndex;
+    }
+
+    /// <summary>
+    /// Sets the controller input guide icons based on the current controller scheme.<br></br>
+    /// Is subscribed to and gets input info from the OnUIInputMade event.
+    /// </summary>
+    private void UpdateControllerIcons(object obj, InputActionChange change)
+    {
+        if (change == InputActionChange.ActionPerformed)
+        {
+            var inputAction = (InputAction)obj;
+            var lastControl = inputAction.activeControl;
+            var lastDevice = lastControl.device;
+
+            // Or you can check the device type directly
+            if (lastDevice is Gamepad)
+            {
+                // Check for specific gamepad types
+                if (lastDevice.description.manufacturer.Contains("Sony"))
+                {
+                    // PlayStation controller
+                    inputGuideIcons.navigateUpDown.sprite = inputIcons[2].updown;
+                    inputGuideIcons.confirm.sprite = inputIcons[2].a;
+                    inputGuideIcons.cancel.sprite = inputIcons[2].b;
+                }
+                else if (lastDevice.description.manufacturer.Contains("Microsoft"))
+                {
+                    // Xbox controller
+                    inputGuideIcons.navigateUpDown.sprite = inputIcons[1].updown;
+                    inputGuideIcons.confirm.sprite = inputIcons[1].a;
+                    inputGuideIcons.cancel.sprite = inputIcons[1].b;
+                }
+                else
+                {
+                    // Generic gamepad
+                    inputGuideIcons.navigateUpDown.sprite = inputIcons[1].updown;
+                    inputGuideIcons.confirm.sprite = inputIcons[1].a;
+                    inputGuideIcons.cancel.sprite = inputIcons[1].b;
+                }
+            }
+            else if (lastDevice is Keyboard)
+            {
+                inputGuideIcons.navigateUpDown.sprite = inputIcons[0].updown;
+                inputGuideIcons.confirm.sprite = inputIcons[0].a;
+                inputGuideIcons.cancel.sprite = inputIcons[0].b;
+            }
+        }
     }
 
     private IEnumerator HighlightAnimation(int buttonIndex)
