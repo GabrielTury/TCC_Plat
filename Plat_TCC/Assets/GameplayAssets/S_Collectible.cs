@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class S_Collectible : MonoBehaviour
 {
+
+    //@todo clean the code 
     public GameObject manager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
