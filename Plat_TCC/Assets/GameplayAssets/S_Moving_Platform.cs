@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class S_Moving_Platform : MonoBehaviour
+public class S_Moving_Platform : MonoBehaviour, IActivatableObjects
 {
     public Transform target;
     public float duration = 2;
+    public bool moved = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,5 +44,13 @@ public class S_Moving_Platform : MonoBehaviour
         }
 
         transform.position = destination;
+    }
+
+    public void ToggleButtonInteraction()
+    {
+        if (!moved)
+        {
+            Activate();
+        }
     }
 }
