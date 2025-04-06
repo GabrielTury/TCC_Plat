@@ -9,23 +9,25 @@ using UnityEditor.SceneManagement;
 // Define the custom editor tool specifically for SO_MissionInfo
 public class MissionObjectTagger : EditorWindow
 {
+    #region Visuals
     private ObjectField missionInfoField;
     private TextField tagField;
     private PopupField<string> targetArrayField;
     private Button populateButton;
     private Button clearButton;
     private Label statusLabel;
+    #endregion
 
     private SO_MissionInfo targetMissionInfo;
-    private string targetTag = "Player"; // Default tag
-    private string[] arrayOptions = new string[] { "Mission Objects", "Mission Coins" };
+    private string targetTag = "Insert Tag"; // Default tag
+    private string[] arrayOptions = new string[] { "Mission Objects", "Mission Collectibles" };
     private string selectedArray = "Mission Objects"; // Default array choice
 
-    [MenuItem("Tools/Mission Object Tagger")]
+    [MenuItem("Tools/Mission Creator")]
     public static void ShowWindow()
     {
         MissionObjectTagger window = GetWindow<MissionObjectTagger>();
-        window.titleContent = new GUIContent("Mission Object Tagger");
+        window.titleContent = new GUIContent("Mission Creator");
         window.minSize = new Vector2(400, 300);
     }
 
@@ -40,13 +42,13 @@ public class MissionObjectTagger : EditorWindow
         headerContainer.style.marginTop = 10;
 
         // Add a title
-        var titleLabel = new Label("Mission Object Tagger Tool");
+        var titleLabel = new Label("Mission Craetor Tool");
         titleLabel.style.fontSize = 18;
         titleLabel.style.unityFontStyleAndWeight = FontStyle.Bold;
         headerContainer.Add(titleLabel);
 
         // Add a description
-        var descriptionLabel = new Label("This tool helps you populate arrays in SO_MissionInfo with GameObjects from your scene based on a tag.");
+        var descriptionLabel = new Label("This tool automates the process of creating levels by automatically assigning active objects to desired mission");
         descriptionLabel.style.whiteSpace = WhiteSpace.Normal;
         headerContainer.Add(descriptionLabel);
 
@@ -134,13 +136,13 @@ public class MissionObjectTagger : EditorWindow
 
         if (selectedArray == "Mission Objects")
         {
-            count = targetMissionInfo.missionObjects?.Length ?? 0;
+            count = targetMissionInfo.missionObjectIds?.Length ?? 0;
             statusLabel.text = $"Mission Objects array has {count} GameObjects";
         }
-        else if (selectedArray == "Mission Coins")
+        else if (selectedArray == "Mission Collectibles")
         {
-            count = targetMissionInfo.missionCoins?.Length ?? 0;
-            statusLabel.text = $"Mission Coins array has {count} GameObjects";
+            count = targetMissionInfo.missionCollectibleIds?.Length ?? 0;
+            statusLabel.text = $"Mission Collectibles array has {count} GameObjects";
         }
     }
 
@@ -167,6 +169,8 @@ public class MissionObjectTagger : EditorWindow
         // Handle direct reference assignment based on array type
         if (selectedArray == "Mission Objects")
         {
+            EditorUtility.DisplayDialog("Not Implemented", $"Mission Objects not implemented yet, @ me at Discord ", "Just Wait");
+            return;
             // Create a new array of the correct size
             GameObject[] newArray = new GameObject[taggedObjects.Length];
 
@@ -177,21 +181,68 @@ public class MissionObjectTagger : EditorWindow
             }
 
             // Assign the array
-            targetMissionInfo.missionObjects = newArray;
+            //targetMissionInfo.missionObjects = newArray; // @wip
         }
-        else // Mission Coins
+        else // Mission Collectibles
         {
             // Create a new array of the correct size
-            GameObject[] newArray = new GameObject[taggedObjects.Length];
+            List<int> collectibleIds = new List<int>();
 
+            int collectibleIndex = 0; //this will serve as index for objects with the collectible component
             // Copy each reference directly
             for (int i = 0; i < taggedObjects.Length; i++)
             {
-                newArray[i] = taggedObjects[i];
+                #region Assign ID
+                S_Collectible scriptRef = taggedObjects[i].GetComponent<S_Collectible>();
+                if (scriptRef != null)
+                {
+                    collectibleIndex++;
+
+                    int resultId = -1;
+
+                    int levelStartIndex = targetMissionInfo.name.IndexOf("_"); //where the levelId is Placed
+                    int missionStartIndex = targetMissionInfo.name.IndexOf("-"); //where the missionId is placed
+                    if (levelStartIndex != -1 && missionStartIndex != -1) //if both were found
+                    {
+                        int levelIdSize = (missionStartIndex - levelStartIndex) - 1;
+                        if(int.TryParse(targetMissionInfo.name.Substring(levelStartIndex + 1, levelIdSize), out int levelIdInt))
+                        {
+                            resultId = levelIdInt * 100000;
+                            targetMissionInfo.level = levelIdInt;
+                        }
+                        else
+                        {
+                            EditorUtility.DisplayDialog("Error", $"Assigned Mission Info Object, has incorrect level on its name, only numbers are allowed for level, check it again or report a bug in Discord", "OK");
+                            return;
+                        }
+
+                        if (int.TryParse(targetMissionInfo.name.Substring(missionStartIndex + 1), out int missionIdInt))
+                        {
+                            resultId += missionIdInt * 1000;
+                            targetMissionInfo.misisonIndex = missionIdInt;
+                        }
+                        else
+                        {
+                            EditorUtility.DisplayDialog("Error", $"Assigned Mission Info Object, has incorrect mission on its name, only numbers are allowed for mission, check it again or report a bug in Discord", "OK");
+                            return;
+                        }
+
+                        resultId += collectibleIndex;
+
+                    }
+                    else
+                    {
+                        EditorUtility.DisplayDialog("Error", $"Assigned Mission Info Object has invalid name, check it again or report a bug in Discord", "OK");
+                        return;
+                    }
+                    scriptRef.SetId(resultId);
+                    collectibleIds.Add(resultId);
+                }
+                #endregion
+
             }
 
-            // Assign using the property
-            targetMissionInfo.missionCoins = newArray;
+            targetMissionInfo.missionCollectibleIds = collectibleIds.ToArray();
         }
 
         // Use EditorUtility.SetDirty to mark the asset as modified
@@ -225,11 +276,11 @@ public class MissionObjectTagger : EditorWindow
         // Clear the array based on selection
         if (selectedArray == "Mission Objects")
         {
-            targetMissionInfo.missionObjects = new GameObject[0];
+            targetMissionInfo.missionCollectibleIds = new int[0];
         }
         else // Mission Coins
         {
-            targetMissionInfo.missionCoins = new GameObject[0];
+            targetMissionInfo.missionCollectibleIds = new int[0];
         }
 
         // Use EditorUtility.SetDirty to mark the asset as modified

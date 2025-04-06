@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class S_Collectible : MonoBehaviour
 {
+    [SerializeField]
+    private int collectibleId = -1;
 
     //@todo clean the code 
     public GameObject manager;
@@ -15,6 +17,11 @@ public class S_Collectible : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetId(int id)
+    {
+        collectibleId = id;
     }
 
     private void OnTriggerEnter(Collider other)

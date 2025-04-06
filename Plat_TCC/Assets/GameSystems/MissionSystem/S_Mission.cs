@@ -27,8 +27,9 @@ public class S_Mission : MonoBehaviour
     public void InitializeMission(SO_MissionInfo missionInfo)
     {
         objective = missionInfo.objective;
-        missionCoins = missionInfo.missionCoins;
-        missionObjects = missionInfo.missionObjects;
+        //@todo start level using only the Ids of the objects
+        //missionCoins = missionInfo.missionCoins;
+        //missionObjects = missionInfo.missionObjects;
         //Activate this Mission GameObjects
         foreach (GameObject obj in missionObjects)
         {
