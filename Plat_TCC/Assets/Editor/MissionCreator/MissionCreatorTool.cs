@@ -169,19 +169,63 @@ public class MissionObjectTagger : EditorWindow
         // Handle direct reference assignment based on array type
         if (selectedArray == "Mission Objects")
         {
-            EditorUtility.DisplayDialog("Not Implemented", $"Mission Objects not implemented yet, @ me at Discord ", "Just Wait");
-            return;
-            // Create a new array of the correct size
-            GameObject[] newArray = new GameObject[taggedObjects.Length];
+            #region Assing Id
+            List<int> objectsIds = new List<int>();
 
-            // Copy each reference directly
+            int objectIndex = 0;
             for (int i = 0; i < taggedObjects.Length; i++)
             {
-                newArray[i] = taggedObjects[i];
-            }
+                S_ObjectIdentifier scriptRef = taggedObjects[i].GetComponent<S_ObjectIdentifier>();
+                if(scriptRef == null)
+                    taggedObjects[i].AddComponent<S_ObjectIdentifier>();
 
-            // Assign the array
-            //targetMissionInfo.missionObjects = newArray; // @wip
+                if (scriptRef != null)
+                {
+                    objectIndex++;
+
+                    int resultId = -1;
+
+                    int levelStartIndex = targetMissionInfo.name.IndexOf("_"); //where the levelId is Placed
+                    int missionStartIndex = targetMissionInfo.name.IndexOf("-"); //where the missionId is placed
+                    if (levelStartIndex != -1 && missionStartIndex != -1) //if both were found
+                    {
+                        int levelIdSize = (missionStartIndex - levelStartIndex) - 1;
+                        if (int.TryParse(targetMissionInfo.name.Substring(levelStartIndex + 1, levelIdSize), out int levelIdInt))
+                        {
+                            resultId = levelIdInt * 100000;
+                            targetMissionInfo.level = levelIdInt;
+                        }
+                        else
+                        {
+                            EditorUtility.DisplayDialog("Error", $"Assigned Mission Info Object, has incorrect level on its name, only numbers are allowed for level, check it again or report a bug in Discord", "OK");
+                            return;
+                        }
+
+                        if (int.TryParse(targetMissionInfo.name.Substring(missionStartIndex + 1), out int missionIdInt))
+                        {
+                            resultId += missionIdInt * 1000;
+                            targetMissionInfo.misisonIndex = missionIdInt;
+                        }
+                        else
+                        {
+                            EditorUtility.DisplayDialog("Error", $"Assigned Mission Info Object, has incorrect mission on its name, only numbers are allowed for mission, check it again or report a bug in Discord", "OK");
+                            return;
+                        }
+
+                        resultId += objectIndex;
+
+                    }
+                    else
+                    {
+                        EditorUtility.DisplayDialog("Error", $"Assigned Mission Info Object has invalid name, check it again or report a bug in Discord", "OK");
+                        return;
+                    }
+                    scriptRef.SetId(resultId);
+                    objectsIds.Add(resultId);
+                }
+            }
+            targetMissionInfo.missionObjectIds = objectsIds.ToArray();
+#endregion
         }
         else // Mission Collectibles
         {
