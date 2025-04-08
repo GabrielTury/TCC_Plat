@@ -11,6 +11,8 @@ Cada mundo contém várias missões que fazem o jogador explorar diferentes part
 
 Nosso foco está em entregar a melhor experiência possível com a jogabilidade e com gráficos bonitos para tornar um jogo que o jogador se divirta e aprecie durante toda a duração do jogo.
 
+![Concept art sobre o game feel do jogo](key-concept.png)
+
 # Membros da Equipe
 - Artur Amorim Damasio da Silva (RA00318690) - Enemy Design, Environment Design
 - Gabriel Tury (RA00318926) - Gameplay Programmer, Game Design
@@ -19,4 +21,3 @@ Nosso foco está em entregar a melhor experiência possível com a jogabilidade 
 - Ryann Thierry Passos de Medeiros (RA00320452) - UI/UX Programming & Design
 - Vitor Hickmann (RA00319948) - 3D Artist
 
-![Concept art sobre o game feel do jogo](<key concept-1.png>)
