@@ -18,3 +18,5 @@ Nosso foco está em entregar a melhor experiência possível com a jogabilidade 
 - Mateus Martins Torres (RA00318801) - Level Design, Environment Design
 - Ryann Thierry Passos de Medeiros (RA00320452) - UI/UX Programming & Design
 - Vitor Hickmann (RA00319948) - 3D Artist
+
+![Concept art sobre o game feel do jogo](<key concept-1.png>)
