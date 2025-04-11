@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class S_MissionManager : MonoBehaviour
 {
+    [SerializeField]
     /// <summary>
     /// Array that holds all missions for a certain level, the order in the array is the order of the missions
     /// </summary>
