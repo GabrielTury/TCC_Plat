@@ -8,7 +8,7 @@ De maneira geral, o gameplay loop geral do jogo é:
 # Mecânicas principais
 ## Mecânicas do Jogador
 O jogador tem acesso a algumas mecânicas principais durante todo o jogo, já que elas estão atreladas ao protagonista, e não ao mundo.
-- **Movemento:**  O jogador pode se movimentar em qualquer direção usando o joystick do controle ou em oito direções usando o teclado. Como o jogador tem total controle sobre a câmera, ele pode utilizá-la para se mover em qualquer direção com o teclado também. 
+- **Movimento:**  O jogador pode se movimentar em qualquer direção usando o joystick do controle ou em oito direções usando o teclado. Como o jogador tem total controle sobre a câmera, ele pode utilizá-la para se mover em qualquer direção com o teclado também. 
 - **Pulo:** O jogador tamnbém tem um pulo, que é necessário para alcançar plataformas, atacar inimigos e desviar de projéteis.
 - **Cabeçada:** Ao apertar o botão de pulo enquanto estiver no ar, o jogador ativa um rápido dash, que dá um pouco mais de alcance horizontal e também ataca certos tipos de inimigos específicos.
 - **Gancho & Corda:** A principal mecânica diferenciada do jogo. Em diversos pontos em cada mundo, o jogador encontrará alvos. que podem ser utilizados como um ponto onde ele pode prender uma corda e se balançar sobre. Isso permite que o jogador alcance distâncias maiores que o alcance de seu jump+dash, principalmente se passar por vários alvos em sequência. Enquanto estiver pendurado, o jogador também pode subir e descer com a corda, dando a ele maior mobilidade vertical.
@@ -27,3 +27,12 @@ Os inimigos em geral não possuem muita complexidade. Seu uso primario é como o
 - **"Minion básico":** (WIP) um inimigo simples que percorre um caminho pré-determinado. Pode ser derrotado com um pulo ou uma cabeçada.
 - **"Minion plataforma":** (WIP) um inimigo grande, que não pode ser derrotado. O jogador pode atrai-lo para lugares específicos para então usá-lo como plataforma.
 - **"Pássaro drone":** (WIP) um inimigo que voa em um caminho pré-determinado. Por baixo, pode ser utilizado como um alvo para o gancho.
+# Sistemas principais
+## Sistema de mundos e níveis
+- **Mundos:** O jogo é divido em mundos que têm temáticas diferentes tanto visualmente como mecanicamente, cada um pode ter elementos presentes em outros mundo mas contém usos únicos de mecânicas e assets visuais, além de missões diferentes.
+- **Missões:** Cada mundo tem várias missões, cada missão explora uma parte diferente do mesmo mundo.
+- **Hub:** A escolha de mundo e missão é feita por um hub central e navegável, inspirado no castelo da peach de Super Mario 64.
+#Interface
+## Interface do jogador
+- **HUD:** A Hud é minimalista para mostrar mais o jogo e evitar informações excessivas ao jogador, a interface in-game mostrará a vida e o progresso das missão selecionada.
+- **Menus:** Os menus contarão com opções de acessibilidade para melhorar a experiência do jogador e aumentar o público para o game.
