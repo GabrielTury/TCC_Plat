@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,7 +23,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     #endregion
 
     #region Grappling Variables
-    [Space(2), Header("Variables"), SerializeField]
+    [Space(2), Header("Variables"), SerializeField, Obsolete("Grapple Distance is now set by Grapple Detection Range", false)]
     private float maxGrappleDistance;
 
     [SerializeField, Tooltip("The maximum distance the player can stay on the rope (this is a multiplier that takes the start position as base, so 0.8 = 80% of the distance from starting point to the attachPoint)"), Range(0, 2)]
@@ -35,8 +36,12 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     private float rotationSpeed;
 
     [InspectorLabel("Aim Assist Strength")]
-    [SerializeField, Tooltip("The radius of the aim assist"), Range(0.1f, 5f)]
+    [SerializeField, Tooltip("The radius of the aim assist"), Range(0.1f, 5f), Obsolete("Aim radius is obsolete", false)]
     private float aimRadius;
+
+    [InspectorLabel("Grapple Detection Range")]
+    [Tooltip("The distance at which grapple objects will be detected")]
+    public float grappleDetectionRange;
 
     private Vector3 anchorPoint;
 
@@ -124,40 +129,63 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
-#region Swing
+    #region Swing
     private void StartSwing()
     {
-
-        Debug.Log("Before Cast");
-        RaycastHit hit;        
-        if (Physics.SphereCast(Camera.main.transform.position, aimRadius, Camera.main.transform.forward, out hit, maxGrappleDistance, grappable))
+        if (playerMovement.grapplingCollidersInRange.Length != 0)
         {
-            if (joint == null)
-                joint = gameObject.AddComponent<SpringJoint>();
+            Collider closestCollider = null;
+            float closestDistance = float.MaxValue;
+            Vector3 playerPosition = transform.position;
+            Vector3 playerForward = transform.forward;
 
-            anchorPoint = hit.point;
-            joint.autoConfigureConnectedAnchor = false;
-            joint.connectedAnchor = anchorPoint;
+            foreach (var collider in playerMovement.grapplingCollidersInRange)
+            {
+                Vector3 directionToCollider = (collider.transform.position - playerPosition).normalized;
+                float angle = Vector3.Angle(playerForward, directionToCollider);
 
-            float distFromPoint = Vector3.Distance(transform.position, anchorPoint);
-            joint.maxDistance = distFromPoint * maxHangingRangeMultiplier;
-            joint.minDistance = distFromPoint * minHangingRangeMultiplier;
+                if (angle <= 70)
+                {
+                    float distance = Vector3.Distance(playerPosition, collider.transform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestCollider = collider;
+                    }
+                }
+            }
 
-            //these value might change but are better off being fixed to keep
-            joint.spring = 4.5f;
-            joint.damper = 7.5f;
-            joint.massScale = 4.5f;
+            if (closestCollider != null)
+            {
+                    if (joint == null)
+                        joint = gameObject.AddComponent<SpringJoint>();
 
-            lr.positionCount = 2;
-            currentHookPoint = hookStart.position;
-            Debug.Log(anchorPoint);
+                    anchorPoint = closestCollider.transform.position;
+                    joint.autoConfigureConnectedAnchor = false;
+                    joint.connectedAnchor = anchorPoint;
 
-            rb.AddForce((anchorPoint - transform.position) * grappleForce, ForceMode.Impulse);//add movement to the player towards the grapple point
+                    float distFromPoint = Vector3.Distance(transform.position, anchorPoint);
+                    joint.maxDistance = distFromPoint * maxHangingRangeMultiplier;
+                    joint.minDistance = distFromPoint * minHangingRangeMultiplier;
+
+                    joint.spring = 4.5f;
+                    joint.damper = 7.5f;
+                    joint.massScale = 4.5f;
+
+                    lr.positionCount = 2;
+                    currentHookPoint = hookStart.position;
+
+                    rb.AddForce((anchorPoint - transform.position) * grappleForce, ForceMode.Impulse);                    
+            }
+            else
+            {
+                StopSwing();
+            }
         }
         else
+        {
             StopSwing();
-            //Debug.Log(hit.collider.name);
-
+        }
     }
 
     private void StopSwing()
@@ -246,10 +274,12 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     private void OnDrawGizmosSelected()
     {
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.forward * maxGrappleDistance);
+        //Gizmos.color = Color.cyan;
+        //Gizmos.DrawWireSphere(Camera.main.transform.position + (Camera.main.transform.forward * (maxGrappleDistance / 2)), aimRadius);
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.forward * maxGrappleDistance);
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(Camera.main.transform.position + (Camera.main.transform.forward * (maxGrappleDistance / 2)), aimRadius);
+        Gizmos.DrawWireSphere(transform.position, grappleDetectionRange);
     }
 
 }

@@ -13,11 +13,26 @@ public class S_PlayerMovement : MonoBehaviour
     private IMoveState[] moveStates;
     private IMoveState activeState;
 
+    private bool canGrapple;
+    private S_GrapplingMovement grapplingMovement;
+
+    public Collider[] grapplingCollidersInRange { get; private set; }
+
     private void Awake()
     {
         inputs = new InputSystem_Actions();
         moveStates = GetComponents<IMoveState>();
         activeState = moveStates[0];
+
+        foreach (IMoveState moveState in moveStates)
+        {
+            if (moveState is S_GrapplingMovement)
+            {
+                canGrapple = true;
+                grapplingMovement = (S_GrapplingMovement)moveState;
+                Debug.Log("Has Grapple ability");
+            }
+        }
     }
     private void OnEnable()
     {
@@ -87,6 +102,11 @@ public class S_PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {      
         activeState.StateFixedUpdate();
+        if(canGrapple)
+        {
+            Collider[] objects = Physics.OverlapSphere(transform.position, grapplingMovement.grappleDetectionRange, 1<<7);
+            if(objects != null) grapplingCollidersInRange = objects;
+        }
     }
     // Update is called once per frame
     void Update()
