@@ -44,6 +44,21 @@ public static class S_HelperFunctions
         objImage.rectTransform.anchoredPosition = targetPosition;
     }
 
+    public static IEnumerator SmoothMoveTransform(Transform objImage, Vector3 targetPosition, float duration)
+    {
+        Vector3 startPosition = objImage.position;
+        float lerp = 0;
+        float smoothLerp = 0;
+        while (lerp < 1 && duration > 0)
+        {
+            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            smoothLerp = Mathf.SmoothStep(0, 1, lerp);
+            objImage.position = Vector3.Lerp(startPosition, targetPosition, smoothLerp);
+            yield return null;
+        }
+        objImage.position = targetPosition;
+    }
+
     public static IEnumerator SmoothRectMove(RectTransform objImage, Vector2 targetPosition, float duration)
     {
         Vector2 startPosition = objImage.anchoredPosition;
