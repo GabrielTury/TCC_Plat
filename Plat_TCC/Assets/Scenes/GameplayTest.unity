@@ -1036,7 +1036,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grapplingCanvas: {fileID: 200671283}
-  orbitSpeed: 50
 --- !u!1 &1522056218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,6 +1275,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3338506916138432338, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: maxAngle
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338506916138432338, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: maxSpeed
       value: 5
       objectReference: {fileID: 0}
@@ -1305,7 +1308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3338506916138432338, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: grappleDetectionRange
-      value: 11
+      value: 13.24
       objectReference: {fileID: 0}
     - target: {fileID: 3338506916138432338, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: maxHangingRangeMultiplier

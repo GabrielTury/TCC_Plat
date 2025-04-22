@@ -35,9 +35,9 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     [SerializeField]
     private float rotationSpeed;
 
-    [InspectorLabel("Aim Assist Strength")]
-    [SerializeField, Tooltip("The radius of the aim assist"), Range(0.1f, 5f), Obsolete("Aim radius is obsolete", false)]
-    private float aimRadius;
+    [InspectorLabel("Max Angle from Player")]
+    [SerializeField, Tooltip("The radius of the aim assist"), Range(1, 90f)]
+    private float maxAngle;
 
     [InspectorLabel("Grapple Detection Range")]
     [Tooltip("The distance at which grapple objects will be detected")]
@@ -53,7 +53,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     private Vector2 inputDirection;
 
     [InspectorLabel("Movement Swing Force")]
-    [Space(2), Header("Movement"), SerializeField, Tooltip("Force which the player can mvoe while swinging")]
+    [Space(2), Header("Grapple Movement"), SerializeField, Tooltip("Force which the player can mvoe while swinging")]
     private float moveForce;
 
     [SerializeField]
@@ -144,7 +144,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                 Vector3 directionToCollider = (collider.transform.position - playerPosition).normalized;
                 float angle = Vector3.Angle(playerForward, directionToCollider);
 
-                if (angle <= 70)
+                if (angle <= maxAngle)
                 {
                     float distance = Vector3.Distance(playerPosition, collider.transform.position);
                     if (distance < closestDistance)
@@ -152,6 +152,10 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                         closestDistance = distance;
                         closestCollider = collider;
                     }
+                }
+                else
+                {
+                    Debug.Log("Angle too high");
                 }
             }
 
