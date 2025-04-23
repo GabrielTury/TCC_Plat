@@ -72,10 +72,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     public void StateFixedUpdate()
     {
+        anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
         //Ground Movement
         if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
-        {
-            anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
+        {            
             Vector3 moveDirection = GetCameraRelativeDirection();
             rb.AddForce(moveDirection * accelerationForce * airMultiplier, ForceMode.Acceleration);
         }
@@ -121,7 +121,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         movementDirection = Vector2.zero;
         moving = false;
-        rb.linearVelocity = rb.linearVelocity/2f;
+        rb.linearVelocity = rb.linearVelocity/2f;        
     }
 
     public void Move_Perform(InputAction.CallbackContext obj)
