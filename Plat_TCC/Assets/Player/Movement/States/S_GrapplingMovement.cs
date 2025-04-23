@@ -11,6 +11,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     S_GroundMovement groundMovement;//See S_PlayerMovement ChangeState() note
     #region Components
     private Rigidbody rb;
+    private Animator anim;
 
     private SpringJoint joint;
     private LineRenderer lr;
@@ -77,6 +78,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
         lr = GetComponent<LineRenderer>(); 
         lr.positionCount = 0;
         playerMovement = GetComponent<S_PlayerMovement>();
@@ -161,7 +163,10 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
             if (closestCollider != null)
             {
-                    if (joint == null)
+                anim.SetTrigger("Grapple");
+                anim.SetBool("IsGrappling", true);
+
+                if (joint == null)
                         joint = gameObject.AddComponent<SpringJoint>();
 
                     anchorPoint = closestCollider.transform.position;
@@ -205,6 +210,8 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             if (groundMovement != null)
                 groundMovement.RefreshDoubleJump();
         }
+
+        anim.SetBool("IsGrappling", false);
     }
     #endregion//Swing
 #region Swing Movement

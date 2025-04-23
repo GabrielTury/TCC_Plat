@@ -8,6 +8,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 {
     #region Components
     private Rigidbody rb;
+    private Animator anim;
 
     private S_PlayerMovement playerMovement;
     private S_GrapplingMovement grapplingMovement;//see S_PlayerMovement ChangeState() note
@@ -74,17 +75,20 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         //Ground Movement
         if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
         {
+            anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
             Vector3 moveDirection = GetCameraRelativeDirection();
             rb.AddForce(moveDirection * accelerationForce * airMultiplier, ForceMode.Acceleration);
         }
         //Jump and double jump physics
         if (jump)
         {
+            anim.SetTrigger("Jump");
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             jump = false;
         }
         else if (doubleJump)
         {
+            anim.SetTrigger("DoubleJump");
             float normalizedAngle = doubleJumpAngle / 90f;
             
             rb.linearVelocity = Vector3.zero;
@@ -130,6 +134,8 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+
         playerMovement = GetComponent<S_PlayerMovement>();
         grapplingMovement = GetComponent<S_GrapplingMovement>();
     }
@@ -151,6 +157,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             airMultiplier = airMovementMultiplier; //on air movement
         }
 
+        anim.SetBool("Grounded", ret);
         return ret;
     }
 

@@ -20,4 +20,11 @@ public class S_GrappableObject : MonoBehaviour
         // Make the grapplingCanvas always face the camera
         grapplingCanvas.transform.LookAt(Camera.main.transform.position);
     }
+    /// <summary>
+    /// Called when the object enters in the player's grapple range, this method is called every frame while its in range
+    /// </summary>
+    void InRange()
+    {
+
+    }
 }

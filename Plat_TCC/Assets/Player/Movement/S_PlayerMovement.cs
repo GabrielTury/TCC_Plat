@@ -105,7 +105,14 @@ public class S_PlayerMovement : MonoBehaviour
         if(canGrapple)
         {
             Collider[] objects = Physics.OverlapSphere(transform.position, grapplingMovement.grappleDetectionRange, 1<<7);
-            if(objects != null) grapplingCollidersInRange = objects;
+            if (objects != null)
+            {
+                grapplingCollidersInRange = objects;
+                foreach (Collider collider in objects)
+                {
+                    collider.SendMessage("InRange");
+                }
+            }
         }
     }
     // Update is called once per frame
