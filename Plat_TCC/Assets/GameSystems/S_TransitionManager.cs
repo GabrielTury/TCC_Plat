@@ -1,6 +1,8 @@
 using System.Collections;
+using Unity.Properties;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 public class S_TransitionManager : MonoBehaviour
 {
@@ -8,7 +10,14 @@ public class S_TransitionManager : MonoBehaviour
 
     private CanvasGroup canvasGroup;
 
+    [SerializeField]
     private RectTransform rectChild;
+
+    [SerializeField]
+    private float openSpeed = 2f;
+
+    [SerializeField]
+    private float closeSpeed = 2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,8 +31,9 @@ public class S_TransitionManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        DontDestroyOnLoad(this);
+
         canvasGroup = GetComponent<CanvasGroup>();
-        rectChild = GetComponentInChildren<RectTransform>();
 
         rectChild.anchoredPosition = new Vector2(0, 0);
 
@@ -47,11 +57,16 @@ public class S_TransitionManager : MonoBehaviour
         // Add logic to load the specific mission here
     }
 
+    public void RestartLevel()
+    {
+        StartCoroutine(RestartStage());
+    }
+
     private IEnumerator LoadLevel(string levelName, int missionIndex = -1)
     {
         while (canvasGroup.alpha < 1)
         {
-            canvasGroup.alpha += Time.deltaTime;
+            canvasGroup.alpha += Time.deltaTime * openSpeed;
             yield return null;
         }
 
@@ -63,7 +78,24 @@ public class S_TransitionManager : MonoBehaviour
 
         while (canvasGroup.alpha > 0)
         {
-            canvasGroup.alpha -= Time.deltaTime;
+            canvasGroup.alpha -= Time.deltaTime * closeSpeed;
+            yield return null;
+        }
+    }
+
+    private IEnumerator RestartStage()
+    {
+        while (canvasGroup.alpha < 1)
+        {
+            canvasGroup.alpha += Time.deltaTime * openSpeed;
+            yield return null;
+        }
+
+        S_LevelManager.instance.ResetLevel();
+
+        while (canvasGroup.alpha > 0)
+        {
+            canvasGroup.alpha -= Time.deltaTime * closeSpeed;
             yield return null;
         }
     }

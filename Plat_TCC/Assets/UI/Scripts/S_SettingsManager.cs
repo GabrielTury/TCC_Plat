@@ -203,6 +203,11 @@ public class S_SettingsManager : MonoBehaviour
         {
             CloseSettings();
         }
+
+        if (inputs.UI.Pause.WasPressedThisFrame() && isOnSettingsMenu)
+        {
+            CloseSettings();
+        }
     }
 
     public void ManageSettingSelection(float directionValue)
@@ -323,6 +328,7 @@ public class S_SettingsManager : MonoBehaviour
         }
         buttonAnimationCoroutine[buttonIndex] = StartCoroutine(HighlightAnimation(buttonIndex));
         lastButtonHighlighted = buttonIndex;
+        selectionIndex = buttonIndex;
     }
 
     private IEnumerator HighlightAnimation(int buttonIndex)
@@ -339,7 +345,7 @@ public class S_SettingsManager : MonoBehaviour
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.alpha = Mathf.Lerp(startAlpha, targetAlpha, smoothLerp);
             objRect.localScale = Vector2.Lerp(startScale, targetScale, smoothLerp);
@@ -364,7 +370,7 @@ public class S_SettingsManager : MonoBehaviour
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.alpha = Mathf.Lerp(startAlpha, targetAlpha, smoothLerp);
             objRect.localScale = Vector2.Lerp(startScale, targetScale, smoothLerp);

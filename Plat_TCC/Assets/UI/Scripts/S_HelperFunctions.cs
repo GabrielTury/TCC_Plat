@@ -35,7 +35,7 @@ public static class S_HelperFunctions
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.rectTransform.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, smoothLerp);
             yield return null;
@@ -51,7 +51,7 @@ public static class S_HelperFunctions
         float smoothLerp = 0;
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.position = Vector3.Lerp(startPosition, targetPosition, smoothLerp);
             yield return null;
@@ -67,7 +67,7 @@ public static class S_HelperFunctions
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, smoothLerp);
             yield return null;
@@ -84,7 +84,7 @@ public static class S_HelperFunctions
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.rectTransform.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, smoothLerp);
             yield return null;
@@ -102,7 +102,7 @@ public static class S_HelperFunctions
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.rectTransform.anchorMin = Vector2.Lerp(startScaleMin, targetScaleMin, smoothLerp);
             objImage.rectTransform.anchorMax = Vector2.Lerp(startScaleMax, targetScaleMax, smoothLerp);
@@ -121,7 +121,7 @@ public static class S_HelperFunctions
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.rectTransform.sizeDelta = Vector2.Lerp(startScale, targetScale, smoothLerp);
             yield return null;
@@ -137,7 +137,7 @@ public static class S_HelperFunctions
         float smoothLerp = 0;
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objCamera.transform.position = Vector3.Lerp(startPosition, targetPosition, smoothLerp);
             yield return null;
@@ -152,7 +152,7 @@ public static class S_HelperFunctions
         float smoothLerp = 0;
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objCamera.transform.eulerAngles = Vector3.Lerp(startRotation, targetRotation, smoothLerp);
             yield return null;
@@ -168,7 +168,7 @@ public static class S_HelperFunctions
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.rectTransform.localScale = Vector2.Lerp(startScale, targetScale, smoothLerp);
             yield return null;
@@ -190,7 +190,7 @@ public static class S_HelperFunctions
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.color = Color32.Lerp(startColor, targetColor, smoothLerp);
             yield return null;
@@ -211,7 +211,7 @@ public static class S_HelperFunctions
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             textObj.color = Color32.Lerp(startColor, targetColor, smoothLerp);
             yield return null;

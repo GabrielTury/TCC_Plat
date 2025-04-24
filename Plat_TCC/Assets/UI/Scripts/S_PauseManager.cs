@@ -37,9 +37,17 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     [SerializeField]
     private InputSystem_Actions inputs;
 
+    [SerializeField]
+    private RectTransform mainHolder;
+
     private bool isThisMenuActive = true;
+    private bool isInPause = false;
+
+    [SerializeField]
+    private float offset = 800f;
 
     private Coroutine mainMenuAnimationCoroutine;
+    private Coroutine mainHolderAnimationCoroutine;
 
     [SerializeField]
     private InputGuideIcons inputGuideIcons;
@@ -89,6 +97,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     void Update()
     {
         CheckPlayerInput();
+        //ManageOffset();
     }
 
     // Update is called once per frame
@@ -97,22 +106,38 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         ScrollBackgroundShadow(0.001f);
     }
 
+    /*
+    private void ManageOffset()
+    {
+        if (isInPause)
+        {
+            offset = Mathf.Lerp(offset, 0, Time.deltaTime * 2f);
+        }
+        else
+        {
+            offset = Mathf.Lerp(offset, -800, Time.deltaTime * 2f);
+        }
+    }
+    */
+
     private void InitializeContent()
     {
-        shadowScroller.rectTransform.anchoredPosition = new Vector2(-1615, 0);
+        mainHolder.anchoredPosition = new Vector2(-1900, 0);
+        //mainPanel.anchoredPosition = new Vector2(-800, 0);
+        //shadowScroller.rectTransform.anchoredPosition = new Vector2(-1615, 0);
 
-        gameLogo.rectTransform.anchoredPosition = new Vector2(-570, 750);
-        gameLogo.rectTransform.localScale = new Vector2(0, 0);
+        //gameLogo.rectTransform.anchoredPosition = new Vector2(-570, 750);
+        //gameLogo.rectTransform.localScale = new Vector2(0, 0);
 
-        int distance = 140;
+        //int distance = 140;
         for (int i = 0; i < buttons.Length; i++)
         {
             buttonsImage[i] = buttons[i].GetComponent<Image>();
         }
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttonsImage[i].rectTransform.anchoredPosition = new Vector2(-570, -800 - ((i + 1) * distance));
-        }
+        //for (int i = 0; i < buttons.Length; i++)
+        //{
+        //    buttonsImage[i].rectTransform.anchoredPosition = new Vector2(-570, -800 - ((i + 1) * distance));
+        //}
         
     }
     
@@ -142,17 +167,30 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     {
         if (inputs.UI.Pause.WasPressedThisFrame())
         {
-            if (isThisMenuActive)
+            if (isInPause)
             {
-                ResumeGame();
+                if (isThisMenuActive)
+                {
+                    if (mainPanel.anchoredPosition.x > -200)
+                    {
+                        ResumeGame();
+                    }
+                }
+                else
+                {
+                    //if (mainPanel.anchoredPosition.x > -200)
+                    //{
+                    //    ResumeOperation();
+                    //}
+                }
             }
             else
             {
-                ResumeOperation();
+                ShowMenu();
             }
         }
 
-        if (inputs.UI.Navigate.WasPressedThisFrame())
+        if (inputs.UI.Navigate.WasPressedThisFrame() && isInPause && isThisMenuActive)
         {
             if (inputs.UI.Navigate.ReadValue<Vector2>().y > 0)
             {
@@ -174,7 +212,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
             }
         }
         
-        if (inputs.UI.Submit.WasPressedThisFrame())
+        if (inputs.UI.Submit.WasPressedThisFrame() && isInPause && isThisMenuActive && mainPanel.anchoredPosition.x > -200)
         {
             buttons[selectionIndex].onClick.Invoke();
         }
@@ -255,7 +293,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.color = Color32.Lerp(startColor, targetColor, smoothLerp);
             objImage.rectTransform.localScale = Vector2.Lerp(startScale, targetScale, smoothLerp);
@@ -279,7 +317,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
         while (lerp < 1 && duration > 0)
         {
-            lerp = Mathf.MoveTowards(lerp, 1, Time.deltaTime / duration);
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
             smoothLerp = Mathf.SmoothStep(0, 1, lerp);
             objImage.color = Color32.Lerp(startColor, targetColor, smoothLerp);
             objImage.rectTransform.localScale = Vector2.Lerp(startScale, targetScale, smoothLerp);
@@ -292,6 +330,12 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
     #region Buttons Behavior
 
+    public void RestartAtLastCheckpoint()
+    {
+        //S_LevelManager.instance.ResetLevel();
+        S_TransitionManager.instance.RestartLevel();
+        ResumeGame();
+    }
     public void ResumeOperation()
     {
         isThisMenuActive = true;
@@ -302,14 +346,26 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         mainMenuAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainPanel, new Vector2(0, 0), 0.3f));
     }
 
+    public void ShowMenu()
+    {
+        isInPause = true;
+        Time.timeScale = 0f;
+        if (mainHolderAnimationCoroutine != null)
+        {
+            StopCoroutine(mainHolderAnimationCoroutine);
+        }
+        mainHolderAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainHolder, new Vector2(0, 0), 0.3f));
+    }
+
     public void ResumeGame()
     {
-        isThisMenuActive = false;
-        if (mainMenuAnimationCoroutine != null)
+        isInPause = false;
+        Time.timeScale = 1f;
+        if (mainHolderAnimationCoroutine != null)
         {
-            StopCoroutine(mainMenuAnimationCoroutine);
+            StopCoroutine(mainHolderAnimationCoroutine);
         }
-        mainMenuAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainPanel, new Vector2(-800, 0), 0.3f));
+        mainHolderAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainHolder, new Vector2(-1900, 0), 0.3f));
     }
 
     public void OpenSettingsMenu()

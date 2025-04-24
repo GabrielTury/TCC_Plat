@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using HF = S_HelperFunctions;
 
@@ -290,6 +291,12 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
     }
 
     #region Buttons Behavior
+
+    public void StartGame()
+    {
+        //S_TransitionManager.instance.GoToLevel("Level1");
+        SceneManager.LoadScene("HubWorld");
+    }
 
     public void ResumeOperation()
     {

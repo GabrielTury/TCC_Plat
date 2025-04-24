@@ -17,6 +17,11 @@ public class S_LevelManager : MonoBehaviour
     {
         instance = this;
         savedObjectsTransform = new List<Transform>(savedObjects.Length);
+
+        // Set Checkpoint Data to player initial position
+
+        Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        SetCheckpointData(playerPos);
     }
 
     // Update is called once per frame
@@ -41,6 +46,27 @@ public class S_LevelManager : MonoBehaviour
                 Debug.LogWarning("[Checkpoint Data] Object " + obj + " does not have a transform.");
             }
             index++;
+        }
+    }
+
+    public void ResetLevel()
+    {
+        // Reset player position
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            player.transform.position = playerPositionCheckpoint;
+        }
+        // Reset collectibles
+        //collectibles = 0;
+        // Reset saved objects
+        for (int i = 0; i < savedObjects.Length; i++)
+        {
+            if (savedObjects[i] != null && savedObjectsTransform[i] != null)
+            {
+                savedObjects[i].transform.position = savedObjectsTransform[i].position;
+                savedObjects[i].transform.rotation = savedObjectsTransform[i].rotation;
+            }
         }
     }
 }
