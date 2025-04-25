@@ -78,7 +78,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         {            
             Vector3 moveDirection = GetCameraRelativeDirection();
             rb.AddForce(moveDirection * accelerationForce * airMultiplier, ForceMode.Acceleration);
-        }
+        }        
         //Jump and double jump physics
         if (jump)
         {

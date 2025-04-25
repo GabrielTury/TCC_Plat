@@ -14,9 +14,14 @@ public class S_MissionManager : MonoBehaviour
 
     private Coroutine Loading;
 
+    private void Awake()
+    {
+        if(worldInfo != null)
+            SetWorldInfo(worldInfo);
+    }
     public void StartMission(FinishedLoading callback, int missionIndex)
     {
-        if(Loading != null)
+        if(Loading == null)
             Loading = StartCoroutine(MissionLoadTick(callback, missionIndex));
     }
 

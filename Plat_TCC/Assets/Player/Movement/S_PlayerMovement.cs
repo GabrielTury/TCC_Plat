@@ -110,7 +110,7 @@ public class S_PlayerMovement : MonoBehaviour
                 grapplingCollidersInRange = objects;
                 foreach (Collider collider in objects)
                 {
-                    collider.SendMessage("InRange");
+                    collider.SendMessage("InRange", SendMessageOptions.DontRequireReceiver);
                 }
             }
         }
