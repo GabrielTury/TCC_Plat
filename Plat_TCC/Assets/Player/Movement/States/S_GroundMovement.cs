@@ -1,3 +1,4 @@
+using System.Collections;
 using System.ComponentModel;
 using System.Xml.Schema;
 using UnityEngine;
@@ -50,9 +51,11 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     [SerializeField, Range(0, 90), Tooltip("Double Jump angle of movement 90 is straigth up and 0 straigth forward")]
     private float doubleJumpAngle;
 
-    [SerializeField, Header("Temporary"), Range(0,20)]
+    [SerializeField, Header("Gravity"), Range(0,40)]
     private float gravityForce;
     #endregion
+
+    private Coroutine stopMovement;
     public void Attack_Perform(InputAction.CallbackContext obj)
     {
         if (grapplingMovement)
@@ -121,13 +124,20 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         movementDirection = Vector2.zero;
         moving = false;
-        rb.linearVelocity = rb.linearVelocity/2f;        
+        if(stopMovement == null)
+            stopMovement = StartCoroutine(SlowlyStopMovement());        
     }
 
     public void Move_Perform(InputAction.CallbackContext obj)
     {
         movementDirection = obj.ReadValue<Vector2>();
         moving = true;
+
+        if(stopMovement != null)
+        {
+            StopCoroutine(stopMovement);
+            stopMovement = null;
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -175,6 +185,15 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         right.Normalize();
 
         return (forward * movementDirection.y + right * movementDirection.x).normalized;
+    }
+
+    private IEnumerator SlowlyStopMovement()
+    {
+        while (rb.linearVelocity.magnitude > 0.1f)
+        {
+            rb.linearVelocity = rb.linearVelocity / 1.1f;
+            yield return new WaitForFixedUpdate();
+        }
     }
     #endregion//Private Specific Methods
 
