@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class S_Respawn_Fall : MonoBehaviour
 {
-    [SerializeField] private GameObject transitionManager;
+    public GameObject transitionManager;
+
+    void Start()
+    {
+        transitionManager = GameObject.Find("TransitionCanvas");
+    }
 
     private void OnTriggerEnter(Collider other)
     {

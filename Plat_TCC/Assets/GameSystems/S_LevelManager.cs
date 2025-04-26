@@ -7,6 +7,7 @@ public class S_LevelManager : MonoBehaviour
     public static S_LevelManager instance;
 
     public int collectibles = 0;
+    public int mainCollectibles = 0;
     public Vector3 playerPositionCheckpoint;
 
     public GameObject[] savedObjects;
