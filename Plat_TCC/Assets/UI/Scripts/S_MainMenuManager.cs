@@ -294,8 +294,8 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
     public void StartGame()
     {
-        //S_TransitionManager.instance.GoToLevel("Level1");
-        SceneManager.LoadScene("HubWorld");
+        S_TransitionManager.instance.GoToLevel("HubWorld");
+        //SceneManager.LoadScene("HubWorld");
     }
 
     public void ResumeOperation()
