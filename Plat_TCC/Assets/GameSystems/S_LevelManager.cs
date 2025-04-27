@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +12,10 @@ public class S_LevelManager : MonoBehaviour
     public GameObject[] savedObjects;
     public List<Transform> savedObjectsTransform = new List<Transform>();
 
+    private Transform playerTransform;
+
+    private bool isResetting = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,14 +24,23 @@ public class S_LevelManager : MonoBehaviour
 
         // Set Checkpoint Data to player initial position
 
-        Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-        SetCheckpointData(playerPos);
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
+        SetCheckpointData(playerTransform.position);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (isResetting)
+        {
+            if (playerTransform.position != playerPositionCheckpoint)
+            {
+                playerTransform.position = playerPositionCheckpoint;
+                isResetting = false;
+                //Debug.LogWarning("[Checkpoint Update Data] Player position reset to checkpoint.");
+            }
+        }
     }
 
     public void SetCheckpointData(Vector3 checkpointPosition)
@@ -53,14 +65,23 @@ public class S_LevelManager : MonoBehaviour
     public void ResetLevel()
     {
         // Reset player position
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            player.transform.position = playerPositionCheckpoint;
+            isResetting = true;
+            //Debug.LogWarning("[Checkpoint Data] Player position reset to checkpoint.");
+        } else
+        {
+            Debug.LogWarning("[Checkpoint Data] Player not found. Cannot reset position.");
         }
+
         // Reset collectibles
+
         //collectibles = 0;
+
         // Reset saved objects
+
         for (int i = 0; i < savedObjects.Length; i++)
         {
             if (savedObjects[i] != null && savedObjectsTransform[i] != null)

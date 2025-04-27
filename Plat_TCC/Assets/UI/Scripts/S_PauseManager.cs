@@ -43,8 +43,8 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     private bool isThisMenuActive = true;
     private bool isInPause = false;
 
-    [SerializeField]
-    private float offset = 800f;
+    //[SerializeField]
+    //private float offset = 800f;
 
     private Coroutine mainMenuAnimationCoroutine;
     private Coroutine mainHolderAnimationCoroutine;
