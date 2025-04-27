@@ -43,6 +43,30 @@ public class S_LevelManager : MonoBehaviour
         }
     }
 
+    public void AddCollectible(string collectibleName, int count)
+    {
+        switch (collectibleName)
+        {
+            case "Main":
+                mainCollectibles += count;
+                S_CollectibleExhibitor.instance.UpdateCollectible(collectibleName, mainCollectibles);
+                break;
+
+            case "Apple":
+                collectibles += count;
+                S_CollectibleExhibitor.instance.UpdateCollectible(collectibleName, collectibles);
+                break;
+
+            default:
+                Debug.LogWarning("[Checkpoint Data] Collectible " + collectibleName + " not recognized.");
+                break;
+        }
+
+        
+
+        //Debug.LogWarning("[Checkpoint Data] Collectible " + collectibleName + " collected. Total: " + collectibles);
+    }
+
     public void SetCheckpointData(Vector3 checkpointPosition)
     {
         playerPositionCheckpoint = checkpointPosition;
