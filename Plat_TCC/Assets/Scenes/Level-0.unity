@@ -19073,18 +19073,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2195691904213967800, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.00007
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195691904213967800, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.00061
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195691904213967800, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.00009
-      objectReference: {fileID: 0}
     - target: {fileID: 3989175100169348947, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.46
@@ -19128,10 +19116,6 @@ PrefabInstance:
     - target: {fileID: 6415675410843183998, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7789462132015681404, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
-      propertyPath: transitionManager
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19691,6 +19675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f654bdade9a564884e365aecd41d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionManager: {fileID: 0}
 --- !u!65 &1481597846
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23743,7 +23728,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 49af91da5ec5e5c45a085739b4161b54, type: 3}
   m_Resource: {fileID: 8300000, guid: 49af91da5ec5e5c45a085739b4161b54, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -24938,6 +24923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f654bdade9a564884e365aecd41d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionManager: {fileID: 0}
 --- !u!65 &2112140282
 BoxCollider:
   m_ObjectHideFlags: 0
