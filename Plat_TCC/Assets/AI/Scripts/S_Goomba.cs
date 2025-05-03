@@ -58,7 +58,7 @@ public class S_Goomba : S_ObstacleBase
 
     protected override IEnumerator Idle_Exec()
     {
-        throw new System.NotImplementedException();
+        yield return null;
     }
 
     protected override IEnumerator Stunned_Exec()

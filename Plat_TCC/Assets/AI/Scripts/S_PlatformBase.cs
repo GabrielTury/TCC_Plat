@@ -1,16 +1,37 @@
 using UnityEngine;
+using System.Collections;
 
-public class S_PlatformBase : S_AIBase
+public abstract class S_PlatformBase : S_AIBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    protected enum PlatformState
     {
-        
+        Moving,
+        Idle,
+        Acting
+    };
+
+    protected PlatformState currentState = PlatformState.Idle;
+    protected void ChangeState(PlatformState newState)
+    {
+        currentState = newState;
+        switch (newState)
+        {
+            case PlatformState.Moving:
+                StartCoroutine(Moving_Exec());
+                break;
+            case PlatformState.Idle:
+                StartCoroutine(Idle_Exec());
+                break;
+            case PlatformState.Acting:
+                StartCoroutine(Acting_Exec());
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    protected abstract IEnumerator Moving_Exec();
+
+    protected abstract IEnumerator Idle_Exec();
+
+    protected abstract IEnumerator Acting_Exec();
 }

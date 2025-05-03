@@ -74,6 +74,8 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     private float cableMoveDir;
 
+    private Collider closestCollider;
+
     #endregion
     private void Awake()
     {
@@ -116,6 +118,10 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         {
             SwingMovement();
             CableMovement();
+
+            anchorPoint = closestCollider.transform.position;
+
+            joint.connectedAnchor = anchorPoint;
         }
     }
 
@@ -136,7 +142,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     {
         if (playerMovement.grapplingCollidersInRange.Length != 0)
         {
-            Collider closestCollider = null;
+            closestCollider = null;
             float closestDistance = float.MaxValue;
             Vector3 playerPosition = transform.position;
             Vector3 playerForward = transform.forward;

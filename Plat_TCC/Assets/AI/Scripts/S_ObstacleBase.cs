@@ -12,10 +12,11 @@ public abstract class S_ObstacleBase : S_AIBase
         Dying
     };
 
-    protected ObstacleState currentState;
+    protected ObstacleState currentState = ObstacleState.Idle;
 
     protected void ChangeState(ObstacleState nextState)
     {
+        currentState = nextState;
         switch (nextState)
         {
             case ObstacleState.Moving:
