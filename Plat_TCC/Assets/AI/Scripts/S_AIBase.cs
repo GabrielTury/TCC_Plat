@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
-public class S_AIBase : MonoBehaviour
+public abstract class S_AIBase : MonoBehaviour
 {
+
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

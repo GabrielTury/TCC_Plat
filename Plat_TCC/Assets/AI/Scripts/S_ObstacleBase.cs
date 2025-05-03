@@ -1,16 +1,44 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
-public class S_ObstacleBase : S_AIBase
+public abstract class S_ObstacleBase : S_AIBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected enum ObstacleState
     {
-        
+        Moving,
+        Idle,
+        Stunned,
+        Dying
+    };
+
+    protected ObstacleState currentState;
+
+    protected void ChangeState(ObstacleState nextState)
+    {
+        switch (nextState)
+        {
+            case ObstacleState.Moving:
+                StartCoroutine(Moving_Exec());
+                break;
+            case ObstacleState.Idle:
+                StartCoroutine(Idle_Exec());
+                break;
+            case ObstacleState.Stunned:
+                StartCoroutine(Stunned_Exec());
+                break;
+            case ObstacleState.Dying:
+                StartCoroutine(Dying_Exec());
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    protected abstract IEnumerator Moving_Exec();
+
+    protected abstract IEnumerator Idle_Exec();
+
+    protected abstract IEnumerator Stunned_Exec();
+
+    protected abstract IEnumerator Dying_Exec();
+
 }
