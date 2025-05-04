@@ -1,16 +1,37 @@
+using System.Collections;
 using UnityEngine;
 
-public class S_InteractableBase : S_AIBase
+public abstract class S_InteractableBase : S_AIBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected enum InteractableState
     {
-        
-    }
+        Moving,
+        Idle,
+        Interacting
+    };
 
-    // Update is called once per frame
-    void Update()
+    protected InteractableState currentState = InteractableState.Idle;
+
+    protected abstract IEnumerator Interacting_Exec();
+
+    protected abstract IEnumerator Idle_Exec();
+
+    protected abstract IEnumerator Moving_Exec();
+
+    protected void ChangeState(InteractableState newState)
     {
-        
+        currentState = newState;
+        switch (newState)
+        {
+            case InteractableState.Moving:
+                StartCoroutine(Moving_Exec());
+                break;
+            case InteractableState.Idle:
+                StartCoroutine(Idle_Exec());
+                break;
+            case InteractableState.Interacting:
+                StartCoroutine(Interacting_Exec());
+                break;
+        }
     }
 }
