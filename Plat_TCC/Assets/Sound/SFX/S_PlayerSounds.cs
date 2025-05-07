@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class S_PlayStep: MonoBehaviour
 {
-    public AudioSource audioSource;
-    public AudioClip[] footstepSounds;
-    public AudioClip jumpSound;
-    public AudioClip landSound;
-    public AudioClip ropeSound;
+    [SerializeField]
+    private AudioSource audioSource;
+    private AudioClip[] footstepSounds;
+    private AudioClip jumpSound;
+    private AudioClip landSound;
+    private AudioClip ropeSound;
 
     public void PlayStepSound()
     {
