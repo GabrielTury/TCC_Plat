@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Xml.Schema;
@@ -16,8 +17,11 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     #endregion
     #region Movement Variables
     [Header("Ground Movement")]
-    [SerializeField, Range(1, 50), Tooltip("Rate at which the player will accelerate when moving")]
+    [SerializeField, Range(1, 50), Tooltip("Rate at which the player will accelerate when moving"), Obsolete]
     private float accelerationForce;
+
+    [SerializeField, Range(1, 50), Tooltip("Acceleration in m/s^2")]
+    private float acceleration;
 
     [SerializeField, Range(0, 1), Tooltip("Percentage of movement efficiency compared to the ground movement")]
     private float airMovementMultiplier = 1f;
@@ -36,14 +40,25 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     private bool doubleJumping = false;
     private bool doubleJump = false;
+
+    private float jumpPressTime;
     #endregion
     #region Jump Variables
     [Space(2), Header("Jump Variables")]
     [SerializeField]
     private Transform groundPoint;
 
-    [SerializeField, Range(1, 50), Tooltip("force which the player uses to jump")]
+    [SerializeField, Range(1, 50), Tooltip("force which the player uses to jump"), Obsolete]
     private float jumpForce;
+
+    [SerializeField]
+    private float jumpSpeed;
+
+    [SerializeField, Range(1, 1000), Tooltip("In milliseconds")]
+    private float maxJumpPressTime;
+
+    [SerializeField, Range (10, 300),Tooltip("Coyote Time in ms")]
+    private float coyoteTime = 150;
 
     [SerializeField, Range(1, 50), Tooltip("force which the player uses to doubleJump")]
     private float doubleJumpForce;
@@ -73,21 +88,40 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             doubleJump = true;
     }
 
+    public void Jump_Cancel(InputAction.CallbackContext obj)
+    {
+        jumpPressTime = 0;
+        jump = false;
+    }
+
     public void StateFixedUpdate()
     {
         anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
         //Ground Movement
         if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
-        {            
+        {                        
             Vector3 moveDirection = GetCameraRelativeDirection();
-            rb.AddForce(moveDirection * accelerationForce * airMultiplier, ForceMode.Acceleration);
-        }        
+            Vector3 velocity = moveDirection * Time.fixedDeltaTime * acceleration;
+            //velocity = velocity.normalized * Mathf.Clamp(velocity.magnitude, maxGroundSpeed*0.5f , maxGroundSpeed);
+            rb.linearVelocity = moveDirection * maxGroundSpeed;
+            //Speed must be at least half of the maximum
+
+            //rb.AddForce(moveDirection * accelerationForce * airMultiplier, ForceMode.Acceleration);
+        }
         //Jump and double jump physics
         if (jump)
         {
+            jumpPressTime += Time.fixedDeltaTime * 1000;//transforming the time from seconds to millisseconds
+            rb.linearVelocity = Vector3.up * jumpSpeed * (1- (jumpPressTime/maxJumpPressTime * 1.5f));
             anim.SetTrigger("Jump");
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            jump = false;
+            
+            //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if(jumpPressTime > maxJumpPressTime)
+            {
+                jump = false;
+                jumpPressTime = 0;
+            }
+
         }
         else if (doubleJump)
         {
@@ -103,7 +137,8 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         
         if(!IsGrounded())
         {
-            rb.AddForce(Vector3.down * gravityForce, ForceMode.Acceleration);
+            //rb.linearVelocity += Vector3.down * gravityForce;
+            rb.AddForce(Vector3.down * gravityForce,ForceMode.Force);
         }
     }
 
@@ -227,7 +262,6 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundPoint.position, 0.5f);
     }
-
 
 #endif
     //@todo colocar gravidade extra, alterar o controle do personagem quando no ar, tempo de parada após perder input

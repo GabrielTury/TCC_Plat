@@ -102,6 +102,11 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         throw new System.NotImplementedException();
     }
 
+    public void Jump_Cancel(InputAction.CallbackContext obj)
+    {
+        throw new NotImplementedException();
+    }
+
     public void Move_Cancel(InputAction.CallbackContext obj)
     {
         inputDirection = Vector3.zero;

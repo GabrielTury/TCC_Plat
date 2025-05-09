@@ -2771,6 +2771,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6719966718222377910, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: jumpSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719966718222377910, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: acceleration
+      value: 26.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719966718222377910, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: angularSpeed
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719966718222377910, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: gravityForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6719966718222377910, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: maxJumpPressTime
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

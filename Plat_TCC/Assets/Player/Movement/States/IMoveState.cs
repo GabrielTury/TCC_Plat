@@ -29,6 +29,11 @@ public interface IMoveState
     /// <param name="obj">Input System action callback value</param>
     public void Jump_Perform(InputAction.CallbackContext obj);
     /// <summary>
+    /// Needs to be called when Input "Jump".canceled is executed
+    /// </summary>
+    /// <param name="obj">Input System action callback value</param>
+    public void Jump_Cancel(InputAction.CallbackContext obj);
+    /// <summary>
     /// Needs to be called when Input "Attack".perform is executed
     /// </summary>
     /// <param name="obj">Input System action callback value</param>

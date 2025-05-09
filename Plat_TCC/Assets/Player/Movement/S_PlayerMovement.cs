@@ -39,10 +39,16 @@ public class S_PlayerMovement : MonoBehaviour
         inputs.Player.Move.performed += Move_performed;
         inputs.Player.Move.canceled += Move_canceled;
         inputs.Player.Jump.performed += Jump_performed;
+        inputs.Player.Jump.canceled += Jump_canceled;
         inputs.Player.Attack.performed += Attack_performed;
         inputs.Player.Attack.canceled += Attack_canceled;
         inputs.Player.MoveCable.performed += MoveCable_performed;
         inputs.Player.MoveCable.canceled += MoveCable_canceled;
+    }
+
+    private void Jump_canceled(InputAction.CallbackContext obj)
+    {
+        activeState.Jump_Cancel(obj);
     }
 
     private void MoveCable_canceled(InputAction.CallbackContext obj)
@@ -76,6 +82,7 @@ public class S_PlayerMovement : MonoBehaviour
         inputs.Player.Move.performed -= Move_performed;
         inputs.Player.Move.canceled -= Move_canceled;
         inputs.Player.Jump.performed -= Jump_performed;
+        inputs.Player.Jump.canceled -= Jump_canceled;
         inputs.Player.Attack.performed -= Attack_performed;
         inputs.Player.Attack.canceled -= Attack_canceled;
         inputs.Player.MoveCable.performed -= MoveCable_performed;
