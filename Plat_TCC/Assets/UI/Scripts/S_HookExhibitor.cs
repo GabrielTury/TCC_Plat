@@ -59,7 +59,15 @@ public class S_HookExhibitor : MonoBehaviour
                 // Check if the hook is in front of the camera
                 if (screenPosition.z > 0)
                 {
+                    // Set the position of it a little higher than it should be so that it doesnt blend with the background, but if goes above the screen height, put it below
+
+                    screenPosition.y += 50f;
+                    if (screenPosition.y > Screen.height)
+                    {
+                        screenPosition.y = Screen.height - 50f;
+                    }
                     uiIcon.position = screenPosition;
+                    
 
                     float scaleFactor = Mathf.InverseLerp(interactionDistance, 0, distance);
                     uiIcon.localScale = Vector2.Lerp(minScale, maxScale, scaleFactor);
