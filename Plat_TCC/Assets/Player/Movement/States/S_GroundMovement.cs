@@ -83,7 +83,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     public void Jump_Perform(InputAction.CallbackContext obj)
     {
         if (IsGrounded())
+        {
             jump = true;
+            jumpPressTime = 0;
+        }
         else if (!doubleJumping)
             doubleJump = true;
     }
@@ -101,9 +104,11 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
         {                        
             Vector3 moveDirection = GetCameraRelativeDirection();
-            Vector3 velocity = moveDirection * Time.fixedDeltaTime * acceleration;
+            Vector3 velocity = moveDirection * maxGroundSpeed;
+            velocity.y = rb.linearVelocity.y; // Preserve the vertical velocity
+
             //velocity = velocity.normalized * Mathf.Clamp(velocity.magnitude, maxGroundSpeed*0.5f , maxGroundSpeed);
-            rb.linearVelocity = moveDirection * maxGroundSpeed;
+            rb.linearVelocity = velocity;
             //Speed must be at least half of the maximum
 
             //rb.AddForce(moveDirection * accelerationForce * airMultiplier, ForceMode.Acceleration);
@@ -112,11 +117,18 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         if (jump)
         {
             jumpPressTime += Time.fixedDeltaTime * 1000;//transforming the time from seconds to millisseconds
-            rb.linearVelocity = Vector3.up * jumpSpeed * (1- (jumpPressTime/maxJumpPressTime * 1.5f));
+
+            float jumpMultiplier = 1 - (jumpPressTime / maxJumpPressTime);
+            jumpMultiplier = Mathf.Clamp(jumpMultiplier, 0.5f, 1f);
+
+            Vector3 finalSpeed = rb.linearVelocity;
+            finalSpeed.y = jumpSpeed * jumpMultiplier;
+
+            rb.linearVelocity = finalSpeed;
             anim.SetTrigger("Jump");
             
             //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            if(jumpPressTime > maxJumpPressTime)
+            if(jumpPressTime >= maxJumpPressTime)
             {
                 jump = false;
                 jumpPressTime = 0;
@@ -137,8 +149,11 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         
         if(!IsGrounded())
         {
-            //rb.linearVelocity += Vector3.down * gravityForce;
-            rb.AddForce(Vector3.down * gravityForce,ForceMode.Force);
+            float accelDown = rb.linearVelocity.y - (gravityForce * Time.fixedDeltaTime);
+            Vector3 gravity = rb.linearVelocity;
+            gravity.y = accelDown;
+            rb.linearVelocity = gravity;
+            //rb.AddForce(Vector3.down * gravityForce,ForceMode.Acceleration);
         }
     }
 
