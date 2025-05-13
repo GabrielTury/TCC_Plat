@@ -125,9 +125,8 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             finalSpeed.y = jumpSpeed * jumpMultiplier;
 
             rb.linearVelocity = finalSpeed;
-            anim.SetTrigger("Jump");
+            anim.SetTrigger("Jump"); //Change place
             
-            //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             if(jumpPressTime >= maxJumpPressTime)
             {
                 jump = false;
