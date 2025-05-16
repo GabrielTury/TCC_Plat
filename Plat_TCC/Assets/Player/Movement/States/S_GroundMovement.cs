@@ -17,11 +17,11 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     #endregion
     #region Movement Variables
     [Header("Ground Movement")]
-    [SerializeField, Range(1, 50), Tooltip("Rate at which the player will accelerate when moving"), Obsolete]
-    private float accelerationForce;
 
-    [SerializeField, Range(1, 50), Tooltip("Acceleration in m/s^2")]
-    private float acceleration;
+    [SerializeField, Range(0, 1), Tooltip("Starting speed is a fraction of the maxgroundspeed as, 0.5 = half of maxGroundSpeed")]
+    private float startingSpeedMultiplier;
+
+    private float movingTime;
 
     [SerializeField, Range(0, 1), Tooltip("Percentage of movement efficiency compared to the ground movement")]
     private float airMovementMultiplier = 1f;
@@ -102,16 +102,19 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
         //Ground Movement
         if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
-        {                        
+        {
+            if (movingTime <= 0)
+                movingTime = startingSpeedMultiplier;
+            else if (movingTime < 1)
+                movingTime += Time.fixedDeltaTime;
+            else
+                movingTime = 1;
+
             Vector3 moveDirection = GetCameraRelativeDirection();
-            Vector3 velocity = moveDirection * maxGroundSpeed;
-            velocity.y = rb.linearVelocity.y; // Preserve the vertical velocity
+            Vector3 velocity = moveDirection * maxGroundSpeed * movingTime;
+            velocity.y = rb.linearVelocity.y; // Preserve vertical velocity
 
-            //velocity = velocity.normalized * Mathf.Clamp(velocity.magnitude, maxGroundSpeed*0.5f , maxGroundSpeed);
             rb.linearVelocity = velocity;
-            //Speed must be at least half of the maximum
-
-            //rb.AddForce(moveDirection * accelerationForce * airMultiplier, ForceMode.Acceleration);
         }
         //Jump and double jump physics
         if (jump)
@@ -173,6 +176,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         movementDirection = Vector2.zero;
         moving = false;
+        movingTime = 0;
         if(stopMovement == null)
             stopMovement = StartCoroutine(SlowlyStopMovement());        
     }

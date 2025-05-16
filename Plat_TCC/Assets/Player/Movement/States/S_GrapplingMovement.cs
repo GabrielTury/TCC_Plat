@@ -188,7 +188,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                     joint.maxDistance = distFromPoint * maxHangingRangeMultiplier;
                     joint.minDistance = distFromPoint * minHangingRangeMultiplier;
 
-                    joint.spring = 4.5f;
+                    joint.spring = 6.5f;
                     joint.damper = 7.5f;
                     joint.massScale = 4.5f;
 
@@ -229,8 +229,8 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     private void SwingMovement()
     {
         if (rb.linearVelocity.magnitude > maxSpeed) return;
-
-        rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Force);
+        Vector3 finalVelocity = GetCameraRelativeDirection() * moveForce;
+        rb.linearVelocity = finalVelocity;
     }
 
     private Vector3 GetCameraRelativeDirection()
