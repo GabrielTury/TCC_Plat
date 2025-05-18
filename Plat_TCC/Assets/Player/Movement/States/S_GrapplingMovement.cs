@@ -25,6 +25,9 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     #region Grappling Variables
 
+    [Header("Temporary")]
+    public bool enableObsoleteGrappling;
+
     [SerializeField, Tooltip("The maximum distance the player can stay on the rope (this is a multiplier that takes the start position as base, so 0.8 = 80% of the distance from starting point to the attachPoint)"), Range(0, 2)]
     private float maxHangingRangeMultiplier;
 
@@ -226,38 +229,15 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     }
     private void SwingMovement()
     {
-        // Calculate the direction from the player to the anchor point (rope center)
-        Vector3 toAnchor = anchorPoint - transform.position;
-        float distanceToAnchor = toAnchor.magnitude;
-        Vector3 ropeDir = toAnchor.normalized;
-
-        // Project current velocity onto the tangent of the swing circle (perpendicular to rope)
-        Vector3 velocity = rb.linearVelocity;
-        Vector3 tangent = Vector3.Cross(Vector3.up, ropeDir).normalized;
-        Vector3 tangentVelocity = Vector3.ProjectOnPlane(velocity, ropeDir);
-
-        // Get input direction relative to camera
-        Vector3 inputMoveDir = GetCameraRelativeDirection();
-
-        // Only allow input that is perpendicular to the rope (tangent)
-        float inputAmount = Vector3.Dot(inputMoveDir, tangent);
-        Vector3 swingInput = tangent * inputAmount * moveForce;
-
-        // Apply input force to the rigidbody (simulate pumping the swing)
-        rb.AddForce(swingInput, ForceMode.Acceleration);
-
-        // Dampen the velocity towards the anchor (simulate rope tension and energy loss)
-        float swingDamping = 0.98f; // Damping factor per FixedUpdate
-        rb.linearVelocity = tangentVelocity * swingDamping;
-
-        // Apply a centripetal force to keep the player on the rope
-        float ropeTension = Mathf.Max(0, (distanceToAnchor - joint.maxDistance) * 20f);
-        rb.AddForce(ropeDir * ropeTension, ForceMode.Acceleration);
-
-        // Optionally, clamp the max speed
-        if (rb.linearVelocity.magnitude > maxSpeed)
+        if(enableObsoleteGrappling)
         {
-            rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
+            if (rb.linearVelocity.magnitude > maxSpeed) return;
+
+            rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Force);
+        }
+        else
+        {
+
         }
     }
 

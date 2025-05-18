@@ -84,6 +84,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         if (IsGrounded())
         {
+            anim.SetTrigger("Jump");
             jump = true;
             jumpPressTime = 0;
         }
@@ -128,7 +129,6 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             finalSpeed.y = jumpSpeed * jumpMultiplier;
 
             rb.linearVelocity = finalSpeed;
-            anim.SetTrigger("Jump"); //Change place
             
             if(jumpPressTime >= maxJumpPressTime)
             {
