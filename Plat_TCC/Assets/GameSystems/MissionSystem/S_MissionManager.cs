@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class S_MissionManager : MonoBehaviour
 {
+    public static S_MissionManager instance;
+
     [SerializeField]
     /// <summary>
     /// Array that holds all missions for a certain level, the order in the array is the order of the missions
@@ -16,9 +18,12 @@ public class S_MissionManager : MonoBehaviour
 
     private void Awake()
     {
-        if(worldInfo != null)
+        instance = this;
+
+        if (worldInfo != null)
             SetWorldInfo(worldInfo);
     }
+
     public void StartMission(FinishedLoading callback, int missionIndex)
     {
         if(Loading == null)

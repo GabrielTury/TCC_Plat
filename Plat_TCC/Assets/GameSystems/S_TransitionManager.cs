@@ -71,9 +71,25 @@ public class S_TransitionManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(levelName);
+
+        while (!SceneManager.GetSceneByName(levelName).isLoaded)
+        {
+            yield return null;
+        }
+
         if (missionIndex != -1)
         {
-            // Load specific mission here
+            S_MissionManager.instance.StartMission((bool result) =>
+            {
+                if (result)
+                {
+                    Debug.Log("Mission loaded successfully.");
+                }
+                else
+                {
+                    Debug.Log("Failed to load mission.");
+                }
+            }, missionIndex);
         }
 
         while (canvasGroup.alpha > 0)
