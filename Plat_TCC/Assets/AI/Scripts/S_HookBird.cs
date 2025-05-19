@@ -56,7 +56,7 @@ public class S_HookBird : S_PlatformBase
     }
 
     #endregion //State Coroutines
-
+#if UNITY_EDITOR
     [ContextMenu("Set Path")]
     private void SetEditorPath()
     {
@@ -69,7 +69,7 @@ public class S_HookBird : S_PlatformBase
         // Converter de volta para o array
         path = pathList.ToArray();
     }
-
+#endif //UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (path == null || path.Length == 0)

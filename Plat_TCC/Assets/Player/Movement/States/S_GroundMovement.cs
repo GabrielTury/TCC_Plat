@@ -100,6 +100,11 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     public void StateFixedUpdate()
     {
+        if (movementDirection == Vector2.zero && moving)
+        {
+            Debug.Log($"PROBLEMATIC FRAME: movementDirection={movementDirection}, moving={moving}, frameCount={Time.fixedTime}");
+        }
+
         anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
         //Ground Movement
         if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
@@ -157,26 +162,31 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             rb.linearVelocity = gravity;
             //rb.AddForce(Vector3.down * gravityForce,ForceMode.Acceleration);
         }
-    }
 
-    public void StateUpdate()
-    {
         if (!moving) return;
 
         Vector3 moveDir = GetCameraRelativeDirection();
 
-        if (moveDir != Vector3.zero)
+        if (moveDir.sqrMagnitude > 0.001f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir, transform.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * angularSpeed);
         }
     }
 
+    public void StateUpdate()
+    {
+
+    }
+
     public void Move_Cancel(InputAction.CallbackContext obj)
     {
+        Debug.Log($"Move_Cancel called at frame {Time.fixedTime}");
         movementDirection = Vector2.zero;
         moving = false;
         movingTime = 0;
+        rb.angularVelocity = Vector3.zero;
+       // Debug.Log("Move_Cancel");
         if(stopMovement == null)
             stopMovement = StartCoroutine(SlowlyStopMovement());        
     }
@@ -208,7 +218,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         bool ret = false;
         LayerMask groundMask = 1 << 6;
-        Collider[] results = Physics.OverlapSphere(groundPoint.position, 0.5f, groundMask);
+        Collider[] results = Physics.OverlapSphere(groundPoint.position, 0.3f, groundMask);
         if (results != null && results.Length > 0)
         {
             ret = true;
@@ -235,8 +245,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         forward.y = 0;
         right.y = 0;
         forward.Normalize();
-        right.Normalize();
-
+        right.Normalize();        
         return (forward * movementDirection.y + right * movementDirection.x).normalized;
     }
 
@@ -278,7 +287,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(groundPoint.position, 0.5f);
+        Gizmos.DrawWireSphere(groundPoint.position, 0.3f);
     }
 
 #endif
