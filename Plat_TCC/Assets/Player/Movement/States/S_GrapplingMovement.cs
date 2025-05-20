@@ -54,9 +54,16 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     private Vector2 inputDirection;
 
+    private Vector2 lastinputDir;
+
     [InspectorLabel("Movement Swing Force")]
     [Space(2), Header("Grapple Movement"), SerializeField, Tooltip("Force which the player can mvoe while swinging")]
     private float moveForce;
+
+    [SerializeField]
+    private float grappleForceCooldown;
+
+    private float grappleTimer = 0;
 
     [SerializeField]
     private float maxSpeed;
@@ -72,8 +79,6 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     [SerializeField, InspectorLabel("Innital Grappling Force"), Tooltip("Force towards the anchor point when starting the grapple")]
     private float grappleForce = 5;
-
-    private float decellerationRate;
 
     private float cableMoveDir;
 
@@ -118,6 +123,18 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     public void Move_Perform(InputAction.CallbackContext obj)
     {
         inputDirection = obj.ReadValue<Vector2>();
+
+        if(lastinputDir == Vector2.zero)
+            lastinputDir = inputDirection * -1;
+        float dotProd = Vector3.Dot(inputDirection, lastinputDir);
+
+        if ( dotProd < 0.5 && grappleTimer > grappleForceCooldown)
+        {
+            rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Impulse);
+            grappleTimer = 0;
+            lastinputDir = inputDirection;
+        }
+
     }
 
     public void StateFixedUpdate()
@@ -127,9 +144,23 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             SwingMovement();
             CableMovement();
 
+            if(grappleTimer < grappleForceCooldown)
+                grappleTimer += Time.fixedDeltaTime;
+
             anchorPoint = closestCollider.transform.position;
 
             joint.connectedAnchor = anchorPoint;
+
+
+            Vector3 moveDir = GetCameraRelativeDirection();
+
+            if (moveDir != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(moveDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            }
+
+            rb.AddForce(Vector3.down * 10, ForceMode.Acceleration);
         }
     }
 
@@ -137,13 +168,6 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     {
         DrawLine();
 
-        Vector3 moveDir = GetCameraRelativeDirection();
-
-        if (moveDir != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        }
     }
     #region Swing
     private void StartSwing()
@@ -191,7 +215,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                     joint.maxDistance = distFromPoint * maxHangingRangeMultiplier;
                     joint.minDistance = distFromPoint * minHangingRangeMultiplier;
 
-                    joint.spring = 6.5f;
+                    joint.spring = 8.5f;
                     joint.damper = 7.5f;
                     joint.massScale = 4.5f;
 
@@ -234,10 +258,6 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             if (rb.linearVelocity.magnitude > maxSpeed) return;
 
             rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Force);
-        }
-        else
-        {
-
         }
     }
 

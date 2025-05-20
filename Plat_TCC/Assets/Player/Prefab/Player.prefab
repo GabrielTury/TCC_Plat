@@ -1301,14 +1301,15 @@ MonoBehaviour:
   grappable:
     serializedVersion: 2
     m_Bits: 128
-  enableObsoleteGrappling: 1
+  enableObsoleteGrappling: 0
   maxHangingRangeMultiplier: 0.7
   minHangingRangeMultiplier: 0.2
   rotationSpeed: 20
   maxAngle: 80
   grappleDetectionRange: 13.24
   lineDrawSpeed: 15
-  moveForce: 10
+  moveForce: 20
+  grappleForceCooldown: 1.5
   maxSpeed: 10
   cableSpeed: 15
   retractForce: 20
@@ -2010,6 +2011,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 31ac1bae224de2d40aa4b826dfae99f2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d1fe88905fcce0a49a37236e06621ae4, type: 2}
     - target: {fileID: 919132149155446097, guid: 31ac1bae224de2d40aa4b826dfae99f2, type: 3}
       propertyPath: m_Name
       value: Goat_Ancora
@@ -2084,6 +2089,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 44ac727a292038e41aaf666d7542b66c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 883e9c86a7b0957409ddc1c6c32f1d32, type: 2}
     - target: {fileID: 919132149155446097, guid: 44ac727a292038e41aaf666d7542b66c, type: 3}
       propertyPath: m_Name
       value: Goat_Grappel
@@ -2158,6 +2167,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 010f35cb72681f44ba7dd77c7149d49f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: da4cf7434b9d0b64f8177a3fc5e81eec, type: 2}
     - target: {fileID: 919132149155446097, guid: 010f35cb72681f44ba7dd77c7149d49f, type: 3}
       propertyPath: m_Name
       value: Goat_Cinto
