@@ -100,11 +100,6 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     public void StateFixedUpdate()
     {
-        if (movementDirection == Vector2.zero && moving)
-        {
-            Debug.Log($"PROBLEMATIC FRAME: movementDirection={movementDirection}, moving={moving}, frameCount={Time.fixedTime}");
-        }
-
         anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
         //Ground Movement
         if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
@@ -181,7 +176,6 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     public void Move_Cancel(InputAction.CallbackContext obj)
     {
-        Debug.Log($"Move_Cancel called at frame {Time.fixedTime}");
         movementDirection = Vector2.zero;
         moving = false;
         movingTime = 0;
