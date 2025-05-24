@@ -12,6 +12,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     #region Components
     private Rigidbody rb;
     private Animator anim;
+    private Camera cam;
 
     private SpringJoint joint;
     private LineRenderer lr;
@@ -90,6 +91,8 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         lr = GetComponent<LineRenderer>(); 
+        cam = Camera.main;
+
         lr.positionCount = 0;
         playerMovement = GetComponent<S_PlayerMovement>();
         groundMovement = GetComponent<S_GroundMovement>();
@@ -263,10 +266,10 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     private Vector3 GetCameraRelativeDirection()
     {
-        if (Camera.main == null) return Vector3.zero;
+        if (cam == null) return Vector3.zero;
 
-        Vector3 forward = Camera.main.transform.forward;
-        Vector3 right = Camera.main.transform.right;
+        Vector3 forward = cam.transform.forward;
+        Vector3 right = cam.transform.right;
 
         // Flatten the vectors to avoid unwanted vertical movement
         forward.y = 0;
@@ -325,9 +328,9 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     private void OnDrawGizmosSelected()
     {
         //Gizmos.color = Color.red;
-        //Gizmos.DrawLine(Camera.main.transform.position, Camera.main.transform.forward * maxGrappleDistance);
+        //Gizmos.DrawLine(cam.transform.position, cam.transform.forward * maxGrappleDistance);
         //Gizmos.color = Color.cyan;
-        //Gizmos.DrawWireSphere(Camera.main.transform.position + (Camera.main.transform.forward * (maxGrappleDistance / 2)), aimRadius);
+        //Gizmos.DrawWireSphere(cam.transform.position + (cam.transform.forward * (maxGrappleDistance / 2)), aimRadius);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, grappleDetectionRange);
     }

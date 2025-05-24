@@ -18,7 +18,7 @@ public class S_GrappableObject : MonoBehaviour
         //grapplingCanvas.transform.RotateAround(transform.position, Vector3.up, orbitSpeed * Time.deltaTime);//the position must always be the closest to the player in certain radius
 
         // Make the grapplingCanvas always face the camera
-        grapplingCanvas.transform.LookAt(Camera.main.transform.position);
+        //grapplingCanvas.transform.LookAt(Camera.main.transform.position);
     }
     /// <summary>
     /// Called when the object enters in the player's grapple range, this method is called every frame while its in range

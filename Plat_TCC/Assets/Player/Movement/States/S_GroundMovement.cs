@@ -11,6 +11,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     #region Components
     private Rigidbody rb;
     private Animator anim;
+    private Camera cam;
 
     private S_PlayerMovement playerMovement;
     private S_GrapplingMovement grapplingMovement;//see S_PlayerMovement ChangeState() note
@@ -202,6 +203,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        cam = Camera.main;
 
         playerMovement = GetComponent<S_PlayerMovement>();
         grapplingMovement = GetComponent<S_GrapplingMovement>();
@@ -230,10 +232,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     private Vector3 GetCameraRelativeDirection()
     {
-        if (Camera.main == null) return Vector3.zero;
+        if (cam == null) return Vector3.zero;
 
-        Vector3 forward = Camera.main.transform.forward;
-        Vector3 right = Camera.main.transform.right;
+        Vector3 forward = cam.transform.forward;
+        Vector3 right = cam.transform.right;
 
         // Flatten the vectors to avoid unwanted vertical movement
         forward.y = 0;
