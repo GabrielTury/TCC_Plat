@@ -22,6 +22,15 @@ O objetivo da missão é capturar um robô que corre pelo nível segurando o col
 
 O terceiro mundo se passa dentro de uma pirâmide invertida onde o jogador deve escalar para escapar. Tem movimentação mais técnica e puzzles mais complexos do que os mundos anteriores.
 
+### Missão 1 - Alcançar o Objetivo
+Faz uso de alvos para gancho ligados de maneira continua, sendo um desafio de reflexos e timing para o jogador, que deve balancar entre eles sem plataformas de apoio. Além disso incorpora a plataforma ambulante do mundo anterior.
+
+### Missão 2 - Alcançar o Objetivo
+Um grande puzzle em três salas, que requer que o jogador vá e volte entre salas para desbloquear a saída que leva ao objetivo.
+
+### Missão 3 - Alcançar o Objetivo
+Um desafio mais linear, onde uma sala foca em combate contra inimigos e a outra foca em movimentação por um labirinto.
+
 ## Mundo 4
 **Temática:** TBD
 
