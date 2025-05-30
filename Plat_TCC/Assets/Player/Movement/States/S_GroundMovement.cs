@@ -101,6 +101,9 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     public void StateFixedUpdate()
     {
+
+        ApplyGravity();
+
         anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
         //Ground Movement
         if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
@@ -148,16 +151,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             rb.AddForce(doubleJumpDirection.normalized * doubleJumpForce, ForceMode.Impulse);
             doubleJumping = true;
             doubleJump = false;
-        }      
-        
-        if(!IsGrounded())
-        {
-            float accelDown = rb.linearVelocity.y - (gravityForce * Time.fixedDeltaTime);
-            Vector3 gravity = rb.linearVelocity;
-            gravity.y = accelDown;
-            rb.linearVelocity = gravity;
-            //rb.AddForce(Vector3.down * gravityForce,ForceMode.Acceleration);
-        }
+        }             
 
         if (!moving) return;
 
@@ -167,6 +161,18 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDir, transform.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * angularSpeed);
+        }
+    }
+
+    private void ApplyGravity()
+    {
+        if (!IsGrounded())
+        {
+            float accelDown = rb.linearVelocity.y - (gravityForce * Time.fixedDeltaTime);
+            Vector3 gravity = rb.linearVelocity;
+            gravity.y = accelDown;
+            rb.linearVelocity = gravity;
+            //rb.AddForce(Vector3.down * gravityForce,ForceMode.Acceleration);
         }
     }
 

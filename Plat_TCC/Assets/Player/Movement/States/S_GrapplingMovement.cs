@@ -26,7 +26,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     #region Grappling Variables
 
-    [Header("Temporary")]
+    [Header("Temporary"), Obsolete]
     public bool enableObsoleteGrappling;
 
     [SerializeField, Tooltip("The maximum distance the player can stay on the rope (this is a multiplier that takes the start position as base, so 0.8 = 80% of the distance from starting point to the attachPoint)"), Range(0, 2)]
@@ -129,14 +129,15 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
         if(lastinputDir == Vector2.zero)
             lastinputDir = inputDirection * -1;
-        float dotProd = Vector3.Dot(inputDirection, lastinputDir);
 
-        if ( dotProd < 0.5 && grappleTimer > grappleForceCooldown)
+        /*float dotProd = Vector3.Dot(inputDirection, lastinputDir);
+
+        if ( dotProd < 0.5 && grappleTimer >= grappleForceCooldown)
         {
             rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Impulse);
             grappleTimer = 0;
             lastinputDir = inputDirection;
-        }
+        }*/
 
     }
 
@@ -147,6 +148,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             SwingMovement();
             CableMovement();
 
+            //Count Timer
             if(grappleTimer < grappleForceCooldown)
                 grappleTimer += Time.fixedDeltaTime;
 
@@ -218,7 +220,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                     joint.maxDistance = distFromPoint * maxHangingRangeMultiplier;
                     joint.minDistance = distFromPoint * minHangingRangeMultiplier;
 
-                    joint.spring = 8.5f;
+                    joint.spring = 9.5f;
                     joint.damper = 7.5f;
                     joint.massScale = 4.5f;
 
@@ -256,12 +258,27 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     }
     private void SwingMovement()
     {
-        if(enableObsoleteGrappling)
+        if (inputDirection != Vector2.zero)
+        {
+            float dotProd = Vector3.Dot(inputDirection, lastinputDir);
+
+            if(dotProd < 0.5)
+                grappleTimer = 0;
+
+            if (grappleTimer <= grappleForceCooldown)
+            {
+                rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Force);
+                /*grappleTimer = 0;*/
+                lastinputDir = inputDirection;
+            }
+        }
+
+        /*if (enableObsoleteGrappling)
         {
             if (rb.linearVelocity.magnitude > maxSpeed) return;
 
             rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Force);
-        }
+        }*/
     }
 
     private Vector3 GetCameraRelativeDirection()
