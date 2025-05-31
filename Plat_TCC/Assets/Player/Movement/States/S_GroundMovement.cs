@@ -160,7 +160,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         if (moveDir.sqrMagnitude > 0.001f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDir, transform.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * angularSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * angularSpeed);
         }
     }
 
@@ -255,7 +255,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         while (rb.linearVelocity.magnitude > 0.1f)
         {
-            rb.linearVelocity = rb.linearVelocity / 1.1f;
+            
+            Vector3 newRate = rb.linearVelocity / 1.1f;
+            newRate.y = rb.linearVelocity.y; // Preserve vertical velocity
+            rb.linearVelocity = newRate;
             yield return new WaitForFixedUpdate();
         }
     }
