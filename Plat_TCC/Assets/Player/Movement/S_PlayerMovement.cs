@@ -3,11 +3,10 @@ using UnityEngine.InputSystem;
 
 public class S_PlayerMovement : MonoBehaviour
 {
-    private InputSystem_Actions inputs;
-
     [SerializeField]
-    private Transform groundPoint;
+    private GameObject blobShadow;
 
+    private InputSystem_Actions inputs;
 
     private IMoveState[] moveStates;
     private IMoveState activeState;
@@ -108,9 +107,33 @@ public class S_PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {      
         activeState.StateFixedUpdate();
-        if(canGrapple)
+        GrapplingRange();
+        BlobShadow();
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        activeState.StateUpdate();
+    }
+
+    private void BlobShadow()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
         {
-            Collider[] objects = Physics.OverlapSphere(transform.position, grapplingMovement.grappleDetectionRange, 1<<7);
+            Vector3 shadowPosition = hit.point;
+            shadowPosition.y += 0.01f;
+            blobShadow.transform.position = shadowPosition;
+        }
+        else
+            Debug.Log("No hot on shadow");
+    }
+
+    private void GrapplingRange()
+    {
+        if (canGrapple)
+        {
+            Collider[] objects = Physics.OverlapSphere(transform.position, grapplingMovement.grappleDetectionRange, 1 << 7);
             if (objects != null)
             {
                 grapplingCollidersInRange = objects;
@@ -120,11 +143,6 @@ public class S_PlayerMovement : MonoBehaviour
                 }
             }
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        activeState.StateUpdate();
     }
 
     public void ChangeState(IMoveState state)//change this to work with a enum
@@ -138,5 +156,11 @@ public class S_PlayerMovement : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 100f);
     }
 }
