@@ -14,6 +14,18 @@ public class S_PlayerFX : MonoBehaviour
     [SerializeField] private GameObject fallburstVFX;
     [SerializeField] private Transform vfxSpawnPoint;
 
+    private VisualEffect footstep;
+    private VisualEffect fallburst;
+
+    private void Awake()
+    {
+        GameObject vfxInstance = Instantiate(footstepVFX, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
+        footstep = vfxInstance.GetComponent<VisualEffect>();
+
+        vfxInstance = Instantiate(fallburstVFX, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
+        fallburst = vfxInstance.GetComponent<VisualEffect>();
+    }
+
     public void PlayStep()
     {
         if (footstepSounds.Length == 0) return;
@@ -21,7 +33,13 @@ public class S_PlayerFX : MonoBehaviour
         AudioClip clip = footstepSounds[randomIndex];
         audioSource.PlayOneShot(clip);
 
-        if (footstepVFX != null && vfxSpawnPoint != null)
+        if(footstep != null)
+        {
+            footstep.transform.position = vfxSpawnPoint.position;
+            footstep.Play();
+        }
+        
+        /*if (footstepVFX != null && vfxSpawnPoint != null)
         {
             GameObject vfxInstance = Instantiate(footstepVFX, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
             VisualEffect vfx = vfxInstance.GetComponent<VisualEffect>();
@@ -29,7 +47,7 @@ public class S_PlayerFX : MonoBehaviour
             {
                 vfx.SendEvent("OnPlay");
             }
-        }
+        }*/
     }
     public void PlayJump()
     {
@@ -39,8 +57,13 @@ public class S_PlayerFX : MonoBehaviour
     public void PlayLanding()
     {
         audioSource.PlayOneShot(landSound);
+        if(fallburst != null)
+        {
+            fallburst.transform.position = vfxSpawnPoint.position;
+            fallburst.Play();
+        }
 
-        if (fallburstVFX != null && vfxSpawnPoint != null)
+        /*if (fallburstVFX != null && vfxSpawnPoint != null)
         {
             GameObject vfxInstance = Instantiate(fallburstVFX, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
             VisualEffect vfx = vfxInstance.GetComponent<VisualEffect>();
@@ -48,7 +71,7 @@ public class S_PlayerFX : MonoBehaviour
             {
                 vfx.SendEvent("OnPlay");
             }
-        }
+        }*/
     }
 
     public void PlayRope()
