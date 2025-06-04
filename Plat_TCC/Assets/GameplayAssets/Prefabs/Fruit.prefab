@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7182125177930907228}
   - component: {fileID: 1823398651474323660}
   m_Layer: 6
-  m_Name: Collectible
+  m_Name: Fruit
   m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,7 +55,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.6
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.82, z: 0}
 --- !u!114 &7182125177930907228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5d8516b340b5a0748b2e1ca6221dfeae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.473
+      value: 0.343
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5d8516b340b5a0748b2e1ca6221dfeae, type: 3}
       propertyPath: m_LocalPosition.z
