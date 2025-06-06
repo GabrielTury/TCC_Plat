@@ -11,6 +11,7 @@ public class S_PlayerInformation : MonoBehaviour
     void OnDamageTaken()
     {
         applesCollected -= applesLostOnDamage;
+        S_LevelManager.instance.collectibles = applesCollected;
 
         if(applesCollected < 0)
         {

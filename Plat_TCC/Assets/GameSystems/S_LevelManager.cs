@@ -14,6 +14,8 @@ public class S_LevelManager : MonoBehaviour
 
     private Transform playerTransform;
 
+    private S_PlayerInformation playerInfo;
+
     private bool isResetting = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,6 +27,7 @@ public class S_LevelManager : MonoBehaviour
         // Set Checkpoint Data to player initial position
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerInfo = playerTransform.GetComponent<S_PlayerInformation>();
 
         SetCheckpointData(playerTransform.position);
     }
@@ -62,8 +65,8 @@ public class S_LevelManager : MonoBehaviour
                 break;
         }
 
-        
 
+        playerInfo.applesCollected = collectibles;
         //Debug.LogWarning("[Checkpoint Data] Collectible " + collectibleName + " collected. Total: " + collectibles);
     }
 
