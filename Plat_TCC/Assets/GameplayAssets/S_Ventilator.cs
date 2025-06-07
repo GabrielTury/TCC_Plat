@@ -11,10 +11,16 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
     [SerializeField]
     private float speed;
 
+    [SerializeField]
+    private bool startDisabled;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (startDisabled == true)
+        {
+            ToggleButtonInteraction();
+        }
     }
 
     // Update is called once per frame
