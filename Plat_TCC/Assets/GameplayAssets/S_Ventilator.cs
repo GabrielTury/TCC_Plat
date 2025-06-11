@@ -9,7 +9,13 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
     private GameObject disabledVisualizer;
 
     [SerializeField]
+    private GameObject fanObject;
+
+    [SerializeField]
     private float speed;
+
+    [SerializeField]
+    private float fanSpinSpeed;
 
     [SerializeField]
     private bool startDisabled;
@@ -35,6 +41,11 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
                     objRb.AddForce(transform.parent.up * speed, ForceMode.Acceleration);
                 }
             }
+        }
+
+        if (!disabledVisualizer.activeSelf)
+        {
+            fanObject.transform.Rotate(0, Time.deltaTime * fanSpinSpeed, 0, Space.World);
         }
     }
 
