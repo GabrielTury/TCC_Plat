@@ -209,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2898097635698373317}
   - component: {fileID: 5190835241705604109}
-  - component: {fileID: 378942589318506865}
+  - component: {fileID: 3228840075200288640}
   m_Layer: 6
   m_Name: Wind Zone
   m_TagString: Untagged
@@ -254,7 +254,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 20, z: 4}
   m_Center: {x: 0, y: 10, z: 0}
---- !u!114 &378942589318506865
+--- !u!114 &3228840075200288640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,8 +268,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disabledVisualizer: {fileID: 9114278190817761559}
   fanObject: {fileID: 7253344744983729663}
-  speed: 10
-  fanSpinSpeed: 10
+  speed: 5
+  fanSpinSpeed: 1000
   startDisabled: 0
 --- !u!1001 &5861200364424559932
 PrefabInstance:
