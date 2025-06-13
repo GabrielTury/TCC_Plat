@@ -7,7 +7,7 @@ public class S_RotateFruit : MonoBehaviour
 
     private void Start()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y + height, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y + height / 10, transform.position.z);
     }
     // Update is called once per frame
     void Update()
