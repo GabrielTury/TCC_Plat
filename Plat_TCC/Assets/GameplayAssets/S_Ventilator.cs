@@ -36,14 +36,14 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
         {
             if (objRb != null)
             {
-                if (!disabledVisualizer.activeSelf)
+                if (disabledVisualizer.activeSelf)
                 {
                     objRb.AddForce(transform.parent.up * speed, ForceMode.Acceleration);
                 }
             }
         }
 
-        if (!disabledVisualizer.activeSelf)
+        if (disabledVisualizer.activeSelf)
         {
             fanObject.transform.Rotate(0, Time.deltaTime * fanSpinSpeed, 0, Space.World);
         }
