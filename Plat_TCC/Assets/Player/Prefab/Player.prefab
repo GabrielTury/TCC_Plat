@@ -912,7 +912,7 @@ Transform:
   m_GameObject: {fileID: 5327408885590022741}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0, z: -1.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1225,7 +1225,6 @@ GameObject:
   - component: {fileID: 3550678666094352426}
   - component: {fileID: 7789462132015681404}
   - component: {fileID: 5864600736520399410}
-  - component: {fileID: 5335608722859134249}
   - component: {fileID: 5621912023471539407}
   - component: {fileID: 426628437545526167}
   m_Layer: 10
@@ -1499,7 +1498,7 @@ AudioSource:
   m_GameObject: {fileID: 6415675410843183998}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6777605474915160019, guid: d5eec1078d8ff514c8cbcddf0782c9db, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -1587,34 +1586,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5335608722859134249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6415675410843183998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71668f0c86e7a0f4c8e6b558010ed3bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 5864600736520399410}
-  footstepSounds:
-  - {fileID: 8300000, guid: 957f8875519e95c4486327cf9dfd4464, type: 3}
-  - {fileID: 8300000, guid: 549d365159e32a84499162bc1501200e, type: 3}
-  - {fileID: 8300000, guid: 6ecb91d8e5555274f8b2f5e16b660534, type: 3}
-  - {fileID: 8300000, guid: 0dd8d4db0f86cfd4d81a6c1d10a3105c, type: 3}
-  - {fileID: 8300000, guid: 393ea9ce63d2f4943a895033791e0a03, type: 3}
-  - {fileID: 8300000, guid: c06ac70eac17f9b4b8cfe44969b068d2, type: 3}
-  - {fileID: 8300000, guid: ab45fd6e5bf27fe45bda0858d52089e7, type: 3}
-  - {fileID: 8300000, guid: 41c9ca8770c068042bab68f562b7019f, type: 3}
-  jumpSound: {fileID: 8300000, guid: d693eb5942d22ea429e14096ae5ad47a, type: 3}
-  landSound: {fileID: 8300000, guid: dbc33935f1831a74cab592a841df0aad, type: 3}
-  ropeSound: {fileID: 8300000, guid: a1f24c65c3843714d8405a1178bf78b0, type: 3}
-  footstepVFX: {fileID: 8097078060573437841, guid: aac44fa17e75bf041bf6083bfc9548e8, type: 3}
-  fallburstVFX: {fileID: 8809471052285697022, guid: e4587d3bfd5c2614690190cba8f8f83d, type: 3}
-  vfxSpawnPoint: {fileID: 6454666565702905853}
 --- !u!114 &5621912023471539407
 MonoBehaviour:
   m_ObjectHideFlags: 0
