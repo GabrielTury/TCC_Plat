@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,8 @@ public class S_MissionManager : MonoBehaviour
     private string[] missionSceneNames;
 
     private Coroutine Loading;
+
+    private int currentMissionIndex;
 
     private void Awake()
     {
@@ -62,6 +65,7 @@ public class S_MissionManager : MonoBehaviour
             result = true;
             
         Finish:
+        currentMissionIndex = missionIndex; //Sets the current mission index
         callback?.Invoke(result); //Calls the delegate
     }
 
@@ -69,5 +73,13 @@ public class S_MissionManager : MonoBehaviour
     {
         worldInfo = input;
         missionSceneNames = worldInfo.missionSceneNames;
+    }
+
+    public void SaveCurrentMissionStatus(bool complete)
+    {
+        string worldNumber = worldInfo.worldId.ToString();
+        string missionNumber = currentMissionIndex.ToString();
+        
+        PlayerPrefs.SetInt("Mission" + worldNumber + "-" + missionNumber + "Completed", (complete == true ? 1 : 0));
     }
 }

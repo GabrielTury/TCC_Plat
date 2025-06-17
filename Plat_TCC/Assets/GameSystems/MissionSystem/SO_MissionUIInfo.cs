@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MissionUIInfo", menuName = "Mission System/MissionUIInfo")]
 public class SO_MissionUIInfo : ScriptableObject
 {
+    [TextArea]
     public string objectiveName;
     public string condition;
 
@@ -15,4 +16,5 @@ public class SO_MissionUIInfo : ScriptableObject
         public int count;
     }
 
+    public CollectibleInfo[] collectibleInfo;
 }
