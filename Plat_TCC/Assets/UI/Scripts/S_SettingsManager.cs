@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using HF = S_HelperFunctions;
@@ -38,6 +39,9 @@ public class S_SettingsManager : MonoBehaviour
 
     //[SerializeField]
     private Coroutine[] buttonAnimationCoroutine = new Coroutine[5];
+
+    [SerializeField]
+    private AudioMixer audioMixer;
 
     [SerializeField]
     private int lastButtonHighlighted = 0;
@@ -308,6 +312,12 @@ public class S_SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("WINDOW_TYPE_INDEX", windowTypeIndex);
         PlayerPrefs.SetFloat("MUSIC_VOLUME", musicVolume);
         PlayerPrefs.SetFloat("SOUND_VOLUME", soundVolume);
+
+        audioMixer.SetFloat("MusicParam", musicVolume / 100);
+        audioMixer.SetFloat("SoundParam", soundVolume / 100);
+
+        Debug.LogError("astoiast");
+
     }
 
     private void ApplySavedPlayerSettings()

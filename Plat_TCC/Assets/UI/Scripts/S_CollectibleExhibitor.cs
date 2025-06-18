@@ -21,12 +21,30 @@ public class S_CollectibleExhibitor : MonoBehaviour
     private RectTransform appleIcon;
 
     [SerializeField]
+    private Image appleIconImage;
+
+    [SerializeField]
+    private Image appleShadowImage;
+
+    [SerializeField]
     private TextMeshProUGUI appleCounter;
 
     private Coroutine appleStretchCoroutine;
 
     private int appleTimer = 0;
     #endregion
+
+    [SerializeField]
+    private Sprite appleSprite;
+
+    [SerializeField]
+    private Sprite keySprite;
+
+    [SerializeField]
+    private Color32 appleBGColor;
+
+    [SerializeField]
+    private Color32 keyBGColor;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,6 +73,20 @@ public class S_CollectibleExhibitor : MonoBehaviour
 
     public void UpdateCollectible(string collectibleName, int count)
     {
+        switch (collectibleName)
+        {
+            case "Apple":
+
+                appleIconImage.sprite = appleSprite;
+                appleShadowImage.color = appleBGColor;
+                break;
+
+            case "Key":
+                appleIconImage.sprite = keySprite;
+                appleShadowImage.color = keyBGColor;
+                break;
+
+        }
         appleCounter.text = count + "x";
         appleTimer = 60;
         if (appleStretchCoroutine != null) { StopCoroutine(appleStretchCoroutine); }

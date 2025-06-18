@@ -7,6 +7,7 @@ public class S_LevelManager : MonoBehaviour
 
     public int collectibles = 0;
     public int mainCollectibles = 0;
+    public int keyCollectibles = 0;
     public Vector3 playerPositionCheckpoint;
 
     public GameObject[] savedObjects;
@@ -53,6 +54,11 @@ public class S_LevelManager : MonoBehaviour
             case "Main":
                 mainCollectibles += count;
                 S_CollectibleExhibitor.instance.UpdateCollectible(collectibleName, mainCollectibles);
+                break;
+
+            case "Key":
+                keyCollectibles += count;
+                S_CollectibleExhibitor.instance.UpdateCollectible(collectibleName, keyCollectibles);
                 break;
 
             case "Apple":
