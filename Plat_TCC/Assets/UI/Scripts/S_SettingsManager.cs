@@ -313,11 +313,8 @@ public class S_SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("MUSIC_VOLUME", musicVolume);
         PlayerPrefs.SetFloat("SOUND_VOLUME", soundVolume);
 
-        audioMixer.SetFloat("MusicParam", musicVolume / 100);
-        audioMixer.SetFloat("SoundParam", soundVolume / 100);
-
-        Debug.LogError("astoiast");
-
+        audioMixer.SetFloat("MusicParam", Mathf.Lerp(-80, 0, musicVolume));
+        audioMixer.SetFloat("SoundParam", Mathf.Lerp(-80, 0, soundVolume));
     }
 
     private void ApplySavedPlayerSettings()
