@@ -3,8 +3,8 @@ using UnityEngine.InputSystem;
 
 public class S_PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject blobShadow;
+    //[SerializeField]
+    //private GameObject blobShadow;
 
     private InputSystem_Actions inputs;
 
@@ -118,7 +118,7 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void BlobShadow()
     {
-        RaycastHit hit;
+        /*RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
         {
             Vector3 shadowPosition = hit.point;
@@ -126,7 +126,7 @@ public class S_PlayerMovement : MonoBehaviour
             blobShadow.transform.position = shadowPosition;
         }
         else
-            Debug.Log("No hot on shadow");
+            Debug.Log("No hit on shadow");*/
     }
 
     private void GrapplingRange()
