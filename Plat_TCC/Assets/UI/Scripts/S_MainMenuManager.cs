@@ -78,6 +78,7 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Time.timeScale = 1f; // Ensure the time scale is set to normal
         InitializeSceneObjects();
         BeginSceneAnimation();
         for (int i = 0; i < buttons.Length; i++)

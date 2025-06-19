@@ -29,7 +29,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     private int selectionIndex = 0;
 
     //[SerializeField]
-    private Coroutine[] buttonAnimationCoroutine = new Coroutine[4];
+    private Coroutine[] buttonAnimationCoroutine = new Coroutine[6];
 
     [SerializeField]
     private int lastButtonHighlighted = 0;
@@ -375,8 +375,22 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
             StopCoroutine(mainMenuAnimationCoroutine);
         }
         S_SettingsManager.instance.OpenSettings(this);
+        S_SettingsManager.instance.isOnSettingsMenu = true;
         mainMenuAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainPanel, new Vector2(-800, 0), 0.3f));
         isThisMenuActive = false;
+    }
+
+    public void QuitToTitle()
+    {
+        isInPause = false;
+        Time.timeScale = 1f;
+        if (mainHolderAnimationCoroutine != null)
+        {
+            StopCoroutine(mainHolderAnimationCoroutine);
+        }
+        mainHolderAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainHolder, new Vector2(-1900, 0), 0.3f));
+        S_TransitionManager.instance.GoToLevel("MainMenu");
+        Debug.Log("Quitting to Title Screen...");
     }
     #endregion
 }

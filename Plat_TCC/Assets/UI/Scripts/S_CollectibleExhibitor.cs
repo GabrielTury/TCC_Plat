@@ -41,10 +41,16 @@ public class S_CollectibleExhibitor : MonoBehaviour
     private Sprite keySprite;
 
     [SerializeField]
+    private Sprite gearSprite;
+
+    [SerializeField]
     private Color32 appleBGColor;
 
     [SerializeField]
     private Color32 keyBGColor;
+
+    [SerializeField]
+    private Color32 gearBGColor;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -84,6 +90,11 @@ public class S_CollectibleExhibitor : MonoBehaviour
             case "Key":
                 appleIconImage.sprite = keySprite;
                 appleShadowImage.color = keyBGColor;
+                break;
+
+            case "Main":
+                appleIconImage.sprite = gearSprite;
+                appleShadowImage.color = gearBGColor;
                 break;
 
         }

@@ -62,7 +62,7 @@ public class S_WorldPortal : MonoBehaviour
                 S_MissionSelectManager missionSelectManager = missionCanvas.GetComponent<S_MissionSelectManager>();
                 if (missionSelectManager != null)
                 {
-                    missionSelectManager.Setup(missionInfos);
+                    missionSelectManager.Setup(missionInfos, levelName);
                 }
                 else
                 {

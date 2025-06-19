@@ -19,7 +19,7 @@ public class S_SettingsManager : MonoBehaviour
 
     private InputSystem_Actions inputs;
 
-    private bool isOnSettingsMenu = false;
+    public bool isOnSettingsMenu = false;
 
     private Coroutine settingsAnimationCoroutine;
 
@@ -38,7 +38,7 @@ public class S_SettingsManager : MonoBehaviour
     private int selectionIndex = 0;
 
     //[SerializeField]
-    private Coroutine[] buttonAnimationCoroutine = new Coroutine[5];
+    private Coroutine[] buttonAnimationCoroutine = new Coroutine[6];
 
     [SerializeField]
     private AudioMixer audioMixer;
@@ -137,6 +137,7 @@ public class S_SettingsManager : MonoBehaviour
     {
         if (Time.timeSinceLevelLoad < 1.5f || isOnSettingsMenu == false || settingsPanel.anchoredPosition.x < -100)
         {
+            //Debug.Log("Settings menu is not active or the panel is not visible yet.");
             return;
         }
         if (inputs.UI.Navigate.WasPressedThisFrame())

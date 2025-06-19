@@ -2,14 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class S_MissionSelectManager : MonoBehaviour
 {
+    private InputSystem_Actions inputs;
+
     [SerializeField]
     private CanvasGroup canvasGroup;
 
     [SerializeField]
     private SO_MissionUIInfo[] missionInfos;
+
+    private string levelName;
 
     [SerializeField]
     private GameObject panelPrefab;
@@ -18,6 +23,28 @@ public class S_MissionSelectManager : MonoBehaviour
     private List<RectTransform> missionPanels = new List<RectTransform>();
 
     private int mainPosX = -570; // Main position X for the mission panels
+
+    private int currentIndex = 0;
+
+    private bool canInteract = true; // Flag to control interaction
+
+    [SerializeField]
+    private Transform missionPanelsHolder; // Reference to the holder for mission panels
+
+    private void Awake()
+    {
+        inputs = new InputSystem_Actions();
+    }
+
+    private void OnEnable()
+    {
+        inputs.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputs.Disable();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +58,7 @@ public class S_MissionSelectManager : MonoBehaviour
 
         foreach (SO_MissionUIInfo missionInfo in missionInfos)
         {
-            GameObject panel = Instantiate(panelPrefab, transform);
+            GameObject panel = Instantiate(panelPrefab, missionPanelsHolder);
             RectTransform panelRect = panel.GetComponent<RectTransform>();
             missionPanels.Add(panelRect);
 
@@ -63,7 +90,80 @@ public class S_MissionSelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // update the position of the panels based on the current index
+        for (int i = 0; i < missionPanels.Count; i++)
+        {
+            RectTransform rectTransform = missionPanels[i];
+            if (rectTransform != null)
+            {
+                // Calculate the new position based on the current index
+                //float newXPosition = mainPosX + (500 * (i - currentIndex));
+                //rectTransform.anchoredPosition = new Vector2(newXPosition, -40);
+
+                // Calculate the new position based on the current index with a smooth transition
+
+                float targetXPosition = mainPosX + (500 * (i - currentIndex));
+                float currentXPosition = rectTransform.anchoredPosition.x;
+                float newXPosition = Mathf.Lerp(currentXPosition, targetXPosition, Time.deltaTime * 9f); // Adjust the speed as needed
+                rectTransform.anchoredPosition = new Vector2(newXPosition, -40);
+
+            }
+            else
+            {
+                Debug.LogError("RectTransform component not found on the instantiated panel.");
+            }
+        }
+
+        // Check if can interact with the mission panels
+        if (canInteract)
+        {
+            // Handle input for navigating through the mission panels
+            if (inputs.UI.Navigate.WasPressedThisFrame())
+            {
+                if (inputs.UI.Navigate.ReadValue<Vector2>().x > 0.5f && currentIndex < missionPanels.Count - 1)
+                {
+                    currentIndex++;
+                    //Debug.Log("Current Index: " + currentIndex);
+                }
+                else if (inputs.UI.Navigate.ReadValue<Vector2>().x < -0.5f && currentIndex > 0)
+                {
+                    currentIndex--;
+                    //Debug.Log("Current Index: " + currentIndex);
+                }
+            }
+
+            if (inputs.UI.Submit.WasPressedThisFrame())
+            {
+                TryStartMission(); // Check if the player is trying to start the mission
+            }
+            
+        }
+    }
+
+    public void TryStartMission()
+    {
+        string currentMissionCondition = missionInfos[currentIndex].condition;
+        if (string.IsNullOrEmpty(currentMissionCondition))
+        {
+            currentMissionCondition = "true"; // Default to false if condition is not set
+        }
+        else
+        {
+            if (PlayerPrefs.GetString(currentMissionCondition, "true") == "true")
+            {
+                currentMissionCondition = "true"; // If the condition is met, set it to true
+            }
+            else
+            {
+                currentMissionCondition = "false"; // Otherwise, set it to false
+            }
+        }
+        if (canInteract && currentMissionCondition == "true")
+        {
+            // Start the mission with the current index
+            S_TransitionManager.instance.GoToLevelWithMission(levelName, currentIndex);
+            canInteract = false; // Disable interaction to prevent multiple submissions
+        }
     }
 
     // coroutine to fade in the canvas group
@@ -88,9 +188,10 @@ public class S_MissionSelectManager : MonoBehaviour
         canvasGroup.alpha = endAlpha; // Ensure the final alpha is set
     }
 
-    public void Setup(SO_MissionUIInfo[] missionInfos)
+    public void Setup(SO_MissionUIInfo[] missionInfos, string levelName)
     {
         //Debug.LogWarning(missionInfos.Length + " missions set up in S_MissionSelectManager.");
         this.missionInfos = missionInfos;
+        this.levelName = levelName;
     }
 }
