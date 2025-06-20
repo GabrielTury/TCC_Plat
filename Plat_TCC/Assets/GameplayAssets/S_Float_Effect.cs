@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class S_RotateFruit : MonoBehaviour
+public class S_Float_Effect : MonoBehaviour
 {
     [SerializeField]
     private float spin_speed, float_speed, height;
