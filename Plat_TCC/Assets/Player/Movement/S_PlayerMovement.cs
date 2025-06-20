@@ -6,6 +6,9 @@ public class S_PlayerMovement : MonoBehaviour
     //[SerializeField]
     //private GameObject blobShadow;
 
+    [SerializeField]
+    private GameObject[] GrapplingMesh;
+
     private InputSystem_Actions inputs;
 
     private IMoveState[] moveStates;
@@ -24,11 +27,22 @@ public class S_PlayerMovement : MonoBehaviour
 
         foreach (IMoveState moveState in moveStates)
         {
+            var stateComponent = moveState as MonoBehaviour;
             if (moveState is S_GrapplingMovement)
             {
-                canGrapple = true;
+                if(stateComponent.enabled)
+                {
+                    canGrapple = true;
+                    Debug.Log("Has Grapple ability");
+                }
+                else
+                {
+                    foreach (GameObject mesh in GrapplingMesh)
+                    {
+                        mesh.SetActive(false);
+                    }
+                }
                 grapplingMovement = (S_GrapplingMovement)moveState;
-                Debug.Log("Has Grapple ability");
             }
         }
     }
@@ -155,6 +169,16 @@ public class S_PlayerMovement : MonoBehaviour
                 activeState = state;
                 break;
             }
+        }
+    }
+
+    public void EnableGrappling(bool newState)
+    {
+        canGrapple = newState;
+
+        foreach (GameObject mesh in GrapplingMesh)
+        {
+            mesh.SetActive(true);
         }
     }
 
