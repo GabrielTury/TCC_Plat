@@ -438,71 +438,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &254774698
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 700683222844903964, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_Name
-      value: Message Sign
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057172352199875690, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.3823903
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057172352199875690, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.63387
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057172352199875690, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -15.191086
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057172352199875690, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.93874276
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057172352199875690, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057172352199875690, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.34461868
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057172352199875690, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057172352199875690, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057172352199875690, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 40.317
-      objectReference: {fileID: 0}
-    - target: {fileID: 3057172352199875690, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: dialogText
-      value: Press space to jump!
-      objectReference: {fileID: 0}
-    - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
-      propertyPath: m_text
-      value: Press space to jump!
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
 --- !u!1001 &304858250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1015,15 +950,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
-      value: 'Press space while in the air
-
-        to dash forward!'
+      value: "Press the jump button while in \nthe air to dash forward!"
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
-      value: 'Press space while in the air
-
-        to dash forward!'
+      value: "Press the jump button while in \nthe air to dash forward!"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2591,7 +2522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
-      value: 'Press the left mouse button
+      value: 'Press the action button
 
         to use your grappling hook
 
@@ -2600,7 +2531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
-      value: 'Press the left mouse button
+      value: 'Press the action button
 
         to use your grappling hook
 
@@ -2953,7 +2884,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 254774698}
   - {fileID: 595345638}
   - {fileID: 1046199720}
   - {fileID: 1659304891}
