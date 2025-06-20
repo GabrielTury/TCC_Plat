@@ -46,7 +46,7 @@ public class S_ButtonActivator : MonoBehaviour
         {
             timer = 5;
             ToggleButtonInteraction();
-            pressedButtonTransform.position = new Vector3(pressedButtonPosition.x, pressedButtonPosition.y - 0.1f, pressedButtonPosition.z);
+            pressedButtonTransform.position = new Vector3(pressedButtonPosition.x, pressedButtonPosition.y - 0.2f, pressedButtonPosition.z);
         }
     }
 
