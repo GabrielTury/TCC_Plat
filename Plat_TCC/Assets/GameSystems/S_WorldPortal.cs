@@ -23,6 +23,18 @@ public class S_WorldPortal : MonoBehaviour
     private InputSystem_Actions inputs;
 
     [SerializeField]
+    private InputGuideIcons inputGuideIcons;
+
+    [System.Serializable]
+    private struct InputGuideIcons
+    {
+        public Image confirm;
+    }
+
+    [SerializeField]
+    private UIControllerIcons[] inputIcons; // The icons for each input type
+
+    [SerializeField]
     private SO_MissionUIInfo[] missionInfos;
 
     [SerializeField]
@@ -35,11 +47,13 @@ public class S_WorldPortal : MonoBehaviour
 
     private void OnEnable()
     {
+        InputSystem.onActionChange += UpdateControllerIcons;
         inputs.Enable();
     }
 
     private void OnDisable()
     {
+        InputSystem.onActionChange -= UpdateControllerIcons;
         inputs.Disable();
     }
 
@@ -53,7 +67,7 @@ public class S_WorldPortal : MonoBehaviour
         if (playerIsInRegion)
         {
             //loadSize = Mathf.Lerp(loadSize, 1, 0.02f);
-            if (inputs.Player.Interact.WasPressedThisFrame() && !hasStartedLoading)
+            if (inputs.Player.Jump.WasPressedThisFrame() && !hasStartedLoading)
             {
                 //loadSize = 1;
                 //S_TransitionManager.instance.GoToLevelWithMission(levelName, missionIndex);
@@ -84,6 +98,45 @@ public class S_WorldPortal : MonoBehaviour
         //    S_TransitionManager.instance.GoToLevelWithMission(levelName, missionIndex);
         //    hasStartedLoading = true;
         //}
+    }
+
+    /// <summary>
+    /// Sets the controller input guide icons based on the current controller scheme.<br></br>
+    /// Is subscribed to and gets input info from the OnUIInputMade event.
+    /// </summary>
+    private void UpdateControllerIcons(object obj, InputActionChange change)
+    {
+        if (change == InputActionChange.ActionPerformed)
+        {
+            var inputAction = (InputAction)obj;
+            var lastControl = inputAction.activeControl;
+            var lastDevice = lastControl.device;
+
+            // Or you can check the device type directly
+            if (lastDevice is Gamepad)
+            {
+                // Check for specific gamepad types
+                if (lastDevice.description.manufacturer.Contains("Sony"))
+                {
+                    // PlayStation controller
+                    inputGuideIcons.confirm.sprite = inputIcons[2].a;
+                }
+                else if (lastDevice.description.manufacturer.Contains("Microsoft"))
+                {
+                    // Xbox controller
+                    inputGuideIcons.confirm.sprite = inputIcons[1].a;
+                }
+                else
+                {
+                    // Generic gamepad
+                    inputGuideIcons.confirm.sprite = inputIcons[1].a;
+                }
+            }
+            else if (lastDevice is Keyboard)
+            {
+                inputGuideIcons.confirm.sprite = inputIcons[0].a;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
