@@ -105,8 +105,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         ApplyGravity();
 
         anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
-        //Ground Movement
-        if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
+
+        bool nearWall = IsNearWall();
+        //Movement
+        if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving && !nearWall)
         {
             if (movingTime <= 0)
                 movingTime = startingSpeedMultiplier;
@@ -262,9 +264,28 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             yield return new WaitForFixedUpdate();
         }
     }
+
+    private bool IsNearWall()
+    {
+        if (movementDirection.sqrMagnitude < 0.01f)
+            return false;
+
+        Vector3 origin = transform.position;
+        Vector3 dir = GetCameraRelativeDirection();
+        float distance = 1f; // Adjust as needed for your character's size
+
+        // Only check horizontal direction
+        dir.y = 0;
+        dir.Normalize();
+
+        if (dir == Vector3.zero)
+            return false;
+        
+        return Physics.SphereCast(origin, 0.3f, dir, out _, distance, ~0, QueryTriggerInteraction.Ignore);
+    }
     #endregion//Private Specific Methods
 
-#region Unused Methods
+    #region Unused Methods
     public void MoveCable_Cancel(InputAction.CallbackContext obj)
     {
         //throw new System.NotImplementedException();
@@ -293,8 +314,14 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundPoint.position, 0.3f);
+
+        Gizmos.color = Color.cyan;
+        Vector3 dir = GetCameraRelativeDirection();
+        dir.y = 0;
+        dir.Normalize();
+        Gizmos.DrawLine(transform.position, transform.position + dir * 1f);
     }
 
 #endif
-    //@todo colocar gravidade extra, alterar o controle do personagem quando no ar, tempo de parada após perder input
+    
 }
