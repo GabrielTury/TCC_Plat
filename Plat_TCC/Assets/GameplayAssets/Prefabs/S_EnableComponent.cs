@@ -29,9 +29,8 @@ public class S_EnableComponent : MonoBehaviour
         {
             switch(componentToEnable)
             {
-                case Component.GrapplingMovement:
-                    other.GetComponent<S_GrapplingMovement>().enabled = true;
-                    other.GetComponent<S_PlayerMovement>().EnableGrappling(true);
+                case Component.GrapplingMovement:                    
+                    other.GetComponentInParent<S_PlayerMovement>().EnableGrappling(true);
                     break;
 
                 default:

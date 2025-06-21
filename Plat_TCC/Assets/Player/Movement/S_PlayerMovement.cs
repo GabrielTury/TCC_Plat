@@ -175,7 +175,7 @@ public class S_PlayerMovement : MonoBehaviour
     public void EnableGrappling(bool newState)
     {
         canGrapple = newState;
-
+        GetComponent<S_GrapplingMovement>().enabled = newState;
         foreach (GameObject mesh in GrapplingMesh)
         {
             mesh.SetActive(true);

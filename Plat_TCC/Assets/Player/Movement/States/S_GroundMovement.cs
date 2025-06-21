@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Xml.Schema;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -74,7 +75,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     private Coroutine stopMovement;
     public void Attack_Perform(InputAction.CallbackContext obj)
     {
-        if (grapplingMovement)
+        if (grapplingMovement && grapplingMovement.enabled)
         {
             playerMovement.ChangeState(grapplingMovement);
             grapplingMovement.Attack_Perform(obj);
@@ -108,8 +109,12 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
         bool nearWall = IsNearWall();
         //Movement
-        if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving && !nearWall)
+        if (rb.linearVelocity.magnitude <= maxGroundSpeed && moving)
         {
+            if(nearWall && !IsGrounded())
+            {
+                return;
+            }
             if (movingTime <= 0)
                 movingTime = startingSpeedMultiplier;
             else if (movingTime < 1)
