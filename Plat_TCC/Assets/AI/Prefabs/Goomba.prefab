@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2045825947594857648}
   - component: {fileID: 3740847197459623660}
   - component: {fileID: 8547786566106810983}
+  - component: {fileID: 3987295635934215854}
   m_Layer: 0
   m_Name: Goomba
   m_TagString: Untagged
@@ -90,8 +91,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4685711de35c246868cef531b154f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: []
+  path:
+  - {x: -45.27, y: 0.4, z: 4.73}
+  - {x: -39.5, y: 0.75, z: 0.24}
+  - {x: -36.06, y: 0.75, z: 4}
   handler: {fileID: 0}
+--- !u!95 &3987295635934215854
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638593143307635972}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aabe2f563752ac44caf18162ef66a2cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &8541626342625876614
 PrefabInstance:
   m_ObjectHideFlags: 0

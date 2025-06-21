@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class S_Goomba : S_ObstacleBase
 {
     private NavMeshAgent nav;
+    private Animator anim;
 
     [SerializeField]
     private Vector3[] path;
@@ -19,6 +20,7 @@ public class S_Goomba : S_ObstacleBase
 
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
     }
     void Start()
@@ -35,7 +37,12 @@ public class S_Goomba : S_ObstacleBase
     protected override IEnumerator Moving_Exec()
     {
         //Code to entry
+        if(path.Length <= 0)
+        {
+            goto Exit; //If no path is set, exit the coroutine
+        }
         nav.destination = path[currentPathIndex];
+        anim.SetBool("Walking", true);
 
         while (currentState == ObstacleState.Moving)
         {
@@ -53,6 +60,8 @@ public class S_Goomba : S_ObstacleBase
             yield return new WaitForFixedUpdate();
         }
 
+    Exit:
+        anim.SetBool("Walking", false);
         //Code to exit
     }
 
