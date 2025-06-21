@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class S_EnableComponent : MonoBehaviour
@@ -25,7 +26,7 @@ public class S_EnableComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.GetComponentInParent<S_PlayerMovement>())
         {
             switch(componentToEnable)
             {
