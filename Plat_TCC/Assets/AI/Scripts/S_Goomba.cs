@@ -20,7 +20,7 @@ public class S_Goomba : S_ObstacleBase
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         nav = GetComponent<NavMeshAgent>();
     }
     void Start()
