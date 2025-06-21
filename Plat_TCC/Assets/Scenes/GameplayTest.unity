@@ -3395,7 +3395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3338506916138432338, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3989175100169348947, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3458,6 +3458,18 @@ PrefabInstance:
       propertyPath: pathEditor
       value: 
       objectReference: {fileID: 108780842}
+    - target: {fileID: 244204686070427960, guid: 743a80b613733184a8c8ff1d76c8d0e8, type: 3}
+      propertyPath: path.Array.data[0].y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 244204686070427960, guid: 743a80b613733184a8c8ff1d76c8d0e8, type: 3}
+      propertyPath: path.Array.data[1].y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 244204686070427960, guid: 743a80b613733184a8c8ff1d76c8d0e8, type: 3}
+      propertyPath: path.Array.data[2].y
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 873179754251600471, guid: 743a80b613733184a8c8ff1d76c8d0e8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.91
@@ -3501,6 +3513,14 @@ PrefabInstance:
     - target: {fileID: 7528343054600244832, guid: 743a80b613733184a8c8ff1d76c8d0e8, type: 3}
       propertyPath: m_Name
       value: Bird
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528343054600244832, guid: 743a80b613733184a8c8ff1d76c8d0e8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7528343054600244832, guid: 743a80b613733184a8c8ff1d76c8d0e8, type: 3}
+      propertyPath: m_TagString
+      value: Hook
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
