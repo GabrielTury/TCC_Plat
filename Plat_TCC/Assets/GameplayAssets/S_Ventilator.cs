@@ -20,6 +20,13 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
     [SerializeField]
     private bool startDisabled;
 
+    private Collider ownCollider;
+
+    private void Awake()
+    {
+        ownCollider = GetComponent<Collider>();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -65,5 +72,6 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
     {
         this.gameObject.layer = (this.gameObject.layer == 6 ? 0 : 6);
         disabledVisualizer.SetActive(!disabledVisualizer.activeSelf);
+        ownCollider.enabled = !ownCollider.enabled;
     }
 }

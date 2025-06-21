@@ -275,7 +275,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         if (movementDirection.sqrMagnitude < 0.01f)
             return false;
 
-        Vector3 origin = transform.position;
+        Vector3 origin = transform.position + Vector3.down * 1.4f;
         Vector3 dir = GetCameraRelativeDirection();
         float distance = 1f; // Adjust as needed for your character's size
 
@@ -321,10 +321,16 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         Gizmos.DrawWireSphere(groundPoint.position, 0.3f);
 
         Gizmos.color = Color.cyan;
-        Vector3 dir = GetCameraRelativeDirection();
+        Vector3 dir = GetCameraRelativeDirection() + Vector3.down * 0.8f;
         dir.y = 0;
         dir.Normalize();
         Gizmos.DrawLine(transform.position, transform.position + dir * 1f);
+
+        Gizmos.color = Color.blue;
+        Vector3 dir2 = transform.forward * 0.8f;
+        dir2.y = 0;
+        dir2.Normalize();
+        Gizmos.DrawLine(transform.position + Vector3.down * 1.4f, transform.position + Vector3.down * 1.4f + dir2 * 1f);
     }
 
 #endif
