@@ -466,7 +466,6 @@ Transform:
   - {fileID: 4122839993364288269}
   - {fileID: 8406610387598722113}
   - {fileID: 5656701215862351502}
-  - {fileID: 2195691904213967800}
   m_Father: {fileID: 5777560571053403809}
   m_LocalEulerAnglesHint: {x: -5.2408156, y: -25.723032, z: -8.098086}
 --- !u!1 &3089160186615982641
@@ -1332,6 +1331,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8742ab1d7ec167346bf46cdd74918ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handPoint: {fileID: 8587961994813549080}
+  beltPoint: {fileID: 4066316364459074821}
+  grapplingBase: {fileID: 2346163010594635324}
+  grapplingAnchor: {fileID: 3262467994390364019}
   hookStart: {fileID: 2195691904213967800}
   grappable:
     serializedVersion: 2
@@ -1938,12 +1941,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8587961994813549080}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.19192436, y: 0.1389508, z: 0.32583892, w: 0.91525227}
-  m_LocalPosition: {x: 0.00007, y: 0.00061, z: -0.00009}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.27926028, y: -0.7700213, z: 0.37240162, w: -0.43634623}
+  m_LocalPosition: {x: -94, y: 1, z: -27}
+  m_LocalScale: {x: 27125.508, y: 27125.506, z: 27125.496}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6851568667316376003}
+  m_Father: {fileID: 3153907869453591686}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8922503480442117954
 GameObject:
@@ -2174,7 +2177,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 44ac727a292038e41aaf666d7542b66c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2195691904213967800}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44ac727a292038e41aaf666d7542b66c, type: 3}
 --- !u!1 &2346163010594635324 stripped

@@ -17,6 +17,14 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     private SpringJoint joint;
     private LineRenderer lr;
 
+    [Header("Visuals")]
+    [SerializeField]
+    private GameObject handPoint;
+    [SerializeField]
+    private GameObject beltPoint, grapplingBase, grapplingAnchor;
+
+    private Vector3 ogBasePosition, ogBaseRotation, ogAnchorPosition, ogAnchorRotation;
+
     [Header("Components")]
     [SerializeField]
     private Transform hookStart;
@@ -212,22 +220,35 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                 if (joint == null)
                         joint = gameObject.AddComponent<SpringJoint>();
 
-                    anchorPoint = closestCollider.transform.position;
-                    joint.autoConfigureConnectedAnchor = false;
-                    joint.connectedAnchor = anchorPoint;
+                anchorPoint = closestCollider.transform.position;
+                joint.autoConfigureConnectedAnchor = false;
+                joint.connectedAnchor = anchorPoint;
 
-                    float distFromPoint = Vector3.Distance(transform.position, anchorPoint);
-                    joint.maxDistance = distFromPoint * maxHangingRangeMultiplier;
-                    joint.minDistance = distFromPoint * minHangingRangeMultiplier;
+                float distFromPoint = Vector3.Distance(transform.position, anchorPoint);
+                joint.maxDistance = distFromPoint * maxHangingRangeMultiplier;
+                joint.minDistance = distFromPoint * minHangingRangeMultiplier;
 
-                    joint.spring = 9.5f;
-                    joint.damper = 7.5f;
-                    joint.massScale = 4.5f;
+                joint.spring = 9.5f;
+                joint.damper = 7.5f;
+                joint.massScale = 4.5f;
 
-                    lr.positionCount = 2;
-                    currentHookPoint = hookStart.position;
+                lr.positionCount = 2;
+                currentHookPoint = hookStart.position;
 
-                    rb.AddForce((anchorPoint - transform.position) * grappleForce, ForceMode.Impulse);                    
+                rb.AddForce((anchorPoint - transform.position) * grappleForce, ForceMode.Impulse);
+                #region Grappling Gun Visuals
+                ogBasePosition = grapplingBase.transform.localPosition;
+                ogBaseRotation = grapplingBase.transform.localEulerAngles;
+
+                grapplingBase.transform.SetParent(handPoint.transform);
+                grapplingBase.transform.localPosition = Vector3.zero;
+
+                ogAnchorPosition = grapplingAnchor.transform.localPosition;
+                ogAnchorRotation = grapplingAnchor.transform.localEulerAngles;
+
+                grapplingAnchor.transform.SetParent(closestCollider.transform);
+                grapplingAnchor.transform.localPosition = Vector3.zero;
+                #endregion
             }
             else
             {
@@ -255,6 +276,14 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         }
 
         anim.SetBool("IsGrappling", false);
+
+        grapplingBase.transform.SetParent(beltPoint.transform);
+        grapplingBase.transform.localPosition = ogBasePosition;
+        grapplingBase.transform.localEulerAngles = ogBaseRotation;
+
+        grapplingAnchor.transform.SetParent(beltPoint.transform);
+        grapplingAnchor.transform.localPosition = ogAnchorPosition;
+        grapplingAnchor.transform.localEulerAngles = ogAnchorRotation;
     }
     private void SwingMovement()
     {
