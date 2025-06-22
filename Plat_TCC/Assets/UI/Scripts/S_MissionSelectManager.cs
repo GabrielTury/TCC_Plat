@@ -49,6 +49,8 @@ public class S_MissionSelectManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+
         canvasGroup.alpha = 0f; // Set the initial alpha to 0 for fade-in effect
         FadeIn(1);
 
@@ -143,24 +145,31 @@ public class S_MissionSelectManager : MonoBehaviour
     public void TryStartMission()
     {
         string currentMissionCondition = missionInfos[currentIndex].condition;
+        bool canProceed = false;
+
+        // Debug log the condition for clarity
+
+        Debug.Log($"Current Mission Condition: {currentMissionCondition}");
+
         if (string.IsNullOrEmpty(currentMissionCondition))
         {
-            currentMissionCondition = "true"; // Default to false if condition is not set
+            canProceed = true; // Default to false if condition is not set
         }
         else
         {
-            if (PlayerPrefs.GetString(currentMissionCondition, "true") == "true")
+            if (PlayerPrefs.GetString(currentMissionCondition, "false") == "true")
             {
-                currentMissionCondition = "true"; // If the condition is met, set it to true
+                canProceed = true;
             }
             else
             {
-                currentMissionCondition = "false"; // Otherwise, set it to false
+                canProceed = false;
             }
         }
-        if (canInteract && currentMissionCondition == "true")
+        if (canInteract && canProceed == true)
         {
             // Start the mission with the current index
+            Cursor.lockState = CursorLockMode.Locked;
             S_TransitionManager.instance.GoToLevelWithMission(levelName, currentIndex);
             canInteract = false; // Disable interaction to prevent multiple submissions
         }

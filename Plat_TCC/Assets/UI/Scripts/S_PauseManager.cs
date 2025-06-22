@@ -348,6 +348,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
     public void ShowMenu()
     {
+        Cursor.lockState = CursorLockMode.None;
         isInPause = true;
         Time.timeScale = 0f;
         if (mainHolderAnimationCoroutine != null)
@@ -359,6 +360,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
     public void ResumeGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         isInPause = false;
         Time.timeScale = 1f;
         if (mainHolderAnimationCoroutine != null)

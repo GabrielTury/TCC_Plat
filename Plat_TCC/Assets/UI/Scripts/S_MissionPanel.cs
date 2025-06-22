@@ -132,7 +132,7 @@ public class S_MissionPanel : MonoBehaviour
         }
 
         string currentMissionCondition = missionInfo.condition;
-        bool canProceed = false; // Default to true, will be set to false if condition is not met
+        bool canProceed = false;
 
         // Debug log the condition for clarity
 

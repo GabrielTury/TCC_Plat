@@ -72,6 +72,8 @@ public class S_TransitionManager : MonoBehaviour
 
         SceneManager.LoadScene(levelName);
 
+        Cursor.lockState = CursorLockMode.Locked;
+
         while (!SceneManager.GetSceneByName(levelName).isLoaded)
         {
             yield return null;
