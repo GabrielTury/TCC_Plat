@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c4685711de35c246868cef531b154f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 1
   path:
   - {x: -45.27, y: 0.4, z: 4.73}
   - {x: -39.5, y: 0.75, z: 0.24}
@@ -108,13 +109,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeadJumpModifier
       objectReference: {fileID: 0}
+    - target: {fileID: 6635485320235258073, guid: f384b1a90458bb94e994aeb80492e173, type: 3}
+      propertyPath: m_Radius
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 8259747277046012631, guid: f384b1a90458bb94e994aeb80492e173, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8259747277046012631, guid: f384b1a90458bb94e994aeb80492e173, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.349
+      value: 1.338
       objectReference: {fileID: 0}
     - target: {fileID: 8259747277046012631, guid: f384b1a90458bb94e994aeb80492e173, type: 3}
       propertyPath: m_LocalPosition.z
@@ -243,7 +248,7 @@ PrefabInstance:
       addedObject: {fileID: 290984190311138987}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f2c63c9e039910d4097429c48beff7e8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6584407680212352427}
+      addedObject: {fileID: 5386279225265996651}
   m_SourcePrefab: {fileID: 100100000, guid: f2c63c9e039910d4097429c48beff7e8, type: 3}
 --- !u!4 &8143434577758190957 stripped
 Transform:
@@ -274,11 +279,11 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.2
+  m_Radius: 1.47
   m_Height: 4.5
   m_Direction: 1
   m_Center: {x: 0, y: 2.3, z: 0}
---- !u!95 &6584407680212352427
+--- !u!95 &5386279225265996651
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
