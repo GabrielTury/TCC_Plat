@@ -2183,9 +2183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aee8cfcac53bb04387e64d7c501bda1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spin_speed: 0
-  float_speed: 0.5
-  height: 0.1
 --- !u!1001 &1921537063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2814,6 +2811,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4756266792825742285, guid: fbde4092d1260b847a87031e38dfbb8c, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5266069637256612849, guid: fbde4092d1260b847a87031e38dfbb8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2998,6 +2999,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1592780486}
+    - target: {fileID: 7569249726822755353, guid: fbde4092d1260b847a87031e38dfbb8c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveAndCloseSettings
+      objectReference: {fileID: 0}
     - target: {fileID: 8733776895005991958, guid: fbde4092d1260b847a87031e38dfbb8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

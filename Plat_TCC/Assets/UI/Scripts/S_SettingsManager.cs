@@ -302,6 +302,12 @@ public class S_SettingsManager : MonoBehaviour
         }
     }
 
+    public void SaveAndCloseSettings()
+    {
+        SaveNewSettings();
+        CloseSettings();
+    }
+
     private void SaveNewSettings()
     {
         // Save the new settings to the player prefs

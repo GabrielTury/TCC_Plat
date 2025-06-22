@@ -175,6 +175,24 @@ public class S_MissionSelectManager : MonoBehaviour
         }
     }
 
+    public void MoveDirection(int direction)
+    {
+        if (direction < 0)
+        {
+            if (currentIndex > 0)
+            {
+                currentIndex--;
+            }
+        }
+        else if (direction > 0)
+        {
+            if (currentIndex < missionPanels.Count - 1)
+            {
+                currentIndex++;
+            }
+        }
+    }
+
     // coroutine to fade in the canvas group
     public void FadeIn(float duration)
     {
