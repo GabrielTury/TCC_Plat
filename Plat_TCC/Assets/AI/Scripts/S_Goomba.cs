@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class S_Goomba : S_ObstacleBase
+public class S_Goomba : S_ObstacleBase, IDamageable
 {
     private NavMeshAgent nav;
     private Animator anim;
+
+    [Header("Enemy Settings")]
+    [SerializeField]
+    private int health = 1;
 
     [SerializeField]
     private Vector3[] path;
@@ -26,12 +30,14 @@ public class S_Goomba : S_ObstacleBase
     void Start()
     {        
         ChangeState(ObstacleState.Moving); //Sets default state
+        anim.SetInteger("Health", health);
     }
 
     #region State Coroutines
     protected override IEnumerator Dying_Exec()
     {
-        throw new System.NotImplementedException();
+        yield return new WaitForSeconds(4f);
+        Destroy(gameObject); //Destroy the game object after a delay
     }
 
     protected override IEnumerator Moving_Exec()
@@ -76,6 +82,23 @@ public class S_Goomba : S_ObstacleBase
     }
     #endregion //StateCoroutines
 
+    #region Interfaces
+    public bool TakeDamage(int damageAmount = 1, string animParameter = "Hit")
+    {
+        anim.SetTrigger(animParameter);
+        health -= damageAmount;
+        anim.SetInteger("Health", health);
+
+        if(health <= 0)
+        {
+            ChangeState(ObstacleState.Dying);
+            return true;
+        }
+        return false;
+    }
+    #endregion //Interfaces
+
+    #region Editor Methods
     [ContextMenu("Set Path")]
     private void SetEditorPath()
     {
@@ -112,4 +135,5 @@ public class S_Goomba : S_ObstacleBase
         Gizmos.color = Color.green;
         Gizmos.DrawLine(path[path.Length - 1], path[0]);
     }
+    #endregion//Editor Methods
 }

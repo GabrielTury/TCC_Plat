@@ -13,23 +13,27 @@ public abstract class S_ObstacleBase : S_AIBase
     };
 
     protected ObstacleState currentState = ObstacleState.Idle;
+    protected Coroutine currentCoroutine = null;
 
     protected void ChangeState(ObstacleState nextState)
     {
         currentState = nextState;
+        if(currentCoroutine != null)
+            StopCoroutine(currentCoroutine); // Stop the current coroutine if it exists
+
         switch (nextState)
         {
             case ObstacleState.Moving:
-                StartCoroutine(Moving_Exec());
+                currentCoroutine = StartCoroutine(Moving_Exec());
                 break;
             case ObstacleState.Idle:
-                StartCoroutine(Idle_Exec());
+                currentCoroutine = StartCoroutine(Idle_Exec());
                 break;
             case ObstacleState.Stunned:
-                StartCoroutine(Stunned_Exec());
+                currentCoroutine = StartCoroutine(Stunned_Exec());
                 break;
             case ObstacleState.Dying:
-                StartCoroutine(Dying_Exec());
+                currentCoroutine = StartCoroutine(Dying_Exec());
                 break;
         }
     }
