@@ -7,6 +7,7 @@ public class S_PlayerFX : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] footstepSounds;
     [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip doublejumpSound;
     [SerializeField] private AudioClip landSound;
     [SerializeField] private AudioClip ropeSound;
 
@@ -52,6 +53,11 @@ public class S_PlayerFX : MonoBehaviour
     public void PlayJump()
     {
         audioSource.PlayOneShot(jumpSound);
+    }
+
+    public void PlayDoubleJump()
+    {
+        audioSource.PlayOneShot(doublejumpSound);
     }
 
     public void PlayLanding()
