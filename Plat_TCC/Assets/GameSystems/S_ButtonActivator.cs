@@ -11,6 +11,8 @@ public class S_ButtonActivator : MonoBehaviour
 
     private int timer = 0;
 
+    [SerializeField] private AudioClip buttonPress;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,6 +49,7 @@ public class S_ButtonActivator : MonoBehaviour
             timer = 5;
             ToggleButtonInteraction();
             pressedButtonTransform.position = new Vector3(pressedButtonPosition.x, pressedButtonPosition.y - 0.2f, pressedButtonPosition.z);
+            AudioManager.instance.PlaySFX(buttonPress);
         }
     }
 

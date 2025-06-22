@@ -1832,6 +1832,7 @@ MonoBehaviour:
   target: {fileID: 206222991}
   duration: 4
   moved: 0
+  stoneMove: {fileID: 8300000, guid: b2bdcfe39bc17ac4ca723156831dc2e1, type: 3}
 --- !u!64 &1037017589
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2104,6 +2105,7 @@ MonoBehaviour:
   target: {fileID: 206222991}
   duration: 3
   moved: 0
+  stoneMove: {fileID: 0}
 --- !u!1001 &1134482143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3546,10 +3548,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 180896230381629663, guid: 0a6e65d9836383c4b99dc00880419c50, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 495070493417857115, guid: 0a6e65d9836383c4b99dc00880419c50, type: 3}
       propertyPath: m_LocalPosition.x
       value: 47.14
@@ -3598,18 +3596,6 @@ PrefabInstance:
       propertyPath: 'objects.Array.data[0]'
       value: 
       objectReference: {fileID: 2126272986}
-    - target: {fileID: 3148182614290697546, guid: 0a6e65d9836383c4b99dc00880419c50, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3148182614290697546, guid: 0a6e65d9836383c4b99dc00880419c50, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3148182614290697546, guid: 0a6e65d9836383c4b99dc00880419c50, type: 3}
-      propertyPath: m_Size.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4134608720087045614, guid: 0a6e65d9836383c4b99dc00880419c50, type: 3}
       propertyPath: 'objects.Array.data[0]'
       value: 
@@ -3728,6 +3714,7 @@ MonoBehaviour:
   target: {fileID: 226977835}
   duration: 3
   moved: 0
+  stoneMove: {fileID: 8300000, guid: 5a5c9dd9b14dcef42bc5456360b8860c, type: 3}
 --- !u!1001 &349449933737291529
 PrefabInstance:
   m_ObjectHideFlags: 0

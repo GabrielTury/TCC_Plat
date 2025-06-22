@@ -4,6 +4,8 @@ using UnityEngine;
 public class S_EnableComponent : MonoBehaviour
 {
 
+    [SerializeField] private AudioClip grappleCollected;
+
     private enum Component
     {
         GrapplingMovement,
@@ -37,8 +39,8 @@ public class S_EnableComponent : MonoBehaviour
                 default:
                     break;
             }
-                
 
+            AudioManager.instance.PlaySFX(grappleCollected);
             Destroy(gameObject); //Destroy the object
         }
     }

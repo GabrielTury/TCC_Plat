@@ -7,6 +7,8 @@ public class S_Moving_Platform : MonoBehaviour, IActivatableObjects
     public float duration = 2;
     public bool moved = false;
 
+    [SerializeField] private AudioClip stoneMove;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -51,6 +53,8 @@ public class S_Moving_Platform : MonoBehaviour, IActivatableObjects
         if (!moved)
         {
             Activate();
+            AudioManager.instance.PlaySFX(stoneMove);
+            moved = true;
         }
     }
 }
