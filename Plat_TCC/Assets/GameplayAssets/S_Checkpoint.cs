@@ -10,16 +10,15 @@ public class S_Checkpoint : MonoBehaviour
 
     private Animator animator;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip checkpointSound;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         childPole = transform.GetChild(0);
         animator = childPole.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (playerIsInRegion && !hasActivatedCheckpoint)
@@ -30,8 +29,11 @@ public class S_Checkpoint : MonoBehaviour
 
             S_LevelManager.instance.SetCheckpointData(playerPos);
 
-            //RaisePole();
+            // RaisePole ();
             animator.SetBool("IsActive", true);
+
+            // Som de ativação do checkpoint
+            AudioManager.instance.PlaySFX(checkpointSound);
         }
     }
 
