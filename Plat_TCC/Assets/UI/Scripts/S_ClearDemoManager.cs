@@ -20,6 +20,7 @@ public class S_ClearDemoManager : MonoBehaviour
                 canvasGroup.alpha = 1f; // Set the alpha to fully opaque
                 canvasGroup.interactable = true; // Make it interactable
                 canvasGroup.blocksRaycasts = true; // Allow it to block raycasts
+                Cursor.lockState = CursorLockMode.None; // Unlock the cursor
             }
             else
             {
@@ -40,6 +41,7 @@ public class S_ClearDemoManager : MonoBehaviour
 
     public void KeepPlaying()
     {
+        Cursor.lockState = CursorLockMode.Locked; // Unlock the cursor
         Destroy(gameObject);
     }
 
