@@ -19,7 +19,7 @@ public class S_Float_Effect : MonoBehaviour
     {
         if (Time.fixedTime > 0)
         {
-            transform.Rotate(0, Time.deltaTime * spin_speed, 0, Space.World);
+            transform.Rotate(0, Time.fixedDeltaTime * spin_speed, 0, Space.World);
 
             float float_height = Mathf.Sin(Time.time * float_speed) * height / 10;
             transform.position = new Vector3(transform.position.x, transform.position.y + float_height, transform.position.z);

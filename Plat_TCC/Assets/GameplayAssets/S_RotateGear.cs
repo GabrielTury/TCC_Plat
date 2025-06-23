@@ -9,6 +9,9 @@ public class S_RotateGear : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale <= 0)
+            return;
+        
         transform.Rotate(0, 0, Time.deltaTime * rotate_speed);
         transform.Rotate(0, Time.deltaTime * spin_speed, 0,Space.World);
 
