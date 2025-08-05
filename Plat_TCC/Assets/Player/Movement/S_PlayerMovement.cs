@@ -16,6 +16,7 @@ public class S_PlayerMovement : MonoBehaviour
 
     private bool canGrapple;
     private S_GrapplingMovement grapplingMovement;
+    private bool isPaused;
 
     public Collider[] grapplingCollidersInRange { get; private set; }
 
@@ -112,14 +113,10 @@ public class S_PlayerMovement : MonoBehaviour
 
         activeState.Move_Perform(obj);
     }
-
-    void Start()
-    {
-        
-    }
-
     private void FixedUpdate()
-    {      
+    {
+        if (isPaused) return;
+
         activeState.StateFixedUpdate();
         GrapplingRange();
         BlobShadow();
@@ -127,6 +124,7 @@ public class S_PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isPaused) return;
         activeState.StateUpdate();
     }
 
@@ -186,5 +184,23 @@ public class S_PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 100f);
+    }
+
+    public void PausePlayer(bool pausePlayerMovement = true, bool pausePlayerInput = true)
+    {
+        if (pausePlayerMovement)
+            isPaused = true;
+        else
+            isPaused = false;
+
+        if (pausePlayerInput)
+            inputs.Disable();
+        else
+            inputs.Enable();
+    }
+
+    public bool GetPauseStatus()
+    {
+        return isPaused;
     }
 }
