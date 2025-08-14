@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.SceneManagement;
 
 public class S_MissionManager : MonoBehaviour
@@ -21,7 +22,13 @@ public class S_MissionManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+            Destroy(this);
 
         if (worldInfo != null)
             SetWorldInfo(worldInfo);
@@ -59,11 +66,13 @@ public class S_MissionManager : MonoBehaviour
             //Check if Async Operation is done
             yield return new WaitForEndOfFrame();
         }
-
+        
         Scene ret = SceneManager.GetSceneByName(missionSceneNames[missionIndex]);//Check if scene was loaded
         if(ret.IsValid())
-            result = true;
-            
+        {
+            result = true;            
+        }
+
         Finish:
         currentMissionIndex = missionIndex; //Sets the current mission index
         callback?.Invoke(result); //Calls the delegate

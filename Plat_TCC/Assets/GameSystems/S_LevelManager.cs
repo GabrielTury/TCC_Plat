@@ -22,7 +22,11 @@ public class S_LevelManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this);
+
         savedObjectsTransform = new List<Transform>(savedObjects.Length);
 
         // Set Checkpoint Data to player initial position
