@@ -8,7 +8,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 {
     
     S_PlayerMovement playerMovement;
-    S_GroundMovement groundMovement;//See S_PlayerMovement ChangeState() note
+    S_GroundMovement groundMovement;
     #region Components
     private Rigidbody rb;
     private Animator anim;
@@ -113,7 +113,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     public void Attack_Cancel(InputAction.CallbackContext obj)
     {
         StopSwing();
-        playerMovement.ChangeState(groundMovement);
+        playerMovement.ChangeState(typeof(S_GroundMovement));
     }
 
     public void Jump_Perform(InputAction.CallbackContext obj)
@@ -181,6 +181,11 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     {
         DrawLine();
 
+    }
+
+    public void Activation()
+    {
+        Attack_Perform(new InputAction.CallbackContext());
     }
     #region Swing
     private void StartSwing()
@@ -270,7 +275,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             Destroy(joint);
         else
         {
-            playerMovement.ChangeState(groundMovement); //case it has no joint (case it missed)
+            playerMovement.ChangeState(typeof(S_GroundMovement)); //case it has no joint (case it missed)
             if (groundMovement != null)
                 groundMovement.RefreshDoubleJump();
         }

@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.ComponentModel;
-using System.Xml.Schema;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -75,10 +73,51 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     private Coroutine stopMovement;
     public void Attack_Perform(InputAction.CallbackContext obj)
     {
-        if (grapplingMovement && grapplingMovement.enabled)
+        //@optimize
+        Dictionary<Vector3, string> collidersInRange = new Dictionary<Vector3, string>();
+        if(playerMovement.grapplingCollidersInRange != null)
         {
-            playerMovement.ChangeState(grapplingMovement);
-            grapplingMovement.Attack_Perform(obj);
+            foreach(Collider col in playerMovement.grapplingCollidersInRange)
+            {
+                collidersInRange.Add(col.transform.position, "grapple");
+            }
+        }
+
+        if(playerMovement.ziplinesInRange != null)
+        {
+            foreach (Collider col in playerMovement.ziplinesInRange)
+            {
+                collidersInRange.Add(col.transform.position, "zipline");
+            }
+        }
+
+        float nearestDistance = 0f;
+        string nearestColliderId = "none";
+        foreach (Vector3 pos in collidersInRange.Keys)
+        {
+            float dist = Vector3.Distance(transform.position, pos);
+            if(nearestDistance == 0)
+            {
+                dist = nearestDistance;
+                collidersInRange.TryGetValue(pos, out nearestColliderId);
+            }
+            else if(dist < nearestDistance)
+            {
+                dist = nearestDistance;
+                collidersInRange.TryGetValue(pos, out nearestColliderId);
+            }
+        }
+
+        switch (nearestColliderId)
+        {
+            case "grapple":
+                playerMovement.ChangeState(typeof(S_GrapplingMovement));
+                break;
+            case "zipline":
+                playerMovement.ChangeState(typeof(S_ZiplineMovement));
+                break;
+            default:
+                break;
         }
     }
 
@@ -186,6 +225,12 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     public void StateUpdate()
     {
 
+    }
+
+
+    public void Activation()
+    {
+        
     }
 
     public void Move_Cancel(InputAction.CallbackContext obj)
@@ -334,5 +379,5 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     }
 
 #endif
-    
+
 }
