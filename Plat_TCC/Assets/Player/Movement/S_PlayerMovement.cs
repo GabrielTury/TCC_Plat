@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,9 +17,13 @@ public class S_PlayerMovement : MonoBehaviour
 
     private bool canGrapple;
     private S_GrapplingMovement grapplingMovement;
+
+    private S_ZiplineMovement ziplineMovement;
+
     private bool isPaused;
 
     public Collider[] grapplingCollidersInRange { get; private set; }
+    public Collider[] ziplinesInRange { get; private set; }
 
     private void Awake()
     {
@@ -44,6 +49,10 @@ public class S_PlayerMovement : MonoBehaviour
                     }
                 }
                 grapplingMovement = (S_GrapplingMovement)moveState;
+            }
+            else if (moveState is S_ZiplineMovement)
+            {
+                ziplineMovement = (S_ZiplineMovement)moveState;
             }
         }
     }
@@ -119,6 +128,7 @@ public class S_PlayerMovement : MonoBehaviour
 
         activeState.StateFixedUpdate();
         GrapplingRange();
+        ZiplineRange();
         BlobShadow();
     }
     // Update is called once per frame
@@ -157,14 +167,30 @@ public class S_PlayerMovement : MonoBehaviour
         }
     }
 
-    public void ChangeState(IMoveState state)//change this to work with a enum
+    private void ZiplineRange()
     {
-        foreach (IMoveState m in moveStates)
+        Collider[] objs = Physics.OverlapSphere(transform.position, 5f, 1 << 12);
+        if(objs != null)
         {
-            if (m == state)
+            ziplinesInRange = objs;
+        }
+    }
+
+    public void ChangeState(Type state)
+    {
+        if (!typeof(IMoveState).IsAssignableFrom(state))
+        {
+            Debug.LogError("Invalid type passed to ChangeState. Must be a subclass of IMoveState.");
+            return;
+        }
+
+        foreach (IMoveState s in moveStates)
+        {
+            if (s.GetType() == state)
             {
                 Debug.Log("Changed State to: "+ state.ToString());
-                activeState = state;
+                activeState = s;
+                activeState.Activation();
                 break;
             }
         }

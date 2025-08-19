@@ -51,4 +51,6 @@ public interface IMoveState
     /// Needs to be called in Update
     /// </summary>
     public void StateUpdate();
+
+    public void Activation();
 }
