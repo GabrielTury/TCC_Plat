@@ -76,6 +76,7 @@ public class S_MissionManager : MonoBehaviour
         Finish:
         currentMissionIndex = missionIndex; //Sets the current mission index
         callback?.Invoke(result); //Calls the delegate
+        Loading = null;
     }
 
     public void SetWorldInfo(SO_WorldInfo input)

@@ -79,8 +79,11 @@ public class S_TransitionManager : MonoBehaviour
             yield return null;
         }
 
+        Debug.Log("Attempting to load mission");
+
         if (missionIndex != -1)
         {
+            Debug.Log("Mission Index is not -1, proceeding");
             S_MissionManager.instance.StartMission((bool result) =>
             {
                 if (result)

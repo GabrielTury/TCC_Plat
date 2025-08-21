@@ -170,6 +170,7 @@ public class S_MissionSelectManager : MonoBehaviour
         {
             // Start the mission with the current index
             Cursor.lockState = CursorLockMode.Locked;
+            Debug.Log("Next level: " + levelName + " with mission index: " + currentIndex);
             S_TransitionManager.instance.GoToLevelWithMission(levelName, currentIndex);
             canInteract = false; // Disable interaction to prevent multiple submissions
         }
