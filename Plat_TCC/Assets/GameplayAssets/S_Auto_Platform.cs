@@ -3,63 +3,46 @@ using System.Collections;
 
 public class S_Auto_Platform : MonoBehaviour, IActivatableObjects
 {
-    public Transform target;
+    [SerializeField]
+    private Transform waypoint1;
+    [SerializeField]
+    private Transform waypoint2;
+
     public float duration = 2;
     public bool moved = false;
-    private Vector3 startPosition;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        startPosition = transform.position;
-        StartCoroutine(Move(target.position, duration));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        transform.position = waypoint2.position;
+        StartCoroutine(Move(waypoint1.position, waypoint2.position, duration));
     }
 
     public void Activate()
     {
-        StartCoroutine(Move(target.position, duration));
-        Debug.Log("Move");
+        StartCoroutine(Move(waypoint2.position, waypoint1.position, duration));
     }
 
-
-    public void MoveToPoint()
+    IEnumerator Move(Vector3 start, Vector3 end, float time)
     {
+        float elapsed = 0; //resets time for trip forward
 
-    }
-
-    IEnumerator Move(Vector3 destination, float time)
-    {
-        float elapsed;
-        while (true)
+        while (elapsed < time)
         {
-            elapsed = 0; //resets time for trip forward
+            float percentage = elapsed / time;
+            percentage = Mathf.SmoothStep(0,1,percentage); //smoothing at the ends
+            transform.position = Vector3.Lerp(start, end, percentage);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
 
-            while (elapsed < time)
-            {
-                transform.position = Vector3.Lerp(startPosition, destination, elapsed / time);
-                elapsed += Time.deltaTime;
-                yield return null;
-            }
+        //swaps direction
+        transform.position = end;
+        end = start;
+        start = transform.position;
 
-            transform.position = destination;
-            
-            elapsed = 0; //resets time for trip back
-
-            while (elapsed < time)
-            {
-                transform.position = Vector3.Lerp(destination, startPosition, elapsed / time);
-                elapsed += Time.deltaTime;
-                yield return null;
-            }
-
-            transform.position = startPosition;
-        } 
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(Move(start, end, duration));
     }
 
     public void ToggleButtonInteraction()
@@ -69,4 +52,16 @@ public class S_Auto_Platform : MonoBehaviour, IActivatableObjects
             Activate();
         }
     }
+
+    /*
+    //Sets player as child to be carried with platform
+    private void OnTriggerEnter(Collider other)
+    {
+        other.transform.parent.SetParent(transform);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        other.transform.parent.SetParent(null);
+    }*/
 }
