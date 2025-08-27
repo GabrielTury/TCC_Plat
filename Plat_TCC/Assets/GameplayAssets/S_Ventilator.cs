@@ -37,7 +37,7 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (isOnVentilator)
         {

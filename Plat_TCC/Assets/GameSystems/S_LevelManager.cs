@@ -107,6 +107,7 @@ public class S_LevelManager : MonoBehaviour
         if (player != null)
         {
             isResetting = true;
+            player.transform.position = playerPositionCheckpoint;
             //Debug.LogWarning("[Checkpoint Data] Player position reset to checkpoint.");
         } else
         {
