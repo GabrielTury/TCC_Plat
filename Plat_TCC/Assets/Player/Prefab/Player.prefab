@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 5049115415336744353}
   m_Layer: 10
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1227,6 +1227,7 @@ GameObject:
   - component: {fileID: 5621912023471539407}
   - component: {fileID: 426628437545526167}
   - component: {fileID: 917414742347617863}
+  - component: {fileID: 6375834722632056990}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -1291,7 +1292,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
@@ -1332,7 +1333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8742ab1d7ec167346bf46cdd74918ac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handPoint: {fileID: 8587961994813549080}
+  handPoint: {fileID: 3032768740899842543}
   beltPoint: {fileID: 4066316364459074821}
   grapplingBase: {fileID: 2346163010594635324}
   grapplingAnchor: {fileID: 3262467994390364019}
@@ -1641,6 +1642,20 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6415675410843183998}
   m_Enabled: 1
+--- !u!114 &6375834722632056990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6415675410843183998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d7e4dd5169f7c4ba076af68c8c5f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ziplineDetectionRadius: 15
+  speed: 10
 --- !u!1 &6626096078716309006
 GameObject:
   m_ObjectHideFlags: 0

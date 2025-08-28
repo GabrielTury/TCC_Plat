@@ -6,9 +6,12 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
     [Header("Detection"), Range(1, 30)]
     public float ziplineDetectionRadius = 5f;
 
+    [Header("Movement"), Range(1, 50), SerializeField]
+    private float speed = 10f;
+
     private S_PlayerMovement playerMovement;
 
-    private S_Zipline zipline;
+    private Vector3 destination;
 
     #region Interface Methods
     public void Activation()
@@ -27,60 +30,85 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
 
         }
 
-        zipline = nearestCollider.GetComponent<S_Zipline>();
+        S_Zipline zipline = nearestCollider.GetComponent<S_Zipline>();
+        if(zipline == null)
+        {
+            zipline = nearestCollider.GetComponentInParent<S_Zipline>();
+        }
+
+        GetCorrectPointFromRotation(zipline.ziplinePoints);
+
+        
 
         Debug.Log("Activated Zipline Code");
     }
     public void Attack_Cancel(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        playerMovement.ChangeState(typeof(S_GroundMovement));
     }
 
     public void Attack_Perform(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Jump_Cancel(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Jump_Perform(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        playerMovement.ChangeState(typeof(S_GroundMovement));
     }
 
     public void MoveCable_Cancel(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void MoveCable_Perform(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Move_Cancel(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void Move_Perform(InputAction.CallbackContext obj)
     {
-        throw new System.NotImplementedException();
+       
     }
 
     public void StateFixedUpdate()
     {
-        //zipline.
+        transform.position = Vector3.MoveTowards(transform.position, destination, Time.fixedDeltaTime * speed);
     }
 
     public void StateUpdate()
     {
-        throw new System.NotImplementedException();
+        
     }
     #endregion //Interface Methods
+
+    #region Auxiliary Methods
+    private void GetCorrectPointFromRotation(Vector3[] points)
+    {
+        float lowestAngle = 360f;        
+        foreach (Vector3 point in points)
+        {
+            Vector3 directionToPoint = point - transform.position;
+            float angle = Vector3.Angle(transform.forward, directionToPoint);
+            if (lowestAngle == 360f || angle < lowestAngle) // Assuming a 90-degree field of view
+            {
+                lowestAngle = angle;
+                destination = point;
+            }
+        }
+    }
+    #endregion
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -88,9 +116,4 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
         playerMovement = GetComponent<S_PlayerMovement>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
