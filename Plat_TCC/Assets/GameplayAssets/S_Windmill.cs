@@ -27,17 +27,17 @@ public class S_Windmill : MonoBehaviour
 
         foreach(Transform t in platformList)
         {
-            int baseAngle = index * 90;
+            float baseAngle = index * Mathf.PI/2;
             Vector3 pos;
-            pos.x = transform.localPosition.x + distance * Mathf.Cos(angle + baseAngle);
-            pos.y = transform.localPosition.y + distance * Mathf.Sin(angle + baseAngle);
-            pos.z = transform.localPosition.z;
+            pos.x = transform.position.x + distance * Mathf.Cos(angle + baseAngle);
+            pos.y = transform.position.y + distance * Mathf.Sin(angle + baseAngle);
+            pos.z = transform.position.z;
 
-            t.localPosition = pos;
+            t.position = pos;
 
             index++;
         }
 
-        angle = angle + angleSpeed;
+        angle = angle + angleSpeed/100;
     }
 }
