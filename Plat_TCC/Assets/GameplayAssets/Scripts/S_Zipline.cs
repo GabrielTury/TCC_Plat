@@ -8,6 +8,8 @@ public class S_Zipline : MonoBehaviour
 
     [SerializeField]
     private bool isMovable = false;
+
+    public Vector3[] ziplinePoints { get; private set; }
     private void Start()
     {
         LineRenderer lineRenderer = GetComponent<LineRenderer>();
@@ -21,6 +23,8 @@ public class S_Zipline : MonoBehaviour
 
         if (isMovable)
             StartCoroutine(UpdateLineRenderer(lineRenderer, otherPoint));
+
+        ziplinePoints = linePositions;
     }
 
     private IEnumerator UpdateLineRenderer(LineRenderer lineRenderer, Transform otherTransform)
