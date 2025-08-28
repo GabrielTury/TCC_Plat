@@ -52,16 +52,4 @@ public class S_Auto_Platform : MonoBehaviour, IActivatableObjects
             Activate();
         }
     }
-
-    
-    //Sets player as child to be carried with platform
-    private void OnTriggerEnter(Collider other)
-    {
-        other.transform.parent.SetParent(transform);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        other.transform.parent.SetParent(null);
-    }
 }
