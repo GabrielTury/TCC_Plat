@@ -87,10 +87,11 @@ public class S_MissionManager : MonoBehaviour
 
     public void SaveCurrentMissionStatus(bool complete)
     {
-        string worldNumber = (worldInfo.worldId + 1).ToString();
-        string missionNumber = (currentMissionIndex + 1).ToString();
-        
-        PlayerPrefs.SetString("Mission" + worldNumber + "-" + missionNumber + "Completed", (complete == true ? "true" : "false"));
+        int worldNumber = (worldInfo.worldId + 1);
+        int missionNumber = (currentMissionIndex + 1);
+
+        S_SaveManager.instance.SetMissionStatus(worldNumber, missionNumber, complete);
+        //PlayerPrefs.SetString("Mission" + worldNumber + "-" + missionNumber + "Completed", (complete == true ? "true" : "false"));
         Debug.LogWarning($"Mission {missionNumber} in World {worldNumber} saved as {(complete ? "completed" : "not completed")}. RAW: Mission" + worldNumber + "-" + missionNumber + "Completed");
     }
 }

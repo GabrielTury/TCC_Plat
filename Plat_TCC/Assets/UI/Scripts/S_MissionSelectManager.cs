@@ -157,7 +157,16 @@ public class S_MissionSelectManager : MonoBehaviour
         }
         else
         {
-            if (PlayerPrefs.GetString(currentMissionCondition, "false") == "true")
+            // Convert the condition string into a workable format for the new save system
+            // Get the first number in the condition string as the world number
+            // Get the second number in the condition string as the mission number
+
+            bool conditionMet = S_SaveManager.instance.GetMissionStatus(
+                int.Parse(currentMissionCondition.Split('-')[0]),
+                int.Parse(currentMissionCondition.Split('-')[1])
+            );
+
+            if (conditionMet)
             {
                 canProceed = true;
             }

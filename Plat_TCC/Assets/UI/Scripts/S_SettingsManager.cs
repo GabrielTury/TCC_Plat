@@ -88,10 +88,29 @@ public class S_SettingsManager : MonoBehaviour
 
     void Start()
     {
-        resolutionIndex = PlayerPrefs.GetInt("RESOLUTION_INDEX", 0);
-        windowTypeIndex = PlayerPrefs.GetInt("WINDOW_TYPE_INDEX", 0);
-        musicVolume = PlayerPrefs.GetFloat("MUSIC_VOLUME", 0.8f);
-        soundVolume = PlayerPrefs.GetFloat("SOUND_VOLUME", 0.8f);
+        S_SaveManager.SettingsData settingsData;
+        bool exists;
+        
+        (settingsData, exists) = S_SaveManager.instance.LoadSettingsData();
+
+        if (exists)
+        {
+            resolutionIndex = settingsData.resolutionIndex;
+            windowTypeIndex = settingsData.windowTypeIndex;
+            musicVolume = settingsData.musicVolume;
+            soundVolume = settingsData.soundVolume;
+        } else
+        {
+            resolutionIndex = resolutions.Count - 1; // Default to highest resolution available
+            windowTypeIndex = 2; // Default to Fullscreen
+            musicVolume = 0.8f; // Default to 80%
+            soundVolume = 0.8f; // Default to 80%
+        }
+
+        //resolutionIndex = PlayerPrefs.GetInt("RESOLUTION_INDEX", 0);
+        //windowTypeIndex = PlayerPrefs.GetInt("WINDOW_TYPE_INDEX", 0);
+        //musicVolume = PlayerPrefs.GetFloat("MUSIC_VOLUME", 0.8f);
+        //soundVolume = PlayerPrefs.GetFloat("SOUND_VOLUME", 0.8f);
 
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
@@ -315,10 +334,20 @@ public class S_SettingsManager : MonoBehaviour
         Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height,
             windowTypes[windowTypeIndex] == 0 ? FullScreenMode.Windowed : windowTypes[windowTypeIndex] == 1 ? FullScreenMode.FullScreenWindow : FullScreenMode.ExclusiveFullScreen);
 
-        PlayerPrefs.SetInt("RESOLUTION_INDEX", resolutionIndex);
-        PlayerPrefs.SetInt("WINDOW_TYPE_INDEX", windowTypeIndex);
-        PlayerPrefs.SetFloat("MUSIC_VOLUME", musicVolume);
-        PlayerPrefs.SetFloat("SOUND_VOLUME", soundVolume);
+        S_SaveManager.SettingsData settingsData = new S_SaveManager.SettingsData
+        {
+            resolutionIndex = resolutionIndex,
+            windowTypeIndex = windowTypeIndex,
+            musicVolume = musicVolume,
+            soundVolume = soundVolume
+        };
+
+        S_SaveManager.instance.SaveSettingsData(settingsData);
+
+        //PlayerPrefs.SetInt("RESOLUTION_INDEX", resolutionIndex);
+        //PlayerPrefs.SetInt("WINDOW_TYPE_INDEX", windowTypeIndex);
+        //PlayerPrefs.SetFloat("MUSIC_VOLUME", musicVolume);
+        //PlayerPrefs.SetFloat("SOUND_VOLUME", soundVolume);
 
         audioMixer.SetFloat("MusicParam", Mathf.Lerp(-80, 0, musicVolume));
         audioMixer.SetFloat("SoundParam", Mathf.Lerp(-80, 0, soundVolume));

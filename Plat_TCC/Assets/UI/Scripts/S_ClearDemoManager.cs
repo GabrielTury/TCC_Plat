@@ -8,11 +8,15 @@ public class S_ClearDemoManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        string miss1 = PlayerPrefs.GetString("Mission1-1Completed", "false");
-        string miss2 = PlayerPrefs.GetString("Mission1-2Completed", "false");
-        string miss3 = PlayerPrefs.GetString("Mission1-3Completed", "false");
+        //string miss1 = PlayerPrefs.GetString("Mission1-1Completed", "false");
+        //string miss2 = PlayerPrefs.GetString("Mission1-2Completed", "false");
+        //string miss3 = PlayerPrefs.GetString("Mission1-3Completed", "false");
 
-        if (miss1 == "true" && miss2 == "true" && miss3 == "true")
+        bool missB1 = S_SaveManager.instance.GetMissionStatus(1, 1);
+        bool missB2 = S_SaveManager.instance.GetMissionStatus(1, 2);
+        bool missB3 = S_SaveManager.instance.GetMissionStatus(1, 3);
+
+        if (missB1 == true && missB2 == true && missB3 == true)
         {
             canvasGroup = GetComponent<CanvasGroup>();
             if (canvasGroup != null)

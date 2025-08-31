@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Windows;
@@ -144,7 +145,33 @@ public class S_MissionPanel : MonoBehaviour
         }
         else
         {
-            if (PlayerPrefs.GetString(currentMissionCondition, "false") == "true")
+            string[] conditionParts = currentMissionCondition.Split('-');
+            int worldNumber = 0, missionNumber = 0;
+            bool conditionMet = false;
+
+            if (conditionParts.Length >= 2)
+            {
+                Regex numRegex = new Regex(@"\d+");
+                Match worldMatch = numRegex.Match(conditionParts[0]);
+                Match missionMatch = numRegex.Match(conditionParts[1]);
+
+                if (worldMatch.Success && missionMatch.Success &&
+                    int.TryParse(worldMatch.Value, out worldNumber) &&
+                    int.TryParse(missionMatch.Value, out missionNumber))
+                {
+                    conditionMet = S_SaveManager.instance.GetMissionStatus(worldNumber, missionNumber);
+                }
+                else
+                {
+                    Debug.LogError($"Invalid mission condition format: {currentMissionCondition}");
+                }
+            }
+            else
+            {
+                Debug.LogError($"Invalid mission condition format: {currentMissionCondition}");
+            }
+
+            if (conditionMet)
             {
                 canProceed = true;
             }
@@ -153,8 +180,6 @@ public class S_MissionPanel : MonoBehaviour
                 canProceed = false;
             }
         }
-
-        // Debug log the result of the condition check and the mission condition
 
         Debug.Log($"Can Proceed: {canProceed} for condition: {currentMissionCondition}");
 
