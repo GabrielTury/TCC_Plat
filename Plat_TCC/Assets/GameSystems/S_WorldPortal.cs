@@ -75,6 +75,9 @@ public class S_WorldPortal : MonoBehaviour
                 //loadSize = 1;
                 //S_TransitionManager.instance.GoToLevelWithMission(levelName, missionIndex);
                 hasStartedLoading = true;
+
+                GameObject.Find("Player").GetComponent<S_PlayerMovement>().PausePlayer();
+
                 GameObject missionCanvas = Instantiate(missionSelectCanvas);
                 S_MissionSelectManager missionSelectManager = missionCanvas.GetComponent<S_MissionSelectManager>();
                 if (missionSelectManager != null)

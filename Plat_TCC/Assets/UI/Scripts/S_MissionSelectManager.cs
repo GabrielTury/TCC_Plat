@@ -185,6 +185,10 @@ public class S_MissionSelectManager : MonoBehaviour
                     Debug.LogError($"Invalid mission condition format: {currentMissionCondition}");
                 }
             }
+            if (conditionMet)
+            {
+                canProceed = true;
+            }
             else
             {
                 Debug.LogError($"Invalid mission condition format: {currentMissionCondition}");

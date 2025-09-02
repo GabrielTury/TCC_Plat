@@ -55,9 +55,9 @@ public class S_SaveManager : MonoBehaviour
 
     public WorldSave defaultWorld;
 
-    public static PlayerData playerData;
+    public PlayerData playerData;
 
-    public static SettingsData settingsData;
+    public SettingsData settingsData;
 
     public void Start()
     {
