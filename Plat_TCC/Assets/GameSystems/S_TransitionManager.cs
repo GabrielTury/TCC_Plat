@@ -109,7 +109,7 @@ public class S_TransitionManager : MonoBehaviour
         while (canvasGroup.alpha < 1)
         {
             canvasGroup.alpha += Time.deltaTime * openSpeed;
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
 
         S_LevelManager.instance.ResetLevel();
@@ -117,7 +117,7 @@ public class S_TransitionManager : MonoBehaviour
         while (canvasGroup.alpha > 0)
         {
             canvasGroup.alpha -= Time.deltaTime * closeSpeed;
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
     }
 }

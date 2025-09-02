@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Windows;
 
@@ -161,18 +162,30 @@ public class S_MissionSelectManager : MonoBehaviour
             // Get the first number in the condition string as the world number
             // Get the second number in the condition string as the mission number
 
-            bool conditionMet = S_SaveManager.instance.GetMissionStatus(
-                int.Parse(currentMissionCondition.Split('-')[0]),
-                int.Parse(currentMissionCondition.Split('-')[1])
-            );
+            string[] conditionParts = currentMissionCondition.Split('-');
+            int worldNumber = 0, missionNumber = 0;
+            bool conditionMet = false;
 
-            if (conditionMet)
+            if (conditionParts.Length >= 2)
             {
-                canProceed = true;
+                Regex numRegex = new Regex(@"\d+");
+                Match worldMatch = numRegex.Match(conditionParts[0]);
+                Match missionMatch = numRegex.Match(conditionParts[1]);
+
+                if (worldMatch.Success && missionMatch.Success &&
+                    int.TryParse(worldMatch.Value, out worldNumber) &&
+                    int.TryParse(missionMatch.Value, out missionNumber))
+                {
+                    conditionMet = S_SaveManager.instance.GetMissionStatus(worldNumber, missionNumber);
+                }
+                else
+                {
+                    Debug.LogError($"Invalid mission condition format: {currentMissionCondition}");
+                }
             }
             else
             {
-                canProceed = false;
+                Debug.LogError($"Invalid mission condition format: {currentMissionCondition}");
             }
         }
         if (canInteract && canProceed == true)

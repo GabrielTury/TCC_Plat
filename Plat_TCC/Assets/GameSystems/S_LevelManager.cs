@@ -13,7 +13,7 @@ public class S_LevelManager : MonoBehaviour
     public GameObject[] savedObjects;
     public List<Transform> savedObjectsTransform = new List<Transform>();
 
-    private Transform playerTransform;
+    public Transform playerTransform;
 
     private S_PlayerInformation playerInfo;
 
@@ -42,11 +42,15 @@ public class S_LevelManager : MonoBehaviour
     {
         if (isResetting)
         {
+            if (playerTransform == null)
+            {
+                playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            }
             if (playerTransform.position != playerPositionCheckpoint)
             {
                 playerTransform.position = playerPositionCheckpoint;
                 isResetting = false;
-                //Debug.LogWarning("[Checkpoint Update Data] Player position reset to checkpoint.");
+                Debug.LogWarning("[Checkpoint Update Data] Player position trying to reset to checkpoint.");
             }
         }
     }
@@ -83,6 +87,7 @@ public class S_LevelManager : MonoBehaviour
     public void SetCheckpointData(Vector3 checkpointPosition)
     {
         playerPositionCheckpoint = checkpointPosition;
+        Debug.Log("Player Position Checkpoint: " + checkpointPosition);
 
         int index = 0;
         foreach (var obj in savedObjects)
@@ -103,11 +108,11 @@ public class S_LevelManager : MonoBehaviour
     {
         // Reset player position
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        //GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (playerTransform != null)
         {
             isResetting = true;
-            player.transform.position = playerPositionCheckpoint;
+            playerTransform.position = playerPositionCheckpoint;
             //Debug.LogWarning("[Checkpoint Data] Player position reset to checkpoint.");
         } else
         {
