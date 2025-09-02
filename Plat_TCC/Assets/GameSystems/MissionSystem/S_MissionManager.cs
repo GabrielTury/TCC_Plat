@@ -49,6 +49,7 @@ public class S_MissionManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator MissionLoadTick(FinishedLoading callback, int missionIndex)
     {
+        if (SceneManager.GetActiveScene().name == "HubWorld" || SceneManager.GetActiveScene().name == "MainMenu") { yield break; }
         bool result = false;
         AsyncOperation missionLoad;
         for (int i = 0; i < SceneManager.loadedSceneCount; i++)
