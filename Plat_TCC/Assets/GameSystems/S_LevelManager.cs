@@ -7,6 +7,9 @@ public class S_LevelManager : MonoBehaviour
 
     public int collectibles = 0;
     public int mainCollectibles = 0;
+    /// <summary>
+    /// Keys collected
+    /// </summary>
     public int keyCollectibles = 0;
     public Vector3 playerPositionCheckpoint;
 
@@ -18,6 +21,8 @@ public class S_LevelManager : MonoBehaviour
     private S_PlayerInformation playerInfo;
 
     private bool isResetting = false;
+
+    public System.Action OnKeyCollected;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -67,6 +72,7 @@ public class S_LevelManager : MonoBehaviour
             case "Key":
                 keyCollectibles += count;
                 S_CollectibleExhibitor.instance.UpdateCollectible(collectibleName, keyCollectibles);
+                OnKeyCollected.Invoke();
                 break;
 
             case "Apple":

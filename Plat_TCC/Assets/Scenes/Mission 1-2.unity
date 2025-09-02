@@ -176,6 +176,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+--- !u!4 &76049479 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+  m_PrefabInstance: {fileID: 1443180890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &103228872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8167695107317865448, guid: 045a853ff4ff52b489515a7dd26710ed, type: 3}
@@ -2613,6 +2618,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f365fbad726f76a44b4f77fdc84370ed, type: 3}
+--- !u!1001 &1443180890
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1904032228}
+    m_Modifications:
+    - target: {fileID: 1057259154750207385, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_Name
+      value: Final Cage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -79.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 24.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 125.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
 --- !u!1001 &1459756895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4411,6 +4489,7 @@ Transform:
   - {fileID: 325974475}
   - {fileID: 1374370113}
   - {fileID: 103228872}
+  - {fileID: 76049479}
   - {fileID: 1684001438}
   - {fileID: 1995648553}
   - {fileID: 740675206}
