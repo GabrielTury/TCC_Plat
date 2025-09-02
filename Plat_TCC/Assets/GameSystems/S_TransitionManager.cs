@@ -19,6 +19,9 @@ public class S_TransitionManager : MonoBehaviour
     [SerializeField]
     private float closeSpeed = 2f;
 
+    [SerializeField]
+    private SO_WorldInfo defaultWorldInfo;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -48,12 +51,13 @@ public class S_TransitionManager : MonoBehaviour
 
     public void GoToLevel(string levelName)
     {
-        StartCoroutine(LoadLevel(levelName));
+        Debug.LogError("Loading level without mission is not working");
+        StartCoroutine(LoadLevel(levelName, 0, null));
     }
 
-    public void GoToLevelWithMission(string levelName, int missionIndex)
+    public void GoToLevelWithMission(string levelName, int missionIndex, SO_WorldInfo worldInfo)
     {
-        StartCoroutine(LoadLevel(levelName, missionIndex));
+        StartCoroutine(LoadLevel(levelName, missionIndex, worldInfo));
         // Add logic to load the specific mission here
     }
 
@@ -62,7 +66,7 @@ public class S_TransitionManager : MonoBehaviour
         StartCoroutine(RestartStage());
     }
 
-    private IEnumerator LoadLevel(string levelName, int missionIndex = -1)
+    private IEnumerator LoadLevel(string levelName, int missionIndex = -1, SO_WorldInfo worldInfo = null)
     {
         while (canvasGroup.alpha < 1)
         {
@@ -84,6 +88,11 @@ public class S_TransitionManager : MonoBehaviour
         if (missionIndex != -1)
         {
             Debug.Log("Mission Index is not -1, proceeding");
+            if (worldInfo == null)
+            {
+                worldInfo = defaultWorldInfo;
+            }
+            S_MissionManager.instance.SetWorldInfo(worldInfo);
             S_MissionManager.instance.StartMission((bool result) =>
             {
                 if (result)

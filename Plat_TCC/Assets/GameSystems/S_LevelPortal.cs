@@ -39,7 +39,7 @@ public class S_LevelPortal : MonoBehaviour
         if (loadSize >= 0.99f && hasStartedLoading == false)
         {
             loadSize = 1;
-            S_TransitionManager.instance.GoToLevelWithMission(levelName, missionIndex);
+            //S_TransitionManager.instance.GoToLevelWithMission(levelName, missionIndex, worldInfo);
             hasStartedLoading = true;
         }
     }

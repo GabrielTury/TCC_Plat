@@ -1051,6 +1051,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 908622bc067f9e044977aa8b12cbf687, type: 2}
   - {fileID: 11400000, guid: fba8c95c25c07e843ac7b02577d4b8a0, type: 2}
   missionSelectCanvas: {fileID: 9112116454290858960, guid: 2f1aa757318c76545b1a61114b8f89fc, type: 3}
+  worldInfo: {fileID: 11400000, guid: c80563d91fd6bd844be129a2ebd8bfd3, type: 2}
 --- !u!1001 &645676812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1881,6 +1882,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 740ccf8d03d80b34c809ba27ecb00fc6, type: 2}
   - {fileID: 11400000, guid: 52bf43a42f3ecb74e8ce7f99d5fe3476, type: 2}
   missionSelectCanvas: {fileID: 9112116454290858960, guid: 2f1aa757318c76545b1a61114b8f89fc, type: 3}
+  worldInfo: {fileID: 11400000, guid: 5f8f4df5f7d36524980f6e75a7088b94, type: 2}
 --- !u!65 &905791747
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3703,6 +3705,7 @@ MonoBehaviour:
   playerPositionCheckpoint: {x: 0, y: 0, z: 0}
   savedObjects: []
   savedObjectsTransform: []
+  playerTransform: {fileID: 0}
 --- !u!4 &1484744257
 Transform:
   m_ObjectHideFlags: 0
@@ -4320,6 +4323,7 @@ MonoBehaviour:
   rectChild: {fileID: 481185296}
   openSpeed: 1.75
   closeSpeed: 0.9
+  defaultWorldInfo: {fileID: 0}
 --- !u!114 &1896230743
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,6 +17,8 @@ public class S_MissionSelectManager : MonoBehaviour
 
     private string levelName;
 
+    private SO_WorldInfo worldInfo;
+
     [SerializeField]
     private GameObject panelPrefab;
 
@@ -193,7 +195,7 @@ public class S_MissionSelectManager : MonoBehaviour
             // Start the mission with the current index
             Cursor.lockState = CursorLockMode.Locked;
             Debug.Log("Next level: " + levelName + " with mission index: " + currentIndex);
-            S_TransitionManager.instance.GoToLevelWithMission(levelName, currentIndex);
+            S_TransitionManager.instance.GoToLevelWithMission(levelName, currentIndex, worldInfo);
             canInteract = false; // Disable interaction to prevent multiple submissions
         }
     }
@@ -238,10 +240,11 @@ public class S_MissionSelectManager : MonoBehaviour
         canvasGroup.alpha = endAlpha; // Ensure the final alpha is set
     }
 
-    public void Setup(SO_MissionUIInfo[] missionInfos, string levelName)
+    public void Setup(SO_MissionUIInfo[] missionInfos, string levelName, SO_WorldInfo worldInfo)
     {
         //Debug.LogWarning(missionInfos.Length + " missions set up in S_MissionSelectManager.");
         this.missionInfos = missionInfos;
         this.levelName = levelName;
+        this.worldInfo = worldInfo;
     }
 }

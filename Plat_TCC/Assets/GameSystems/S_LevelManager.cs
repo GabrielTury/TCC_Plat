@@ -31,7 +31,7 @@ public class S_LevelManager : MonoBehaviour
 
         // Set Checkpoint Data to player initial position
 
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.Find("Player").transform;
         playerInfo = playerTransform.GetComponent<S_PlayerInformation>();
 
         SetCheckpointData(playerTransform.position);
@@ -44,7 +44,7 @@ public class S_LevelManager : MonoBehaviour
         {
             if (playerTransform == null)
             {
-                playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+                playerTransform = GameObject.Find("Player").transform;
             }
             if (playerTransform.position != playerPositionCheckpoint)
             {
@@ -109,6 +109,10 @@ public class S_LevelManager : MonoBehaviour
         // Reset player position
 
         //GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (playerTransform == null)
+        {
+            playerTransform = GameObject.Find("Player").transform;
+        }
         if (playerTransform != null)
         {
             isResetting = true;

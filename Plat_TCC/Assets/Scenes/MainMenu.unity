@@ -469,6 +469,7 @@ MonoBehaviour:
   rectChild: {fileID: 1118698457}
   openSpeed: 1.75
   closeSpeed: 0.9
+  defaultWorldInfo: {fileID: 11400000, guid: c80563d91fd6bd844be129a2ebd8bfd3, type: 2}
 --- !u!114 &461766844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1000,6 +1001,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultData:
     appleCount: 0
+    worlds: []
+  defaultSettings:
+    resolutionIndex: 0
+    windowTypeIndex: 0
+    musicVolume: 0
+    soundVolume: 0
+  defaultWorld:
+    missionStatus: 
 --- !u!4 &785125869
 Transform:
   m_ObjectHideFlags: 0

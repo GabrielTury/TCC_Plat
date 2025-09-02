@@ -40,6 +40,9 @@ public class S_WorldPortal : MonoBehaviour
     [SerializeField]
     private GameObject missionSelectCanvas;
 
+    [SerializeField]
+    private SO_WorldInfo worldInfo;
+
     private void Awake()
     {
         inputs = new InputSystem_Actions();
@@ -76,7 +79,7 @@ public class S_WorldPortal : MonoBehaviour
                 S_MissionSelectManager missionSelectManager = missionCanvas.GetComponent<S_MissionSelectManager>();
                 if (missionSelectManager != null)
                 {
-                    missionSelectManager.Setup(missionInfos, levelName);
+                    missionSelectManager.Setup(missionInfos, levelName, worldInfo);
                 }
                 else
                 {
