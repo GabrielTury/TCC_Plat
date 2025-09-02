@@ -83,11 +83,19 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             }
         }
 
-        if(playerMovement.ziplinesInRange != null)
+        if (playerMovement.ziplinesInRange != null)
         {
             foreach (Collider col in playerMovement.ziplinesInRange)
             {
                 collidersInRange.Add(col.transform.position, "zipline");
+            }
+        }
+
+        if(playerMovement.movablesInRange != null)
+        {
+            foreach(Collider col in playerMovement.movablesInRange)
+            {
+                collidersInRange.Add(col.transform.position, "movable");
             }
         }
 
@@ -115,6 +123,9 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
                 break;
             case "zipline":
                 playerMovement.ChangeState(typeof(S_ZiplineMovement));
+                break;
+            case "movable":
+                playerMovement.ChangeState(typeof(S_ObjectMovement));
                 break;
             default:
                 break;
