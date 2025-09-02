@@ -18,12 +18,11 @@ public class S_PlayerMovement : MonoBehaviour
     private bool canGrapple;
     private S_GrapplingMovement grapplingMovement;
 
-    private S_ZiplineMovement ziplineMovement;
-
     private bool isPaused;
 
     public Collider[] grapplingCollidersInRange { get; private set; }
     public Collider[] ziplinesInRange { get; private set; }
+    public Collider[] movablesInRange { get; private set; }
 
     private void Awake()
     {
@@ -50,10 +49,6 @@ public class S_PlayerMovement : MonoBehaviour
                 }
                 grapplingMovement = (S_GrapplingMovement)moveState;
             }
-            else if (moveState is S_ZiplineMovement)
-            {
-                ziplineMovement = (S_ZiplineMovement)moveState;
-            }
         }
     }
     private void OnEnable()
@@ -71,31 +66,37 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void Jump_canceled(InputAction.CallbackContext obj)
     {
+        if (isPaused) return;
         activeState.Jump_Cancel(obj);
     }
 
     private void MoveCable_canceled(InputAction.CallbackContext obj)
     {
+        if (isPaused) return;
         activeState.MoveCable_Cancel(obj);
     }
 
     private void MoveCable_performed(InputAction.CallbackContext obj)
     {
+        if (isPaused) return;
         activeState.MoveCable_Perform(obj);
     }
 
     private void Attack_canceled(InputAction.CallbackContext obj)
     {
+        if (isPaused) return;
         activeState.Attack_Cancel(obj);
     }
 
     private void Attack_performed(InputAction.CallbackContext obj)
     {
+        if (isPaused) return;
         activeState.Attack_Perform(obj);
     }
 
     private void Jump_performed(InputAction.CallbackContext obj)
     {
+        if (isPaused) return;
         activeState.Jump_Perform(obj);
     }
 
@@ -114,12 +115,13 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void Move_canceled(InputAction.CallbackContext obj)
     {
+        if (isPaused) return;
         activeState.Move_Cancel(obj);
     }
 
     private void Move_performed(InputAction.CallbackContext obj)
     {
-
+        if (isPaused) return;
         activeState.Move_Perform(obj);
     }
     private void FixedUpdate()
@@ -129,6 +131,7 @@ public class S_PlayerMovement : MonoBehaviour
         activeState.StateFixedUpdate();
         GrapplingRange();
         ZiplineRange();
+        MovableObjectRange();
         BlobShadow();
     }
     // Update is called once per frame
@@ -176,6 +179,14 @@ public class S_PlayerMovement : MonoBehaviour
         }
     }
 
+    private void MovableObjectRange()
+    {
+        Collider[] objs = Physics.OverlapSphere(transform.position, 6f, 1 << 8);
+        if(objs != null)
+        {
+            movablesInRange = objs;
+        }
+    }
     public void ChangeState(Type state)
     {
         if (!typeof(IMoveState).IsAssignableFrom(state))

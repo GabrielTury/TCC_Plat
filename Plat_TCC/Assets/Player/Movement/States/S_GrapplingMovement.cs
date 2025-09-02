@@ -247,12 +247,14 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
                 grapplingBase.transform.SetParent(handPoint.transform);
                 grapplingBase.transform.localPosition = Vector3.zero;
+                grapplingBase.transform.rotation = Quaternion.identity;
 
                 ogAnchorPosition = grapplingAnchor.transform.localPosition;
                 ogAnchorRotation = grapplingAnchor.transform.localEulerAngles;
 
                 grapplingAnchor.transform.SetParent(closestCollider.transform);
                 grapplingAnchor.transform.localPosition = Vector3.zero;
+                grapplingBase.transform.rotation = Quaternion.identity;
                 #endregion
             }
             else
