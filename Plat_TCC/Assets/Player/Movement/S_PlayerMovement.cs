@@ -29,7 +29,7 @@ public class S_PlayerMovement : MonoBehaviour
         inputs = new InputSystem_Actions();
         moveStates = GetComponents<IMoveState>();
         activeState = moveStates[0];
-
+        
         foreach (IMoveState moveState in moveStates)
         {
             var stateComponent = moveState as MonoBehaviour;
