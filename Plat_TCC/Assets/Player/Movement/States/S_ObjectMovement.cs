@@ -11,8 +11,12 @@ public class S_ObjectMovement : MonoBehaviour, IMoveState
     private GameObject movable;
     private Vector2 dir;
 
-    [SerializeField]
+    [SerializeField, Range(1f, 10f)]
     private float objectSpeed = 5;
+    [SerializeField]
+    private float objectDistance = 3;
+    [SerializeField]
+    private float maxObjectDistance = 6;
     #region Interface Methods
     public void Activation()
     {
@@ -66,7 +70,7 @@ public class S_ObjectMovement : MonoBehaviour, IMoveState
 
     public void Move_Cancel(InputAction.CallbackContext obj)
     {
-        groundMovement.MoveCable_Cancel(obj);
+        groundMovement.Move_Cancel(obj);
         dir = Vector2.zero;
     }
 
@@ -79,9 +83,17 @@ public class S_ObjectMovement : MonoBehaviour, IMoveState
     public void StateFixedUpdate()
     {
         groundMovement.StateFixedUpdate();
-        Vector2 movement = dir * objectSpeed * Time.fixedDeltaTime;
-        movable.transform.position += new Vector3(movement.x, 0, movement.y);
 
+        float distanceFromObject = Vector3.Distance(movable.transform.position, transform.position);
+        if (distanceFromObject < objectDistance)
+            return;
+        else if (distanceFromObject > maxObjectDistance)
+            Attack_Cancel(new InputAction.CallbackContext());
+
+        Vector3 target = transform.position + ((movable.transform.position - transform.position) * 0.5f);
+        Vector3 movement = Vector3.MoveTowards(movable.transform.position, target, objectSpeed/100f);
+        movement.y = movable.transform.position.y;
+        movable.transform.position = movement;
     }
 
     public void StateUpdate()
