@@ -13,6 +13,8 @@ public class S_ButtonActivator : MonoBehaviour
 
     [SerializeField] private AudioClip buttonPress;
 
+    private bool isActivated = false;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,14 +34,14 @@ public class S_ButtonActivator : MonoBehaviour
 
     private void ToggleButtonInteraction()
     {
-        foreach (GameObject obj in objects)
-        {
-            IActivatableObjects activatable = obj.GetComponent<IActivatableObjects>();
-            if (activatable != null)
+            foreach (GameObject obj in objects)
             {
-                activatable.ToggleButtonInteraction();
+                IActivatableObjects activatable = obj.GetComponent<IActivatableObjects>();
+                if (activatable != null)
+                {
+                    activatable.ToggleButtonInteraction();
+                }
             }
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,14 +49,21 @@ public class S_ButtonActivator : MonoBehaviour
         if (timer <= 0)
         {
             timer = 5;
-            ToggleButtonInteraction();
-            pressedButtonTransform.position = new Vector3(pressedButtonPosition.x, pressedButtonPosition.y - 0.2f, pressedButtonPosition.z);
-            AudioManager.instance.PlaySFX(buttonPress);
+            if (!isActivated)
+            {
+                ToggleButtonInteraction();
+                pressedButtonTransform.position = new Vector3(pressedButtonPosition.x, pressedButtonPosition.y - 0.2f, pressedButtonPosition.z);
+                AudioManager.instance.PlaySFX(buttonPress);
+                isActivated = true;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        pressedButtonTransform.position = new Vector3(pressedButtonPosition.x, pressedButtonPosition.y, pressedButtonPosition.z);
+        if (!isActivated)
+        {
+            pressedButtonTransform.position = new Vector3(pressedButtonPosition.x, pressedButtonPosition.y, pressedButtonPosition.z);
+        }
     }
 }

@@ -14,6 +14,9 @@ public class S_Windmill : MonoBehaviour
     [SerializeField]
     private float distance = 25;
 
+    [SerializeField]
+    private Transform center;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,5 +42,7 @@ public class S_Windmill : MonoBehaviour
         }
 
         angle = angle + angleSpeed/100;
+
+        center.Rotate(0,0, angleSpeed*1.8f/Mathf.PI);
     }
 }
