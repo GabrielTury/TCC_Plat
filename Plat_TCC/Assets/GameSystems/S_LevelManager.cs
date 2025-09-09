@@ -4,6 +4,7 @@ using UnityEngine;
 public class S_LevelManager : MonoBehaviour
 {
     public static S_LevelManager instance;
+    public S_PlayerMovement playerMovement {  get; private set; }
 
     public int collectibles = 0;
     public int mainCollectibles = 0;
@@ -38,6 +39,7 @@ public class S_LevelManager : MonoBehaviour
 
         playerTransform = GameObject.Find("Player").transform;
         playerInfo = playerTransform.GetComponent<S_PlayerInformation>();
+        playerMovement = playerTransform.GetComponent<S_PlayerMovement>();
 
         SetCheckpointData(playerTransform.position);
     }

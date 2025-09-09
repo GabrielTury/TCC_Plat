@@ -21,6 +21,7 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
     private bool startDisabled;
 
     private Collider ownCollider;
+    private S_PlayerMovement playerMove;
 
     private void Awake()
     {
@@ -34,8 +35,9 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
         {
             ToggleButtonInteraction();
         }
+        playerMove = S_LevelManager.instance.playerMovement;
     }
-
+    
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -45,7 +47,8 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
             {
                 if (disabledVisualizer.activeSelf)
                 {
-                    objRb.AddForce(transform.parent.up * speed, ForceMode.Acceleration);
+                    playerMove.AddPlayerForce(transform.parent.up * speed, ForceMode.Acceleration);
+                    //objRb.AddForce(transform.parent.up * speed, ForceMode.Acceleration);
                 }
             }
         }
