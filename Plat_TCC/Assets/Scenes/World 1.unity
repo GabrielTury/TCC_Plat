@@ -7303,6 +7303,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2955286884124477510, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: slowDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2955286884124477510, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: slowedTimeScale
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3989175100169348947, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10333,7 +10341,7 @@ MonoBehaviour:
   IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
   ChannelMask: -1
-  UpdateMethod: 0
+  UpdateMethod: 2
   BlendUpdateMethod: 1
   LensModeOverride:
     Enabled: 0
