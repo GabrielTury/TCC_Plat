@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using HF = S_HelperFunctions;
 
@@ -20,16 +21,16 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     private Image gameLogo;
 
     [SerializeField]
-    private Button[] buttons = new Button[4];
+    private Button[] buttons = new Button[5];
 
     //[SerializeField]
-    private Image[] buttonsImage = new Image[4];
+    private Image[] buttonsImage = new Image[5];
 
     [SerializeField]
     private int selectionIndex = 0;
 
     //[SerializeField]
-    private Coroutine[] buttonAnimationCoroutine = new Coroutine[6];
+    private Coroutine[] buttonAnimationCoroutine = new Coroutine[7];
 
     [SerializeField]
     private int lastButtonHighlighted = 0;
@@ -332,8 +333,24 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
     public void RestartAtLastCheckpoint()
     {
+        if (SceneManager.GetActiveScene().name == "HubWorld")
+        {
+            Debug.Log("You are in the Hub World, cannot restart level.");
+            return;
+        }
         //S_LevelManager.instance.ResetLevel();
         S_TransitionManager.instance.RestartLevel();
+        ResumeGame();
+    }
+
+    public void ReturnToWorldHub()
+    {
+        if (SceneManager.GetActiveScene().name == "HubWorld")
+        {
+            Debug.Log("You are in the Hub World, cannot restart level.");
+            return;
+        }
+        S_TransitionManager.instance.GoToLevel("HubWorld");
         ResumeGame();
     }
     public void ResumeOperation()

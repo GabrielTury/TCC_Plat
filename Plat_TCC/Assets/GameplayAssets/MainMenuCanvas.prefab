@@ -121,7 +121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4651825048621767726}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7096743370081029852}
+        m_TargetAssemblyTypeName: S_MainMenuManager, Assembly-CSharp
+        m_MethodName: ContinueGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6338752495570738995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,7 +1418,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: b6d5e67bd9d6e974e8645768665f3c5a, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2366,6 +2378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 8132856359155065625}
+  isOnSettingsMenu: 0
   buttons:
   - {fileID: 5986180151533966547}
   - {fileID: 8470322298701233514}
@@ -2373,6 +2386,7 @@ MonoBehaviour:
   - {fileID: 7869623160024608881}
   - {fileID: 1580234883906464587}
   selectionIndex: 0
+  audioMixer: {fileID: 0}
   lastButtonHighlighted: 0
 --- !u!1 &4838281119850873170
 GameObject:
@@ -3502,7 +3516,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3942775497162417675}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7096743370081029852}
+        m_TargetAssemblyTypeName: S_MainMenuManager, Assembly-CSharp
+        m_MethodName: NewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1357644471055131803
 MonoBehaviour:
   m_ObjectHideFlags: 0

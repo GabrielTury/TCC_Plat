@@ -56,6 +56,8 @@ public class S_SettingsManager : MonoBehaviour
         (3840, 2160)
     };
 
+    private int maxResolutionIndex;
+
     private int resolutionIndex = 0;
 
     private List<int> windowTypes = new List<int>
@@ -67,9 +69,9 @@ public class S_SettingsManager : MonoBehaviour
 
     private int windowTypeIndex = 0;
 
-    private float musicVolume = 0.8f;
+    private int musicVolume = 80;
 
-    private float soundVolume = 0.8f;
+    private int soundVolume = 80;
 
     private void Awake()
     {
@@ -90,8 +92,10 @@ public class S_SettingsManager : MonoBehaviour
     {
         S_SaveManager.SettingsData settingsData;
         bool exists;
-        
+
         (settingsData, exists) = S_SaveManager.instance.LoadSettingsData();
+
+        maxResolutionIndex = resolutions.FindLastIndex(res => res.width <= Screen.currentResolution.width);
 
         if (exists)
         {
@@ -99,18 +103,14 @@ public class S_SettingsManager : MonoBehaviour
             windowTypeIndex = settingsData.windowTypeIndex;
             musicVolume = settingsData.musicVolume;
             soundVolume = settingsData.soundVolume;
-        } else
-        {
-            resolutionIndex = resolutions.Count - 1; // Default to highest resolution available
-            windowTypeIndex = 2; // Default to Fullscreen
-            musicVolume = 0.8f; // Default to 80%
-            soundVolume = 0.8f; // Default to 80%
         }
-
-        //resolutionIndex = PlayerPrefs.GetInt("RESOLUTION_INDEX", 0);
-        //windowTypeIndex = PlayerPrefs.GetInt("WINDOW_TYPE_INDEX", 0);
-        //musicVolume = PlayerPrefs.GetFloat("MUSIC_VOLUME", 0.8f);
-        //soundVolume = PlayerPrefs.GetFloat("SOUND_VOLUME", 0.8f);
+        else
+        {
+            resolutionIndex = maxResolutionIndex; // Default to highest resolution available
+            windowTypeIndex = 2; // Default to Fullscreen
+            musicVolume = 80; // Default to 80%
+            soundVolume = 80; // Default to 80%
+        }
 
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
@@ -127,7 +127,8 @@ public class S_SettingsManager : MonoBehaviour
             {
                 buttonsText[i] = buttons[i].GetComponentInChildren<TextMeshProUGUI>();
                 UpdateSettingSelectionDisplay(i);
-            } catch { }
+            }
+            catch { }
         }
 
         int distance = 200;
@@ -244,11 +245,11 @@ public class S_SettingsManager : MonoBehaviour
                 
                 if (direction == "left")
                 {
-                    resolutionIndex = (int)HF.Wrap(resolutionIndex - 1, 0, resolutions.Count);
+                    resolutionIndex = (int)HF.Wrap(resolutionIndex - 1, 0, maxResolutionIndex + 1);
                 }
                 else if (direction == "right") 
                 {
-                    resolutionIndex = (int)HF.Wrap(resolutionIndex + 1, 0, resolutions.Count);
+                    resolutionIndex = (int)HF.Wrap(resolutionIndex + 1, 0, maxResolutionIndex + 1);
                 }
                 
                 break;
@@ -269,26 +270,24 @@ public class S_SettingsManager : MonoBehaviour
 
                 if (direction == "left")
                 {
-                    musicVolume = HF.WrapVolume(musicVolume, -0.1f, 0, 1);
+                    musicVolume = HF.WrapVolume(musicVolume, -10, 0, 100);
                 }
                 else if (direction == "right")
                 {
-                    musicVolume = HF.WrapVolume(musicVolume, 0.1f, 0, 1);
+                    musicVolume = HF.WrapVolume(musicVolume, 10, 0, 100);
                 }
-                musicVolume = Mathf.Round(musicVolume * 10) / 10f;
                 break;
 
             case 3: // Sound Volume
 
                 if (direction == "left")
                 {
-                    soundVolume = HF.WrapVolume(soundVolume, -0.1f, 0, 1);
+                    soundVolume = HF.WrapVolume(soundVolume, -10, 0, 100);
                 }
                 else if (direction == "right")
                 {
-                    soundVolume = HF.WrapVolume(soundVolume, 0.1f, 0, 1);
+                    soundVolume = HF.WrapVolume(soundVolume, 10, 0, 100);
                 }
-                soundVolume = Mathf.Round(soundVolume * 10) / 10f;
                 break;
         }
 
@@ -311,12 +310,12 @@ public class S_SettingsManager : MonoBehaviour
 
             case 2: // Music Volume
 
-                buttonsText[menuIndex].text = $"Music Volume: {(int)(musicVolume * 100)}%";
+                buttonsText[menuIndex].text = $"Music Volume: {(int)(musicVolume)}%";
                 break;
 
             case 3: // Sound Volume
 
-                buttonsText[menuIndex].text = $"Sound Volume: {(int)(soundVolume * 100)}%";
+                buttonsText[menuIndex].text = $"Sound Volume: {(int)(soundVolume)}%";
                 break;
         }
     }
@@ -348,9 +347,10 @@ public class S_SettingsManager : MonoBehaviour
         //PlayerPrefs.SetInt("WINDOW_TYPE_INDEX", windowTypeIndex);
         //PlayerPrefs.SetFloat("MUSIC_VOLUME", musicVolume);
         //PlayerPrefs.SetFloat("SOUND_VOLUME", soundVolume);
+        // Change the audio mixer to use proper volume scaling logarithmically
 
-        audioMixer.SetFloat("MusicParam", Mathf.Lerp(-80, 0, musicVolume));
-        audioMixer.SetFloat("SoundParam", Mathf.Lerp(-80, 0, soundVolume));
+        audioMixer.SetFloat("MusicParam", Mathf.Log10(Mathf.Clamp(musicVolume / 100f, 0.0001f, 1f)) * 20);
+        audioMixer.SetFloat("SoundParam", Mathf.Log10(Mathf.Clamp(soundVolume / 100f, 0.0001f, 1f)) * 20);
     }
 
     private void ApplySavedPlayerSettings()

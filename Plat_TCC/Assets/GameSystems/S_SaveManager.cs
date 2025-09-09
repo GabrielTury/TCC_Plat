@@ -24,7 +24,7 @@ public class S_SaveManager : MonoBehaviour
     [System.Serializable]
     public struct SettingsData
     {
-        public SettingsData(int resolutionIndexTemp, int windowTypeIndexTemp, float musicVolumeTemp, float soundVolumeTemp)
+        public SettingsData(int resolutionIndexTemp, int windowTypeIndexTemp, int musicVolumeTemp, int soundVolumeTemp)
         {
             resolutionIndex = resolutionIndexTemp;
             windowTypeIndex = windowTypeIndexTemp;
@@ -34,8 +34,8 @@ public class S_SaveManager : MonoBehaviour
 
         public int resolutionIndex;
         public int windowTypeIndex;
-        public float musicVolume;
-        public float soundVolume;
+        public int musicVolume;
+        public int soundVolume;
     }
 
     [System.Serializable]
@@ -101,7 +101,7 @@ public class S_SaveManager : MonoBehaviour
             SavePlayerData(playerData);
         }
 
-        defaultSettings = new SettingsData(0, 0, 1.0f, 1.0f);
+        defaultSettings = new SettingsData(0, 0, 100, 100);
 
         SettingsData loadedSettingsData;
         (loadedSettingsData, worked) = LoadSettingsData();
@@ -212,15 +212,6 @@ public class S_SaveManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Resets the player data to default values and saves it to file.
-    /// </summary>
-    public void ResetPlayerData()
-    {
-        playerData = new PlayerData(0, new List<WorldSave>());
-        SavePlayerData(playerData);
-    }
-
-    /// <summary>
     /// Prints the current player data to the console for debugging purposes.
     /// </summary>
     public void GetPlayerDataDebugInfo()
@@ -252,6 +243,16 @@ public class S_SaveManager : MonoBehaviour
     { 
         string info = $"Resolution Index: {settingsData.resolutionIndex}\nWindow Type Index: {settingsData.windowTypeIndex}\nMusic Volume: {settingsData.musicVolume}\nSound Volume: {settingsData.soundVolume}";
         Debug.Log(info);
+    }
+
+
+    /// <summary>
+    /// Resets the player data to default values and saves it.
+    /// </summary>
+    public void ResetPlayerData()
+    {
+        playerData = defaultData;
+        SavePlayerData(playerData);
     }
 
     /// <summary>

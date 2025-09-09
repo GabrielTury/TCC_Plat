@@ -294,10 +294,21 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
     #region Buttons Behavior
 
-    public void StartGame()
+    public void ContinueGame()
     {
         S_TransitionManager.instance.GoToLevel("HubWorld");
-        //SceneManager.LoadScene("HubWorld");
+    }
+
+    public void NewGame()
+    {
+        S_SaveManager.instance.ResetPlayerData();
+        S_TransitionManager.instance.GoToLevel("HubWorld");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Quit Game");
     }
 
     public void ResumeOperation()

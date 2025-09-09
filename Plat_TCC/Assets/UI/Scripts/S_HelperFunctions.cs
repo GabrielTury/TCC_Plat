@@ -11,7 +11,7 @@ public static class S_HelperFunctions
         return (((x - x_min) % (x_max - x_min)) + (x_max - x_min)) % (x_max - x_min) + x_min;
     }
 
-    public static float WrapVolume(float value, float step, float min, float max)
+    public static int WrapVolume(int value, int step, int min, int max)
     {
         value += step;
         if (value > max)
