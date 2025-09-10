@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-//using static UnityEditor.PlayerSettings;
 
 public class S_ObjectMovement : MonoBehaviour, IMoveState
 {
