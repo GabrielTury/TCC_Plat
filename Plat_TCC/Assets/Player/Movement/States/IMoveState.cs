@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public interface IMoveState
-{    
+{
     /// <summary>
     /// Needs to be called when Input "MoveCable".cancel is executed
     /// </summary>

@@ -6,14 +6,6 @@ public class S_PlayerMovement : MonoBehaviour
 {
     //[SerializeField]
     //private GameObject blobShadow;
-    [SerializeField]
-    private float slowedTimeScale, slowDuration;
-    private float originalTimeScale, currentSlowedTime;
-    private bool bSlowedTime;
-
-    //private Animator anim;
-    private Rigidbody rb;
-    private Vector3 snowballedForce;
 
     [SerializeField]
     private GameObject[] GrapplingMesh;
@@ -34,17 +26,16 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         inputs = new InputSystem_Actions();
         moveStates = GetComponents<IMoveState>();
         activeState = moveStates[0];
-
+        
         foreach (IMoveState moveState in moveStates)
         {
             var stateComponent = moveState as MonoBehaviour;
             if (moveState is S_GrapplingMovement)
             {
-                if (stateComponent.enabled)
+                if(stateComponent.enabled)
                 {
                     canGrapple = true;
                     Debug.Log("Has Grapple ability");
@@ -59,8 +50,6 @@ public class S_PlayerMovement : MonoBehaviour
                 grapplingMovement = (S_GrapplingMovement)moveState;
             }
         }
-
-        //anim = GetComponent<Animator>();
     }
     private void OnEnable()
     {
@@ -73,20 +62,6 @@ public class S_PlayerMovement : MonoBehaviour
         inputs.Player.Attack.canceled += Attack_canceled;
         inputs.Player.MoveCable.performed += MoveCable_performed;
         inputs.Player.MoveCable.canceled += MoveCable_canceled;
-        inputs.Player.Skill.performed += Skill_performed;        
-    }
-    /// <summary>
-    /// Slows time
-    /// </summary>
-    /// <param name="obj"></param>
-    private void Skill_performed(InputAction.CallbackContext obj)
-    {
-        originalTimeScale = Time.timeScale;
-        Time.timeScale = slowedTimeScale;        
-        currentSlowedTime = 0;
-        snowballedForce = Vector3.zero;
-        //anim.speed /= (slowedTimeScale/2);
-        bSlowedTime = true;
     }
 
     private void Jump_canceled(InputAction.CallbackContext obj)
@@ -136,7 +111,6 @@ public class S_PlayerMovement : MonoBehaviour
         inputs.Player.Attack.canceled -= Attack_canceled;
         inputs.Player.MoveCable.performed -= MoveCable_performed;
         inputs.Player.MoveCable.canceled -= MoveCable_canceled;
-        inputs.Player.Skill.performed -= Skill_performed;
     }
 
     private void Move_canceled(InputAction.CallbackContext obj)
@@ -164,17 +138,6 @@ public class S_PlayerMovement : MonoBehaviour
     void Update()
     {
         if(isPaused) return;
-        if(bSlowedTime)
-        {
-            currentSlowedTime += Time.unscaledDeltaTime;
-            if(currentSlowedTime >= slowDuration)
-            {
-                Time.timeScale = originalTimeScale;
-                bSlowedTime = false;
-                rb.AddForce(snowballedForce, ForceMode.Force);
-                //anim.speed = 1;
-            }
-        }
         activeState.StateUpdate();
     }
 
@@ -276,15 +239,5 @@ public class S_PlayerMovement : MonoBehaviour
     public bool GetPauseStatus()
     {
         return isPaused;
-    }
-
-    public void AddPlayerForce(Vector3 force, ForceMode forceMode = ForceMode.Force)
-    {
-        rb.AddForce(force, forceMode);
-
-        if(bSlowedTime)        
-        {
-            snowballedForce += force;
-        }
     }
 }

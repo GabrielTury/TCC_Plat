@@ -325,11 +325,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -353,8 +353,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 88310235}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11445008, y: 0.000000037121612, z: -0.0000000042766737, w: 0.993429}
-  m_LocalPosition: {x: 1, y: 7.237058, z: -9.537169}
+  m_LocalRotation: {x: 0.05398199, y: 0.14250058, z: -0.007783602, w: 0.98829097}
+  m_LocalPosition: {x: -17.57272, y: 11.4334755, z: -63.065155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -418,11 +418,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowDebugText: 0
   ShowCameraFrustum: 1
-  IgnoreTimeScale: 1
+  IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
   ChannelMask: -1
-  UpdateMethod: 2
-  BlendUpdateMethod: 1
+  UpdateMethod: 0
+  BlendUpdateMethod: 0
   LensModeOverride:
     Enabled: 0
     DefaultMode: 2
@@ -3597,14 +3597,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2955286884124477510, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
-      propertyPath: slowDuration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2955286884124477510, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
-      propertyPath: slowedTimeScale
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 3989175100169348947, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -3748,10 +3740,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 123968253551266142, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
       propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 123968253551266142, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: IgnoreTimeScale
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2588683752055523103, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
