@@ -36,6 +36,7 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
             ToggleButtonInteraction();
         }
         playerMove = S_LevelManager.instance.playerMovement;
+
     }
     
     // Update is called once per frame
@@ -63,6 +64,10 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
     {
         isOnVentilator = true;
         objRb = other.gameObject.GetComponentInParent<Rigidbody>();
+        if (playerMove == null)
+        {
+            playerMove = FindFirstObjectByType<S_PlayerMovement>();
+        }
     }
 
     private void OnTriggerExit(Collider other)
