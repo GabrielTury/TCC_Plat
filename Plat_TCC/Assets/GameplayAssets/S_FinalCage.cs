@@ -6,7 +6,9 @@ public class S_FinalCage : MonoBehaviour
     [SerializeField, Range(1, 5)]
     private int keyAmount = 1;
 
-    bool isGateReady = false;
+    bool isCageReady = false; //Is the cage ready to be opened?
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,7 +20,7 @@ public class S_FinalCage : MonoBehaviour
         if (S_LevelManager.instance.keyCollectibles >= keyAmount)
         {
             S_LevelManager.instance.OnKeyCollected -= KeyCollected;
-            isGateReady = true;
+            isCageReady = true;
         }
     }
 
@@ -32,11 +34,12 @@ public class S_FinalCage : MonoBehaviour
         S_LevelManager.instance.OnKeyCollected -= KeyCollected;
     }
 
+    //checks if ready to be opened and then opens it
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            if (isGateReady)
+            if (isCageReady)
             {
                 Destroy(gameObject);
             }
