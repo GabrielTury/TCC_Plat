@@ -82,6 +82,11 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
        
     }
 
+    public void Skill_Perform(InputAction.CallbackContext obj)
+    {
+        playerMovement.ChangeState(typeof(S_SlowedMovement));
+    }
+
     public void StateFixedUpdate()
     {
         transform.position = Vector3.MoveTowards(transform.position, destination, Time.fixedDeltaTime * speed);

@@ -79,6 +79,11 @@ public class S_ObjectMovement : MonoBehaviour, IMoveState
         dir = obj.ReadValue<Vector2>();
     }
 
+    public void Skill_Perform(InputAction.CallbackContext obj)
+    {
+        playerMovement.ChangeState(typeof(S_SlowedMovement));
+    }
+
     public void StateFixedUpdate()
     {
         groundMovement.StateFixedUpdate();
