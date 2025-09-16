@@ -5,10 +5,10 @@ using HF = S_HelperFunctions;
 public class S_Checkpoint : MonoBehaviour
 {
     private bool playerIsInRegion = false;
-    private bool hasActivatedCheckpoint = false;
+    public bool hasActivatedCheckpoint = false;
     private Transform childPole;
 
-    private Animator animator;
+    public Animator animator;
 
     [Header("Audio")]
     [SerializeField] private AudioClip checkpointSound;
@@ -27,7 +27,7 @@ public class S_Checkpoint : MonoBehaviour
 
             Vector3 playerPos = transform.position + new Vector3(0, 1.5f, 0);
 
-            S_LevelManager.instance.SetCheckpointData(playerPos);
+            S_LevelManager.instance.SetCheckpointData(playerPos, this);
 
             // RaisePole ();
             animator.SetBool("IsActive", true);

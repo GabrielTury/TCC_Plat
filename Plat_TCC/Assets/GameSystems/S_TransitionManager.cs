@@ -128,6 +128,8 @@ public class S_TransitionManager : MonoBehaviour
         }
 
         canvasGroup.alpha = endAlpha;
+
+        S_LevelManager.instance.PerformOnSceneLoad();
     }
 
     private IEnumerator RestartStage()

@@ -17,6 +17,8 @@ public class S_LevelManager : MonoBehaviour
     public GameObject[] savedObjects;
     public List<Transform> savedObjectsTransform = new List<Transform>();
 
+    private S_Checkpoint[] checkpoints;
+
     public Transform playerTransform;
 
     private S_PlayerInformation playerInfo;
@@ -30,7 +32,7 @@ public class S_LevelManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        else
+        else if (instance != this)
             Destroy(this);
 
         savedObjectsTransform = new List<Transform>(savedObjects.Length);
@@ -60,6 +62,13 @@ public class S_LevelManager : MonoBehaviour
                 Debug.LogWarning("[Checkpoint Update Data] Player position trying to reset to checkpoint.");
             }
         }
+    }
+
+    public void PerformOnSceneLoad()
+    {
+        // Find all objects that contain S_Checkpoint script in the scene
+        checkpoints = FindObjectsByType<S_Checkpoint>(FindObjectsSortMode.InstanceID);
+        Debug.Log("[Checkpoint Data] Found " + checkpoints.Length + " checkpoints in the scene.");
     }
 
     public void AddCollectible(string collectibleName, int count)
@@ -92,7 +101,7 @@ public class S_LevelManager : MonoBehaviour
         //Debug.LogWarning("[Checkpoint Data] Collectible " + collectibleName + " collected. Total: " + collectibles);
     }
 
-    public void SetCheckpointData(Vector3 checkpointPosition)
+    public void SetCheckpointData(Vector3 checkpointPosition, S_Checkpoint checkpoint = null)
     {
         playerPositionCheckpoint = checkpointPosition;
         Debug.Log("[Checkpoint Data] Set Player Position Checkpoint: " + checkpointPosition);
@@ -109,6 +118,22 @@ public class S_LevelManager : MonoBehaviour
                 Debug.LogWarning("[Checkpoint Data] Object " + obj + " does not have a transform.");
             }
             index++;
+        }
+
+        if (checkpoint != null)
+        {
+            // For each checkpoint that is not the current one, reset its state
+            foreach (S_Checkpoint ck in checkpoints)
+            {
+                if (ck != checkpoint)
+                {
+                    ck.animator.SetBool("IsActive", false);
+                    ck.hasActivatedCheckpoint = false;
+                    Debug.Log(ck.name + " deactivated.");
+                }
+            }
+
+            Debug.Log("[Checkpoint Data] Checkpoint set by: " + checkpoint.name);
         }
     }
 
