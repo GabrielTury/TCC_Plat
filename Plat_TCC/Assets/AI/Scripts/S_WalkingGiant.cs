@@ -9,6 +9,9 @@ public class S_WalkingGiant : S_InteractableBase
     private float detectionRadius;
 
     [SerializeField]
+    private Collider awakeTrigger;
+
+    [SerializeField]
     private float distanceToWalk = 5f;
 
     [SerializeField]
@@ -71,6 +74,7 @@ public class S_WalkingGiant : S_InteractableBase
     {
         Collider[] temp = Physics.OverlapSphere(transform.position, detectionRadius, layerToAvoid, QueryTriggerInteraction.Collide);
 
+
         if (temp != objsInRange && temp.Length != 0)
         {
             objsInRange = temp;
@@ -89,4 +93,9 @@ public class S_WalkingGiant : S_InteractableBase
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        anim.SetTrigger("WakeUp");
+        Destroy(awakeTrigger);
+    }
 }
