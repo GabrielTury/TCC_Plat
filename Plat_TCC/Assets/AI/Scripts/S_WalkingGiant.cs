@@ -16,18 +16,23 @@ public class S_WalkingGiant : S_InteractableBase
 
     private Collider[] objsInRange;
 
+    private Animator anim;
+
     NavMeshAgent nav;
     private void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
     protected override IEnumerator Idle_Exec()
     {
+        anim.SetBool("IsWalking", false);
         yield return null;
     }
 
     protected override IEnumerator Interacting_Exec()
     {
+        anim.SetBool("IsWalking", true);
         Vector3[] avoidPos = new Vector3[objsInRange.Length];
 
         for (int i = 0; i < objsInRange.Length; i++)
