@@ -252,7 +252,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         rb.angularVelocity = Vector3.zero;
        // Debug.Log("Move_Cancel");
         if(stopMovement == null)
-            stopMovement = StartCoroutine(SlowlyStopMovement());        
+            stopMovement = StartCoroutine(SlowlyStopMovement());
     }
 
     public void Move_Perform(InputAction.CallbackContext obj)
@@ -260,11 +260,17 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         movementDirection = obj.ReadValue<Vector2>();
         moving = true;
 
-        if(stopMovement != null)
+        if (stopMovement != null)
         {
             StopCoroutine(stopMovement);
             stopMovement = null;
         }
+    }
+
+
+    public void Skill_Perform(InputAction.CallbackContext obj)
+    {
+        playerMovement.ChangeState(typeof(S_SlowedMovement));
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

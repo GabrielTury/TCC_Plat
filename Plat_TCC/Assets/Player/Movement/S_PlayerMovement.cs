@@ -6,11 +6,7 @@ public class S_PlayerMovement : MonoBehaviour
 {
     //[SerializeField]
     //private GameObject blobShadow;
-    [SerializeField]
-    private float slowedTimeScale, slowDuration;
-    private float originalTimeScale, currentSlowedTime;
-    private bool bSlowedTime;
-    private bool bCanSlow;
+    public bool bSlowedTime;
 
     //private Animator anim;
     private Rigidbody rb;
@@ -82,12 +78,13 @@ public class S_PlayerMovement : MonoBehaviour
     /// <param name="obj"></param>
     private void Skill_performed(InputAction.CallbackContext obj)
     {
-        originalTimeScale = Time.timeScale;
+        activeState.Skill_Perform(obj);
+        /*originalTimeScale = Time.timeScale;
         Time.timeScale = slowedTimeScale;        
         currentSlowedTime = 0;
         snowballedForce = Vector3.zero;
         //anim.speed /= (slowedTimeScale/2);
-        bSlowedTime = true;
+        bSlowedTime = true;*/
     }
 
     private void Jump_canceled(InputAction.CallbackContext obj)
@@ -165,17 +162,6 @@ public class S_PlayerMovement : MonoBehaviour
     void Update()
     {
         if(isPaused) return;
-        if(bSlowedTime)
-        {
-            currentSlowedTime += Time.unscaledDeltaTime;
-            if(currentSlowedTime >= slowDuration)
-            {
-                Time.timeScale = originalTimeScale;
-                bSlowedTime = false;
-                rb.AddForce(snowballedForce, ForceMode.Force);
-                //anim.speed = 1;
-            }
-        }
         activeState.StateUpdate();
     }
 
@@ -236,7 +222,7 @@ public class S_PlayerMovement : MonoBehaviour
         foreach (IMoveState s in moveStates)
         {
             if (s.GetType() == state)
-            {
+            {                
                 Debug.Log("Changed State to: "+ state.ToString());
                 activeState = s;
                 activeState.Activation();
@@ -287,5 +273,10 @@ public class S_PlayerMovement : MonoBehaviour
         {
             snowballedForce += force;
         }
+    }
+
+    public void ApplySnowballedForce()
+    {
+        rb.AddForce(snowballedForce, ForceMode.Force);
     }
 }
