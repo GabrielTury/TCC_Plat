@@ -43,6 +43,8 @@ public interface IMoveState
     /// </summary>
     /// <param name="obj">Input System action callback value</param>
     public void Attack_Cancel(InputAction.CallbackContext obj);
+
+    public void Skill_Perform(InputAction.CallbackContext obj);
     /// <summary>
     /// Needs to be called in FixedUpdate
     /// </summary>

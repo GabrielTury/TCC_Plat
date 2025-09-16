@@ -148,6 +148,10 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         }*/
 
     }
+    public void Skill_Perform(InputAction.CallbackContext obj)
+    {
+        playerMovement.ChangeState(typeof(S_SlowedMovement));
+    }
 
     public void StateFixedUpdate()
     {
@@ -387,5 +391,5 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, grappleDetectionRange);
     }
-
+        
 }
