@@ -24,21 +24,21 @@ public class S_SettingsManager : MonoBehaviour
     private Coroutine settingsAnimationCoroutine;
 
     [SerializeField]
-    private GameObject[] buttons = new GameObject[5];
+    private GameObject[] buttons = new GameObject[6];
 
     //[SerializeField]
-    private CanvasGroup[] buttonsCanvas = new CanvasGroup[5];
+    private CanvasGroup[] buttonsCanvas = new CanvasGroup[6];
 
     //[SerializeField]
-    private RectTransform[] buttonsRects = new RectTransform[5];
+    private RectTransform[] buttonsRects = new RectTransform[6];
 
-    private TextMeshProUGUI[] buttonsText = new TextMeshProUGUI[4];
+    private TextMeshProUGUI[] buttonsText = new TextMeshProUGUI[5];
 
     [SerializeField]
     private int selectionIndex = 0;
 
     //[SerializeField]
-    private Coroutine[] buttonAnimationCoroutine = new Coroutine[6];
+    private Coroutine[] buttonAnimationCoroutine = new Coroutine[7];
 
     [SerializeField]
     private AudioMixer audioMixer;
@@ -68,6 +68,8 @@ public class S_SettingsManager : MonoBehaviour
     };
 
     private int windowTypeIndex = 0;
+
+    private bool vsyncEnabled = false;
 
     private int musicVolume = 80;
 
@@ -101,6 +103,7 @@ public class S_SettingsManager : MonoBehaviour
         {
             resolutionIndex = settingsData.resolutionIndex;
             windowTypeIndex = settingsData.windowTypeIndex;
+            vsyncEnabled = settingsData.vsyncEnabled;
             musicVolume = settingsData.musicVolume;
             soundVolume = settingsData.soundVolume;
         }
@@ -108,6 +111,7 @@ public class S_SettingsManager : MonoBehaviour
         {
             resolutionIndex = maxResolutionIndex; // Default to highest resolution available
             windowTypeIndex = 2; // Default to Fullscreen
+            vsyncEnabled = false;
             musicVolume = 80; // Default to 80%
             soundVolume = 80; // Default to 80%
         }
@@ -131,14 +135,14 @@ public class S_SettingsManager : MonoBehaviour
             catch { }
         }
 
-        int distance = 200;
+        int distance = 162;
 
         for (int i = 0; i < buttons.Length; i++)
         {
-            buttonsRects[i].anchoredPosition = new Vector2(-570, 500 - ((i + 1) * distance));
+            buttonsRects[i].anchoredPosition = new Vector2(-570, 498 - ((i + 1) * distance));
         }
 
-        buttonsRects[4].anchoredPosition = new Vector2(-570, -445);
+        buttonsRects[5].anchoredPosition = new Vector2(-570, -445);
 
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -205,17 +209,22 @@ public class S_SettingsManager : MonoBehaviour
 
                     break;
 
-                case 2: // Music Volume
+                case 2: // Vsync
 
 
                     break;
 
-                case 3: // Sound Volume
+                case 3: // Music Volume
 
 
                     break;
 
-                case 4: // Save
+                case 4: // Sound Volume
+
+
+                    break;
+
+                case 5: // Save
 
                     SaveNewSettings();
                     CloseSettings();
@@ -266,7 +275,19 @@ public class S_SettingsManager : MonoBehaviour
                 }
                 break;
 
-            case 2: // Music Volume
+            case 2: // Vsync
+
+                if (direction == "left")
+                {
+                    vsyncEnabled = !vsyncEnabled;
+                }
+                else if (direction == "right")
+                {
+                    vsyncEnabled = !vsyncEnabled;
+                }
+                break;
+
+            case 3: // Music Volume
 
                 if (direction == "left")
                 {
@@ -278,7 +299,7 @@ public class S_SettingsManager : MonoBehaviour
                 }
                 break;
 
-            case 3: // Sound Volume
+            case 4: // Sound Volume
 
                 if (direction == "left")
                 {
@@ -308,12 +329,17 @@ public class S_SettingsManager : MonoBehaviour
                 buttonsText[menuIndex].text = windowTypes[windowTypeIndex] == 0 ? "Windowed" : windowTypes[windowTypeIndex] == 1 ? "Borderless" : "Fullscreen";
                 break;
 
-            case 2: // Music Volume
+            case 2: // Vsync
+
+                buttonsText[menuIndex].text = vsyncEnabled ? "Enabled" : "Disabled";
+                break;
+
+            case 3: // Music Volume
 
                 buttonsText[menuIndex].text = $"Music Volume: {(int)(musicVolume)}%";
                 break;
 
-            case 3: // Sound Volume
+            case 4: // Sound Volume
 
                 buttonsText[menuIndex].text = $"Sound Volume: {(int)(soundVolume)}%";
                 break;
@@ -332,6 +358,8 @@ public class S_SettingsManager : MonoBehaviour
 
         Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height,
             windowTypes[windowTypeIndex] == 0 ? FullScreenMode.Windowed : windowTypes[windowTypeIndex] == 1 ? FullScreenMode.FullScreenWindow : FullScreenMode.ExclusiveFullScreen);
+
+        QualitySettings.vSyncCount = (vsyncEnabled ? 1 : 0);
 
         S_SaveManager.SettingsData settingsData = new S_SaveManager.SettingsData
         {
@@ -356,6 +384,14 @@ public class S_SettingsManager : MonoBehaviour
     private void ApplySavedPlayerSettings()
     {
         // Apply the saved settings to the game
+
+        Screen.SetResolution(resolutions[resolutionIndex].width, resolutions[resolutionIndex].height,
+            windowTypes[windowTypeIndex] == 0 ? FullScreenMode.Windowed : windowTypes[windowTypeIndex] == 1 ? FullScreenMode.FullScreenWindow : FullScreenMode.ExclusiveFullScreen);
+
+        QualitySettings.vSyncCount = (vsyncEnabled ? 1 : 0);
+
+        audioMixer.SetFloat("MusicParam", Mathf.Log10(Mathf.Clamp(musicVolume / 100f, 0.0001f, 1f)) * 20);
+        audioMixer.SetFloat("SoundParam", Mathf.Log10(Mathf.Clamp(soundVolume / 100f, 0.0001f, 1f)) * 20);
     }
 
     public void HighlightButton(int buttonIndex)

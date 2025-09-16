@@ -95,7 +95,7 @@ public class S_LevelManager : MonoBehaviour
     public void SetCheckpointData(Vector3 checkpointPosition)
     {
         playerPositionCheckpoint = checkpointPosition;
-        Debug.Log("Player Position Checkpoint: " + checkpointPosition);
+        Debug.Log("[Checkpoint Data] Set Player Position Checkpoint: " + checkpointPosition);
 
         int index = 0;
         foreach (var obj in savedObjects)

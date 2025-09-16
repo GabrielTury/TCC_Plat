@@ -24,16 +24,18 @@ public class S_SaveManager : MonoBehaviour
     [System.Serializable]
     public struct SettingsData
     {
-        public SettingsData(int resolutionIndexTemp, int windowTypeIndexTemp, int musicVolumeTemp, int soundVolumeTemp)
+        public SettingsData(int resolutionIndexTemp, int windowTypeIndexTemp, bool vsyncEnabledTemp, int musicVolumeTemp, int soundVolumeTemp)
         {
             resolutionIndex = resolutionIndexTemp;
             windowTypeIndex = windowTypeIndexTemp;
+            vsyncEnabled = vsyncEnabledTemp;
             musicVolume = musicVolumeTemp;
             soundVolume = soundVolumeTemp;
         }
 
         public int resolutionIndex;
         public int windowTypeIndex;
+        public bool vsyncEnabled;
         public int musicVolume;
         public int soundVolume;
     }
@@ -101,7 +103,7 @@ public class S_SaveManager : MonoBehaviour
             SavePlayerData(playerData);
         }
 
-        defaultSettings = new SettingsData(0, 0, 100, 100);
+        defaultSettings = new SettingsData(0, 0, false, 100, 100);
 
         SettingsData loadedSettingsData;
         (loadedSettingsData, worked) = LoadSettingsData();

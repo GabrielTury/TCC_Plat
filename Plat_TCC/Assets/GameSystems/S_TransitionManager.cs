@@ -14,7 +14,7 @@ public class S_TransitionManager : MonoBehaviour
     private RectTransform rectChild;
 
     [SerializeField]
-    private float openSpeed = 2f;
+    private float openSpeed = 1f;
 
     [SerializeField]
     private float closeSpeed = 2f;
@@ -51,7 +51,7 @@ public class S_TransitionManager : MonoBehaviour
 
     public void GoToLevel(string levelName)
     {
-        Debug.LogError("Loading level without mission is not working");
+        Debug.LogWarning("Loading level without mission is ?. Level name: " + levelName);
         StartCoroutine(LoadLevel(levelName, 0, null));
     }
 
@@ -68,18 +68,28 @@ public class S_TransitionManager : MonoBehaviour
 
     private IEnumerator LoadLevel(string levelName, int missionIndex = -1, SO_WorldInfo worldInfo = null)
     {
-        while (canvasGroup.alpha < 1)
+        float startAlpha = canvasGroup.alpha;
+        float endAlpha = 1f;
+        float elapsedTime = 0;
+
+        while (elapsedTime < openSpeed)
         {
-            canvasGroup.alpha += Time.deltaTime * openSpeed;
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / openSpeed);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
 
+        canvasGroup.alpha = endAlpha;
+
+        Debug.Log("Attempting to load scene at LoadLevel()");
         SceneManager.LoadScene(levelName);
+        Debug.Log("Scene load processed at LoadLevel()");
 
         Cursor.lockState = CursorLockMode.Locked;
 
         while (!SceneManager.GetSceneByName(levelName).isLoaded)
         {
+            Debug.Log("Scene \"" + levelName + "\" has not loaded yet...");
             yield return null;
         }
 
@@ -106,27 +116,50 @@ public class S_TransitionManager : MonoBehaviour
             }, missionIndex);
         }
 
-        while (canvasGroup.alpha > 0)
+        startAlpha = canvasGroup.alpha;
+        endAlpha = 0;
+        elapsedTime = 0;
+
+        while (elapsedTime < closeSpeed)
         {
-            canvasGroup.alpha -= Time.deltaTime * closeSpeed;
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / closeSpeed);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        canvasGroup.alpha = endAlpha;
     }
 
     private IEnumerator RestartStage()
     {
-        while (canvasGroup.alpha < 1)
+        float startAlpha = canvasGroup.alpha;
+        float endAlpha = 1f;
+        float elapsedTime = 0;
+
+        while (elapsedTime < openSpeed)
         {
-            canvasGroup.alpha += Time.deltaTime * openSpeed;
-            yield return new WaitForEndOfFrame();
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / openSpeed);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+
+        canvasGroup.alpha = endAlpha;
 
         S_LevelManager.instance.ResetLevel();
 
-        while (canvasGroup.alpha > 0)
+        yield return new WaitForSeconds(0.75f);
+
+        startAlpha = canvasGroup.alpha;
+        endAlpha = 0;
+        elapsedTime = 0;
+
+        while (elapsedTime < closeSpeed + 0.5f)
         {
-            canvasGroup.alpha -= Time.deltaTime * closeSpeed;
-            yield return new WaitForEndOfFrame();
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / (closeSpeed + 0.5f));
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
+
+        canvasGroup.alpha = endAlpha;
     }
 }
