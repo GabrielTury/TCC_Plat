@@ -10,6 +10,7 @@ public class S_PlayerMovement : MonoBehaviour
     private float slowedTimeScale, slowDuration;
     private float originalTimeScale, currentSlowedTime;
     private bool bSlowedTime;
+    private bool bCanSlow;
 
     //private Animator anim;
     private Rigidbody rb;
