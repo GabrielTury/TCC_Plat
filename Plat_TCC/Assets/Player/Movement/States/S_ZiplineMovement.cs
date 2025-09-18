@@ -36,11 +36,12 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
             zipline = nearestCollider.GetComponentInParent<S_Zipline>();
         }
 
-        GetCorrectPointFromRotation(zipline.ziplinePoints);
+        //GetCorrectPointFromRotation(zipline.ziplinePoints);
+        destination = zipline.endPoint.position;
 
-        
 
-        Debug.Log("Activated Zipline Code");
+
+        //Debug.Log("Activated Zipline Code");
     }
     public void Attack_Cancel(InputAction.CallbackContext obj)
     {
