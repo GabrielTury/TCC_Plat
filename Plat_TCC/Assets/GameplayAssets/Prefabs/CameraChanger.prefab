@@ -111,6 +111,8 @@ GameObject:
   - component: {fileID: 813835759436016279}
   - component: {fileID: 4027985564414316282}
   - component: {fileID: 5067084443698272571}
+  - component: {fileID: 3289341352431734329}
+  - component: {fileID: 2804349677227075341}
   m_Layer: 0
   m_Name: VirtualCamera
   m_TagString: Untagged
@@ -126,8 +128,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5717690739854512345}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.05398199, y: 0.14250058, z: -0.007783602, w: 0.98829097}
-  m_LocalPosition: {x: -27.65, y: 6.03, z: -5.8899994}
+  m_LocalRotation: {x: -0.00032371035, y: 0.9995899, z: 0.012579244, w: 0.025723131}
+  m_LocalPosition: {x: -9.07728, y: -1.1734753, z: 57.175156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -155,7 +157,7 @@ MonoBehaviour:
   Target:
     TrackingTarget: {fileID: 0}
     LookAtTarget: {fileID: 0}
-    CustomLookAtTarget: 0
+    CustomLookAtTarget: 1
   Lens:
     FieldOfView: 40
     OrthographicSize: 10
@@ -189,3 +191,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LookAtOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &3289341352431734329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717690739854512345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damping: 0
+--- !u!114 &2804349677227075341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5717690739854512345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Offset: {x: 0, y: 0, z: -20}
+  ApplyAfter: 1
+  PreserveComposition: 0
