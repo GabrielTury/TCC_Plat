@@ -1,47 +1,44 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class S_ButtonActivator : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] objects;
+    [SerializeField] private GameObject[] objects;
 
     private Transform pressedButtonTransform;
-
     private Vector3 pressedButtonPosition;
-
     private int timer = 0;
-
-    [SerializeField] private AudioClip buttonPress;
-
     private bool isActivated = false;
 
+    [SerializeField] private AudioClip buttonPress;
+    [SerializeField] private VisualEffect rockVFX;
+    [SerializeField] private float vfxDuration = 2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pressedButtonTransform = this.gameObject.transform;
+        pressedButtonTransform = transform;
         pressedButtonPosition = pressedButtonTransform.position;
+
+        if (rockVFX != null)
+            rockVFX.Stop();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         if (timer > 0)
-        {
             timer -= 1;
-        }
     }
 
     private void ToggleButtonInteraction()
     {
-            foreach (GameObject obj in objects)
-            {
-                IActivatableObjects activatable = obj.GetComponent<IActivatableObjects>();
-                if (activatable != null)
-                {
-                    activatable.ToggleButtonInteraction();
-                }
-            }
+        foreach (GameObject obj in objects)
+        {
+            IActivatableObjects activatable = obj.GetComponent<IActivatableObjects>();
+            if (activatable != null)
+                activatable.ToggleButtonInteraction();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,8 +49,18 @@ public class S_ButtonActivator : MonoBehaviour
             if (!isActivated)
             {
                 ToggleButtonInteraction();
-                pressedButtonTransform.position = new Vector3(pressedButtonPosition.x, pressedButtonPosition.y - 0.2f, pressedButtonPosition.z);
-                AudioManager.instance.PlaySFX(buttonPress);
+
+                pressedButtonTransform.position = new Vector3(
+                    pressedButtonPosition.x,
+                    pressedButtonPosition.y - 0.2f,
+                    pressedButtonPosition.z
+                );
+
+                if (buttonPress != null)
+                    AudioManager.instance.PlaySFX(buttonPress);
+
+                PlayRockEffect(); // só dispara se tiver efeito configurado
+
                 isActivated = true;
             }
         }
@@ -63,7 +70,22 @@ public class S_ButtonActivator : MonoBehaviour
     {
         if (!isActivated)
         {
-            pressedButtonTransform.position = new Vector3(pressedButtonPosition.x, pressedButtonPosition.y, pressedButtonPosition.z);
+            pressedButtonTransform.position = pressedButtonPosition;
         }
+    }
+
+    private void PlayRockEffect()
+    {
+        if (rockVFX != null)
+        {
+            rockVFX.Play();
+            Invoke(nameof(StopRockEffect), vfxDuration);
+        }
+    }
+
+    private void StopRockEffect()
+    {
+        if (rockVFX != null)
+            rockVFX.Stop();
     }
 }
