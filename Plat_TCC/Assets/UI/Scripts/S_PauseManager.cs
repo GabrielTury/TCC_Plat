@@ -36,6 +36,9 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     private int lastButtonHighlighted = 0;
 
     [SerializeField]
+    private Image collectibleBG;
+
+    [SerializeField]
     private InputSystem_Actions inputs;
 
     [SerializeField]
@@ -217,6 +220,23 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         {
             buttons[selectionIndex].onClick.Invoke();
         }
+    }
+
+    /// <summary>
+    /// For item types:<br></br>
+    /// 1 = Apple;
+    /// 2 = Key;
+    /// 3 = Gear<br></br>
+    /// If maxAmount is defined, it will show the required amount in the UI rather than just the current amount collected.
+    /// </summary>
+    /// <param name="collectibleImage"></param>
+    /// <param name="collectibleName"></param>
+    /// <param name="itemType">
+    /// </param>
+    /// <param name="maxAmount"></param>
+    public void AddCollectibleTracking(Sprite collectibleImage, string collectibleName, int itemType, int maxAmount = -1)
+    {
+
     }
 
     public void HighlightButton(int buttonIndex)
