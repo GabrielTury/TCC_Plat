@@ -17,6 +17,7 @@ public class S_ChangeCamPerspective : MonoBehaviour
 
     private void Start()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         changeCam.enabled = false;
     }
 
