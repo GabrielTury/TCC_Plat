@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class S_Collectible : MonoBehaviour
@@ -6,7 +7,13 @@ public class S_Collectible : MonoBehaviour
     [SerializeField] private GameObject collectVFXPrefab;
     [SerializeField] private int collectibleId = -1;
 
-    public void SetId(int id) => collectibleId = id;
+    private GameObject collectedVFX;
+
+    private MeshRenderer mesh;
+    private void Start()
+    {
+        mesh = GetComponentInChildren<MeshRenderer>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,8 +23,16 @@ public class S_Collectible : MonoBehaviour
         AudioManager.instance.PlaySFX(appleCollected);
 
         if (collectVFXPrefab != null)
-            Instantiate(collectVFXPrefab, transform.position, Quaternion.identity);
+            collectedVFX = Instantiate(collectVFXPrefab, transform.position, Quaternion.identity);
 
+        mesh.enabled = false;
+        StartCoroutine(DestroyObject());
+    }
+
+    private IEnumerator DestroyObject()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(collectedVFX);
         Destroy(gameObject);
     }
 }
