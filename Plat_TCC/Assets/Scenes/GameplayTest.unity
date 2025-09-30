@@ -327,7 +327,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 70
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -354,7 +354,7 @@ Transform:
   m_GameObject: {fileID: 88310235}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00032371035, y: 0.9995899, z: 0.012579244, w: 0.025723131}
-  m_LocalPosition: {x: -0.028340459, y: 3.7267036, z: 19.967205}
+  m_LocalPosition: {x: -0.03351772, y: 7.725437, z: 20.067732}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1493,9 +1493,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1321607296788373905, guid: 7bcc06652da93a5418b92879e726ceb9, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1764967565983679812, guid: 7bcc06652da93a5418b92879e726ceb9, type: 3}
       propertyPath: m_Name
       value: Windmill Platforms
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880633893972232837, guid: 7bcc06652da93a5418b92879e726ceb9, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2399957978276286506, guid: 7bcc06652da93a5418b92879e726ceb9, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453234972361233321, guid: 7bcc06652da93a5418b92879e726ceb9, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8630951871097155292, guid: 7bcc06652da93a5418b92879e726ceb9, type: 3}
       propertyPath: m_LocalPosition.x

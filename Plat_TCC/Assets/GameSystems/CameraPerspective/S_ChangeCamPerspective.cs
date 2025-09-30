@@ -19,6 +19,7 @@ public class S_ChangeCamPerspective : MonoBehaviour
 
     [SerializeField]
     private bool trackTarget = true;
+
     private bool tracking;
 
 

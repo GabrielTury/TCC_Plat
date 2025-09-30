@@ -71,6 +71,9 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     #endregion
 
     private Coroutine stopMovement;
+
+    private RaycastHit[] platformResults = new RaycastHit[4];
+    private Vector3 lastPlatformPosition;
     public void Attack_Perform(InputAction.CallbackContext obj)
     {
         //@optimize
@@ -152,8 +155,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     public void StateFixedUpdate()
     {
-
-        ApplyGravity();
+        if(IsGrounded())
+            ApplyPlatformMovement();
+        else
+            ApplyGravity();
 
         anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
 
@@ -223,13 +228,31 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     private void ApplyGravity()
     {
-        if (!IsGrounded())
-        {
             float accelDown = rb.linearVelocity.y - (gravityForce * Time.fixedDeltaTime);
             Vector3 gravity = rb.linearVelocity;
             gravity.y = accelDown;
             rb.linearVelocity = gravity;
             //rb.AddForce(Vector3.down * gravityForce,ForceMode.Acceleration);
+    }
+
+    private void ApplyPlatformMovement()
+    {
+        LayerMask platformLayer = 1 << 13;
+        
+        int result = Physics.RaycastNonAlloc(transform.position, Vector3.down, platformResults, 2f, platformLayer);
+        if(result > 0 )
+        {
+            if(lastPlatformPosition == Vector3.zero)
+            {
+                lastPlatformPosition = platformResults[0].transform.position;
+                return;
+            }
+            transform.position += platformResults[0].transform.position - lastPlatformPosition;
+            lastPlatformPosition = platformResults[0].transform.position;
+        }
+        else
+        {
+            lastPlatformPosition = Vector3.zero;
         }
     }
 
@@ -288,7 +311,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     private bool IsGrounded()
     {
         bool ret = false;
-        LayerMask groundMask = 1 << 6;
+        LayerMask groundMask = 1 << 6 | 1 << 13;
         Collider[] results = Physics.OverlapSphere(groundPoint.position, 0.3f, groundMask);
         if (results != null && results.Length > 0)
         {
