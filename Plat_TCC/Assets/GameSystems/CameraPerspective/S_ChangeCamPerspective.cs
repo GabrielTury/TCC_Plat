@@ -15,6 +15,9 @@ public class S_ChangeCamPerspective : MonoBehaviour
     private Transform playerTransform;
 
     [SerializeField]
+    private Transform trackingTarget;
+
+    [SerializeField]
     private bool trackTarget = true;
     private bool tracking;
 
@@ -23,6 +26,9 @@ public class S_ChangeCamPerspective : MonoBehaviour
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         changeCam.enabled = false;
+
+        if (trackingTarget != null)
+            changeCam.Target = new CameraTarget { TrackingTarget = trackingTarget };
     }
 
     private void LateUpdate()
