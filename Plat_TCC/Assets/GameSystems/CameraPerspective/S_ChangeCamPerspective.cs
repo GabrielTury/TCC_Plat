@@ -14,6 +14,10 @@ public class S_ChangeCamPerspective : MonoBehaviour
     [SerializeField]
     private Transform playerTransform;
 
+    [SerializeField]
+    private bool trackTarget = true;
+    private bool tracking;
+
 
     private void Start()
     {
@@ -23,6 +27,7 @@ public class S_ChangeCamPerspective : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!tracking) return;
         // Move our position a step closer to the target.
         var step = 100 * Time.deltaTime; // calculate distance to move
 
@@ -35,12 +40,18 @@ public class S_ChangeCamPerspective : MonoBehaviour
     {
         changeCam.enabled = true;
         changeCam.Priority = 1;
+
+        if(trackTarget)
+            tracking = true;
     }
 
     private void OnTriggerExit(Collider other)
     {        
         changeCam.enabled = false;
         changeCam.Priority = -1;
+
+        if(trackTarget)
+            tracking = false;
     }
 
 }
