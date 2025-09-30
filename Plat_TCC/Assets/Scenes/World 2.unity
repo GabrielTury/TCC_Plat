@@ -3018,6 +3018,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1587610738}
     m_Modifications:
+    - target: {fileID: 2598428881613047266, guid: 99f17a20d5ac9994285777f6230d8cd4, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2598428881613047266, guid: 99f17a20d5ac9994285777f6230d8cd4, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2598428881613047266, guid: 99f17a20d5ac9994285777f6230d8cd4, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2598428881613047266, guid: 99f17a20d5ac9994285777f6230d8cd4, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2598428881613047266, guid: 99f17a20d5ac9994285777f6230d8cd4, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2601186571459976174, guid: 99f17a20d5ac9994285777f6230d8cd4, type: 3}
       propertyPath: m_Name
       value: WalkingGiant (2)
@@ -3061,10 +3081,6 @@ PrefabInstance:
     - target: {fileID: 3409952567668703572, guid: 99f17a20d5ac9994285777f6230d8cd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8029871804533859974, guid: 99f17a20d5ac9994285777f6230d8cd4, type: 3}
-      propertyPath: detectionRadius
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
