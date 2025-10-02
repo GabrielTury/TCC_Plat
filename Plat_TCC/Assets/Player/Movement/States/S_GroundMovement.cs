@@ -57,8 +57,9 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     [SerializeField, Range(1, 1000), Tooltip("In milliseconds")]
     private float maxJumpPressTime;
 
-    [SerializeField, Range (10, 300),Tooltip("Coyote Time in ms")]
+    [SerializeField, Range (100, 500),Tooltip("Coyote Time in ms")]
     private float coyoteTime = 150;
+    private float coyoteTimer = 1000;
 
     [SerializeField, Range(1, 50), Tooltip("force which the player uses to doubleJump")]
     private float doubleJumpForce;
@@ -143,8 +144,17 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             jump = true;
             jumpPressTime = 0;
         }
+        else if (coyoteTimer <= coyoteTime && !jump)
+        {
+            anim.SetTrigger("Jump");
+            jump = true;
+            jumpPressTime = 0;
+            coyoteTimer = coyoteTime + 1; //makes sure it can't trigger coyote time more than once
+        }
         else if (!doubleJumping)
+        {            
             doubleJump = true;
+        }
     }
 
     public void Jump_Cancel(InputAction.CallbackContext obj)
@@ -305,6 +315,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
         playerMovement = GetComponent<S_PlayerMovement>();
         grapplingMovement = GetComponent<S_GrapplingMovement>();
+        coyoteTime /= 1000; //Convert to miliseconds
     }
 
     #region Private Specific Methods
@@ -318,10 +329,12 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             ret = true;
             doubleJumping = false;
             airMultiplier = 1f; //efficiency of air movement, turns 1 to not affect ground movement
+            coyoteTimer = 0f;
         }
         else
         {
             airMultiplier = airMovementMultiplier; //on air movement
+            coyoteTimer += Time.deltaTime;
         }
 
         anim.SetBool("Grounded", ret);
