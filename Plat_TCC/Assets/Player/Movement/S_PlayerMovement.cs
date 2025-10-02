@@ -10,7 +10,11 @@ public class S_PlayerMovement : MonoBehaviour
 
     //private Animator anim;
     private Rigidbody rb;
+
+    //Slowmo variables
     private Vector3 snowballedForce;
+    [SerializeField]
+    private float multiplier;
 
     [SerializeField]
     private GameObject[] GrapplingMesh;
@@ -271,7 +275,7 @@ public class S_PlayerMovement : MonoBehaviour
 
         if(bSlowedTime)        
         {
-            snowballedForce += force;
+            snowballedForce += force*multiplier;
         }
     }
 

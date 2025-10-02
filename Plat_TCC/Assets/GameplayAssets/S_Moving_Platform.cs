@@ -5,56 +5,49 @@ public class S_Moving_Platform : MonoBehaviour, IActivatableObjects
 {
     public Transform target;
     public float duration = 2;
-    public bool moved = false;
+
+    Vector3 waypoint1;
+    Vector3 waypoint2;
 
     [SerializeField] private AudioClip stoneMove;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        waypoint1 = transform.position;
+        waypoint2 = target.position;
     }
 
     public void Activate()
     {
-        StartCoroutine(Move(target.position, duration));
-        Debug.Log("Move");
-    }
-    
-
-    public void MoveToPoint()
-    {
-       
+        StartCoroutine(Move(duration));
     }
 
-    IEnumerator Move(Vector3 destination, float time)
+    IEnumerator Move(float time)
     {
-        Vector3 startPosition = transform.position;
         float elapsed = 0;
 
         while (elapsed < time)
         {
-            transform.position = Vector3.Lerp(startPosition, destination, elapsed / time);
+            transform.position = Vector3.Lerp(waypoint1, waypoint2, elapsed / time);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = destination;
+        transform.position = waypoint2;
+        SwapDirections();
     }
 
     public void ToggleButtonInteraction()
     {
-        if (!moved)
-        {
             Activate();
             AudioManager.instance.PlaySFX(stoneMove);
-            moved = true;
-        }
+    }
+
+    void SwapDirections()
+    {
+        Vector3 temp = waypoint1;
+        waypoint1 = waypoint2;
+        waypoint2 = temp;   
     }
 }

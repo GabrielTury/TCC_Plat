@@ -222,7 +222,7 @@ PrefabInstance:
       addedObject: {fileID: 3000963588423680004}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 22b715b17984f5b4091594ce86055076, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9120586274150569636}
+      addedObject: {fileID: 1958663940444826334}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 22b715b17984f5b4091594ce86055076, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3278212407978014800}
@@ -247,8 +247,11 @@ MonoBehaviour:
   objects:
   - {fileID: 0}
   buttonPress: {fileID: 8300000, guid: f2a8ea874f05eac41bd2ef8eb87000b5, type: 3}
---- !u!64 &9120586274150569636
-MeshCollider:
+  rockVFX: {fileID: 0}
+  vfxDuration: 2
+  oneTime: 0
+--- !u!65 &1958663940444826334
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -265,10 +268,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5447036705194824928, guid: 22b715b17984f5b4091594ce86055076, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 2, y: 1.4885167, z: 2}
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!65 &3278212407978014800
 BoxCollider:
   m_ObjectHideFlags: 0

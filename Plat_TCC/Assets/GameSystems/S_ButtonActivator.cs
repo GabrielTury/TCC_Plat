@@ -13,6 +13,7 @@ public class S_ButtonActivator : MonoBehaviour
     [SerializeField] private AudioClip buttonPress;
     [SerializeField] private VisualEffect rockVFX;
     [SerializeField] private float vfxDuration = 2f;
+    [SerializeField] private bool oneTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -61,7 +62,8 @@ public class S_ButtonActivator : MonoBehaviour
 
                 PlayRockEffect(); // só dispara se tiver efeito configurado
 
-                isActivated = true;
+                if(oneTime)
+                    isActivated = true;
             }
         }
     }
