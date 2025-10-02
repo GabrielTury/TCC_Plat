@@ -52,7 +52,7 @@ public class S_ButtonActivator : MonoBehaviour
 
                 pressedButtonTransform.position = new Vector3(
                     pressedButtonPosition.x,
-                    pressedButtonPosition.y - 0.2f,
+                    pressedButtonPosition.y - 0.3f,
                     pressedButtonPosition.z
                 );
 
