@@ -278,5 +278,6 @@ public class S_PlayerMovement : MonoBehaviour
     public void ApplySnowballedForce()
     {
         rb.AddForce(snowballedForce, ForceMode.Force);
+        snowballedForce = Vector3.zero;
     }
 }
