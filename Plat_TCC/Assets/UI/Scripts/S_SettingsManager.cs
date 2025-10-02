@@ -159,7 +159,7 @@ public class S_SettingsManager : MonoBehaviour
 
     private void CheckPlayerInput()
     {
-        if (Time.timeSinceLevelLoad < 1.5f || isOnSettingsMenu == false || settingsPanel.anchoredPosition.x < -100)
+        if (isOnSettingsMenu == false || settingsPanel.anchoredPosition.x < -100)
         {
             //Debug.Log("Settings menu is not active or the panel is not visible yet.");
             return;
@@ -366,7 +366,8 @@ public class S_SettingsManager : MonoBehaviour
             resolutionIndex = resolutionIndex,
             windowTypeIndex = windowTypeIndex,
             musicVolume = musicVolume,
-            soundVolume = soundVolume
+            soundVolume = soundVolume,
+            vsyncEnabled = vsyncEnabled
         };
 
         S_SaveManager.instance.SaveSettingsData(settingsData);

@@ -252,6 +252,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         }
         buttonAnimationCoroutine[buttonIndex] = StartCoroutine(HighlightAnimation(buttonIndex));
         lastButtonHighlighted = buttonIndex;
+        selectionIndex = buttonIndex;
     }
 
     /// <summary>

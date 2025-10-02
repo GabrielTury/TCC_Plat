@@ -195,6 +195,7 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         }
         buttonAnimationCoroutine[buttonIndex] = StartCoroutine(HighlightAnimation(buttonIndex));
         lastButtonHighlighted = buttonIndex;
+        selectionIndex = buttonIndex;
     }
 
     /// <summary>
