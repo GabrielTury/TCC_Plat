@@ -103,6 +103,8 @@ MonoBehaviour:
   changeCam: {fileID: 4027985564414316282}
   lookAtTarget: {fileID: 0}
   playerTransform: {fileID: 0}
+  trackingTarget: {fileID: 0}
+  trackTarget: 1
 --- !u!1 &5717690739854512345
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44d70cc20219cd84593f67d248eafe36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Offset: {x: 0, y: 4, z: -20}
+  Offset: {x: 0, y: 4, z: -12}
   ApplyAfter: 1
   PreserveComposition: 0
 --- !u!1 &6905359291776557065
