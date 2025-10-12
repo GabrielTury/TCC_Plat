@@ -2469,6 +2469,14 @@ PrefabInstance:
       propertyPath: mainHolder
       value: 
       objectReference: {fileID: 1819392934}
+    - target: {fileID: 3807986745533409840, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
+      propertyPath: collectibleBG
+      value: 
+      objectReference: {fileID: 403145724}
+    - target: {fileID: 3807986745533409840, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
+      propertyPath: collectibleShowcasePrefab
+      value: 
+      objectReference: {fileID: 3552444944481449274, guid: bf5cf9cd94ad06345914c946ea8aac24, type: 3}
     - target: {fileID: 3809053628159849260, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -2755,7 +2763,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6689912793583482038, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 403145724}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5986180151533966547, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
       insertIndex: -1
@@ -2773,6 +2784,136 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 611350832}
   m_SourcePrefab: {fileID: 100100000, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
+--- !u!1 &403145723
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 403145724}
+  - component: {fileID: 403145729}
+  - component: {fileID: 403145728}
+  - component: {fileID: 403145727}
+  - component: {fileID: 403145726}
+  - component: {fileID: 403145725}
+  m_Layer: 5
+  m_Name: CollectibleBG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &403145724
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403145723}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.80000466, y: 0.80000466, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1819392934}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 720, y: -817.00006}
+  m_SizeDelta: {x: 475.3466, y: 0}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!225 &403145725
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403145723}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &403145726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403145723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!114 &403145727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403145723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 15
+    m_Bottom: 15
+  m_ChildAlignment: 4
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &403145728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403145723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5529412}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d413aa5bc27d4e44daada547a33639fb, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &403145729
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403145723}
+  m_CullTransparentMesh: 1
 --- !u!4 &407994729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3409952567668703572, guid: 99f17a20d5ac9994285777f6230d8cd4, type: 3}
@@ -9232,11 +9373,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.1
+  far clip plane: 5000
   field of view: 70
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9433,8 +9574,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911557123}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11445002, y: 0.000000026467474, z: -0.0000000030492393, w: 0.993429}
-  m_LocalPosition: {x: -58.1, y: 18.697058, z: 73.45283}
+  m_LocalRotation: {x: 0.01927453, y: 0.49243662, z: -0.010908918, w: 0.8700665}
+  m_LocalPosition: {x: -68.22595, y: 20.217485, z: 76.90995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -24,11 +24,23 @@ public class S_HookExhibitor : MonoBehaviour
 
     private CanvasGroup canvasGroup; // Reference to the CanvasGroup component
 
+    private S_PlayerMovement playerMovement;
+
     void Start()
     {
         mainCamera = Camera.main;
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        // find the first game object with the S_PlayerMovement component in the scene
+
+        playerMovement = Object.FindFirstObjectByType<S_PlayerMovement>();
+
+        if (playerMovement == null)
+        {
+            Debug.LogError("PlayerMovement component not found in the scene.");
+        }
+
 
         GameObject[] hookObjects = GameObject.FindGameObjectsWithTag("Hook");
         hooks = new Transform[hookObjects.Length];
@@ -46,6 +58,14 @@ public class S_HookExhibitor : MonoBehaviour
 
     void Update()
     {
+        bool canGrapple = playerMovement.canGrapple;
+
+        if (!canGrapple)
+        {
+            uiIcon.gameObject.SetActive(false);
+            return;
+        }
+
         closestHook = GetClosestHook();
 
         if (closestHook != null)

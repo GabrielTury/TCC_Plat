@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,6 +11,8 @@ using HF = S_HelperFunctions;
 
 public class S_PauseManager : MonoBehaviour, IMenuCaller
 {
+    public static S_PauseManager instance;
+
     [SerializeField]
     private Camera mainCamera;
 
@@ -98,6 +101,17 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // if a new pause manager is created, destroy the old one
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         InitializeContent();
 
         for (int i = 0; i < buttons.Length; i++)
@@ -106,9 +120,13 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         }
         HighlightButton(selectionIndex);
 
-        S_LevelManager.instance.OnKeyCollected += UpdateCollectibleTrackingKey;
-        S_LevelManager.instance.OnGearCollected += UpdateCollectibleTrackingGear;
-        S_LevelManager.instance.OnAppleCollected += UpdateCollectibleTrackingApple;
+        if (S_LevelManager.instance != null)
+        {
+            S_LevelManager.instance.OnKeyCollected += UpdateCollectibleTrackingKey;
+            S_LevelManager.instance.OnGearCollected += UpdateCollectibleTrackingGear;
+            S_LevelManager.instance.OnAppleCollected += UpdateCollectibleTrackingApple;
+        }
+        
 
         SceneManager.activeSceneChanged += OnSceneChanged;
     }
@@ -248,6 +266,45 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         }
     }
 
+    public void TrackCollectiblesInLevel(int missionIndex, SO_WorldInfo worldInfo)
+    {
+        if (worldInfo == null || worldInfo.missionSceneNames.Length <= missionIndex || missionIndex < 0)
+        {
+            Debug.LogWarning("WorldInfo is null or missionIndex is out of bounds. Cannot track collectibles.");
+            return;
+        }
+
+        // Clear existing tracking
+        foreach (var item in collectibleShowcases)
+        {
+            Destroy(item);
+        }
+        collectibleShowcases.Clear();
+
+        /*
+        if (worldInfo.missionSceneNames[missionIndex] != SceneManager.GetActiveScene().name)
+        {
+            Debug.LogWarning("Current scene does not match the mission scene. Cannot track collectibles.");
+            return;
+        }*/
+
+        // set the new tracking based on the world info and mission index
+
+        if (worldInfo.worldId == 0)
+        {
+            if (missionIndex == 0)
+            {
+                AddCollectibleTracking(1); // Apples: 0X
+                UpdateCollectibleTracking(1, 0);
+
+                AddCollectibleTracking(2, 1); // Keys: 0/1
+                UpdateCollectibleTracking(2, 0);
+
+                AddCollectibleTracking(3, 1); // Gears: 0/1
+                UpdateCollectibleTracking(3, 0);
+            }
+        }
+    }
 
     /// <summary>
     /// For item types:<br></br>
@@ -288,15 +345,27 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
             var textComp = collectibleShowcases[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             if (textComp.text.Contains(itemName))
             {
+                int currentCount = 0;
                 if (textComp.text.Contains("/"))
                 {
+                    int colonIdx = textComp.text.IndexOf(':');
                     int slashIdx = textComp.text.IndexOf('/');
+                    // Extract current count between ": " and "/"
+                    string currentCountStr = textComp.text.Substring(colonIdx + 2, slashIdx - (colonIdx + 2));
+                    int.TryParse(currentCountStr, out currentCount);
+
                     string maxAmount = textComp.text.Substring(slashIdx + 1);
-                    textComp.text = $"{itemName}: {count}/{maxAmount}";
+                    textComp.text = $"{itemName}: {currentCount + count}/{maxAmount}";
                 }
                 else
                 {
-                    textComp.text = $"{itemName}: {count}x";
+                    int colonIdx = textComp.text.IndexOf(':');
+                    int xIdx = textComp.text.IndexOf('x');
+                    // Extract current count between ": " and "x"
+                    string currentCountStr = textComp.text.Substring(colonIdx + 2, xIdx - (colonIdx + 2));
+                    int.TryParse(currentCountStr, out currentCount);
+
+                    textComp.text = $"{itemName}: {currentCount + count}x";
                 }
                 return;
             }
@@ -506,5 +575,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         S_TransitionManager.instance.GoToLevel("MainMenu");
         Debug.Log("Quitting to Title Screen...");
     }
+
+    
     #endregion
 }

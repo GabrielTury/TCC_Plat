@@ -24,7 +24,7 @@ public class S_PlayerMovement : MonoBehaviour
     private IMoveState[] moveStates;
     private IMoveState activeState;
 
-    private bool canGrapple;
+    public bool canGrapple;
     private S_GrapplingMovement grapplingMovement;
 
     private bool isPaused;

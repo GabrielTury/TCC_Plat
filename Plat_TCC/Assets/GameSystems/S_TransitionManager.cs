@@ -108,6 +108,9 @@ public class S_TransitionManager : MonoBehaviour
                 if (result)
                 {
                     Debug.Log("Mission loaded successfully.");
+                    // Track collectibles in the new level
+                    
+                    S_PauseManager.instance.TrackCollectiblesInLevel(missionIndex, worldInfo);
                 }
                 else
                 {
