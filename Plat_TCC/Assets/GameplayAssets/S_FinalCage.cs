@@ -15,7 +15,7 @@ public class S_FinalCage : MonoBehaviour
         S_LevelManager.instance.OnKeyCollected += KeyCollected;
     }
 
-    private void KeyCollected()
+    private void KeyCollected(int count)
     {
         if (S_LevelManager.instance.keyCollectibles >= keyAmount)
         {

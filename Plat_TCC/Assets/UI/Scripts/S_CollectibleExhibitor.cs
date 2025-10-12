@@ -34,14 +34,11 @@ public class S_CollectibleExhibitor : MonoBehaviour
     private int appleTimer = 0;
     #endregion
 
-    [SerializeField]
-    private Sprite appleSprite;
+    public Sprite appleSprite;
 
-    [SerializeField]
-    private Sprite keySprite;
+    public Sprite keySprite;
 
-    [SerializeField]
-    private Sprite gearSprite;
+    public Sprite gearSprite;
 
     [SerializeField]
     private Color32 appleBGColor;

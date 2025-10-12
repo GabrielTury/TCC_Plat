@@ -25,7 +25,11 @@ public class S_LevelManager : MonoBehaviour
 
     private bool isResetting = false;
 
-    public System.Action OnKeyCollected;
+    public System.Action<int> OnAppleCollected;
+
+    public System.Action<int> OnKeyCollected;
+
+    public System.Action<int> OnGearCollected;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,6 +75,8 @@ public class S_LevelManager : MonoBehaviour
         Debug.Log("[Checkpoint Data] Found " + checkpoints.Length + " checkpoints in the scene.");
     }
 
+    // ...
+
     public void AddCollectible(string collectibleName, int count)
     {
         switch (collectibleName)
@@ -78,24 +84,25 @@ public class S_LevelManager : MonoBehaviour
             case "Main":
                 mainCollectibles += count;
                 S_CollectibleExhibitor.instance.UpdateCollectible(collectibleName, mainCollectibles);
+                OnGearCollected?.Invoke(count);
                 break;
 
             case "Key":
                 keyCollectibles += count;
                 S_CollectibleExhibitor.instance.UpdateCollectible(collectibleName, keyCollectibles);
-                OnKeyCollected.Invoke();
+                OnKeyCollected?.Invoke(count);
                 break;
 
             case "Apple":
                 collectibles += count;
                 S_CollectibleExhibitor.instance.UpdateCollectible(collectibleName, collectibles);
+                OnAppleCollected?.Invoke(count);
                 break;
 
             default:
                 Debug.LogWarning("[Checkpoint Data] Collectible " + collectibleName + " not recognized.");
                 break;
         }
-
 
         playerInfo.applesCollected = collectibles;
         //Debug.LogWarning("[Checkpoint Data] Collectible " + collectibleName + " collected. Total: " + collectibles);

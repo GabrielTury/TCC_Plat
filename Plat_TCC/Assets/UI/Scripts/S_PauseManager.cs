@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -36,7 +38,13 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     private int lastButtonHighlighted = 0;
 
     [SerializeField]
-    private Image collectibleBG;
+    private RectTransform collectibleBG;
+
+    [SerializeField]
+    private GameObject collectibleShowcasePrefab;
+
+    [SerializeField]
+    private List<GameObject> collectibleShowcases = new List<GameObject>();
 
     [SerializeField]
     private InputSystem_Actions inputs;
@@ -52,6 +60,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
     private Coroutine mainMenuAnimationCoroutine;
     private Coroutine mainHolderAnimationCoroutine;
+    private Coroutine collectibleBGAnimationCoroutine;
 
     [SerializeField]
     private InputGuideIcons inputGuideIcons;
@@ -96,6 +105,12 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
             HighlightButton(i);
         }
         HighlightButton(selectionIndex);
+
+        S_LevelManager.instance.OnKeyCollected += UpdateCollectibleTrackingKey;
+        S_LevelManager.instance.OnGearCollected += UpdateCollectibleTrackingGear;
+        S_LevelManager.instance.OnAppleCollected += UpdateCollectibleTrackingApple;
+
+        SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
     void Update()
@@ -123,6 +138,17 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         }
     }
     */
+
+    private void OnSceneChanged(Scene current, Scene next)
+    {
+        // reset collectible tracking
+
+        foreach (var item in collectibleShowcases)
+        {
+            Destroy(item);
+        }
+        collectibleShowcases.Clear();
+    }
 
     private void InitializeContent()
     {
@@ -222,6 +248,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         }
     }
 
+
     /// <summary>
     /// For item types:<br></br>
     /// 1 = Apple;
@@ -229,14 +256,51 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     /// 3 = Gear<br></br>
     /// If maxAmount is defined, it will show the required amount in the UI rather than just the current amount collected.
     /// </summary>
-    /// <param name="collectibleImage"></param>
-    /// <param name="collectibleName"></param>
-    /// <param name="itemType">
-    /// </param>
+    /// <param name="itemType"></param>
     /// <param name="maxAmount"></param>
-    public void AddCollectibleTracking(Sprite collectibleImage, string collectibleName, int itemType, int maxAmount = -1)
+    public void AddCollectibleTracking(int itemType, int maxAmount = -1)
     {
+        GameObject newCollectible = Instantiate(collectibleShowcasePrefab, collectibleBG.transform);
+        newCollectible.transform.GetChild(0).GetComponent<Image>().sprite = itemType == 1 ? S_CollectibleExhibitor.instance.appleSprite : itemType == 2 ? S_CollectibleExhibitor.instance.keySprite : itemType == 3 ? S_CollectibleExhibitor.instance.gearSprite : null;
+        if (maxAmount > 0)
+        {
+            newCollectible.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemType == 1 ? "Apples: 0/" + maxAmount : itemType == 2 ? "Keys: 0/" + maxAmount : itemType == 3 ? "Gears: 0/" + maxAmount : "Unknown";
+        }
+        else
+        {
+            newCollectible.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemType == 1 ? "Apples: 0x" : itemType == 2 ? "Keys: 0x" : itemType == 3 ? "Gears: 0x" : "Unknown";
+        }
+        collectibleShowcases.Add(newCollectible);
+    }
 
+    private void UpdateCollectibleTrackingApple(int count) { UpdateCollectibleTracking(1, count); }
+    private void UpdateCollectibleTrackingKey(int count) { UpdateCollectibleTracking(2, count); }
+    private void UpdateCollectibleTrackingGear(int count) { UpdateCollectibleTracking(3, count); }
+
+    public void UpdateCollectibleTracking(int itemType, int count)
+    {
+        // Map itemType to name and format
+        string itemName = itemType == 1 ? "Apples" : itemType == 2 ? "Keys" : itemType == 3 ? "Gears" : null;
+        if (itemName == null) return;
+
+        for (int i = 0; i < collectibleShowcases.Count; i++)
+        {
+            var textComp = collectibleShowcases[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            if (textComp.text.Contains(itemName))
+            {
+                if (textComp.text.Contains("/"))
+                {
+                    int slashIdx = textComp.text.IndexOf('/');
+                    string maxAmount = textComp.text.Substring(slashIdx + 1);
+                    textComp.text = $"{itemName}: {count}/{maxAmount}";
+                }
+                else
+                {
+                    textComp.text = $"{itemName}: {count}x";
+                }
+                return;
+            }
+        }
     }
 
     public void HighlightButton(int buttonIndex)
@@ -393,7 +457,12 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         {
             StopCoroutine(mainHolderAnimationCoroutine);
         }
+        if (collectibleBGAnimationCoroutine != null)
+        {
+            StopCoroutine(collectibleBGAnimationCoroutine);
+        }
         mainHolderAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainHolder, new Vector2(0, 0), 0.3f));
+        collectibleBGAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(collectibleBG, new Vector2(720, -375), 0.3f));
     }
 
     public void ResumeGame()
@@ -405,7 +474,12 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         {
             StopCoroutine(mainHolderAnimationCoroutine);
         }
+        if (collectibleBGAnimationCoroutine != null)
+        {
+            StopCoroutine(collectibleBGAnimationCoroutine);
+        }
         mainHolderAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainHolder, new Vector2(-1900, 0), 0.3f));
+        collectibleBGAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(collectibleBG, new Vector2(720, -800), 0.3f));
     }
 
     public void OpenSettingsMenu()
