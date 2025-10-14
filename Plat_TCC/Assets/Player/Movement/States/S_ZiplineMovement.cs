@@ -13,9 +13,18 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
 
     private Vector3 destination;
 
+    private Animator anim;
+
+    public void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     #region Interface Methods
     public void Activation()
     {
+        anim.SetTrigger("Grapple");
+        anim.SetBool("IsGrappling", true);
         float nearestDist = 0;
         Collider nearestCollider = null;
         foreach (Collider C in playerMovement.ziplinesInRange)
@@ -45,6 +54,7 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
     }
     public void Attack_Cancel(InputAction.CallbackContext obj)
     {
+        anim.SetBool("IsGrappling", false);
         playerMovement.ChangeState(typeof(S_GroundMovement));
     }
 
@@ -60,6 +70,7 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
 
     public void Jump_Perform(InputAction.CallbackContext obj)
     {
+        anim.SetBool("IsGrappling", false);
         playerMovement.ChangeState(typeof(S_GroundMovement));
     }
 
@@ -85,6 +96,7 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
 
     public void Skill_Perform(InputAction.CallbackContext obj)
     {
+        anim.SetBool("IsGrappling", false);
         playerMovement.ChangeState(typeof(S_SlowedMovement));
     }
 
