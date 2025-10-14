@@ -168,7 +168,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         if(IsGrounded())
             ApplyPlatformMovement();
         else
+        {
             ApplyGravity();
+            lastPlatformPosition = Vector3.zero;
+        }
 
         anim.SetFloat("Speed", (rb.linearVelocity.magnitude * 100) / maxGroundSpeed);
 
@@ -249,7 +252,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     {
         LayerMask platformLayer = 1 << 13;
         
-        int result = Physics.RaycastNonAlloc(transform.position, Vector3.down, platformResults, 2f, platformLayer);
+        int result = Physics.RaycastNonAlloc(transform.position, Vector3.down, platformResults, 1.6f, platformLayer);
         if(result > 0 )
         {
             if(lastPlatformPosition == Vector3.zero)
@@ -303,6 +306,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     public void Skill_Perform(InputAction.CallbackContext obj)
     {
+        if (!playerMovement.canSlow) return;
         playerMovement.ChangeState(typeof(S_SlowedMovement));
     }
 
@@ -429,6 +433,10 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         dir2.y = 0;
         dir2.Normalize();
         Gizmos.DrawLine(transform.position + Vector3.down * 1.4f, transform.position + Vector3.down * 1.4f + dir2 * 1f);
+
+        //PlatformDetection
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 1.6f);
     }
 
 #endif

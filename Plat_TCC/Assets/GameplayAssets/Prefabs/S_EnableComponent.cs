@@ -37,7 +37,7 @@ public class S_EnableComponent : MonoBehaviour
                     other.GetComponentInParent<S_PlayerMovement>().EnableGrappling(true);
                     break;
                 case Component.SlowedMovement:
-                    other.GetComponentInParent<S_SlowedMovement>().enabled = true;
+                    other.GetComponentInParent<S_PlayerMovement>().EnableSlowedMovement(true);
                     break;
                 default:
                     break;

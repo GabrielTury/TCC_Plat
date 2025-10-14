@@ -6,7 +6,7 @@ public class S_PlayerMovement : MonoBehaviour
 {
     //[SerializeField]
     //private GameObject blobShadow;
-    public bool bSlowedTime;
+    public bool bSlowedTime;    
 
     //private Animator anim;
     private Rigidbody rb;
@@ -25,6 +25,7 @@ public class S_PlayerMovement : MonoBehaviour
     private IMoveState activeState;
 
     public bool canGrapple;
+    public bool canSlow;
     private S_GrapplingMovement grapplingMovement;
 
     private bool isPaused;
@@ -59,6 +60,13 @@ public class S_PlayerMovement : MonoBehaviour
                 }
                 grapplingMovement = (S_GrapplingMovement)moveState;
             }
+            else if (moveState is S_SlowedMovement)
+            {
+                if (stateComponent.enabled)
+                {
+                    canSlow = true;
+                }
+            }
         }
 
         //anim = GetComponent<Animator>();
@@ -83,12 +91,6 @@ public class S_PlayerMovement : MonoBehaviour
     private void Skill_performed(InputAction.CallbackContext obj)
     {
         activeState.Skill_Perform(obj);
-        /*originalTimeScale = Time.timeScale;
-        Time.timeScale = slowedTimeScale;        
-        currentSlowedTime = 0;
-        snowballedForce = Vector3.zero;
-        //anim.speed /= (slowedTimeScale/2);
-        bSlowedTime = true;*/
     }
 
     private void Jump_canceled(InputAction.CallbackContext obj)
@@ -243,6 +245,11 @@ public class S_PlayerMovement : MonoBehaviour
         {
             mesh.SetActive(true);
         }
+    }
+    public void EnableSlowedMovement(bool newState)
+    {
+        canSlow = newState;
+        GetComponent<S_SlowedMovement>().enabled = newState;
     }
 
     private void OnDrawGizmosSelected()
