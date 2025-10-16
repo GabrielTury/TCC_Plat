@@ -80,6 +80,8 @@ public class S_WalkingGiant : S_InteractableBase
             objsInRange = temp;
             ChangeState(InteractableState.Interacting);
         }
+        else
+            ChangeState(InteractableState.Idle);
     }
 
     private void Start()
