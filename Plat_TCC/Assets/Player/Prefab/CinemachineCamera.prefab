@@ -183,23 +183,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraRadius: 0.4
+  CameraRadius: 20
   Decollision:
     Enabled: 1
     ObstacleLayers:
       serializedVersion: 2
-      m_Bits: 65
+      m_Bits: 17473
     UseFollowTarget:
       Enabled: 1
       YOffset: 0
     Damping: 0.5
     SmoothingTime: 0
   TerrainResolution:
-    Enabled: 1
+    Enabled: 0
     TerrainLayers:
       serializedVersion: 2
       m_Bits: 65
-    MaximumRaycast: 10
+    MaximumRaycast: 20
     Damping: 0.5
 --- !u!114 &123968253551266142
 MonoBehaviour:

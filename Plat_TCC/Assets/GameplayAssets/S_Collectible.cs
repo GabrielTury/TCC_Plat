@@ -33,6 +33,7 @@ public class S_Collectible : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         Destroy(collectedVFX);
+        yield return new WaitForEndOfFrame();
         Destroy(gameObject);
     }
 }
