@@ -54,7 +54,7 @@ public class S_TransitionManager : MonoBehaviour
 
         float offsetY = Time.time * 0.5f; // Adjust the speed by changing the multiplier
         float offsetX = Time.time * 0.2f;
-        scrollerImage.uvRect = new Rect(offsetX, -offsetY, 8, 8);
+        scrollerImage.uvRect = new Rect(offsetX, -offsetY, 9, 9);
     }
 
     public void GoToLevel(string levelName)
