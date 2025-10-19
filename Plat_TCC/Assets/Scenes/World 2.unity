@@ -1892,6 +1892,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7888798056975644334, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9438,11 +9442,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.1
+  far clip plane: 5000
   field of view: 70
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9639,8 +9643,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911557123}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11444999, y: 0.000000029606502, z: -0.0000000034108767, w: 0.99342906}
-  m_LocalPosition: {x: 40.94, y: 11.007058, z: 21.21283}
+  m_LocalRotation: {x: 0.0015449716, y: 0.19031242, z: -0.00029950147, w: 0.98172235}
+  m_LocalPosition: {x: 36.4607, y: 12.03775, z: 19.630987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
