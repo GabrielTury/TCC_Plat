@@ -23,6 +23,8 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
     private Collider ownCollider;
     private S_PlayerMovement playerMove;
 
+    private bool isBoxOnTop = false;
+
     private void Awake()
     {
         ownCollider = GetComponent<Collider>();
@@ -46,7 +48,7 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
         {
             if (objRb != null)
             {
-                if (disabledVisualizer.activeSelf)
+                if (disabledVisualizer.activeSelf & !isBoxOnTop)
                 {
                     playerMove.AddPlayerForce(transform.parent.up * speed, ForceMode.Acceleration);
                     //objRb.AddForce(transform.parent.up * speed, ForceMode.Acceleration);
@@ -68,12 +70,22 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
         {
             playerMove = FindFirstObjectByType<S_PlayerMovement>();
         }
+        // if object has "box" in the name, consider it a box
+        if (other.gameObject.name.ToLower().Contains("box"))
+        {
+            isBoxOnTop = true;
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
         isOnVentilator = false;
         objRb = null;
+        if (other.gameObject.name.ToLower().Contains("box"))
+        {
+            isBoxOnTop = false;
+        }
     }
 
     public void ToggleButtonInteraction()

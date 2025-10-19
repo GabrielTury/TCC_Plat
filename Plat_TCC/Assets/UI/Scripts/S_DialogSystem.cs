@@ -158,6 +158,27 @@ public class S_DialogSystem : MonoBehaviour
         boopingCoroutine = StartCoroutine(BoopingAnimation());
     }
 
+    public void ResetAndStopDialogueInstantly()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+        if (movementCoroutine != null)
+        {
+            StopCoroutine(movementCoroutine);
+            movementCoroutine = null;
+        }
+        if (boopingCoroutine != null)
+        {
+            StopCoroutine(boopingCoroutine);
+            boopingCoroutine = null;
+        }
+        dialogText.text = "";
+        backgroundRectTransform.anchoredPosition = new Vector2(backgroundRectTransform.anchoredPosition.x, targetLoweredHeight);
+    }
+
     private IEnumerator TypeSentence(string sentence, int charCount)
     {
         dialogText.text = "";

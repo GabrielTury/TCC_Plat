@@ -119,6 +119,9 @@ public class S_TransitionManager : MonoBehaviour
             }, missionIndex);
         }
 
+        if (S_DialogSystem.instance != null)
+            S_DialogSystem.instance.ResetAndStopDialogueInstantly();
+
         startAlpha = canvasGroup.alpha;
         endAlpha = 0;
         elapsedTime = 0;
