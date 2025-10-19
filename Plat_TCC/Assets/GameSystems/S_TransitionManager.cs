@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.Properties;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class S_TransitionManager : MonoBehaviour
@@ -12,6 +13,9 @@ public class S_TransitionManager : MonoBehaviour
 
     [SerializeField]
     private RectTransform rectChild;
+
+    [SerializeField]
+    private RawImage scrollerImage;
 
     [SerializeField]
     private float openSpeed = 1f;
@@ -46,7 +50,11 @@ public class S_TransitionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // scroll the raw image
+
+        float offsetY = Time.time * 0.5f; // Adjust the speed by changing the multiplier
+        float offsetX = Time.time * 0.2f;
+        scrollerImage.uvRect = new Rect(offsetX, -offsetY, 8, 8);
     }
 
     public void GoToLevel(string levelName)
