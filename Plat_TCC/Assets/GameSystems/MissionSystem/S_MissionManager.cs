@@ -21,6 +21,13 @@ public class S_MissionManager : MonoBehaviour
 
     private int currentMissionIndex;
 
+    public enum SkyTime
+    {
+        Morning = 0,
+        Evening = 1,
+        Night = 2
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -35,10 +42,10 @@ public class S_MissionManager : MonoBehaviour
             SetWorldInfo(worldInfo);
     }
 
-    public void StartMission(FinishedLoading callback, int missionIndex)
+    public void StartMission(FinishedLoading callback, int missionIndex, SkyTime time = SkyTime.Morning)
     {
         if(Loading == null)
-            Loading = StartCoroutine(MissionLoadTick(callback, missionIndex));
+            Loading = StartCoroutine(MissionLoadTick(callback, missionIndex, time));
     }
 
     public delegate void FinishedLoading(bool loadResult);
@@ -48,7 +55,7 @@ public class S_MissionManager : MonoBehaviour
     /// <param name="callback">Delegate called when the loading finishes</param>
     /// <param name="missionIndex">Which mission to load based on the index from the world info</param>
     /// <returns></returns>
-    private IEnumerator MissionLoadTick(FinishedLoading callback, int missionIndex)
+    private IEnumerator MissionLoadTick(FinishedLoading callback, int missionIndex, SkyTime time = SkyTime.Morning)
     {
         if (SceneManager.GetActiveScene().name == "HubWorld" || SceneManager.GetActiveScene().name == "MainMenu") { yield break; }
         bool result = false;
@@ -58,9 +65,11 @@ public class S_MissionManager : MonoBehaviour
             Scene scene = SceneManager.GetSceneAt(i); //Check if is not trying to load repetade scene
             if (scene.name == missionSceneNames[missionIndex])
                 goto Finish; //Skips Tick Logic and call the callback as false
-                
-        }
-        //SetSkybox(worldInfo.); @set skyboxhere
+
+        }        
+        SetSky(worldInfo.levelLightInfos[(int)time]);
+
+
         missionLoad = SceneManager.LoadSceneAsync(missionSceneNames[missionIndex], LoadSceneMode.Additive); //Loads
 
         while(!missionLoad.isDone)
@@ -97,8 +106,15 @@ public class S_MissionManager : MonoBehaviour
         Debug.LogWarning($"Mission {missionNumber} in World {worldNumber} saved as {(complete ? "completed" : "not completed")}. RAW: Mission" + worldNumber + "-" + missionNumber + "Completed");
     }
 
-    public void SetSkybox(Material skyboxMaterial)
+    public void SetSky(LevelLightInfo lightInfo)
     {
+        Light mainLight = FindFirstObjectByType<Light>();
+        mainLight.color = lightInfo.lightColor;
+        mainLight.intensity = lightInfo.intensity;
+        mainLight.transform.rotation = lightInfo.directionalLightRotation;
+
+        Material skyboxMaterial = lightInfo.skybox;
+
         if (skyboxMaterial != null)
         {
             UnityEngine.RenderSettings.skybox = skyboxMaterial;
