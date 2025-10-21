@@ -9,15 +9,21 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
     [Header("Movement"), Range(1, 50), SerializeField]
     private float speed = 10f;
 
+    [SerializeField, Range(-5,5)]
+    private float destinationOffset = 0f;
+
     private S_PlayerMovement playerMovement;
 
     private Vector3 destination;
 
     private Animator anim;
 
+    private Rigidbody rb;
+
     public void Awake()
     {
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     #region Interface Methods
@@ -48,7 +54,8 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
         //GetCorrectPointFromRotation(zipline.ziplinePoints);
         destination = zipline.endPoint.position;
 
-
+        transform.position = zipline.ziplinePoints[0];
+        rb.linearVelocity = Vector3.zero;
 
         //Debug.Log("Activated Zipline Code");
     }
@@ -102,7 +109,18 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
 
     public void StateFixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, destination, Time.fixedDeltaTime * speed);
+        Vector3 direction = destination - transform.position;
+        direction.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(direction, transform.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 720);
+        Vector3 finalDest = destination - (Vector3.down * destinationOffset);
+        transform.position = Vector3.MoveTowards(transform.position, finalDest, Time.fixedDeltaTime * speed);
+
+        if(Vector3.Distance(transform.position, finalDest) < 0.3f)
+        {
+            anim.SetBool("IsGrappling", false);
+            playerMovement.ChangeState(typeof(S_GroundMovement));
+        }
     }
 
     public void StateUpdate()

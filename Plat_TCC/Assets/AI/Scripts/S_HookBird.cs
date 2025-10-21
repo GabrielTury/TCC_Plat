@@ -15,6 +15,9 @@ public class S_HookBird : S_PlatformBase
     [SerializeField]
     private Vector3[] path;
 
+    [SerializeField]
+    private float knockBackForce = 20f;
+
     private int currentPathIndex = 0;
 
 #if UNITY_EDITOR
@@ -70,6 +73,14 @@ public class S_HookBird : S_PlatformBase
         path = pathList.ToArray();
     }
 #endif //UNITY_EDITOR
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            collision.rigidbody.AddForce((transform.position - collision.transform.position).normalized * knockBackForce, ForceMode.Impulse);
+        }
+    }
     private void OnDrawGizmos()
     {
         if (path == null || path.Length == 0)

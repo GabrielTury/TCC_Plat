@@ -123,12 +123,15 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         switch (nearestColliderId)
         {
             case "grapple":
+                ResetMovementInput();
                 playerMovement.ChangeState(typeof(S_GrapplingMovement));
                 break;
             case "zipline":
+                ResetMovementInput();
                 playerMovement.ChangeState(typeof(S_ZiplineMovement));
                 break;
             case "movable":
+                ResetMovementInput();
                 playerMovement.ChangeState(typeof(S_ObjectMovement));
                 break;
             default:
@@ -220,10 +223,16 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         {
             anim.SetTrigger("DoubleJump");
             float normalizedAngle = doubleJumpAngle / 90f;
+            Vector3 doubleJumpDir = transform.forward;
+            if (movementDirection != Vector2.zero)
+            {
+                doubleJumpDir = GetCameraRelativeDirection();
+            }
             
+
             rb.linearVelocity = Vector3.zero;
-            Vector3 doubleJumpDirection = (transform.forward * (1 - normalizedAngle)) + (transform.up * normalizedAngle);
-            rb.AddForce(doubleJumpDirection.normalized * doubleJumpForce, ForceMode.Impulse);
+            Vector3 doubleJumpForceComposite = (doubleJumpDir * (1 - normalizedAngle)) + (transform.up * normalizedAngle);
+            rb.AddForce(doubleJumpForceComposite.normalized * doubleJumpForce, ForceMode.Impulse);
             doubleJumping = true;
             doubleJump = false;
         }             
@@ -414,6 +423,14 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     public void RefreshDoubleJump()
     {
         doubleJump = false;
+    }
+
+    private void ResetMovementInput()
+    {
+        movementDirection = Vector2.zero;
+        moving = false;
+        movingTime = 0;
+        rb.angularVelocity = Vector3.zero;
     }
 
 #if UNITY_EDITOR

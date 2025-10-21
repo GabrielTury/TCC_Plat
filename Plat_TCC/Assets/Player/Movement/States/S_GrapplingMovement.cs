@@ -247,7 +247,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                 rb.AddForce((anchorPoint - transform.position) * grappleForce, ForceMode.Impulse);
                 #region Grappling Gun Visuals
                 ogBasePosition = grapplingBase.transform.localPosition;
-                ogBaseRotation = grapplingBase.transform.localEulerAngles;
+                ogBaseRotation = grapplingBase.transform.localEulerAngles;                
 
                 grapplingBase.transform.SetParent(handPoint.transform);
                 grapplingBase.transform.localPosition = Vector3.zero;
