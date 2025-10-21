@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.SceneManagement;
@@ -59,7 +60,7 @@ public class S_MissionManager : MonoBehaviour
                 goto Finish; //Skips Tick Logic and call the callback as false
                 
         }
-
+        //SetSkybox(worldInfo.); @set skyboxhere
         missionLoad = SceneManager.LoadSceneAsync(missionSceneNames[missionIndex], LoadSceneMode.Additive); //Loads
 
         while(!missionLoad.isDone)
@@ -94,5 +95,18 @@ public class S_MissionManager : MonoBehaviour
         S_SaveManager.instance.SetMissionStatus(worldNumber, missionNumber, complete);
         //PlayerPrefs.SetString("Mission" + worldNumber + "-" + missionNumber + "Completed", (complete == true ? "true" : "false"));
         Debug.LogWarning($"Mission {missionNumber} in World {worldNumber} saved as {(complete ? "completed" : "not completed")}. RAW: Mission" + worldNumber + "-" + missionNumber + "Completed");
+    }
+
+    public void SetSkybox(Material skyboxMaterial)
+    {
+        if (skyboxMaterial != null)
+        {
+            UnityEngine.RenderSettings.skybox = skyboxMaterial;
+            DynamicGI.UpdateEnvironment();
+        }
+        else
+        {
+            Debug.LogWarning("Skybox material is null. Cannot set skybox.");
+        }
     }
 }
