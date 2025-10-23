@@ -290,20 +290,40 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
         // set the new tracking based on the world info and mission index
 
+        AddCollectibleTracking(1); // Apples: 0X
+        UpdateCollectibleTracking(1, 0);
+
+        AddCollectibleTracking(3); // Gears: 0/1
+        UpdateCollectibleTracking(3, 0);
+
         if (worldInfo.worldId == 0)
+        {
+                AddCollectibleTracking(2, 1); // Keys: 0/1
+                UpdateCollectibleTracking(2, 0);                
+        }
+
+        if (worldInfo.worldId == 1)
         {
             if (missionIndex == 0)
             {
-                AddCollectibleTracking(1); // Apples: 0X
-                UpdateCollectibleTracking(1, 0);
-
                 AddCollectibleTracking(2, 1); // Keys: 0/1
                 UpdateCollectibleTracking(2, 0);
+            }
 
-                AddCollectibleTracking(3, 1); // Gears: 0/1
-                UpdateCollectibleTracking(3, 0);
+            if (missionIndex == 1)
+            {
+                AddCollectibleTracking(2, 3); // Keys: 0/1
+                UpdateCollectibleTracking(2, 0);
+            }
+
+            if (missionIndex == 2)
+            {
+                AddCollectibleTracking(2, 0); // Keys: 0/1
+                UpdateCollectibleTracking(2, 0);
             }
         }
+
+
     }
 
     /// <summary>
