@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Net;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,12 @@ public class S_Collectible_Objective : MonoBehaviour
 
     [SerializeField]
     private GameObject handPoint;
+
+    //@todo GG DESCULPA CONSERTA DEPOIS
+    private void Start()
+    {
+        handPoint = GameObject.Find("hand.R");
+    }
 
 
     private void OnTriggerEnter(Collider other)
