@@ -3306,7 +3306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 961707572}
   duration: 3
-  moved: 0
   stoneMove: {fileID: 0}
 --- !u!1 &608261718 stripped
 GameObject:
@@ -5484,18 +5483,6 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.52
       objectReference: {fileID: 0}
@@ -5534,10 +5521,6 @@ PrefabInstance:
     - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7252689877803853913, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7887253110930570089, guid: 79c196f1ee44f334ea75c8a1732342fd, type: 3}
       propertyPath: m_LocalPosition.x
