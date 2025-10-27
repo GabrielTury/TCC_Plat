@@ -63,9 +63,9 @@ public class S_TransitionManager : MonoBehaviour
         StartCoroutine(LoadLevel(levelName, 0, null));
     }
 
-    public void GoToLevelWithMission(string levelName, int missionIndex, SO_WorldInfo worldInfo)
+    public void GoToLevelWithMission(string levelName, int missionIndex, SO_WorldInfo worldInfo, SO_MissionUIInfo missionInfo)
     {
-        StartCoroutine(LoadLevel(levelName, missionIndex, worldInfo));
+        StartCoroutine(LoadLevel(levelName, missionIndex, worldInfo, missionInfo));
         // Add logic to load the specific mission here
     }
 
@@ -74,7 +74,7 @@ public class S_TransitionManager : MonoBehaviour
         StartCoroutine(RestartStage());
     }
 
-    private IEnumerator LoadLevel(string levelName, int missionIndex = -1, SO_WorldInfo worldInfo = null)
+    private IEnumerator LoadLevel(string levelName, int missionIndex = -1, SO_WorldInfo worldInfo = null, SO_MissionUIInfo missionInfo = null)
     {
         float startAlpha = canvasGroup.alpha;
         float endAlpha = 1f;
@@ -144,6 +144,8 @@ public class S_TransitionManager : MonoBehaviour
         canvasGroup.alpha = endAlpha;
 
         S_LevelManager.instance.PerformOnSceneLoad();
+
+        S_LevelManager.instance.currentTimeChallengeInSeconds = missionInfo != null ? missionInfo.timeLimitInSeconds : 0;
     }
 
     private IEnumerator RestartStage()

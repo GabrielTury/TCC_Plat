@@ -72,7 +72,7 @@ public class S_MissionSelectManager : MonoBehaviour
             S_MissionPanel missionPanel = panel.GetComponent<S_MissionPanel>();
             if (missionPanel != null)
             {
-                missionPanel.Setup(missionInfo);
+                missionPanel.Setup(missionInfo, levelName, index);
             }
             index++;
         }
@@ -199,7 +199,7 @@ public class S_MissionSelectManager : MonoBehaviour
             // Start the mission with the current index
             Cursor.lockState = CursorLockMode.Locked;
             Debug.Log("Next level: " + levelName + " with mission index: " + currentIndex);
-            S_TransitionManager.instance.GoToLevelWithMission(levelName, currentIndex, worldInfo);
+            S_TransitionManager.instance.GoToLevelWithMission(levelName, currentIndex, worldInfo, missionInfos[currentIndex]);
             canInteract = false; // Disable interaction to prevent multiple submissions
         }
     }

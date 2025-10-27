@@ -43,12 +43,20 @@ public class S_SaveManager : MonoBehaviour
     [System.Serializable]
     public struct WorldSave
     {
-        public WorldSave(List<bool> status)
+        public WorldSave(List<bool> status, List<int> fruitCount, List<bool> timeChallenge)
         {
             missionStatus = status;
+            fruitRecord = fruitCount;
+            timeChallengeStatus = timeChallenge;
         }
         [SerializeField]
         public List<bool> missionStatus;
+
+        [SerializeField]
+        public List<int> fruitRecord;
+
+        [SerializeField]
+        public List<bool> timeChallengeStatus;
     }
 
     public PlayerData defaultData;
@@ -63,28 +71,16 @@ public class S_SaveManager : MonoBehaviour
 
     public void Start()
     {
+        DontDestroyOnLoad(gameObject);
+
         if (instance == null)
             instance = this;
         else
             Destroy(this);
 
-        // Default Data Setup
-        List<bool> defaultValues= new List<bool>();
-        for (int i = 0; i < 4; i++)
-        {
-            defaultValues.Add(false);
-        }
+        defaultWorld = new WorldSave(new List<bool> { false, false, false }, new List<int> { 0, 0, 0 }, new List<bool> { false, false, false });
 
-        defaultWorld = new WorldSave(defaultValues);
-
-        int appleCountTemp = 0;
-        List<WorldSave> worldsTemp = new List<WorldSave>();
-        for (int i = 0; i < 3; i++)
-        {
-            worldsTemp.Add(defaultWorld);
-        }
-
-        defaultData = new PlayerData(appleCountTemp, worldsTemp);
+        defaultData = new PlayerData(0, new List<WorldSave> { defaultWorld, defaultWorld, defaultWorld});
 
         bool worked;
         PlayerData loadedPlayerData;
@@ -133,14 +129,21 @@ public class S_SaveManager : MonoBehaviour
         return playerData.worlds[worldNum].missionStatus[missionNum];
     }
 
+    public int GetAppleRecord(int worldNum, int missionNum)
+    {
+        return playerData.worlds[worldNum].fruitRecord[missionNum];
+    }
+
     /// <summary>
     /// Sets the status of a mission in a world. True if completed, false if not completed.
     /// </summary>
     /// <param name="worldNum"></param>
     /// <param name="missionNum"></param>
     /// <param name="status"></param>
-    public void SetMissionStatus(int worldNum, int missionNum, bool status)
+    public void SetMissionStatus(int worldNum, int missionNum, bool status, bool timeChallenge)
     {
+        worldNum = worldNum - 1;
+        missionNum = missionNum - 1;
         // Defensive: Ensure worlds and missionStatus are initialized
         if (playerData.worlds == null || playerData.worlds.Count <= worldNum)
         {
@@ -150,7 +153,12 @@ public class S_SaveManager : MonoBehaviour
             while (tempWorlds.Count <= worldNum)
             {
                 List<bool> defaultMissions = new List<bool> { false, false, false };
-                tempWorlds.Add(new WorldSave(defaultMissions));
+
+                List<int> defaultFruitRecord = new List<int> { 0, 0, 0 };
+
+                List<bool> defaultTimeChallenge = new List<bool> { false, false, false };
+
+                tempWorlds.Add(new WorldSave(defaultMissions, defaultFruitRecord, defaultTimeChallenge));
             }
             playerData = new PlayerData(playerData.appleCount, tempWorlds);
             Debug.Log($"playerData.worlds initialized. New count: {playerData.worlds.Count}");
@@ -164,7 +172,7 @@ public class S_SaveManager : MonoBehaviour
             {
                 tempStatus.Add(false);
             }
-            WorldSave tempWorld = new WorldSave(tempStatus);
+            WorldSave tempWorld = new WorldSave(tempStatus, new List<int> { 0, 0, 0 }, tempStatus);
             List<WorldSave> tempWorlds = new List<WorldSave>(playerData.worlds);
             tempWorlds[worldNum] = tempWorld;
             playerData = new PlayerData(playerData.appleCount, tempWorlds);
@@ -175,8 +183,27 @@ public class S_SaveManager : MonoBehaviour
         List<bool> updatedStatus = new List<bool>(playerData.worlds[worldNum].missionStatus);
         updatedStatus[missionNum] = status;
         Debug.Log($"SetMissionStatus: worldNum={worldNum}, missionNum={missionNum}, status={status}");
-        WorldSave updatedWorld = new WorldSave(updatedStatus);
 
+        // Correcting the type mismatch by accessing the correct element from the fruitRecord list
+        int lastAppleRecord = playerData.worlds[worldNum].fruitRecord[missionNum];
+
+        if (S_LevelManager.instance != null)
+        {
+            if (S_LevelManager.instance.collectibles > lastAppleRecord)
+            {
+                lastAppleRecord = S_LevelManager.instance.collectibles;
+            }
+        }
+
+        // Correcting the type mismatch by providing a List<int> instead of an int
+        List<int> updatedFruitRecord = new List<int>(playerData.worlds[worldNum].fruitRecord);
+        updatedFruitRecord[missionNum] = lastAppleRecord;
+
+        // Timed challenge status update
+        List<bool> updatedTimeChallenge = new List<bool>(playerData.worlds[worldNum].timeChallengeStatus);
+        updatedTimeChallenge[missionNum] = timeChallenge;
+
+        WorldSave updatedWorld = new WorldSave(updatedStatus, updatedFruitRecord, updatedTimeChallenge);
         // Create a copy of worlds to avoid modifying the original list reference
         List<WorldSave> updatedWorlds = new List<WorldSave>(playerData.worlds);
         updatedWorlds[worldNum] = updatedWorld;
@@ -193,6 +220,11 @@ public class S_SaveManager : MonoBehaviour
     public int GetAppleCount()
     {
         return playerData.appleCount;
+    }
+
+    public bool GetTimeChallengeStatus(int worldNum, int missionNum)
+    {
+        return playerData.worlds[worldNum].timeChallengeStatus[missionNum];
     }
 
     /// <summary>

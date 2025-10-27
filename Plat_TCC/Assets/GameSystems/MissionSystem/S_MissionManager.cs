@@ -45,7 +45,18 @@ public class S_MissionManager : MonoBehaviour
     public void StartMission(FinishedLoading callback, int missionIndex, SkyTime time = SkyTime.Morning)
     {
         if(Loading == null)
-            Loading = StartCoroutine(MissionLoadTick(callback, missionIndex, time));
+        {
+            if (S_MissionManager.instance != null)
+            {
+                Loading = StartCoroutine(MissionLoadTick(callback, missionIndex, time));
+            }
+            else
+            {
+                Debug.LogError("Mission Manager instance is null. Cannot start mission load.");
+                callback?.Invoke(false);
+            }
+        }
+            
     }
 
     public delegate void FinishedLoading(bool loadResult);
@@ -101,7 +112,19 @@ public class S_MissionManager : MonoBehaviour
         int worldNumber = (worldInfo.worldId + 1);
         int missionNumber = (currentMissionIndex + 1);
 
-        S_SaveManager.instance.SetMissionStatus(worldNumber, missionNumber, complete);
+        // timed challenge calculation
+
+        bool timeChallengeResult = false;
+
+        if (S_LevelManager.instance != null)
+        {
+            if (S_LevelManager.instance.currentTimeChallengeInSeconds > Time.timeSinceLevelLoad)
+            {
+                timeChallengeResult = true;
+            }
+        }
+
+        S_SaveManager.instance.SetMissionStatus(worldNumber, missionNumber, complete, timeChallengeResult);
         //PlayerPrefs.SetString("Mission" + worldNumber + "-" + missionNumber + "Completed", (complete == true ? "true" : "false"));
         Debug.LogWarning($"Mission {missionNumber} in World {worldNumber} saved as {(complete ? "completed" : "not completed")}. RAW: Mission" + worldNumber + "-" + missionNumber + "Completed");
     }

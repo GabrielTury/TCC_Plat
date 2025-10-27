@@ -17,24 +17,24 @@ public class S_DevShortcuts : MonoBehaviour
     [ContextMenu("Clear All Missions")]
     public void ClearAllWorlds()
     {
-        S_SaveManager.instance.SetMissionStatus(1, 1, true);
-        S_SaveManager.instance.SetMissionStatus(1, 2, true);
-        S_SaveManager.instance.SetMissionStatus(1, 3, true);
-        S_SaveManager.instance.SetMissionStatus(2, 1, true);
-        S_SaveManager.instance.SetMissionStatus(2, 2, true);
-        S_SaveManager.instance.SetMissionStatus(2, 3, true);
+        S_SaveManager.instance.SetMissionStatus(1, 1, true, true);
+        S_SaveManager.instance.SetMissionStatus(1, 2, true, true);
+        S_SaveManager.instance.SetMissionStatus(1, 3, true, true);
+        S_SaveManager.instance.SetMissionStatus(2, 1, true, true);
+        S_SaveManager.instance.SetMissionStatus(2, 2, true, true);
+        S_SaveManager.instance.SetMissionStatus(2, 3, true, true);
         S_SaveManager.instance.SavePlayerData(S_SaveManager.instance.playerData);
     }
 
     [ContextMenu("Reset All Missions")]
     public void ResetAllWorlds()
     {
-        S_SaveManager.instance.SetMissionStatus(1, 1, false);
-        S_SaveManager.instance.SetMissionStatus(1, 2, false);
-        S_SaveManager.instance.SetMissionStatus(1, 3, false);
-        S_SaveManager.instance.SetMissionStatus(2, 1, false);
-        S_SaveManager.instance.SetMissionStatus(2, 2, false);
-        S_SaveManager.instance.SetMissionStatus(2, 3, false);
+        S_SaveManager.instance.SetMissionStatus(1, 1, false, false);
+        S_SaveManager.instance.SetMissionStatus(1, 2, false, false);
+        S_SaveManager.instance.SetMissionStatus(1, 3, false, false);
+        S_SaveManager.instance.SetMissionStatus(2, 1, false, false);
+        S_SaveManager.instance.SetMissionStatus(2, 2, false, false);
+        S_SaveManager.instance.SetMissionStatus(2, 3, false, false);
         S_SaveManager.instance.SavePlayerData(S_SaveManager.instance.playerData);
     }
 }

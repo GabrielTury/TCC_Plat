@@ -27,6 +27,18 @@ public class S_MissionPanel : MonoBehaviour
     [SerializeField]
     private Transform collectibleHolder; // Parent for collectible panels
 
+    [SerializeField]
+    private TextMeshProUGUI appleCounter;
+
+    [SerializeField]
+    private TextMeshProUGUI timedChallengeCounter;
+
+    [SerializeField]
+    private GameObject clearedLevelIcon;
+
+    [SerializeField]
+    private GameObject clearedTimeChallengeIcon;
+
     private void Start()
     {
         // Get references to the UI components if not set in the inspector
@@ -86,10 +98,56 @@ public class S_MissionPanel : MonoBehaviour
         }
     }
 
-    public void Setup(SO_MissionUIInfo missionInfo)
+    public void Setup(SO_MissionUIInfo missionInfo, string levelName, int missionIndex)
     {
         missionNameText.text = missionInfo.objectiveName;
-        
+
+        Regex levelNumberRegex = new Regex(@"\d+");
+        Match levelNumberMatch = levelNumberRegex.Match(levelName);
+
+        int levelNumber = 0;
+        if (levelNumberMatch.Success && int.TryParse(levelNumberMatch.Value, out levelNumber))
+        {
+            Debug.Log($"Extracted Level Number: {levelNumber}");
+        }
+        else
+        {
+            Debug.LogError($"Failed to extract a valid number from levelName: {levelName}");
+        }
+
+        levelNumber = levelNumber - 1;
+
+        Debug.LogWarning("Apple Record for Level " + levelNumber + " Mission " + missionIndex + ": " + S_SaveManager.instance.GetAppleRecord(levelNumber, missionIndex));
+        int appleRecord = S_SaveManager.instance.GetAppleRecord(levelNumber, missionIndex);
+
+        appleCounter.text = appleRecord.ToString() + "x";
+
+        // convert seconds into "00:00" format
+
+        timedChallengeCounter.text = $"{missionInfo.timeLimitInSeconds / 60:D2}:{missionInfo.timeLimitInSeconds % 60:D2}";
+
+        // if current mission is cleared, show the cleared icon
+
+        if (S_SaveManager.instance.GetMissionStatus(levelNumber, missionIndex))
+        {
+            clearedLevelIcon.SetActive(true);
+        }
+        else
+        {
+            clearedLevelIcon.SetActive(false);
+        }
+
+        // if current time challenge is cleared, show the cleared time challenge icon
+
+        if (S_SaveManager.instance.GetTimeChallengeStatus(levelNumber, missionIndex))
+        {
+            clearedTimeChallengeIcon.SetActive(true);
+        }
+        else
+        {
+            clearedTimeChallengeIcon.SetActive(false);
+        }
+
         int index = 0;
         // create the collectible panels for each collectible in the mission
         foreach (var collectible in missionInfo.collectibleInfo)
@@ -159,7 +217,8 @@ public class S_MissionPanel : MonoBehaviour
                     int.TryParse(worldMatch.Value, out worldNumber) &&
                     int.TryParse(missionMatch.Value, out missionNumber))
                 {
-                    conditionMet = S_SaveManager.instance.GetMissionStatus(worldNumber, missionNumber);
+                    //Debug.Log("Parsed World Number: " + worldNumber + ", Mission Number: " + missionNumber);
+                    conditionMet = S_SaveManager.instance.GetMissionStatus(worldNumber - 1, missionNumber - 1);
                 }
                 else
                 {

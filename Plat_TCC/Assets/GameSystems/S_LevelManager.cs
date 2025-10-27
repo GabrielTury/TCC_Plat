@@ -31,6 +31,8 @@ public class S_LevelManager : MonoBehaviour
 
     public System.Action<int> OnGearCollected;
 
+    public int currentTimeChallengeInSeconds;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

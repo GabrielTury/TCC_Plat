@@ -17,4 +17,8 @@ public class SO_MissionUIInfo : ScriptableObject
     }
 
     public CollectibleInfo[] collectibleInfo;
+
+    // Variable to hold the time limit in seconds (0 means no time limit)
+
+    public int timeLimitInSeconds;
 }
