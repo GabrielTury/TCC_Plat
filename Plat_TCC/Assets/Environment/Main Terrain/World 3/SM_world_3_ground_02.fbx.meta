@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7cd980904073d1c44b63c81eb94c01ba
+guid: dde4f9050b621394ca95cad28cb49d5d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_Piston
-    second: {fileID: 2100000, guid: 9000199b254e05640aa186c3dbb8ca44, type: 2}
+      name: Bricks
+    second: {fileID: 2100000, guid: 11c036b4684790042877980da775a777, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass
+    second: {fileID: 2100000, guid: 871b1d953d7db7b4b83646443f354794, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass_edge
+    second: {fileID: 2100000, guid: b67cf40fc9c0b294b8fda9f7a969967e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
