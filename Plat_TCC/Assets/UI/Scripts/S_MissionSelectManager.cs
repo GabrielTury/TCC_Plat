@@ -178,7 +178,7 @@ public class S_MissionSelectManager : MonoBehaviour
                     int.TryParse(worldMatch.Value, out worldNumber) &&
                     int.TryParse(missionMatch.Value, out missionNumber))
                 {
-                    conditionMet = S_SaveManager.instance.GetMissionStatus(worldNumber, missionNumber);
+                    conditionMet = S_SaveManager.instance.GetMissionStatus(worldNumber - 1, missionNumber - 1);
                 }
                 else
                 {
@@ -191,7 +191,7 @@ public class S_MissionSelectManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError($"Invalid mission condition format: {currentMissionCondition}");
+                Debug.LogError($"Condition not met: {currentMissionCondition}");
             }
         }
         if (canInteract && canProceed == true)
