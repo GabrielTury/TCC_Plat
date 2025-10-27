@@ -19,6 +19,9 @@ public class S_PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameObject[] GrapplingMesh;
 
+    [SerializeField, Space(2)]
+    private GameObject blobShadow;
+
     private InputSystem_Actions inputs;
 
     private IMoveState[] moveStates;
@@ -173,7 +176,7 @@ public class S_PlayerMovement : MonoBehaviour
 
     private void BlobShadow()
     {
-        /*RaycastHit hit;
+        RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
         {
             Vector3 shadowPosition = hit.point;
@@ -181,7 +184,7 @@ public class S_PlayerMovement : MonoBehaviour
             blobShadow.transform.position = shadowPosition;
         }
         else
-            Debug.Log("No hit on shadow");*/
+            Debug.Log("No hit on shadow");
     }
 
     private void GrapplingRange()
