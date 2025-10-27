@@ -679,8 +679,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6713194845252765137, guid: 7550e784ad99bb04c90706e93ee25a43, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 379414687}
   m_SourcePrefab: {fileID: 100100000, guid: 7550e784ad99bb04c90706e93ee25a43, type: 3}
+--- !u!1 &119481536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6713194845252765137, guid: 7550e784ad99bb04c90706e93ee25a43, type: 3}
+  m_PrefabInstance: {fileID: 119481535}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &126766274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1071,6 +1079,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6224501936586366827, guid: 7550e784ad99bb04c90706e93ee25a43, type: 3}
   m_PrefabInstance: {fileID: 119481535}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &379414687
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119481536}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.92
+  m_Height: 3.42
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.73, z: 0}
 --- !u!1001 &397061847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1593,15 +1624,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511955692}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -42.8, y: -1.32, z: -9.22}
+  m_LocalRotation: {x: -0, y: 0.9658391, z: -0, w: 0.25914255}
+  m_LocalPosition: {x: -8.47, y: -0.05, z: 10.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 379414686}
   - {fileID: 1470756184}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 149.962, z: 0}
 --- !u!1 &636321547
 GameObject:
   m_ObjectHideFlags: 0
@@ -6991,7 +7022,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Factory
+  m_text: Forgotten Factory
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6106b1903bb44a649a6da6df0643105b, type: 2}
   m_sharedMaterial: {fileID: -2569715681740388835, guid: 6106b1903bb44a649a6da6df0643105b, type: 2}
