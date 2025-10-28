@@ -10,6 +10,7 @@ public class S_Collectible : MonoBehaviour
     private GameObject collectedVFX;
 
     private MeshRenderer mesh;
+    [SerializeField] private Collider collider;
     private void Start()
     {
         mesh = GetComponentInChildren<MeshRenderer>();
@@ -26,6 +27,7 @@ public class S_Collectible : MonoBehaviour
             collectedVFX = Instantiate(collectVFXPrefab, transform.position, Quaternion.identity);
 
         mesh.enabled = false;
+        collider.enabled = false;
         StartCoroutine(DestroyObject());
     }
 
