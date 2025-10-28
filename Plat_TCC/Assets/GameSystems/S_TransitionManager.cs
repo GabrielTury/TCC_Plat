@@ -74,7 +74,7 @@ public class S_TransitionManager : MonoBehaviour
         StartCoroutine(RestartStage());
     }
 
-    private IEnumerator LoadLevel(string levelName, int missionIndex = -1, SO_WorldInfo worldInfo = null, SO_MissionUIInfo missionInfo = null)
+    private IEnumerator LoadLevel(string levelName, int missionIndex = -1, SO_WorldInfo worldInfo = null, SO_MissionUIInfo missionInfo = null, S_MissionManager.SkyTime daytime = S_MissionManager.SkyTime.Morning)
     {
         float startAlpha = canvasGroup.alpha;
         float endAlpha = 1f;
@@ -124,7 +124,7 @@ public class S_TransitionManager : MonoBehaviour
                 {
                     Debug.Log("Failed to load mission.");
                 }
-            }, missionIndex);
+            }, missionIndex, daytime);
         }
 
         if (S_DialogSystem.instance != null)
