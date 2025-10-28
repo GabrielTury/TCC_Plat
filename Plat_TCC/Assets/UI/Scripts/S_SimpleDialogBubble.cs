@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class S_SimpleDialogBubble : MonoBehaviour
 {
@@ -29,11 +31,69 @@ public class S_SimpleDialogBubble : MonoBehaviour
     private Vector3 dialogBoxPosition;
     private Vector3 dialogBoxSize;
 
+    [SerializeField]
+    private InputSystem_Actions inputs;
+
+    private int iconIndex = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         dialogTextBox.text = dialogText;
+    }
+
+    private void Awake()
+    {
+        inputs = new InputSystem_Actions();
+    }
+
+    private void OnEnable()
+    {
+        //GameEvents.UIInputMade += UpdateControllerIcons;
+        InputSystem.onActionChange += UpdateControllerIcons;
+        inputs.Enable();
+    }
+
+    private void OnDisable()
+    {
+        //GameEvents.UIInputMade -= UpdateControllerIcons;
+        InputSystem.onActionChange -= UpdateControllerIcons;
+        inputs.Disable();
+    }
+
+    private void UpdateControllerIcons(object obj, InputActionChange change)
+    {
+        if (change == InputActionChange.ActionPerformed)
+        {
+            var inputAction = (InputAction)obj;
+            var lastControl = inputAction.activeControl;
+            var lastDevice = lastControl.device;
+
+            // Or you can check the device type directly
+            if (lastDevice is Gamepad)
+            {
+                // Check for specific gamepad types
+                if (lastDevice.description.manufacturer.Contains("Sony"))
+                {
+                    iconIndex = 2;
+                }
+                else if (lastDevice.description.manufacturer.Contains("Microsoft"))
+                {
+                    // Xbox controller
+                    iconIndex = 1;
+                }
+                else
+                {
+                    // Generic gamepad
+                    iconIndex = 0;
+                }
+            }
+            else if (lastDevice is Keyboard)
+            {
+                iconIndex = 0;
+            }
+        }//
     }
 
     // Update is called once per frame
@@ -110,6 +170,18 @@ public class S_SimpleDialogBubble : MonoBehaviour
         if (Vector3.Distance(playerTransform.position, transform.position) < 8f)
         {
             dialogBoxSize = Vector3.Lerp(dialogBoxSize, new Vector3(-1f, 1f), 0.12f);
+
+            // Replace all occurrences of "index=" in the dialog text with the current iconIndex value
+            var matches = System.Text.RegularExpressions.Regex.Matches(dialogText, @"index=\d+");
+            foreach (System.Text.RegularExpressions.Match match in matches)
+            {
+                string numberPart = match.Value.Substring(6); // Extract the number after "index="
+                if (int.TryParse(numberPart, out int indexValue))
+                {
+                    dialogText = dialogText.Replace(match.Value, $"index={iconIndex}");
+                }
+            }
+
         }
         else
         {

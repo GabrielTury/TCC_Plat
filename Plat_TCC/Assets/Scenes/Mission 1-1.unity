@@ -1917,13 +1917,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
-      value: "Press the jump button while in \nthe air to dash forward!"
+      value: "Press <sprite=\"b_jump\" index=0 color=#333333> while in \nthe air
+        to dash forward!"
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
-      value: 'Jump while in the air
-
-        to dash forward!'
+      value: "Press <sprite=\"b_jump\" index=0 color=#333333> while in \nthe air
+        to dash forward!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6106b1903bb44a649a6da6df0643105b, type: 2}
+    - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2569715681740388835, guid: 6106b1903bb44a649a6da6df0643105b, type: 2}
+    - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2943,13 +2955,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
-      value: "Press Shift and Ctrl\nto move up and down \nwhen using the grappling
-        hook"
+      value: "Press <sprite=\"b_raise_hook\" index=0 color=#333333> and <sprite=\"b_lower_hook\"
+        index=0 color=#333333> \nto move up and down \nwhen using the grappling hook"
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
-      value: "Press Shift and Ctrl\nto move up and down \nwhen using the grappling
-        hook"
+      value: "Press <sprite=\"b_raise_hook\" index=0 color=#333333> and <sprite=\"b_lower_hook\"
+        index=0 color=#333333> \nto move up and down \nwhen using the grappling hook"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3040,9 +3052,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0339951de9bf44ca51eeecdb4c44f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 206222991}
-  duration: 4
-  stoneMove: {fileID: 8300000, guid: b2bdcfe39bc17ac4ca723156831dc2e1, type: 3}
+  target: {fileID: 0}
+  duration: 2
+  stoneMove: {fileID: 0}
 --- !u!64 &1037017589
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3312,8 +3324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0339951de9bf44ca51eeecdb4c44f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 206222991}
-  duration: 3
+  target: {fileID: 0}
+  duration: 2
   stoneMove: {fileID: 0}
 --- !u!1001 &1072059400
 PrefabInstance:
@@ -4178,8 +4190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spin_speed: 0
-  float_speed: 2
-  height: 0.2
+  float_speed: 0
+  height: 0
 --- !u!1001 &1310120652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5493,21 +5505,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
-      value: 'Press the action button
+      value: 'Press <sprite="b_hook" index=0 color=#333333> to use
 
-        to use your grappling hook
+        your
+        grappling hook
 
-        on
-        targets like this!'
+        on targets like this!'
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
-      value: 'Press the action button
+      value: 'Press <sprite="b_hook" index=0 color=#333333> to use
 
-        to use your grappling hook
+        your
+        grappling hook
 
-        on
-        targets like this!'
+        on targets like this!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6747,7 +6759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 226977835}
-  duration: 3
+  duration: 2
   stoneMove: {fileID: 8300000, guid: 5a5c9dd9b14dcef42bc5456360b8860c, type: 3}
 --- !u!1001 &349449933737291529
 PrefabInstance:
