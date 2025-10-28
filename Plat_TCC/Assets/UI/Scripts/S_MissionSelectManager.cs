@@ -34,6 +34,8 @@ public class S_MissionSelectManager : MonoBehaviour
     [SerializeField]
     private Transform missionPanelsHolder; // Reference to the holder for mission panels
 
+    private S_MissionManager.SkyTime[] daytimes = { S_MissionManager.SkyTime.Morning, S_MissionManager.SkyTime.Evening, S_MissionManager.SkyTime.Night };
+
     private void Awake()
     {
         inputs = new InputSystem_Actions();
@@ -199,7 +201,7 @@ public class S_MissionSelectManager : MonoBehaviour
             // Start the mission with the current index
             Cursor.lockState = CursorLockMode.Locked;
             Debug.Log("Next level: " + levelName + " with mission index: " + currentIndex);
-            S_TransitionManager.instance.GoToLevelWithMission(levelName, currentIndex, worldInfo, missionInfos[currentIndex]);
+            S_TransitionManager.instance.GoToLevelWithMission(levelName, currentIndex, worldInfo, missionInfos[currentIndex], daytimes[currentIndex]);
             canInteract = false; // Disable interaction to prevent multiple submissions
         }
     }

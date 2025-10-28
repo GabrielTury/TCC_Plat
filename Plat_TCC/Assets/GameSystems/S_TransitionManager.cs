@@ -63,9 +63,9 @@ public class S_TransitionManager : MonoBehaviour
         StartCoroutine(LoadLevel(levelName, 0, null));
     }
 
-    public void GoToLevelWithMission(string levelName, int missionIndex, SO_WorldInfo worldInfo, SO_MissionUIInfo missionInfo)
+    public void GoToLevelWithMission(string levelName, int missionIndex, SO_WorldInfo worldInfo, SO_MissionUIInfo missionInfo, S_MissionManager.SkyTime daytime)
     {
-        StartCoroutine(LoadLevel(levelName, missionIndex, worldInfo, missionInfo));
+        StartCoroutine(LoadLevel(levelName, missionIndex, worldInfo, missionInfo, daytime));
         // Add logic to load the specific mission here
     }
 

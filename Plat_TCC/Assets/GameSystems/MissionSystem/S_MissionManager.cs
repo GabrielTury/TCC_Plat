@@ -44,7 +44,7 @@ public class S_MissionManager : MonoBehaviour
 
     public void StartMission(FinishedLoading callback, int missionIndex, SkyTime time = SkyTime.Morning)
     {
-        time = SkyTime.Evening;
+        //time = SkyTime.Evening;
         if(Loading == null)
         {
             if (S_MissionManager.instance != null)
