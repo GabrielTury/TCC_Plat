@@ -4272,6 +4272,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: ee5275be2cce5134c9405ea9525411b4, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 257
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ee5275be2cce5134c9405ea9525411b4, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f272e716a77baab449d69970329d0157, type: 2}
@@ -4826,6 +4830,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df7cbc1ce132ed84bb48191d15ba930e, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 257
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: df7cbc1ce132ed84bb48191d15ba930e, type: 3}
       propertyPath: m_Name
       value: SM_flowers_purple
@@ -5086,6 +5094,7 @@ MonoBehaviour:
   savedObjects: []
   savedObjectsTransform: []
   playerTransform: {fileID: 0}
+  currentTimeChallengeInSeconds: 0
 --- !u!4 &1484744257
 Transform:
   m_ObjectHideFlags: 0
@@ -5241,6 +5250,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8a86540ba81d07e4382c45d9de63651a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8a86540ba81d07e4382c45d9de63651a, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 257
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 8a86540ba81d07e4382c45d9de63651a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
