@@ -5,12 +5,12 @@ public class S_Collectible : MonoBehaviour
 {
     [SerializeField] private AudioClip appleCollected;
     [SerializeField] private GameObject collectVFXPrefab;
-    [SerializeField] private int collectibleId = -1;
+    //[SerializeField] private int collectibleId = -1;
 
     private GameObject collectedVFX;
 
     private MeshRenderer mesh;
-    [SerializeField] private Collider collider;
+    [SerializeField] private new Collider collider;
     private void Start()
     {
         mesh = GetComponentInChildren<MeshRenderer>();
