@@ -238,7 +238,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                 joint.minDistance = distFromPoint * minHangingRangeMultiplier;
 
                 joint.spring = 9.5f;
-                joint.damper = 7.5f;
+                joint.damper = 2.5f;
                 joint.massScale = 4.5f;
 
                 lr.positionCount = 2;

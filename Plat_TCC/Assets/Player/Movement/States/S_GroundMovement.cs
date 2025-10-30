@@ -75,6 +75,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
 
     private RaycastHit[] platformResults = new RaycastHit[4];
     private Vector3 lastPlatformPosition;
+    private Transform lastPlatform;
     public void Attack_Perform(InputAction.CallbackContext obj)
     {
         //@optimize
@@ -264,13 +265,14 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         int result = Physics.RaycastNonAlloc(transform.position, Vector3.down, platformResults, 1.6f, platformLayer);
         if(result > 0 )
         {
-            if(lastPlatformPosition == Vector3.zero)
+            if(lastPlatformPosition == Vector3.zero || lastPlatform != platformResults[0].transform)
             {
-                lastPlatformPosition = platformResults[0].transform.position;
+                lastPlatform = platformResults[0].transform;
+                lastPlatformPosition = lastPlatform.position;
                 return;
             }
-            transform.position += platformResults[0].transform.position - lastPlatformPosition;
-            lastPlatformPosition = platformResults[0].transform.position;
+            transform.position += lastPlatform.position - lastPlatformPosition;
+            lastPlatformPosition = lastPlatform.position;
         }
         else
         {

@@ -177,14 +177,13 @@ public class S_PlayerMovement : MonoBehaviour
     private void BlobShadow()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore))
+        string[] layers = { "Ground", "MovingPlatform" };
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 100f, LayerMask.GetMask(layers), QueryTriggerInteraction.Ignore))
         {
             Vector3 shadowPosition = hit.point;
             shadowPosition.y += 0.01f;
             blobShadow.transform.position = shadowPosition;
         }
-        else
-            Debug.Log("No hit on shadow");
     }
 
     private void GrapplingRange()
