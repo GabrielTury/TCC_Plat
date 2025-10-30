@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class S_WalkingGiant : S_InteractableBase
@@ -16,6 +17,9 @@ public class S_WalkingGiant : S_InteractableBase
 
     [SerializeField]
     private LayerMask layerToAvoid = 1 << 8;
+
+    [SerializeField]
+    private VisualEffect wakeUpVFX;
 
     private Collider[] objsInRange;
 
@@ -43,7 +47,7 @@ public class S_WalkingGiant : S_InteractableBase
             avoidPos[i] = (transform.position - objsInRange[i].transform.position); //gets a point in the oposite direction of the object
         }
 
-        if(avoidPos.Length == 1)
+        if (avoidPos.Length == 1)
             nav.destination = transform.position + avoidPos[0].normalized * distanceToWalk;
         else
         {
@@ -53,10 +57,10 @@ public class S_WalkingGiant : S_InteractableBase
                 averagePos += avoidPos[i];
             }
             averagePos /= avoidPos.Length;
-            
-            nav.destination = transform.position + averagePos.normalized * distanceToWalk;            
+
+            nav.destination = transform.position + averagePos.normalized * distanceToWalk;
         }
-        
+
         yield return null;
     }
 
@@ -99,5 +103,10 @@ public class S_WalkingGiant : S_InteractableBase
     {
         anim.SetTrigger("WakeUp");
         Destroy(awakeTrigger);
+        if (wakeUpVFX != null)
+        {
+            wakeUpVFX.Play();
+        }
+
     }
 }
