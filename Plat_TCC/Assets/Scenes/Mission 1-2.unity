@@ -192,6 +192,15 @@ PrefabInstance:
       propertyPath: multipleSentences.Array.data[2].speakerSprite
       value: 
       objectReference: {fileID: 21300000, guid: bb0e4a7be19391942924e4f0604dfa5b, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].sentenceTextBR
+      value: Uhuuuul!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].sentenceTextBR
+      value: "Acho que voc\xEA t\xE1 se divertindo bastante pra quem est\xE1 s\xF3
+        observando."
+      objectReference: {fileID: 0}
     - target: {fileID: 8376834797628412825, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: m_Name
       value: DialogTrigger
@@ -1882,6 +1891,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 0699ca1d09809f64a914f99d4dc3b467, type: 3}
     - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: singleSentence.sentenceTextBR
+      value: "N\xE3o olha pra baixo. N\xE3o olha pra baixo. N\xE3o olha pra baixo..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: multipleSentences.Array.data[0].speakerName
       value: Grandpa
       objectReference: {fileID: 0}
@@ -3134,6 +3147,20 @@ PrefabInstance:
       propertyPath: multipleSentences.Array.data[2].speakerSprite
       value: 
       objectReference: {fileID: 21300000, guid: bb0e4a7be19391942924e4f0604dfa5b, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].sentenceTextBR
+      value: "Por que oc\xEA t\xE1 aqui de novo? Pensei que j\xE1 tinha pegado aquele
+        treco."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].sentenceTextBR
+      value: "\xC9 um lugar grande! Certeza que podemos achar mais engrenagens olhando
+        em outros cantos."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].sentenceTextBR
+      value: "Bem, se precisar, t\xF4 aqui, comendo ma\xE7\xE3s."
+      objectReference: {fileID: 0}
     - target: {fileID: 8376834797628412825, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: m_Name
       value: DialogTrigger

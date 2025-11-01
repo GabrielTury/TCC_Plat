@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static S_DialogSystem;
 
 public class S_DialogSystem : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class S_DialogSystem : MonoBehaviour
         public string speakerName;
         [TextArea(3, 3)]
         public string sentenceText;
+
+        [TextArea(3, 3)]
+        public string sentenceTextBR;
     }
 
     private float targetRaisedHeight = -350f;
@@ -87,7 +91,20 @@ public class S_DialogSystem : MonoBehaviour
             StopCoroutine(typingCoroutine);
             typingCoroutine = null;
         }
-        typingCoroutine = StartCoroutine(TypeSentence(sentence.sentenceText, charCount));
+
+        S_SaveManager.SettingsData settings = S_SaveManager.instance.GetSettingsData();
+        string currentLanguage = settings.language;
+
+        if (currentLanguage == "en")
+        {
+            typingCoroutine = StartCoroutine(TypeSentence(sentence.sentenceText, charCount));
+        }
+        else
+        {
+            charCount = sentence.sentenceTextBR.Length;
+            typingCoroutine = StartCoroutine(TypeSentence(sentence.sentenceTextBR, charCount));
+        }
+
         speakerImage.sprite = sentence.speakerSprite;
         speakerNameText.text = sentence.speakerName;
         RaiseBox();
@@ -119,7 +136,20 @@ public class S_DialogSystem : MonoBehaviour
                 StopCoroutine(typingCoroutine);
                 typingCoroutine = null;
             }
-            typingCoroutine = StartCoroutine(TypeSentence(s.sentenceText, charCount));
+
+            S_SaveManager.SettingsData settings = S_SaveManager.instance.GetSettingsData();
+            string currentLanguage = settings.language;
+
+            if (currentLanguage == "en")
+            {
+                typingCoroutine = StartCoroutine(TypeSentence(s.sentenceText, charCount));
+            }
+            else
+            {
+                charCount = s.sentenceTextBR.Length;
+                typingCoroutine = StartCoroutine(TypeSentence(s.sentenceTextBR, charCount));
+            }
+
             yield return typingCoroutine;
             typingCoroutine = null;
         }

@@ -1701,6 +1701,23 @@ PrefabInstance:
       propertyPath: multipleSentences.Array.data[5].speakerSprite
       value: 
       objectReference: {fileID: 21300000, guid: bb0e4a7be19391942924e4f0604dfa5b, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].sentenceTextBR
+      value: Estou vendo algo ali! Aposto que podemos usar aquilo para encontrar
+        um caminho pra longe dessas ilhas.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].sentenceTextBR
+      value: Posso comer?
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].sentenceTextBR
+      value: "N\xE3o.\nAcho que est\xE1 trancado numa jaula..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[3].sentenceTextBR
+      value: "T\xE1 vendo? Falei que a chave seria \xFAtil!"
+      objectReference: {fileID: 0}
     - target: {fileID: 8376834797628412825, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: m_Name
       value: DialogTrigger
@@ -1923,6 +1940,11 @@ PrefabInstance:
       propertyPath: dialogText
       value: "Press <sprite=\"b_jump\" index=0 color=#333333> while in \nthe air
         to dash forward!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
+      propertyPath: dialogTextBR
+      value: "Pressione <sprite=\"b_jump\" index=0 color=#333333> enquanto est\xE1\nno
+        ar para pular para frente!"
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
@@ -2962,6 +2984,11 @@ PrefabInstance:
       value: "Press <sprite=\"b_raise_hook\" index=0 color=#333333> and <sprite=\"b_lower_hook\"
         index=0 color=#333333> \nto move up and down \nwhen using the grappling hook"
       objectReference: {fileID: 0}
+    - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
+      propertyPath: dialogTextBR
+      value: "Pressione <sprite=\"b_raise_hook\" index=0 color=#333333> e <sprite=\"b_lower_hook\"
+        index=0 color=#333333> \npara subir e descer \nenquanto usa o gancho de disparo."
+      objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
       value: "Press <sprite=\"b_raise_hook\" index=0 color=#333333> and <sprite=\"b_lower_hook\"
@@ -3204,6 +3231,11 @@ PrefabInstance:
       value: 'You''ll need your grappling hook
 
         to reach the other side...'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
+      propertyPath: dialogTextBR
+      value: "Voc\xEA ir\xE1 precisar do seu gancho de disparo\npara chegar ao outro
+        lado..."
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
@@ -3648,7 +3680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: multipleSentences.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: multipleSentences.Array.data[0].speakerName
@@ -3688,7 +3720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: multipleSentences.Array.data[3].sentenceText
-      value: 'No...... '
+      value: No...... Ok fine, bring them back and we can talk about it.
       objectReference: {fileID: 0}
     - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: multipleSentences.Array.data[4].sentenceText
@@ -3724,6 +3756,22 @@ PrefabInstance:
       propertyPath: multipleSentences.Array.data[5].speakerSprite
       value: 
       objectReference: {fileID: 21300000, guid: bb0e4a7be19391942924e4f0604dfa5b, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].sentenceTextBR
+      value: Olha! Tem tantas fruitas aqui!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].sentenceTextBR
+      value: Pegue-as pra mim! Pra mim!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].sentenceTextBR
+      value: E eu ganho alguma coisa com isso?
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[3].sentenceTextBR
+      value: "N\xE3o...... T\xE1 bom, me traz elas e a\xED a gente conversa."
+      objectReference: {fileID: 0}
     - target: {fileID: 8376834797628412825, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: m_Name
       value: DialogTrigger
@@ -3951,6 +3999,22 @@ PrefabInstance:
       propertyPath: multipleSentences.Array.data[5].speakerSprite
       value: 
       objectReference: {fileID: 21300000, guid: bb0e4a7be19391942924e4f0604dfa5b, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].sentenceTextBR
+      value: "Olha s\xF3! Uma chave brilhante!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].sentenceTextBR
+      value: "O qu\xEA? Onde?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].sentenceTextBR
+      value: Em cima daquela torre. Vai pegar, garoto!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[3].sentenceTextBR
+      value: "Tenho a impress\xE3o de que ser\xE1 \xFAtil depois..."
+      objectReference: {fileID: 0}
     - target: {fileID: 8376834797628412825, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: m_Name
       value: DialogTrigger
@@ -4364,6 +4428,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 0699ca1d09809f64a914f99d4dc3b467, type: 3}
     - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: singleSentence.sentenceTextBR
+      value: "N\xE3o tem jeito a n\xE3o ser pular!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: multipleSentences.Array.data[0].speakerName
       value: Raider
       objectReference: {fileID: 0}
@@ -4435,6 +4503,22 @@ PrefabInstance:
       propertyPath: multipleSentences.Array.data[5].speakerSprite
       value: 
       objectReference: {fileID: 21300000, guid: bb0e4a7be19391942924e4f0604dfa5b, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].sentenceTextBR
+      value: "N\xE3o tem jeito a n\xE3o ser pular!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].sentenceTextBR
+      value: Pegue-as pra mim! Pra MIM!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].sentenceTextBR
+      value: E eu ganho alguma coisa com isso?
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[3].sentenceTextBR
+      value: "N\xE3o...... T\xE1 bom, me traz elas e a\xED a gente conversa."
+      objectReference: {fileID: 0}
     - target: {fileID: 8376834797628412825, guid: 70931249563e84946b93a5f9d0798446, type: 3}
       propertyPath: m_Name
       value: DialogTrigger
@@ -5504,6 +5588,11 @@ PrefabInstance:
 
         on targets like this!'
       objectReference: {fileID: 0}
+    - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
+      propertyPath: dialogTextBR
+      value: Pressione <sprite="b_hook" index=0 color=#333333> para usar o seu gancho
+        de disparo em alvos como esse!
+      objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
       value: 'Press <sprite="b_hook" index=0 color=#333333> to use
@@ -6086,6 +6175,11 @@ PrefabInstance:
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
       value: "Touch these vases to set \nwhere you appear if you fall off!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
+      propertyPath: dialogTextBR
+      value: "Toque nesses vasos para definir\nonde voc\xEA ir\xE1 reaparecer caso
+        caia!"
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text

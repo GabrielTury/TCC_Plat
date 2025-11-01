@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,6 +24,10 @@ public class S_SimpleDialogBubble : MonoBehaviour
     private string dialogText = "Hello, this is a simple dialog bubble!";
 
     [SerializeField]
+    [TextArea]
+    private string dialogTextBR = "Olá, isso é uma simples bolha de diálogo!";
+
+    [SerializeField]
     private Image dialogBoxImage;
 
     [SerializeField]
@@ -36,11 +41,17 @@ public class S_SimpleDialogBubble : MonoBehaviour
 
     private int iconIndex = 0;
 
+    private string currentLanguage = "en";
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         dialogTextBox.text = dialogText;
+
+        S_SaveManager.SettingsData settingsData = S_SaveManager.instance.GetSettingsData();
+
+        currentLanguage = settingsData.language;
     }
 
     private void Awake()
@@ -171,17 +182,31 @@ public class S_SimpleDialogBubble : MonoBehaviour
         {
             dialogBoxSize = Vector3.Lerp(dialogBoxSize, new Vector3(-1f, 1f), 0.12f);
 
-            // Replace all occurrences of "index=" in the dialog text with the current iconIndex value
-            var matches = System.Text.RegularExpressions.Regex.Matches(dialogText, @"index=\d+");
-            foreach (System.Text.RegularExpressions.Match match in matches)
+            if (currentLanguage == "en")
             {
-                string numberPart = match.Value.Substring(6); // Extract the number after "index="
-                if (int.TryParse(numberPart, out int indexValue))
+                var matches = Regex.Matches(dialogText, @"index=\d+");
+                foreach (Match match in matches)
                 {
-                    dialogText = dialogText.Replace(match.Value, $"index={iconIndex}");
+                    string numberPart = match.Value.Substring(6); // Extract the number after "index="
+                    if (int.TryParse(numberPart, out int indexValue))
+                    {
+                        dialogText = dialogText.Replace(match.Value, $"index={iconIndex}");
+                    }
                 }
+                dialogTextBox.text = dialogText;
+            } else
+            {
+                var matches = Regex.Matches(dialogTextBR, @"index=\d+");
+                foreach (Match match in matches)
+                {
+                    string numberPart = match.Value.Substring(6); // Extract the number after "index="
+                    if (int.TryParse(numberPart, out int indexValue))
+                    {
+                        dialogTextBR = dialogTextBR.Replace(match.Value, $"index={iconIndex}");
+                    }
+                }
+                dialogTextBox.text = dialogTextBR;
             }
-
         }
         else
         {

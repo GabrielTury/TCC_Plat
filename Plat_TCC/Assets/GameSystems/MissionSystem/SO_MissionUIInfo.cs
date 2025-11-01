@@ -5,6 +5,10 @@ public class SO_MissionUIInfo : ScriptableObject
 {
     [TextArea]
     public string objectiveName;
+
+    [TextArea]
+    public string objectiveNameBR;
+
     public string condition;
 
     // a class with collectible icon, collectible name and count

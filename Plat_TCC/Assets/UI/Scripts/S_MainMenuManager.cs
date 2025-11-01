@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,7 +28,18 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
     private Image[] buttonsImage = new Image[4];
 
     [SerializeField]
+    private Button buttonLanguage;
+
+    [SerializeField]
     private int selectionIndex = 0;
+
+    private string currentLanguage = "en";
+
+    [SerializeField]
+    private Sprite[] flagImages;
+
+    [SerializeField]
+    private Image flagIcon;
 
     //[SerializeField]
     private Coroutine[] buttonAnimationCoroutine = new Coroutine[4];
@@ -45,6 +57,9 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
     [SerializeField]
     private InputGuideIcons inputGuideIcons;
 
+    [SerializeField]
+    private TextMeshProUGUI[] inputGuideText;
+
     [System.Serializable]
     private struct InputGuideIcons
     {
@@ -61,6 +76,28 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         inputs = new InputSystem_Actions();
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 1f; // Ensure the time scale is set to normal
+        InitializeSceneObjects();
+        BeginSceneAnimation();
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            HighlightButton(i);
+        }
+        HighlightButton(selectionIndex);
+
+        Debug.LogWarning(S_SaveManager.instance);
+
+        S_SaveManager.SettingsData settings = S_SaveManager.instance.GetSettingsData();
+
+        currentLanguage = settings.language;
+
+        Debug.LogWarning("CURRENT LANGUAGE: " + currentLanguage);
+        RefreshLanguage();
+    }
+
     private void OnEnable()
     {
         //GameEvents.UIInputMade += UpdateControllerIcons;
@@ -73,20 +110,6 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         //GameEvents.UIInputMade -= UpdateControllerIcons;
         InputSystem.onActionChange -= UpdateControllerIcons;
         inputs.Disable();
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Time.timeScale = 1f; // Ensure the time scale is set to normal
-        InitializeSceneObjects();
-        BeginSceneAnimation();
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            HighlightButton(i);
-        }
-        HighlightButton(selectionIndex);
     }
 
     void Update()
@@ -153,6 +176,10 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         if (Time.timeSinceLevelLoad < 1.5f || isThisMenuActive == false || mainPanel.anchoredPosition.x < -100)
         {
             return;
+        }
+        if (inputs.Player.Crouch.WasPressedThisFrame())
+        {
+            ChangeLanguage();
         }
         if (inputs.UI.Navigate.WasPressedThisFrame())
         {
@@ -312,6 +339,55 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         Debug.Log("Quit Game");
     }
 
+    public void ChangeLanguage()
+    {
+        if (currentLanguage == "en")
+        {
+            currentLanguage = "br";
+        }
+        else if (currentLanguage == "br")
+        {
+            currentLanguage = "en";
+        }
+
+        S_SaveManager.SettingsData settingsData = S_SaveManager.instance.GetSettingsData();
+
+        settingsData.language = currentLanguage;
+
+        S_SaveManager.instance.SaveSettingsData(settingsData);
+
+        S_SettingsManager.instance.RefreshLanguage(currentLanguage);
+
+        RefreshLanguage();
+    }
+
+    public void RefreshLanguage()
+    {
+        if (currentLanguage == "en")
+        {
+            buttons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Continue Game";
+            buttons[1].GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
+            buttons[2].GetComponentInChildren<TextMeshProUGUI>().text = "Settings";
+            buttons[3].GetComponentInChildren<TextMeshProUGUI>().text = "Quit Game";
+
+            inputGuideText[0].text = "Navigate";
+            inputGuideText[1].text = "Confirm";
+            inputGuideText[2].text = "Return";
+        }
+        else if (currentLanguage == "br")
+        {
+            buttons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Continuar Jogo";
+            buttons[1].GetComponentInChildren<TextMeshProUGUI>().text = "Novo Jogo";
+            buttons[2].GetComponentInChildren<TextMeshProUGUI>().text = "Configurações";
+            buttons[3].GetComponentInChildren<TextMeshProUGUI>().text = "Sair do Jogo";
+
+            inputGuideText[0].text = "Navegar";
+            inputGuideText[1].text = "Confirmar";
+            inputGuideText[2].text = "Voltar";
+        }
+
+        flagIcon.sprite = currentLanguage == "en" ? flagImages[0] : flagImages[1];
+    }
     public void ResumeOperation()
     {
         isThisMenuActive = true;

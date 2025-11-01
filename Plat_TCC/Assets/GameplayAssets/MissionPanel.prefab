@@ -247,6 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionNameText: {fileID: 4475794315952006334}
   collectiblePanelPrefab: {fileID: 4019853026311450178, guid: 9443e144d680f1342820688869a92579, type: 3}
+  missionHeader: {fileID: 1113513516625000674}
   collectiblePanels: []
   canvasGroup: {fileID: 2195191124079961508}
   blockerObj: {fileID: 1079775266338342408}
@@ -278,6 +279,7 @@ GameObject:
   - component: {fileID: 5822712293426290069}
   - component: {fileID: 4378951350918767763}
   - component: {fileID: 3726978119449515213}
+  - component: {fileID: 1649306480906159051}
   m_Layer: 5
   m_Name: LockText
   m_TagString: Untagged
@@ -408,6 +410,27 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1649306480906159051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213535550592475551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: 'Mission Locked
+
+
+    Complete other missions before
+
+    challenging
+    this'
+  dialogTextBR: "Miss\xE3o Bloqueada\n\nComplete outras miss\xF5es antes\nde se desafiar
+    nesta"
 --- !u!1 &1766838876844050445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1091,7 @@ GameObject:
   - component: {fileID: 7069953648428352846}
   - component: {fileID: 1296875809195598801}
   - component: {fileID: 7700606408522060378}
+  - component: {fileID: 2735486710792847287}
   m_Layer: 5
   m_Name: FruitRecord
   m_TagString: Untagged
@@ -1195,6 +1219,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2735486710792847287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5690809724894427363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: Fruits Record
+  dialogTextBR: Recorde de Frutas
 --- !u!1 &6537304514102694650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1244,7 @@ GameObject:
   - component: {fileID: 7947869330493501763}
   - component: {fileID: 8556040599910466679}
   - component: {fileID: 843678955077165782}
+  - component: {fileID: 4554675007179396037}
   m_Layer: 5
   m_Name: ChallengeHeader
   m_TagString: Untagged
@@ -1334,6 +1373,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4554675007179396037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6537304514102694650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: Speed Challenge
+  dialogTextBR: Desafio de Tempo
 --- !u!1 &7041494167083318417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,6 +1609,7 @@ GameObject:
   - component: {fileID: 1233142026479773371}
   - component: {fileID: 4942277105680517526}
   - component: {fileID: 6361081146026276692}
+  - component: {fileID: 5197500688936601385}
   m_Layer: 5
   m_Name: ChallengeText
   m_TagString: Untagged
@@ -1682,6 +1736,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5197500688936601385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8120331111372314349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: Complete in under
+  dialogTextBR: "Complete em at\xE9"
 --- !u!1 &8397940752892702099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,6 +1761,7 @@ GameObject:
   - component: {fileID: 8635670301817046658}
   - component: {fileID: 1340883463426543203}
   - component: {fileID: 1263615392944398421}
+  - component: {fileID: 1172688084040786720}
   m_Layer: 5
   m_Name: ObjectiveHeader
   m_TagString: Untagged
@@ -1821,6 +1890,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1172688084040786720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8397940752892702099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: Primary Objective
+  dialogTextBR: "Objetivo Prim\xE1rio"
 --- !u!1 &8473509224689091848
 GameObject:
   m_ObjectHideFlags: 0

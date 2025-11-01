@@ -53,6 +53,9 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     private InputSystem_Actions inputs;
 
     [SerializeField]
+    private TextMeshProUGUI[] inputGuideText;
+
+    [SerializeField]
     private RectTransform mainHolder;
 
     private bool isThisMenuActive = true;
@@ -126,7 +129,8 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
             S_LevelManager.instance.OnGearCollected += UpdateCollectibleTrackingGear;
             S_LevelManager.instance.OnAppleCollected += UpdateCollectibleTrackingApple;
         }
-        
+
+        RefreshLanguage();
 
         SceneManager.activeSceneChanged += OnSceneChanged;
     }
@@ -337,15 +341,22 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     /// <param name="maxAmount"></param>
     public void AddCollectibleTracking(int itemType, int maxAmount = -1)
     {
+        S_SaveManager.SettingsData settingsData = S_SaveManager.instance.GetSettingsData();
+        string currentLanguage = settingsData.language;
+
+        string appleName = currentLanguage == "en" ? "Apple" : "Maçã";
+        string keyName = currentLanguage == "en" ? "Key" : "Chave";
+        string gearName = currentLanguage == "en" ? "Gear" : "Engrenagem";
+
         GameObject newCollectible = Instantiate(collectibleShowcasePrefab, collectibleBG.transform);
         newCollectible.transform.GetChild(0).GetComponent<Image>().sprite = itemType == 1 ? S_CollectibleExhibitor.instance.appleSprite : itemType == 2 ? S_CollectibleExhibitor.instance.keySprite : itemType == 3 ? S_CollectibleExhibitor.instance.gearSprite : null;
         if (maxAmount > 0)
         {
-            newCollectible.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemType == 1 ? "Apples: 0/" + maxAmount : itemType == 2 ? "Keys: 0/" + maxAmount : itemType == 3 ? "Gears: 0/" + maxAmount : "Unknown";
+            newCollectible.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemType == 1 ? appleName + ": 0/" + maxAmount : itemType == 2 ? keyName + ": 0/" + maxAmount : itemType == 3 ? gearName + ": 0/" + maxAmount : "Unknown";
         }
         else
         {
-            newCollectible.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemType == 1 ? "Apples: 0x" : itemType == 2 ? "Keys: 0x" : itemType == 3 ? "Gears: 0x" : "Unknown";
+            newCollectible.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = itemType == 1 ? appleName + ": 0x" : itemType == 2 ? keyName + ": 0x" : itemType == 3 ? gearName + ": 0x" : "Unknown";
         }
         collectibleShowcases.Add(newCollectible);
     }
@@ -389,6 +400,77 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
                 }
                 return;
             }
+        }
+    }
+
+    public void RefreshLanguage()
+    {
+        S_SaveManager.SettingsData settingsData = S_SaveManager.instance.GetSettingsData();
+
+        string currentLanguage = settingsData.language;
+
+        Debug.LogWarning("bicTsdahas: " + currentLanguage);
+
+        if (currentLanguage == "en")
+        {
+            // For every buttons that has "Resume" in its text, change it to "Resume Game"
+
+            foreach (var button in buttons)
+            {
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Resume"))
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Resume Game";
+                }
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Checkpoint"))
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Return to Last Checkpoint";
+                }
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Hub"))
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Return to World Hub";
+                }
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Settings"))
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Settings";
+                }
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Title"))
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Quit to Title";
+                }
+            }
+
+            inputGuideText[0].text = "Navigate";
+            inputGuideText[1].text = "Confirm";
+            inputGuideText[2].text = "Return";
+        }
+        else if (currentLanguage == "br")
+        {
+            foreach (var button in buttons)
+            {
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Resume"))
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Retomar Jogo";
+                }
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Checkpoint"))
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Retornar ao Último Checkpoint";
+                }
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Hub"))
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Retornar ao Hub de Mundos";
+                }
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Settings"))
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Opções";
+                }
+                if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Title"))
+                {
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Sair para Tela de Título";
+                }
+            }
+            inputGuideText[0].text = "Navegar";
+            inputGuideText[1].text = "Confirmar";
+            inputGuideText[2].text = "Voltar";
         }
     }
 

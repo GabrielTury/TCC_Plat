@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -75,6 +76,8 @@ public class S_SettingsManager : MonoBehaviour
 
     private int soundVolume = 80;
 
+    private string language = "en";
+
     private void Awake()
     {
         inputs = new InputSystem_Actions();
@@ -106,6 +109,7 @@ public class S_SettingsManager : MonoBehaviour
             vsyncEnabled = settingsData.vsyncEnabled;
             musicVolume = settingsData.musicVolume;
             soundVolume = settingsData.soundVolume;
+            language = settingsData.language;
         }
         else
         {
@@ -114,6 +118,7 @@ public class S_SettingsManager : MonoBehaviour
             vsyncEnabled = false;
             musicVolume = 80; // Default to 80%
             soundVolume = 80; // Default to 80%
+            language = "en";
         }
 
         if (SceneManager.GetActiveScene().name == "MainMenu")
@@ -122,6 +127,8 @@ public class S_SettingsManager : MonoBehaviour
         }
 
         instance = this;
+
+        RefreshLanguage(settingsData.language);
 
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -326,22 +333,29 @@ public class S_SettingsManager : MonoBehaviour
 
             case 1: // Window Type
 
-                buttonsText[menuIndex].text = windowTypes[windowTypeIndex] == 0 ? "Windowed" : windowTypes[windowTypeIndex] == 1 ? "Borderless" : "Fullscreen";
+                string windowedText = language == "en" ? "Windowed" : "Janela";
+                string borderlessText = language == "en" ? "Borderless" : "Sem Bordas";
+                string fullscreenText = language == "en" ? "Exclusive" : "Tela Cheia Exclusiva";
+
+                buttonsText[menuIndex].text = windowTypes[windowTypeIndex] == 0 ? windowedText : windowTypes[windowTypeIndex] == 1 ? borderlessText : fullscreenText;
                 break;
 
             case 2: // Vsync
 
-                buttonsText[menuIndex].text = vsyncEnabled ? "Enabled" : "Disabled";
+                string enabledText = language == "en" ? "Enabled" : "Habilitado";
+                string disabledText = language == "en" ? "Disabled" : "Desabilitado";
+
+                buttonsText[menuIndex].text = vsyncEnabled ? enabledText : disabledText;
                 break;
 
             case 3: // Music Volume
 
-                buttonsText[menuIndex].text = $"Music Volume: {(int)(musicVolume)}%";
+                buttonsText[menuIndex].text = $"{(int)(musicVolume)}%";
                 break;
 
             case 4: // Sound Volume
 
-                buttonsText[menuIndex].text = $"Sound Volume: {(int)(soundVolume)}%";
+                buttonsText[menuIndex].text = $"{(int)(soundVolume)}%";
                 break;
         }
     }
@@ -367,7 +381,8 @@ public class S_SettingsManager : MonoBehaviour
             windowTypeIndex = windowTypeIndex,
             musicVolume = musicVolume,
             soundVolume = soundVolume,
-            vsyncEnabled = vsyncEnabled
+            vsyncEnabled = vsyncEnabled,
+            language = language
         };
 
         S_SaveManager.instance.SaveSettingsData(settingsData);
@@ -481,5 +496,29 @@ public class S_SettingsManager : MonoBehaviour
         settingsAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(settingsPanel, new Vector2(-1000, 0), 0.3f));
         previousMenuScript?.ResumeOperation();
         isOnSettingsMenu = false;
+    }
+
+    public void RefreshLanguage(string language)
+    {
+        if (language == "en")
+        {
+            this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Settings";
+            buttons[0].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Resolution";
+            buttons[1].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Window Type";
+            buttons[2].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Vsync";
+            buttons[3].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Music Volume";
+            buttons[4].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Sound Volume";
+            buttons[5].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Save and Return";
+        }
+        else if (language == "br")
+        {
+            this.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Opções";
+            buttons[0].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Resolução";
+            buttons[1].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Tipo de Janela";
+            buttons[2].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Vsync";
+            buttons[3].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = "Volume da Música";
+            buttons[4].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Volume dos Sons";
+            buttons[5].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Salvar e Voltar";
+        }
     }
 }

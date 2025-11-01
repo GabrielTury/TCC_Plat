@@ -14,6 +14,9 @@ public class S_MissionPanel : MonoBehaviour
     private GameObject collectiblePanelPrefab;
 
     [SerializeField]
+    private TextMeshProUGUI missionHeader;
+
+    [SerializeField]
     private List<RectTransform> collectiblePanels = new List<RectTransform>();
 
     private RectTransform rectTransform;
@@ -100,7 +103,18 @@ public class S_MissionPanel : MonoBehaviour
 
     public void Setup(SO_MissionUIInfo missionInfo, string levelName, int missionIndex)
     {
-        missionNameText.text = missionInfo.objectiveName;
+        S_SaveManager.SettingsData settingsData = S_SaveManager.instance.GetSettingsData();
+
+        if (settingsData.language == "en")
+        {
+            missionHeader.text = "Mission " + (missionIndex + 1);
+            missionNameText.text = missionInfo.objectiveName;
+        }
+        else
+        {
+            missionHeader.text = "Missão " + (missionIndex + 1);
+            missionNameText.text = missionInfo.objectiveNameBR;
+        }
 
         Regex levelNumberRegex = new Regex(@"\d+");
         Match levelNumberMatch = levelNumberRegex.Match(levelName);
@@ -108,7 +122,7 @@ public class S_MissionPanel : MonoBehaviour
         int levelNumber = 0;
         if (levelNumberMatch.Success && int.TryParse(levelNumberMatch.Value, out levelNumber))
         {
-            Debug.Log($"Extracted Level Number: {levelNumber}");
+            //Debug.Log($"Extracted Level Number: {levelNumber}");
         }
         else
         {
@@ -117,7 +131,7 @@ public class S_MissionPanel : MonoBehaviour
 
         levelNumber = levelNumber - 1;
 
-        Debug.LogWarning("Apple Record for Level " + levelNumber + " Mission " + missionIndex + ": " + S_SaveManager.instance.GetAppleRecord(levelNumber, missionIndex));
+        //Debug.LogWarning("Apple Record for Level " + levelNumber + " Mission " + missionIndex + ": " + S_SaveManager.instance.GetAppleRecord(levelNumber, missionIndex));
         int appleRecord = S_SaveManager.instance.GetAppleRecord(levelNumber, missionIndex);
 
         appleCounter.text = appleRecord.ToString() + "x";

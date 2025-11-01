@@ -1,8 +1,9 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class S_SaveManager : MonoBehaviour
 {
@@ -24,13 +25,14 @@ public class S_SaveManager : MonoBehaviour
     [System.Serializable]
     public struct SettingsData
     {
-        public SettingsData(int resolutionIndexTemp, int windowTypeIndexTemp, bool vsyncEnabledTemp, int musicVolumeTemp, int soundVolumeTemp)
+        public SettingsData(int resolutionIndexTemp, int windowTypeIndexTemp, bool vsyncEnabledTemp, int musicVolumeTemp, int soundVolumeTemp, string languageName)
         {
             resolutionIndex = resolutionIndexTemp;
             windowTypeIndex = windowTypeIndexTemp;
             vsyncEnabled = vsyncEnabledTemp;
             musicVolume = musicVolumeTemp;
             soundVolume = soundVolumeTemp;
+            language = languageName;
         }
 
         public int resolutionIndex;
@@ -38,6 +40,7 @@ public class S_SaveManager : MonoBehaviour
         public bool vsyncEnabled;
         public int musicVolume;
         public int soundVolume;
+        public string language;
     }
 
     [System.Serializable]
@@ -69,14 +72,14 @@ public class S_SaveManager : MonoBehaviour
 
     public SettingsData settingsData;
 
-    public void Start()
+    public void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-
         if (instance == null)
             instance = this;
         else
             Destroy(this);
+
+        DontDestroyOnLoad(gameObject);
 
         defaultWorld = new WorldSave(new List<bool> { false, false, false }, new List<int> { 0, 0, 0 }, new List<bool> { false, false, false });
 
@@ -99,7 +102,7 @@ public class S_SaveManager : MonoBehaviour
             SavePlayerData(playerData);
         }
 
-        defaultSettings = new SettingsData(0, 0, false, 100, 100);
+        defaultSettings = new SettingsData(0, 0, false, 100, 100, "en");
 
         SettingsData loadedSettingsData;
         (loadedSettingsData, worked) = LoadSettingsData();
@@ -116,6 +119,8 @@ public class S_SaveManager : MonoBehaviour
 
         GetPlayerDataDebugInfo();
         GetSettingsDataDebugInfo();
+
+        SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
     /// <summary>
@@ -352,6 +357,45 @@ public class S_SaveManager : MonoBehaviour
         {
             worked = false;
             return (new SettingsData(), worked);
+        }
+    }
+
+    public SettingsData GetSettingsData()
+    {
+        return settingsData;
+    }
+
+    private void OnSceneChanged(Scene current, Scene next)
+    {
+        SettingsData loadedSettingsData;
+        bool worked;
+
+        (loadedSettingsData, worked) = LoadSettingsData();
+
+        if (worked)
+        {
+            settingsData = loadedSettingsData;
+        }
+        else
+        {
+            settingsData = defaultSettings;
+            SaveSettingsData(settingsData);
+        }
+
+        PlayerData loadedPlayerData;
+
+        // Load Player Data
+        (loadedPlayerData, worked) = LoadPlayerData();
+
+        // If loading worked, use loaded data, otherwise use default data
+        if (worked)
+        {
+            playerData = loadedPlayerData;
+        }
+        else
+        {
+            playerData = defaultData;
+            SavePlayerData(playerData);
         }
     }
 }
