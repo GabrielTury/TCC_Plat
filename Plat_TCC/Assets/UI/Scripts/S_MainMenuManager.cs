@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,10 +23,10 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
     private Image gameLogo;
 
     [SerializeField]
-    private Button[] buttons = new Button[4];
+    private List<Button> buttons = new List<Button>();
 
-    //[SerializeField]
-    private Image[] buttonsImage = new Image[4];
+    [SerializeField]
+    private List<Image> buttonsImage = new List<Image>();  
 
     [SerializeField]
     private Button buttonLanguage;
@@ -82,7 +83,7 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         Time.timeScale = 1f; // Ensure the time scale is set to normal
         InitializeSceneObjects();
         BeginSceneAnimation();
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < buttons.Count; i++)
         {
             HighlightButton(i);
         }
@@ -96,6 +97,15 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
         Debug.LogWarning("CURRENT LANGUAGE: " + currentLanguage);
         RefreshLanguage();
+
+        if (buttons[0] == null)
+        {
+            HighlightButton(1);
+        }
+        else
+        {
+            HighlightButton(0);
+        }
     }
 
     private void OnEnable()
@@ -134,15 +144,36 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         gameLogo.rectTransform.localScale = new Vector2(0, 0);
 
         int distance = 140;
-        for (int i = 0; i < buttons.Length; i++)
+
+        Debug.LogWarning("buttons count " + buttons.Count);
+
+        for (int i = 0; i < buttons.Count; i++)
         {
-            buttonsImage[i] = buttons[i].GetComponent<Image>();
+            if (i < buttonsImage.Count && buttonsImage[i] != null)
+            {
+                buttonsImage[i] = buttons[i].GetComponent<Image>();
+            }
         }
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < buttons.Count; i++)
         {
-            buttonsImage[i].rectTransform.anchoredPosition = new Vector2(-570, -800 - ((i + 1) * distance));
+            if (i < buttonsImage.Count && buttonsImage[i] != null)
+            {
+                buttonsImage[i].rectTransform.anchoredPosition = new Vector2(-570, -800 - ((i + 1) * distance));
+            }
         }
-        
+        if (ArePlayerDataEqual(S_SaveManager.instance.GetPlayerData(), S_SaveManager.instance.defaultData))
+        {
+            if (buttons.Count > 0)
+            {
+                Destroy(buttons[0].gameObject);
+                buttons[0] = null; // Disable Continue Game button
+                if (buttonsImage.Count > 0)
+                {
+                    buttonsImage[0] = null;
+                }
+            }
+            Debug.Log("Player data matches the default data.");
+        }
     }
     
     private void BeginSceneAnimation()
@@ -160,9 +191,12 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         int distance = 140;
         float[] timeDiff = new float[4] { 1.5f, 1.8f, 2.1f, 2.4f };
 
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < buttons.Count; i++)
         {
-            StartCoroutine(HF.SmoothMove(buttonsImage[i], new Vector2(-570, 0 - (i * distance)), timeDiff[i]));
+            if (i < buttonsImage.Count && buttonsImage[i] != null)
+            {
+                StartCoroutine(HF.SmoothMove(buttonsImage[i], new Vector2(-570, 0 - (i * distance)), timeDiff[i]));
+            }
         }
     }
 
@@ -188,39 +222,85 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
                 selectionIndex--;
                 if (selectionIndex < 0)
                 {
-                    selectionIndex = buttons.Length - 1;
+                    selectionIndex = buttons.Count - 1;
+                }
+                if (buttons[selectionIndex] == null)
+                {
+                    selectionIndex--;
+                }
+                if (selectionIndex < 0)
+                {
+                    selectionIndex = buttons.Count - 1;
                 }
                 HighlightButton(selectionIndex);
             }
             else if (inputs.UI.Navigate.ReadValue<Vector2>().y < 0)
             {
                 selectionIndex++;
-                if (selectionIndex >= buttons.Length)
+                if (selectionIndex >= buttons.Count)
                 {
                     selectionIndex = 0;
+                }
+                if (buttons[selectionIndex] == null)
+                {
+                    selectionIndex++;
+                }
+                if (selectionIndex >= buttons.Count)
+                {
+                    if (buttons[0] == null)
+                    {
+                        selectionIndex = 1;
+                    }
+                    else
+                    {
+                        selectionIndex = 0;
+                    }
                 }
                 HighlightButton(selectionIndex);
             }
         }
-        
-        if (inputs.UI.Submit.WasPressedThisFrame())
+
+        if (inputs.UI.Submit.WasPressedThisFrame() && selectionIndex >= 0 && selectionIndex < buttons.Count)
         {
-            buttons[selectionIndex].onClick.Invoke();
+            if (buttons[selectionIndex] != null)
+            {
+                buttons[selectionIndex].onClick.Invoke();
+            }
         }
     }
 
-    public void HighlightButton(int buttonIndex)
+    private void HighlightButton(int buttonIndex)
     {
-        if (buttonAnimationCoroutine[lastButtonHighlighted] != null)
+        if (buttonIndex < 0 || buttonIndex >= buttons.Count || buttons[buttonIndex] == null)
+        {
+            Debug.LogWarning($"Invalid button index: {buttonIndex}. Skipping highlight.");
+            return;
+        }
+
+        // Defensive: Check lastButtonHighlighted is valid before using it
+        if (lastButtonHighlighted >= 0 && lastButtonHighlighted < buttonAnimationCoroutine.Length && buttonAnimationCoroutine[lastButtonHighlighted] != null)
         {
             StopCoroutine(buttonAnimationCoroutine[lastButtonHighlighted]);
             buttonAnimationCoroutine[lastButtonHighlighted] = StartCoroutine(UnHighlightAnimation(lastButtonHighlighted));
         }
-        if (buttonAnimationCoroutine[buttonIndex] != null)
+
+        if (buttonIndex >= 0 && buttonIndex < buttonAnimationCoroutine.Length && buttonAnimationCoroutine[buttonIndex] != null)
         {
             StopCoroutine(buttonAnimationCoroutine[buttonIndex]);
         }
-        buttonAnimationCoroutine[buttonIndex] = StartCoroutine(HighlightAnimation(buttonIndex));
+
+        // Defensive: Check buttonsImage size and null before accessing
+        if (buttonIndex >= buttonsImage.Count || buttonsImage[buttonIndex] == null)
+        {
+            Debug.LogWarning($"Invalid or missing button image at index: {buttonIndex}. Skipping highlight animation.");
+            return;
+        }
+
+        Debug.LogWarning("Highlighting button index: " + buttonIndex);
+        if (buttonIndex >= 0 && buttonIndex < buttonAnimationCoroutine.Length)
+        {
+            buttonAnimationCoroutine[buttonIndex] = StartCoroutine(HighlightAnimation(buttonIndex));
+        }
         lastButtonHighlighted = buttonIndex;
         selectionIndex = buttonIndex;
     }
@@ -365,7 +445,11 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
     {
         if (currentLanguage == "en")
         {
-            buttons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Continue Game";
+            if (buttons[0] != null)
+            {
+                buttons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Continue Game";
+            }
+            
             buttons[1].GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
             buttons[2].GetComponentInChildren<TextMeshProUGUI>().text = "Settings";
             buttons[3].GetComponentInChildren<TextMeshProUGUI>().text = "Quit Game";
@@ -376,7 +460,10 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         }
         else if (currentLanguage == "br")
         {
-            buttons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Continuar Jogo";
+            if (buttons[0] != null)
+            {
+                buttons[0].GetComponentInChildren<TextMeshProUGUI>().text = "Continuar Jogo";
+            }
             buttons[1].GetComponentInChildren<TextMeshProUGUI>().text = "Novo Jogo";
             buttons[2].GetComponentInChildren<TextMeshProUGUI>().text = "Configurações";
             buttons[3].GetComponentInChildren<TextMeshProUGUI>().text = "Sair do Jogo";
@@ -407,6 +494,14 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         S_SettingsManager.instance.OpenSettings(this);
         mainMenuAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainPanel, new Vector2(-800, 0), 0.3f));
         isThisMenuActive = false;
+    }
+    
+
+    private bool ArePlayerDataEqual(S_SaveManager.PlayerData data1, S_SaveManager.PlayerData data2)
+    {
+        // Compare fields of the PlayerData struct for equality
+        return data1.appleCount == data2.appleCount &&
+               data1.worlds.Count == data2.worlds.Count; // Add more comparisons as needed
     }
     #endregion
 }

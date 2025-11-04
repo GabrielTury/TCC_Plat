@@ -128,8 +128,6 @@ public class S_SettingsManager : MonoBehaviour
 
         instance = this;
 
-        RefreshLanguage(settingsData.language);
-
         for (int i = 0; i < buttons.Length; i++)
         {
             buttonsCanvas[i] = buttons[i].GetComponent<CanvasGroup>();
@@ -157,6 +155,8 @@ public class S_SettingsManager : MonoBehaviour
         }
 
         HighlightButton(selectionIndex);
+
+        RefreshLanguage(settingsData.language);
     }
 
     void Update()
@@ -520,5 +520,18 @@ public class S_SettingsManager : MonoBehaviour
             buttons[4].transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = "Volume dos Sons";
             buttons[5].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Salvar e Voltar";
         }
+
+        this.language = language;
+
+        string windowedText = language == "en" ? "Windowed" : "Janela";
+        string borderlessText = language == "en" ? "Borderless" : "Sem Bordas";
+        string fullscreenText = language == "en" ? "Exclusive" : "Tela Cheia Exclusiva";
+
+        buttonsText[1].text = windowTypes[windowTypeIndex] == 0 ? windowedText : windowTypes[windowTypeIndex] == 1 ? borderlessText : fullscreenText;
+
+        string enabledText = language == "en" ? "Enabled" : "Habilitado";
+        string disabledText = language == "en" ? "Disabled" : "Desabilitado";
+
+        buttonsText[2].text = vsyncEnabled ? enabledText : disabledText;
     }
 }

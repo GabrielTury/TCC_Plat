@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 84451324}
   - component: {fileID: 84451326}
   - component: {fileID: 84451325}
+  - component: {fileID: 84451327}
   m_Layer: 0
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -445,6 +446,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84451323}
   m_CullTransparentMesh: 1
+--- !u!114 &84451327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84451323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: World 2
+  dialogTextBR: Mundo 2
 --- !u!1001 &98794621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1812,6 +1827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelName: World 1
+  hasStartedLoading: 0
   inputGuideIcons:
     confirm: {fileID: 1306204800}
   inputIcons:
@@ -2711,6 +2727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelName: World 2
+  hasStartedLoading: 0
   inputGuideIcons:
     confirm: {fileID: 1231061750}
   inputIcons:
@@ -3393,6 +3410,7 @@ GameObject:
   - component: {fileID: 1039206979}
   - component: {fileID: 1039206981}
   - component: {fileID: 1039206980}
+  - component: {fileID: 1039206982}
   m_Layer: 0
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -3518,6 +3536,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039206978}
   m_CullTransparentMesh: 1
+--- !u!114 &1039206982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039206978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: World 3
+  dialogTextBR: Mundo 3
 --- !u!1001 &1059313576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3958,6 +3990,7 @@ GameObject:
   - component: {fileID: 1219676813}
   - component: {fileID: 1219676815}
   - component: {fileID: 1219676814}
+  - component: {fileID: 1219676816}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -4083,6 +4116,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219676812}
   m_CullTransparentMesh: 1
+--- !u!114 &1219676816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219676812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: Windmill Village
+  dialogTextBR: Vilarejo dos Moinhos
 --- !u!1 &1221193307
 GameObject:
   m_ObjectHideFlags: 0
@@ -6545,7 +6592,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7275091774121426331, guid: d5eec1078d8ff514c8cbcddf0782c9db, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 5daa851888fd64c4db82ffbee20bdc59, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 5daa851888fd64c4db82ffbee20bdc59, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
@@ -6815,6 +6862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelName: World 3
+  hasStartedLoading: 0
   inputGuideIcons:
     confirm: {fileID: 1624524136}
   inputIcons:
@@ -7072,6 +7120,7 @@ GameObject:
   - component: {fileID: 2135726064}
   - component: {fileID: 2135726066}
   - component: {fileID: 2135726065}
+  - component: {fileID: 2135726067}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -7197,6 +7246,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2135726063}
   m_CullTransparentMesh: 1
+--- !u!114 &2135726067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135726063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: Forgotten Factory
+  dialogTextBR: "F\xE1brica Esquecida"
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class S_WorldPortal : MonoBehaviour
 
     //private float loadSize = 0;
 
-    private bool hasStartedLoading = false;
+    public bool hasStartedLoading = false;
 
     //[SerializeField]
     //private Image loadBar;
@@ -70,7 +70,7 @@ public class S_WorldPortal : MonoBehaviour
         if (playerIsInRegion)
         {
             //loadSize = Mathf.Lerp(loadSize, 1, 0.02f);
-            if (inputs.Player.Jump.WasPressedThisFrame() && !hasStartedLoading)
+            if (inputs.UI.Submit.WasPressedThisFrame() && !hasStartedLoading)
             {
                 //loadSize = 1;
                 //S_TransitionManager.instance.GoToLevelWithMission(levelName, missionIndex);
@@ -80,6 +80,7 @@ public class S_WorldPortal : MonoBehaviour
 
                 GameObject missionCanvas = Instantiate(missionSelectCanvas);
                 S_MissionSelectManager missionSelectManager = missionCanvas.GetComponent<S_MissionSelectManager>();
+                missionSelectManager.owner = this;
                 if (missionSelectManager != null)
                 {
                     missionSelectManager.Setup(missionInfos, levelName, worldInfo);
@@ -140,7 +141,7 @@ public class S_WorldPortal : MonoBehaviour
             }
             else if (lastDevice is Keyboard)
             {
-                inputGuideIcons.confirm.sprite = inputIcons[0].a;
+                inputGuideIcons.confirm.sprite = inputIcons[0].start;
             }
         }
     }

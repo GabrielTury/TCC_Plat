@@ -217,7 +217,9 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
     private void CheckPlayerInput()
     {
-        if (inputs.UI.Pause.WasPressedThisFrame())
+        S_MissionSelectManager missionSelectManager = FindFirstObjectByType<S_MissionSelectManager>();
+
+        if (inputs.UI.Pause.WasPressedThisFrame() & missionSelectManager == null)
         {
             if (isInPause)
             {
@@ -263,7 +265,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
                 HighlightButton(selectionIndex);
             }
         }
-        
+
         if (inputs.UI.Submit.WasPressedThisFrame() && isInPause && isThisMenuActive && mainPanel.anchoredPosition.x > -200)
         {
             buttons[selectionIndex].onClick.Invoke();

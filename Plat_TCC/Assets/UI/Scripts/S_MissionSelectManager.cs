@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Windows;
 
@@ -35,6 +36,12 @@ public class S_MissionSelectManager : MonoBehaviour
     private Transform missionPanelsHolder; // Reference to the holder for mission panels
 
     private S_MissionManager.SkyTime[] daytimes = { S_MissionManager.SkyTime.Morning, S_MissionManager.SkyTime.Evening, S_MissionManager.SkyTime.Night };
+    
+    public S_WorldPortal owner;
+
+    private bool finishedShowingUp = false;
+
+    private CinemachineInputAxisController virtualCamera;
 
     private void Awake()
     {
@@ -54,6 +61,15 @@ public class S_MissionSelectManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        // find cinemachine camera in the scene
+
+        virtualCamera = GameObject.FindFirstObjectByType<CinemachineInputAxisController>();
+
+        // disable player input in the camera
+
+        virtualCamera.enabled = false;
+
         Cursor.lockState = CursorLockMode.None;
 
         canvasGroup.alpha = 0f; // Set the initial alpha to 0 for fade-in effect
@@ -143,6 +159,12 @@ public class S_MissionSelectManager : MonoBehaviour
             {
                 TryStartMission(); // Check if the player is trying to start the mission
             }
+
+            if (inputs.UI.Cancel.WasPressedThisFrame() & finishedShowingUp)
+            {
+                FadeOut(0.5f);
+                canInteract = false;
+            }
             
         }
     }
@@ -203,6 +225,7 @@ public class S_MissionSelectManager : MonoBehaviour
             Debug.Log("Next level: " + levelName + " with mission index: " + currentIndex);
             S_TransitionManager.instance.GoToLevelWithMission(levelName, currentIndex, worldInfo, missionInfos[currentIndex], daytimes[currentIndex]);
             canInteract = false; // Disable interaction to prevent multiple submissions
+            
         }
     }
 
@@ -244,6 +267,24 @@ public class S_MissionSelectManager : MonoBehaviour
             yield return null; // Wait for the next frame
         }
         canvasGroup.alpha = endAlpha; // Ensure the final alpha is set
+        if (endAlpha == 1f)
+        {
+            finishedShowingUp = true;
+        }
+        if (endAlpha == 0f)
+        {
+            OnFadeOutComplete();
+        }
+        
+    }
+
+    private void OnFadeOutComplete()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        GameObject.Find("Player").GetComponent<S_PlayerMovement>().PausePlayer(false, false);
+        owner.hasStartedLoading = false;
+        virtualCamera.enabled = true;
+        Destroy(this.gameObject);
     }
 
     public void Setup(SO_MissionUIInfo[] missionInfos, string levelName, SO_WorldInfo worldInfo)

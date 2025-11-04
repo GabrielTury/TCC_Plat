@@ -1051,7 +1051,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2bd52b42-031d-4a42-8a0f-1f79f5f635aa"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

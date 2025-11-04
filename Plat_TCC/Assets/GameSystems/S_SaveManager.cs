@@ -62,6 +62,16 @@ public class S_SaveManager : MonoBehaviour
         public List<bool> timeChallengeStatus;
     }
 
+    private List<(int width, int height)> resolutions = new List<(int width, int height)>
+    {
+        (1280, 720),
+        (1366, 768),
+        (1600, 900),
+        (1920, 1080),
+        (2560, 1440),
+        (3840, 2160)
+    };
+
     public PlayerData defaultData;
 
     public SettingsData defaultSettings;
@@ -102,7 +112,9 @@ public class S_SaveManager : MonoBehaviour
             SavePlayerData(playerData);
         }
 
-        defaultSettings = new SettingsData(0, 0, false, 100, 100, "en");
+        int maxResolutionIndex = resolutions.FindLastIndex(res => res.width <= Screen.currentResolution.width);
+
+        defaultSettings = new SettingsData(maxResolutionIndex, 1, false, 80, 80, "en");
 
         SettingsData loadedSettingsData;
         (loadedSettingsData, worked) = LoadSettingsData();
@@ -365,6 +377,11 @@ public class S_SaveManager : MonoBehaviour
         return settingsData;
     }
 
+    public PlayerData GetPlayerData()
+    {
+        return playerData;
+    }
+
     private void OnSceneChanged(Scene current, Scene next)
     {
         SettingsData loadedSettingsData;
@@ -391,6 +408,21 @@ public class S_SaveManager : MonoBehaviour
         if (worked)
         {
             playerData = loadedPlayerData;
+
+            // get all apple count from levels and add them into the global apple count
+
+            int totalApples = 0;
+            for (int worldIndex = 0; worldIndex < playerData.worlds.Count; worldIndex++)
+            {
+                WorldSave world = playerData.worlds[worldIndex];
+                for (int missionIndex = 0; missionIndex < world.fruitRecord.Count; missionIndex++)
+                {
+                    totalApples += world.fruitRecord[missionIndex];
+                }
+            }
+            playerData.appleCount = totalApples;
+
+            SavePlayerData(playerData);
         }
         else
         {
