@@ -232,6 +232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7888798056975644334, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6545,7 +6549,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7275091774121426331, guid: d5eec1078d8ff514c8cbcddf0782c9db, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 5daa851888fd64c4db82ffbee20bdc59, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 5daa851888fd64c4db82ffbee20bdc59, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2

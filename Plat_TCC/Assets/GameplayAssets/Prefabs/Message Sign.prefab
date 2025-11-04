@@ -231,6 +231,7 @@ MonoBehaviour:
   dialogText: 'Hello, this is a
 
     simple dialog bubble!'
+  dialogTextBR: "Ol\xE1, isso \xE9 uma simples bolha de di\xE1logo!"
   dialogBoxImage: {fileID: 6207052702345517713}
   dialogTextBox: {fileID: 7991627772424384632}
 --- !u!225 &8428188806038424221
@@ -509,6 +510,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 3bdc8838acba7954da909d43fceaef35, type: 3}
       propertyPath: m_Name
       value: SM_sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3bdc8838acba7954da909d43fceaef35, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

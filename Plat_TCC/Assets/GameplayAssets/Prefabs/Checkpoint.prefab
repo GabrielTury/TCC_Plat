@@ -67,6 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6eb984c363a3a041979a87d61be321c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasActivatedCheckpoint: 0
+  animator: {fileID: 0}
   checkpointSound: {fileID: 8300000, guid: 0218591766c3f5f4ca82aaf1c5cea33b, type: 3}
 --- !u!1 &7893848950455903119
 GameObject:
@@ -264,6 +266,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 733cad1204cdc9d4795616e3d17fd366, type: 3}
       propertyPath: m_Name
       value: SM_vase
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 733cad1204cdc9d4795616e3d17fd366, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
