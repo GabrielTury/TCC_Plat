@@ -23,6 +23,9 @@ public class S_DevShortcuts : MonoBehaviour
         S_SaveManager.instance.SetMissionStatus(2, 1, true, true);
         S_SaveManager.instance.SetMissionStatus(2, 2, true, true);
         S_SaveManager.instance.SetMissionStatus(2, 3, true, true);
+        S_SaveManager.instance.SetMissionStatus(3, 1, true, true);
+        S_SaveManager.instance.SetMissionStatus(3, 2, true, true);
+        S_SaveManager.instance.SetMissionStatus(3, 3, true, true);
         S_SaveManager.instance.SavePlayerData(S_SaveManager.instance.playerData);
     }
 
@@ -35,6 +38,9 @@ public class S_DevShortcuts : MonoBehaviour
         S_SaveManager.instance.SetMissionStatus(2, 1, false, false);
         S_SaveManager.instance.SetMissionStatus(2, 2, false, false);
         S_SaveManager.instance.SetMissionStatus(2, 3, false, false);
+        S_SaveManager.instance.SetMissionStatus(3, 1, false, false);
+        S_SaveManager.instance.SetMissionStatus(3, 2, false, false);
+        S_SaveManager.instance.SetMissionStatus(3, 3, false, false);
         S_SaveManager.instance.SavePlayerData(S_SaveManager.instance.playerData);
     }
 }
