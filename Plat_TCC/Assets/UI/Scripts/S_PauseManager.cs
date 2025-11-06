@@ -370,7 +370,31 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     public void UpdateCollectibleTracking(int itemType, int count)
     {
         // Map itemType to name and format
-        string itemName = itemType == 1 ? "Apples" : itemType == 2 ? "Keys" : itemType == 3 ? "Gears" : null;
+
+        // check language settings first 
+
+        S_SaveManager.SettingsData settingsData = S_SaveManager.instance.GetSettingsData();
+        string currentLanguage = settingsData.language;
+
+        string itemName = null;
+
+        
+        if (itemName == null)
+            {
+            if (itemType == 1) // Apple
+            {
+                itemName = currentLanguage == "en" ? "Apple" : "Maçã";
+            }
+            else if (itemType == 2) // Key
+            {
+                itemName = currentLanguage == "en" ? "Key" : "Chave";
+            }
+            else if (itemType == 3) // Gear
+            {
+                itemName = currentLanguage == "en" ? "Gear" : "Engrenagem";
+            }
+        }
+
         if (itemName == null) return;
 
         for (int i = 0; i < collectibleShowcases.Count; i++)
@@ -398,7 +422,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
                     string currentCountStr = textComp.text.Substring(colonIdx + 2, xIdx - (colonIdx + 2));
                     int.TryParse(currentCountStr, out currentCount);
 
-                    textComp.text = $"{itemName}: {currentCount + count}x";
+                    textComp.text = $"{itemName}: x{currentCount + count}";
                 }
                 return;
             }
@@ -455,7 +479,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
                 }
                 if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Checkpoint"))
                 {
-                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Retornar ao Último Checkpoint";
+                    button.GetComponentInChildren<TextMeshProUGUI>().text = "Retornar ao Checkpoint Anterior";
                 }
                 if (button.GetComponentInChildren<TextMeshProUGUI>().text.Contains("Hub"))
                 {
