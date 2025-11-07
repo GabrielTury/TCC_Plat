@@ -16,6 +16,8 @@ public class S_ObjectMovement : MonoBehaviour, IMoveState
     private float objectDistance = 3;
     [SerializeField]
     private float maxObjectDistance = 6;
+    [SerializeField]
+    private float movableOffset = 0.5f;
     #region Interface Methods
     public void Activation()
     {
@@ -94,9 +96,18 @@ public class S_ObjectMovement : MonoBehaviour, IMoveState
         else if (distanceFromObject > maxObjectDistance)
             Attack_Cancel(new InputAction.CallbackContext());
 
+        RaycastHit hit;
+        int groundMask = 1 << 6;
+        float movableYpos = movable.transform.position.y;
+
+        if(Physics.Raycast(movable.transform.position, Vector3.down, out hit, 5f, groundMask))
+        {
+            movableYpos = hit.point.y + movableOffset;
+        }
+
         Vector3 target = transform.position + ((movable.transform.position - transform.position) * 0.5f);
         Vector3 movement = Vector3.MoveTowards(movable.transform.position, target, objectSpeed/100f);
-        movement.y = movable.transform.position.y;
+        movement.y = movableYpos;
         movable.transform.position = movement;
     }
 

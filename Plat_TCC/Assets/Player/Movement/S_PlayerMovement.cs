@@ -19,6 +19,9 @@ public class S_PlayerMovement : MonoBehaviour
     [SerializeField]
     private GameObject[] GrapplingMesh;
 
+    [SerializeField]
+    private GameObject watchMesh;
+
     [SerializeField, Space(2)]
     private GameObject blobShadow;
 
@@ -68,6 +71,11 @@ public class S_PlayerMovement : MonoBehaviour
                 if (stateComponent.enabled)
                 {
                     canSlow = true;
+                    watchMesh.SetActive(true);
+                }
+                else
+                {
+                    watchMesh.SetActive(false);
                 }
             }
         }
@@ -252,6 +260,7 @@ public class S_PlayerMovement : MonoBehaviour
     {
         canSlow = newState;
         GetComponent<S_SlowedMovement>().enabled = newState;
+        watchMesh.SetActive(newState);
     }
 
     private void OnDrawGizmosSelected()

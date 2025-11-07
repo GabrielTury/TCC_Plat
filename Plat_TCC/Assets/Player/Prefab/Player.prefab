@@ -1276,6 +1276,7 @@ MonoBehaviour:
   GrapplingMesh:
   - {fileID: 3262467994390364019}
   - {fileID: 2346163010594635324}
+  watchMesh: {fileID: 1737273197909529976}
   blobShadow: {fileID: 7606963843753141224}
   canGrapple: 0
   canSlow: 0
@@ -2216,6 +2217,11 @@ PrefabInstance:
 --- !u!4 &1393820552048938946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cfdb156b25eefa84299344f8086970c1, type: 3}
+  m_PrefabInstance: {fileID: 1503464594427439145}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1737273197909529976 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cfdb156b25eefa84299344f8086970c1, type: 3}
   m_PrefabInstance: {fileID: 1503464594427439145}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2416168602621887010
