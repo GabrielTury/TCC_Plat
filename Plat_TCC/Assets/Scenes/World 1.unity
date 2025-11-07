@@ -7582,6 +7582,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1990939134}
+    - target: {fileID: 2724137304712275779, guid: 9ee607317e805ac4086eca2589cfc60e, type: 3}
+      propertyPath: newHookUICanvas
+      value: 
+      objectReference: {fileID: 7288206629106921493, guid: 3f24d0813ed168a40bb4f826e678d5f0, type: 3}
     - target: {fileID: 4539822160290952114, guid: 9ee607317e805ac4086eca2589cfc60e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -10985,11 +10989,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 5000
+  near clip plane: 0.3
+  far clip plane: 1000
   field of view: 70
   orthographic: 0
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -11013,8 +11017,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990939130}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.19148917, y: 0.0050727976, z: 0.0009897142, w: 0.98148113}
-  m_LocalPosition: {x: -2.6327152, y: -22.657429, z: -32.8811}
+  m_LocalRotation: {x: 0.11445003, y: 0.00000012009143, z: -0.000000013835381, w: 0.993429}
+  m_LocalPosition: {x: -2.51, y: -16.992943, z: -30.547169}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

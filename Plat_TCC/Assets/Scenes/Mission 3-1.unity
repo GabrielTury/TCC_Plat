@@ -2308,16 +2308,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
-      value: 'Press Q to slow down time!
+      value: 'Press <sprite="b_slow" index=0 color=#333333> to slow down time!
 
-        Use it on fans to build momentum!'
+        Use
+        it on fans to build momentum!'
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogTextBR
-      value: 'Pressione Q para desacelerar o tempo!
+      value: 'Pressione <sprite="b_slow" index=0 color=#333333> para desacelerar
+        o tempo!
 
-        Use isso nos ventiladores
-        para ganhar um impulso!'
+        Use isso nos ventiladores para pegar impulso!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
+      propertyPath: m_text
+      value: 'Press <sprite="b_slow" index=0 color=#333333> to slow down time!
+
+        Use
+        it on fans to build momentum!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

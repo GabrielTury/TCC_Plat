@@ -175,6 +175,9 @@ public class S_SimpleDialogBubble : MonoBehaviour
         float textWidth = dialogTextBox.preferredWidth;
         float dialogBoxWidth = Mathf.Clamp(textWidth, 0, 300); // Set a maximum width for the dialog box
         dialogBoxImage.rectTransform.sizeDelta = new Vector3(dialogBoxWidth + 1, dialogBoxImage.rectTransform.sizeDelta.y);
+        // clamp dialog box side to 8.2
+
+        dialogBoxImage.rectTransform.sizeDelta = new Vector2(Mathf.Min(dialogBoxImage.rectTransform.sizeDelta.x, 8.2f), dialogBoxImage.rectTransform.sizeDelta.y);
 
         dialogBoxPosition = Vector3.Lerp(dialogBoxPosition, new Vector3(0, 2.5f + iconSine), 0.1f);
 

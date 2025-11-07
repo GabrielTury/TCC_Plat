@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class S_HookExhibitor : MonoBehaviour
@@ -26,6 +27,9 @@ public class S_HookExhibitor : MonoBehaviour
 
     private S_PlayerMovement playerMovement;
 
+    [SerializeField]
+    private GameObject newHookUICanvas;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -42,8 +46,9 @@ public class S_HookExhibitor : MonoBehaviour
         }
 
 
-        GameObject[] hookObjects = GameObject.FindGameObjectsWithTag("Hook");
-        hooks = new Transform[hookObjects.Length];
+        StartCoroutine(DelayedStart());
+
+        /*hooks = new Transform[hookObjects.Length];
         for (int i = 0; i < hookObjects.Length; i++)
         {
             hooks[i] = hookObjects[i].transform;
@@ -53,20 +58,38 @@ public class S_HookExhibitor : MonoBehaviour
         if (canvasGroup == null)
         {
             Debug.LogError("CanvasGroup component is missing on the UI icon.");
+        }*/
+    }
+
+    private IEnumerator DelayedStart()
+    {
+        yield return new WaitForSeconds(0.2f);
+        GameObject[] hookObjects = GameObject.FindGameObjectsWithTag("Hook");
+
+        // for every hook object, instantiate newHookUICanvas as a child of the hook object
+
+        foreach (GameObject hookObject in hookObjects)
+        {
+            GameObject uiInstance = Instantiate(newHookUICanvas, hookObject.transform);
+            uiInstance.transform.localPosition = Vector3.zero; // Position it at the center of the hook
         }
     }
 
     void Update()
     {
+        /*
         bool canGrapple = playerMovement.canGrapple;
 
         if (!canGrapple)
         {
             uiIcon.gameObject.SetActive(false);
             return;
+        } else
+        {
+            uiIcon.gameObject.SetActive(true);
         }
 
-        closestHook = GetClosestHook();
+            closestHook = GetClosestHook();
 
         if (closestHook != null)
         {
@@ -81,7 +104,7 @@ public class S_HookExhibitor : MonoBehaviour
                 {
                     // Set the position of it a little higher than it should be so that it doesnt blend with the background, but if goes above the screen height, put it below
 
-                    screenPosition.y += 50f;
+                    screenPosition.y += 10f;
                     if (screenPosition.y > Screen.height)
                     {
                         screenPosition.y = Screen.height - 50f;
@@ -109,7 +132,7 @@ public class S_HookExhibitor : MonoBehaviour
         else // No hooks
         {
             uiIcon.gameObject.SetActive(false);
-        }
+        }*/
     }
 
     private Transform GetClosestHook()
