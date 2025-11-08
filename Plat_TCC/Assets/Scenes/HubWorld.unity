@@ -2547,6 +2547,7 @@ GameObject:
   - component: {fileID: 904076825}
   - component: {fileID: 904076827}
   - component: {fileID: 904076826}
+  - component: {fileID: 904076828}
   m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -2681,6 +2682,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904076824}
   m_CullTransparentMesh: 1
+--- !u!114 &904076828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904076824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: 'Thank you for playing the game!
+
+    This is the end of the playable
+    demo.
+
+
+    If you''d like to continue playing, feel free to choose so below.
+
+    Otherwise,
+    see you in the full release!'
+  dialogTextBR: "Obrigado por jogar o jogo!\nEsse \xE9 o fim da demonstra\xE7\xE3o
+    jog\xE1vel.\n\nSe quiser continuar jogando, sinta-se livre para fazer isso logo
+    abaixo.\nCaso contr\xE1rio, nos vemos no lan\xE7amento final!"
 --- !u!1 &905791744
 GameObject:
   m_ObjectHideFlags: 0
@@ -3278,6 +3304,7 @@ GameObject:
   - component: {fileID: 993555576}
   - component: {fileID: 993555578}
   - component: {fileID: 993555577}
+  - component: {fileID: 993555579}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3403,6 +3430,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993555575}
   m_CullTransparentMesh: 1
+--- !u!114 &993555579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993555575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: Keep Playing
+  dialogTextBR: Continuar Jogando
 --- !u!1 &1039206978
 GameObject:
   m_ObjectHideFlags: 0
@@ -5646,6 +5687,7 @@ GameObject:
   - component: {fileID: 1724039057}
   - component: {fileID: 1724039059}
   - component: {fileID: 1724039058}
+  - component: {fileID: 1724039060}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -5670,7 +5712,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 367}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 589.9684, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1724039058
 MonoBehaviour:
@@ -5726,8 +5768,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -5771,6 +5813,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1724039056}
   m_CullTransparentMesh: 1
+--- !u!114 &1724039060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724039056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: Demo End
+  dialogTextBR: Fim da Demo
 --- !u!1 &1726868360
 GameObject:
   m_ObjectHideFlags: 0
@@ -6152,6 +6208,7 @@ GameObject:
   - component: {fileID: 1949447358}
   - component: {fileID: 1949447360}
   - component: {fileID: 1949447359}
+  - component: {fileID: 1949447361}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -6277,6 +6334,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949447357}
   m_CullTransparentMesh: 1
+--- !u!114 &1949447361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949447357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfc5d42e356e9db41804c7a337bbf492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogTextEN: Quit to Title Screen
+  dialogTextBR: Sair para o Menu Principal
 --- !u!1 &1951135541
 GameObject:
   m_ObjectHideFlags: 0
