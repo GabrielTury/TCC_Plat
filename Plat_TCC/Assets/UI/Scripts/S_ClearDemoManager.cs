@@ -12,9 +12,14 @@ public class S_ClearDemoManager : MonoBehaviour
         //string miss2 = PlayerPrefs.GetString("Mission1-2Completed", "false");
         //string miss3 = PlayerPrefs.GetString("Mission1-3Completed", "false");
 
-        bool missB1 = S_SaveManager.instance.GetMissionStatus(3, 1);
-        bool missB2 = S_SaveManager.instance.GetMissionStatus(3, 2);
-        bool missB3 = S_SaveManager.instance.GetMissionStatus(3, 3);
+        bool missB1 = S_SaveManager.instance.GetMissionStatus(2, 0);
+        bool missB2 = S_SaveManager.instance.GetMissionStatus(2, 1);
+        bool missB3 = S_SaveManager.instance.GetMissionStatus(2, 2);
+
+        // print out the values of missB1, missB2, missB3 for debugging
+        //Debug.Log("Mission 3-1 Completed: " + missB1);
+        //Debug.Log("Mission 3-2 Completed: " + missB2);
+        //Debug.Log("Mission 3-3 Completed: " + missB3);
 
         if (missB1 == true && missB2 == true && missB3 == true)
         {
