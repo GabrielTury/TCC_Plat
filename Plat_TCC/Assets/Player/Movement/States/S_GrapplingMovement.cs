@@ -159,9 +159,10 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         {
             SwingMovement();
             CableMovement();
+            GunMovement();
 
             //Count Timer
-            if(grappleTimer < grappleForceCooldown)
+            if (grappleTimer < grappleForceCooldown)
                 grappleTimer += Time.fixedDeltaTime;
 
             anchorPoint = closestCollider.transform.position;
@@ -249,9 +250,9 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                 ogBasePosition = grapplingBase.transform.localPosition;
                 ogBaseRotation = grapplingBase.transform.localEulerAngles;                
 
-                grapplingBase.transform.SetParent(handPoint.transform);
-                grapplingBase.transform.localPosition = Vector3.zero;
-                grapplingBase.transform.rotation = Quaternion.identity;
+                //grapplingBase.transform.SetParent(handPoint.transform);
+                //grapplingBase.transform.localPosition = Vector3.zero;
+                //grapplingBase.transform.rotation = Quaternion.identity;
 
                 ogAnchorPosition = grapplingAnchor.transform.localPosition;
                 ogAnchorRotation = grapplingAnchor.transform.localEulerAngles;
@@ -270,6 +271,12 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         {
             StopSwing();
         }
+    }
+
+    private void GunMovement()
+    {
+        grapplingBase.transform.position = handPoint.transform.position;
+        grapplingBase.transform.LookAt(closestCollider.transform);
     }
 
     private void StopSwing()
