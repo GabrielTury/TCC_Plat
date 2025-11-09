@@ -490,6 +490,136 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d61cff7b4933f44906ddd9e44c257b, type: 3}
+--- !u!1001 &800397896
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3922582070168034259, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_Size.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922582070168034259, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_Size.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: dialogType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: fireOnlyOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].speakerName
+      value: Grandpa
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].speakerName
+      value: Grandpa
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].speakerName
+      value: Raider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].sentenceText
+      value: What's that wasp-lookin' robot doing with our gear?
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].sentenceText
+      value: 'Nab it! Jab it! Tab it! Grab it!
+
+        Stop that wasp thing now!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].sentenceText
+      value: Am I really doing this...?
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].speakerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f796496e512c4904f8450587ef46c529, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].speakerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f796496e512c4904f8450587ef46c529, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].speakerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0699ca1d09809f64a914f99d4dc3b467, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].sentenceTextBR
+      value: "Mas o que que aquele rob\xF4 com cara de vespa est\xE1 fazendo com
+        a nossa engrenagem?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].sentenceTextBR
+      value: 'Prenda! Agarre! Segure! Capture!
+
+        Pegue a vespa agora!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].sentenceTextBR
+      value: Estou mesmo fazendo isso...?
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376834797628412825, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_Name
+      value: DialogTrigger (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 21.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -25.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70931249563e84946b93a5f9d0798446, type: 3}
 --- !u!1001 &892191068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1032,6 +1162,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 800397896}
   - {fileID: 728904467}
   - {fileID: 379131985}
   - {fileID: 958836565}

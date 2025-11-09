@@ -119,6 +119,137 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &31797940
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3922582070168034259, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_Size.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922582070168034259, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_Size.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922582070168034259, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_Size.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: dialogType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: fireOnlyOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].speakerName
+      value: Grandpa
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].speakerName
+      value: Raider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].speakerName
+      value: Raider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].sentenceText
+      value: Woah, look at all that fog. This place gets scary at night...
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].sentenceText
+      value: It's not that bad. I can still go up to that giant tree!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].sentenceText
+      value: I bet I can find another gear there.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].speakerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f796496e512c4904f8450587ef46c529, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].speakerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0699ca1d09809f64a914f99d4dc3b467, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].speakerSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0699ca1d09809f64a914f99d4dc3b467, type: 3}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[0].sentenceTextBR
+      value: "Nossa, olha s\xF3 toda essa n\xE9voa. Esse lugar fica apavorante de
+        noite..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[1].sentenceTextBR
+      value: "N\xE3o \xE9 t\xE3o ruim assim. Eu ainda consigo ir l\xE1 para aquela
+        \xE1rvore gigante!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764912614133823900, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: multipleSentences.Array.data[2].sentenceTextBR
+      value: "Aposto q vou encontrar mais uma engrenagem por l\xE1."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376834797628412825, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_Name
+      value: DialogTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -17.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 47.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649063933999511522, guid: 70931249563e84946b93a5f9d0798446, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70931249563e84946b93a5f9d0798446, type: 3}
 --- !u!1001 &201845740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4627,6 +4758,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 31797940}
   - {fileID: 739016875}
   - {fileID: 309194440}
   - {fileID: 392624633}
