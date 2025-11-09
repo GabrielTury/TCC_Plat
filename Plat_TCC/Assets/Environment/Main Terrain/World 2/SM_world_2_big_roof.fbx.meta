@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 81fe44e47326d83478b113299da07a09
+guid: d29c0caa3e524874f911ad1030fa9e25
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Bricks
-    second: {fileID: 2100000, guid: 11c036b4684790042877980da775a777, type: 2}
+      name: Shingles
+    second: {fileID: 2100000, guid: 04653125eb0891746bd8684bdc15df37, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Bricks_Gray
-    second: {fileID: 2100000, guid: 4bc3e641e84ab9847800714170d7da43, type: 2}
+      name: Shingles_Border
+    second: {fileID: 2100000, guid: ba3d8239bc2df6c44b1bdcd01626cf9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood Beam
+    second: {fileID: 2100000, guid: cfa6306ffee5f264a95b1ac0efa3e036, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
