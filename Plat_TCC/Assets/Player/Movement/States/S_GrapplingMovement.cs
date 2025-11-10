@@ -302,6 +302,8 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         grapplingAnchor.transform.SetParent(beltPoint.transform);
         grapplingAnchor.transform.localPosition = ogAnchorPosition;
         grapplingAnchor.transform.localEulerAngles = ogAnchorRotation;
+        //Reset Input
+        inputDirection = Vector2.zero;
     }
     private void SwingMovement()
     {
