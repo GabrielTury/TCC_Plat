@@ -18,8 +18,11 @@ public class S_WalkingGiant : S_InteractableBase
     [SerializeField]
     private LayerMask layerToAvoid = 1 << 8;
 
-    [SerializeField]
-    private VisualEffect wakeUpVFX;
+    [SerializeField]private VisualEffect wakeUpVFX;
+    [SerializeField] private Transform vfxSpawnPoint;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip spawnSound;
 
     private Collider[] objsInRange;
 
@@ -102,11 +105,18 @@ public class S_WalkingGiant : S_InteractableBase
     private void OnTriggerEnter(Collider other)
     {
         anim.SetTrigger("WakeUp");
-        Destroy(awakeTrigger);
-        if (wakeUpVFX != null)
+        if (audioSource != null && spawnSound != null)
         {
-            wakeUpVFX.Play();
+            audioSource.PlayOneShot(spawnSound);
         }
+
+        // Instancia e ativa o VFX
+        if (wakeUpVFX != null && vfxSpawnPoint != null)
+        {
+            VisualEffect vfxInstance = Instantiate(wakeUpVFX, vfxSpawnPoint.position, vfxSpawnPoint.rotation);
+            vfxInstance.Play();
+        }
+        Destroy(awakeTrigger);
 
     }
 }
