@@ -71,6 +71,8 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     private float gravityForce;
     #endregion
 
+    bool lastGroundStatus;
+
     private Coroutine stopMovement;
 
     private RaycastHit[] platformResults = new RaycastHit[4];
@@ -351,8 +353,14 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             airMultiplier = airMovementMultiplier; //on air movement
             coyoteTimer += Time.deltaTime;
         }
+        if(lastGroundStatus != ret && ret)
+        {
+            if (stopMovement == null)
+                stopMovement = StartCoroutine(SlowlyStopMovement());
+        }
 
-        anim.SetBool("Grounded", ret);
+         anim.SetBool("Grounded", ret);
+        lastGroundStatus = ret;
         return ret;
     }
 
@@ -381,6 +389,8 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             rb.linearVelocity = newRate;
             yield return new WaitForFixedUpdate();
         }
+
+        stopMovement = null;
     }
 
     private bool IsNearWall()
