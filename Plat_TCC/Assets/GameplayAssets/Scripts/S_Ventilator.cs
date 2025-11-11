@@ -44,6 +44,10 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(isBoxOnTop)
+        {            
+            return;
+        }
         if (isOnVentilator)
         {
             if (objRb != null)
@@ -74,6 +78,7 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
         if (other.gameObject.name.ToLower().Contains("box"))
         {
             isBoxOnTop = true;
+            disabledVisualizer.SetActive(false);
         }
 
     }
@@ -85,6 +90,7 @@ public class S_Ventilator : MonoBehaviour, IActivatableObjects
         if (other.gameObject.name.ToLower().Contains("box"))
         {
             isBoxOnTop = false;
+            disabledVisualizer.SetActive(true);
         }
     }
 
