@@ -201,6 +201,27 @@ public static class S_HelperFunctions
         }
     }
 
+    public static IEnumerator SmoothFadeCanvasGroup(CanvasGroup objImage, float targetAlpha, float duration, bool disableOnEnd = false)
+    {
+        float startAlpha = objImage.alpha;
+        float lerp = 0;
+        float smoothLerp = 0;
+
+        while (lerp < 1 && duration > 0)
+        {
+            lerp = Mathf.MoveTowards(lerp, 1, Time.unscaledDeltaTime / duration);
+            smoothLerp = Mathf.SmoothStep(0, 1, lerp);
+            objImage.alpha = Mathf.Lerp(startAlpha, targetAlpha, smoothLerp);
+            yield return null;
+        }
+
+        objImage.alpha = targetAlpha;
+        if (disableOnEnd == true)
+        {
+            objImage.gameObject.SetActive(false);
+        }
+    }
+
     public static IEnumerator SmoothFadeText(TextMeshProUGUI textObj, Color32 targetColor, float duration, bool disableOnEnd = false)
     {
         Color32 startColor = textObj.color;

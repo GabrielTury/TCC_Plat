@@ -1424,40 +1424,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
   m_PrefabInstance: {fileID: 1448085040}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &210806403 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7869623160024608881, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
-  m_PrefabInstance: {fileID: 2946244096316286089}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &210806406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210806403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 781099928}
-          m_TargetAssemblyTypeName: S_SettingsManager, Assembly-CSharp
-          m_MethodName: HighlightButton
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 3
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &215081750
 GameObject:
   m_ObjectHideFlags: 0
@@ -6985,40 +6951,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6185598171477083788, guid: eb1ed51fe0216a74092e5704e7ee6512, type: 3}
   m_PrefabInstance: {fileID: 1223745452}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1224168533 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5869636140928129656, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
-  m_PrefabInstance: {fileID: 2946244096316286089}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1224168536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1224168533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 781099928}
-          m_TargetAssemblyTypeName: S_SettingsManager, Assembly-CSharp
-          m_MethodName: HighlightButton
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 2
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1001 &1250328247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10988,11 +10920,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.1
+  far clip plane: 5000
   field of view: 70
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -11016,8 +10948,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990939130}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11445003, y: 0.00000012009143, z: -0.000000013835381, w: 0.993429}
-  m_LocalPosition: {x: -2.51, y: -16.992943, z: -30.547169}
+  m_LocalRotation: {x: -0.19148917, y: 0.0050727976, z: 0.0009897142, w: 0.98148113}
+  m_LocalPosition: {x: -2.6327152, y: -22.657429, z: -32.8811}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11753,40 +11685,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1624425115}
   m_SourcePrefab: {fileID: 100100000, guid: b001ea9c329969242a6bd63a3db3c37d, type: 3}
---- !u!1 &2071491153 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1580234883906464587, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
-  m_PrefabInstance: {fileID: 2946244096316286089}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2071491159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071491153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 781099928}
-          m_TargetAssemblyTypeName: S_SettingsManager, Assembly-CSharp
-          m_MethodName: HighlightButton
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 4
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1001 &2075518712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12533,15 +12431,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8470322298701233514, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1588089881}
-    - targetCorrespondingSourceObject: {fileID: 5869636140928129656, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1224168536}
-    - targetCorrespondingSourceObject: {fileID: 7869623160024608881, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 210806406}
-    - targetCorrespondingSourceObject: {fileID: 1580234883906464587, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2071491159}
   m_SourcePrefab: {fileID: 100100000, guid: 80354d9787968bd4ba4bd9228e89754e, type: 3}
 --- !u!224 &2946244096316286090 stripped
 RectTransform:

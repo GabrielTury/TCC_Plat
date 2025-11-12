@@ -61,6 +61,16 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
     private bool isThisMenuActive = true;
     private bool isInPause = false;
 
+    [SerializeField]
+    private CanvasGroup appleTotalCounterCanvasGroup;
+
+    private Coroutine appleTotalCounterAnimationCoroutine;
+
+    [SerializeField]
+    private TextMeshProUGUI appleTotalCounterText;
+
+    private int savedAppleCount = 0;
+
     //[SerializeField]
     //private float offset = 800f;
 
@@ -133,6 +143,12 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         RefreshLanguage();
 
         SceneManager.activeSceneChanged += OnSceneChanged;
+
+        // get saved apple count
+
+        S_SaveManager.PlayerData playerData = S_SaveManager.instance.GetPlayerData();
+
+        savedAppleCount = playerData.appleCount;
     }
 
     void Update()
@@ -416,13 +432,15 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
                 }
                 else
                 {
+                    // get number after "x"
                     int colonIdx = textComp.text.IndexOf(':');
                     int xIdx = textComp.text.IndexOf('x');
-                    // Extract current count between ": " and "x"
-                    string currentCountStr = textComp.text.Substring(colonIdx + 2, xIdx - (colonIdx + 2));
+                    
+                    string currentCountStr = textComp.text.Substring(xIdx + 1);
                     int.TryParse(currentCountStr, out currentCount);
 
                     textComp.text = $"{itemName}: x{currentCount + count}";
+                    //Debug.Log("Updated " + itemName + " count to " + (currentCount + count) + " separated values: " + currentCount + "/" + count + "/" + currentCountStr);
                 }
                 return;
             }
@@ -435,7 +453,7 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
         string currentLanguage = settingsData.language;
 
-        Debug.LogWarning("bicTsdahas: " + currentLanguage);
+        //Debug.LogWarning("bicTsdahas: " + currentLanguage);
 
         if (currentLanguage == "en")
         {
@@ -658,8 +676,18 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         {
             StopCoroutine(collectibleBGAnimationCoroutine);
         }
+        if (appleTotalCounterAnimationCoroutine != null)
+        {
+            StopCoroutine(appleTotalCounterAnimationCoroutine);
+        }
         mainHolderAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainHolder, new Vector2(0, 0), 0.3f));
         collectibleBGAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(collectibleBG, new Vector2(720, -375), 0.3f));
+        appleTotalCounterAnimationCoroutine = StartCoroutine(HF.SmoothFadeCanvasGroup(appleTotalCounterCanvasGroup, 1, 0.3f));
+
+        if (S_LevelManager.instance != null)
+        {
+            appleTotalCounterText.text = "Total: x" + (savedAppleCount + S_LevelManager.instance.collectibles);
+        }
     }
 
     public void ResumeGame()
@@ -675,8 +703,13 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         {
             StopCoroutine(collectibleBGAnimationCoroutine);
         }
+        if (appleTotalCounterAnimationCoroutine != null)
+        {
+            StopCoroutine(appleTotalCounterAnimationCoroutine);
+        }
         mainHolderAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(mainHolder, new Vector2(-1900, 0), 0.3f));
         collectibleBGAnimationCoroutine = StartCoroutine(HF.SmoothRectMove(collectibleBG, new Vector2(720, -800), 0.3f));
+        appleTotalCounterAnimationCoroutine = StartCoroutine(HF.SmoothFadeCanvasGroup(appleTotalCounterCanvasGroup, 0, 0.3f));
     }
 
     public void OpenSettingsMenu()
