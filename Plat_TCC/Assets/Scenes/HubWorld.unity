@@ -5774,10 +5774,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2477984391489653312, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: VerticalAxis.Range.x
-      value: -90
-      objectReference: {fileID: 0}
     - target: {fileID: 2588683752055523103, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5821,34 +5817,6 @@ PrefabInstance:
     - target: {fileID: 3606632591159112417, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
       propertyPath: m_Name
       value: CinemachineCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.DeadZone.Size.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.ScreenPosition.x
-      value: -0.0000000055879354
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.ScreenPosition.y
-      value: 0.000000059604645
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.HardLimits.Size.x
-      value: 0.107339375
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.HardLimits.Size.y
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.HardLimits.Offset.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918568440868842221, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Lens.FieldOfView
-      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 7918568440868842221, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
       propertyPath: Target.TrackingTarget

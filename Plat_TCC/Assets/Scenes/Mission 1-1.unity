@@ -2353,18 +2353,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
-      value: "Press <sprite=\"b_jump\" index=0 color=#333333> while in \nthe air
-        to dash forward!"
+      value: "Press <sprite=\"b_jump\" index=0> while in \nthe air to dash forward!"
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogTextBR
-      value: "Pressione <sprite=\"b_jump\" index=0 color=#333333> enquanto est\xE1\nno
-        ar para pular para frente!"
+      value: "Pressione <sprite=\"b_jump\" index=0> enquanto est\xE1\nno ar para
+        pular para frente!"
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
-      value: "Press <sprite=\"b_jump\" index=0 color=#333333> while in \nthe air
-        to dash forward!"
+      value: "Press <sprite=\"b_jump\" index=0> while in \nthe air to dash forward!"
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_fontAsset
@@ -3541,18 +3539,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
-      value: "Press <sprite=\"b_raise_hook\" index=0 color=#333333> and <sprite=\"b_lower_hook\"
-        index=0 color=#333333> \nto move up and down \nwhen using the grappling hook"
+      value: "Press <sprite=\"b_raise_hook\" index=0> and <sprite=\"b_lower_hook\"
+        index=0> \nto move up and down \nwhen using the grappling hook"
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogTextBR
-      value: "Pressione <sprite=\"b_raise_hook\" index=0 color=#333333> e <sprite=\"b_lower_hook\"
-        index=0 color=#333333> \npara subir e descer \nenquanto usa o gancho de disparo."
+      value: "Pressione <sprite=\"b_raise_hook\" index=0> e <sprite=\"b_lower_hook\"
+        index=0> \npara subir e descer \nenquanto usa o gancho de disparo."
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
-      value: "Press <sprite=\"b_raise_hook\" index=0 color=#333333> and <sprite=\"b_lower_hook\"
-        index=0 color=#333333> \nto move up and down \nwhen using the grappling hook"
+      value: "Press <sprite=\"b_raise_hook\" index=0> and <sprite=\"b_lower_hook\"
+        index=0> \nto move up and down \nwhen using the grappling hook"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3911,32 +3909,44 @@ PrefabInstance:
     m_TransformParent: {fileID: 155369584}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.9950867
+      value: 6.36
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.28999996
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -49.234604
+      value: -60.42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000030908623
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000030908623
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3950,6 +3960,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5414655791027698174, guid: b85cb750bfd93ea4dba0facb8410918b, type: 3}
     - target: {fileID: 919132149155446097, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
       propertyPath: m_Name
       value: Dirt_and_shovel (1)
@@ -3957,13 +3975,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1102437508}
   m_SourcePrefab: {fileID: 100100000, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
 --- !u!4 &1102437506 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
   m_PrefabInstance: {fileID: 1102437505}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1102437507 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 704e8615ea70d714e9a6e373349e6001, type: 3}
+  m_PrefabInstance: {fileID: 1102437505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1102437508
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102437507}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.8
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1132246357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6343,26 +6390,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
-      value: 'Press <sprite="b_hook" index=0 color=#333333> to use
+      value: 'Press <sprite="b_hook" index=0> to use
 
-        your
-        grappling hook
+        your grappling hook
 
-        on targets like this!'
+        on
+        targets like this!'
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogTextBR
-      value: "Pressione <sprite=\"b_hook\" index=0 color=#333333> para usar o seu
-        lan\xE7a-gancho em alvos como esse!"
+      value: "Pressione <sprite=\"b_hook\" index=0> para usar o seu lan\xE7a-gancho
+        em alvos como esse!"
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
-      value: 'Press <sprite="b_hook" index=0 color=#333333> to use
+      value: 'Press <sprite="b_hook" index=0> to use
 
-        your
-        grappling hook
+        your grappling hook
 
-        on targets like this!'
+        on
+        targets like this!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

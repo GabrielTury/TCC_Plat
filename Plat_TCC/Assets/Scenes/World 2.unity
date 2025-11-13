@@ -1743,8 +1743,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6, y: 1.9, z: 3}
-  m_Center: {x: 0.0009661317, y: 0.9366965, z: 0.2835248}
+  m_Size: {x: 1.6, y: 1, z: 2.5}
+  m_Center: {x: 0.0009661318, y: 0.9366965, z: 0.28352484}
 --- !u!1001 &290960866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4726,10 +4726,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2477984391489653312, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: VerticalAxis.Range.x
-      value: -90
-      objectReference: {fileID: 0}
     - target: {fileID: 2588683752055523103, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -4773,34 +4769,6 @@ PrefabInstance:
     - target: {fileID: 3606632591159112417, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
       propertyPath: m_Name
       value: CinemachineCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.DeadZone.Size.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.ScreenPosition.x
-      value: -0.0000000055879354
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.ScreenPosition.y
-      value: 0.000000059604645
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.HardLimits.Size.x
-      value: 0.107339375
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.HardLimits.Size.y
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 5528402807674815931, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Composition.HardLimits.Offset.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918568440868842221, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
-      propertyPath: Lens.FieldOfView
-      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 7918568440868842221, guid: df0a2d41da7ead14b926a02b9af00efa, type: 3}
       propertyPath: Target.TrackingTarget
@@ -8012,8 +7980,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6, y: 1.9, z: 3}
-  m_Center: {x: 0.0009661317, y: 0.9366965, z: 0.2835248}
+  m_Size: {x: 1.6, y: 1, z: 2.5}
+  m_Center: {x: 0.0009661318, y: 0.9366965, z: 0.28352484}
 --- !u!1 &1273338437
 GameObject:
   m_ObjectHideFlags: 0
@@ -9492,24 +9460,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogText
-      value: 'You can also press <sprite="b_hook" index=0 color=#333333> to use
+      value: 'You can also press <sprite="b_hook" index=0> to use
 
-        your
-        grappling hook
+        your grappling
+        hook
 
         on ziplines!'
       objectReference: {fileID: 0}
     - target: {fileID: 6428722152484431424, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: dialogTextBR
-      value: "Voc\xEA tamb\xE9m pode apertar <sprite=\"b_hook\" index=0 color=#333333>\npara
-        usar seu lan\xE7a-ganchos\nem tirolesas!"
+      value: "Voc\xEA tamb\xE9m pode apertar <sprite=\"b_hook\" index=0>\npara usar
+        seu lan\xE7a-ganchos\nem tirolesas!"
       objectReference: {fileID: 0}
     - target: {fileID: 7991627772424384632, guid: a6b494bc01994204ca14d44e5a4a7dc9, type: 3}
       propertyPath: m_text
-      value: 'You can also press <sprite="b_hook" index=0 color=#333333> to use
+      value: 'You can also press <sprite="b_hook" index=0> to use
 
-        your
-        grappling hook
+        your grappling
+        hook
 
         on ziplines!'
       objectReference: {fileID: 0}

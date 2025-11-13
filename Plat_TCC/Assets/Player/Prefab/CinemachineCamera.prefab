@@ -60,7 +60,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60
+    FieldOfView: 70
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -155,14 +155,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Composition:
-    ScreenPosition: {x: 0, y: 0}
+    ScreenPosition: {x: -0.0000000055879354, y: 0.000000059604645}
     DeadZone:
       Enabled: 1
-      Size: {x: 0.05, y: 0.1}
+      Size: {x: 0.05, y: 0.2}
     HardLimits:
       Enabled: 1
-      Size: {x: 0.1, y: 0.2}
-      Offset: {x: 0, y: 0}
+      Size: {x: 0.107339375, y: 0.32}
+      Offset: {x: 0, y: 1}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0.78, z: 0}
   Damping: {x: 0.5, y: 0.5}
