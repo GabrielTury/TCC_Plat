@@ -7,8 +7,9 @@ public class S_Collectible_Objective : MonoBehaviour
 {
 
     [SerializeField] private AudioClip goalCollected;
+    [SerializeField] private GameObject collectVFXPrefab;
 
-    [SerializeField] private GameObject confetti;
+    private GameObject collectedVFX;
 
     [SerializeField]
     private GameObject handPoint;
@@ -43,6 +44,8 @@ public class S_Collectible_Objective : MonoBehaviour
             AudioManager.instance.PlaySFX(goalCollected);
         }
 
+        collectedVFX = Instantiate(collectVFXPrefab, transform.position, Quaternion.identity);
+
         Destroy(GetComponent<S_RotateGear>());
         transform.rotation = Quaternion.identity;
 
@@ -52,8 +55,6 @@ public class S_Collectible_Objective : MonoBehaviour
         transform.localScale = new Vector3(0.005f, 0.005f, 0.005f);
 
         StartCoroutine(LevelChangeDelay());
-
-        confetti.SetActive(true);
     }
 
     private IEnumerator LevelChangeDelay()
