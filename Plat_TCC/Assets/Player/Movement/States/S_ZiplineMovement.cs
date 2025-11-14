@@ -27,7 +27,7 @@ public class S_ZiplineMovement : MonoBehaviour, IMoveState
     }
 
     #region Interface Methods
-    public void Activation()
+    public void Activation(object inputPayload = null)
     {
         anim.SetTrigger("Grapple");
         anim.SetBool("IsGrappling", true);

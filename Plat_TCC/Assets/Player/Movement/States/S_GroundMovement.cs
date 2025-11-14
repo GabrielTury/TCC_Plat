@@ -126,8 +126,12 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         switch (nearestColliderId)
         {
             case "grapple":
+                MovementInputPayload payload = new MovementInputPayload
+                {
+                    inputDirection = movementDirection
+                };
                 ResetMovementInput();
-                playerMovement.ChangeState(typeof(S_GrapplingMovement));
+                playerMovement.ChangeState(typeof(S_GrapplingMovement), payload);
                 break;
             case "zipline":
                 ResetMovementInput();
@@ -288,9 +292,19 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     }
 
 
-    public void Activation()
+    public void Activation(object inputPayload = null)
     {
-        
+        if(inputPayload != null && inputPayload is MovementInputPayload payload)
+        {
+            movementDirection = payload.inputDirection;
+            moving = true;
+
+            if (stopMovement != null)
+            {
+                StopCoroutine(stopMovement);
+                stopMovement = null;
+            }
+        }
     }
 
     public void Move_Cancel(InputAction.CallbackContext obj)

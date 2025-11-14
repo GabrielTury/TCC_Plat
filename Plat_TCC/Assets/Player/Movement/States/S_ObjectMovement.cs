@@ -19,7 +19,7 @@ public class S_ObjectMovement : MonoBehaviour, IMoveState
     [SerializeField]
     private float movableOffset = 0.5f;
     #region Interface Methods
-    public void Activation()
+    public void Activation(object inputPayload = null)
     {
         float nearestDist = 0;
         Collider nearestCollider = null;

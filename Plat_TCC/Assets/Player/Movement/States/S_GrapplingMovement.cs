@@ -113,7 +113,12 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     public void Attack_Cancel(InputAction.CallbackContext obj)
     {
         StopSwing();
-        playerMovement.ChangeState(typeof(S_GroundMovement));
+        MovementInputPayload payload = new MovementInputPayload
+        {
+            inputDirection = this.inputDirection
+        };
+        playerMovement.ChangeState(typeof(S_GroundMovement), payload);
+        ResetInput();
     }
 
     public void Jump_Perform(InputAction.CallbackContext obj)
@@ -188,9 +193,14 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     }
 
-    public void Activation()
+    public void Activation(object inputPayload = null)
     {
         Attack_Perform(new InputAction.CallbackContext());
+        if(inputPayload != null && inputPayload is MovementInputPayload payload)
+        {
+            inputDirection = payload.inputDirection;
+            lastinputDir = inputDirection * -1;
+        }
     }
     #region Swing
     private void StartSwing()
@@ -288,6 +298,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             Destroy(joint);
         else
         {
+            ResetInput();
             playerMovement.ChangeState(typeof(S_GroundMovement)); //case it has no joint (case it missed)
             if (groundMovement != null)
                 groundMovement.RefreshDoubleJump();
@@ -302,8 +313,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         grapplingAnchor.transform.SetParent(beltPoint.transform);
         grapplingAnchor.transform.localPosition = ogAnchorPosition;
         grapplingAnchor.transform.localEulerAngles = ogAnchorRotation;
-        //Reset Input
-        inputDirection = Vector2.zero;
+
     }
     private void SwingMovement()
     {
@@ -381,6 +391,13 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     }
 
 #endregion //Cable Movement
+
+    private void ResetInput()
+    {
+        //Reset Input
+        inputDirection = Vector2.zero;
+        lastinputDir = Vector2.zero;
+    }
     private void DrawLine()
     {
         if (!joint) return;

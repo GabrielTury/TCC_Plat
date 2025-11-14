@@ -54,5 +54,5 @@ public interface IMoveState
     /// </summary>
     public void StateUpdate();
 
-    public void Activation();
+    public void Activation(object inputPayload = null);
 }

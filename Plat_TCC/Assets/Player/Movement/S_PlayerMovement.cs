@@ -227,7 +227,7 @@ public class S_PlayerMovement : MonoBehaviour
             movablesInRange = objs;
         }
     }
-    public void ChangeState(Type state)
+    public void ChangeState(Type state, object payload = null)
     {
         if (!typeof(IMoveState).IsAssignableFrom(state))
         {
@@ -241,7 +241,7 @@ public class S_PlayerMovement : MonoBehaviour
             {                
                 Debug.Log("Changed State to: "+ state.ToString());
                 activeState = s;
-                activeState.Activation();
+                activeState.Activation(payload);
                 break;
             }
         }
@@ -302,4 +302,9 @@ public class S_PlayerMovement : MonoBehaviour
         rb.AddForce(snowballedForce, ForceMode.Force);
         snowballedForce = Vector3.zero;
     }
+}
+
+public struct MovementInputPayload
+{
+       public Vector2 inputDirection;
 }

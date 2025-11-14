@@ -13,7 +13,7 @@ public class S_SlowedMovement : MonoBehaviour, IMoveState
 
     private S_PlayerMovement playerMovement;
     private S_GroundMovement groundMovement;
-    public void Activation()
+    public void Activation(object inputPayload = null)
     {
         originalTimeScale = Time.timeScale;
         Time.timeScale = slowedTimeScale;
