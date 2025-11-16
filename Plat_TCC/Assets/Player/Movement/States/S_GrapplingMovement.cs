@@ -34,9 +34,6 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     #region Grappling Variables
 
-    [Header("Temporary"), Obsolete]
-    public bool enableObsoleteGrappling;
-
     [SerializeField, Tooltip("The maximum distance the player can stay on the rope (this is a multiplier that takes the start position as base, so 0.8 = 80% of the distance from starting point to the attachPoint)"), Range(0, 2)]
     private float maxHangingRangeMultiplier;
 
@@ -122,13 +119,11 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     }
 
     public void Jump_Perform(InputAction.CallbackContext obj)
-    {
-        throw new System.NotImplementedException();
+    {        
     }
 
     public void Jump_Cancel(InputAction.CallbackContext obj)
-    {
-        throw new NotImplementedException();
+    {        
     }
 
     public void Move_Cancel(InputAction.CallbackContext obj)
@@ -255,6 +250,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                 lr.positionCount = 2;
                 currentHookPoint = hookStart.position;
 
+                rb.linearVelocity = Vector3.zero;
                 rb.AddForce((anchorPoint - transform.position) * grappleForce, ForceMode.Impulse);
                 #region Grappling Gun Visuals
                 ogBasePosition = grapplingBase.transform.localPosition;
@@ -336,13 +332,6 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                 lastinputDir = inputDirection;
             }
         }
-
-        /*if (enableObsoleteGrappling)
-        {
-            if (rb.linearVelocity.magnitude > maxSpeed) return;
-
-            rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Force);
-        }*/
     }
 
     private Vector3 GetCameraRelativeDirection()
@@ -402,6 +391,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         //Reset Input
         inputDirection = Vector2.zero;
         lastinputDir = Vector2.zero;
+        grappleTimer = 0;
     }
     private void DrawLine()
     {
