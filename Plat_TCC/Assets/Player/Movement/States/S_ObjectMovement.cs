@@ -100,7 +100,7 @@ public class S_ObjectMovement : MonoBehaviour, IMoveState
         int groundMask = 1 << 6;
         float movableYpos = movable.transform.position.y;
 
-        if(Physics.Raycast(movable.transform.position, Vector3.down, out hit, 5f, groundMask))
+        if(Physics.Raycast(movable.transform.position, Vector3.down, out hit, 10f, groundMask))
         {
             movableYpos = hit.point.y + movableOffset;
         }

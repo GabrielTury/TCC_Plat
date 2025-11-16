@@ -21,7 +21,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     [SerializeField]
     private GameObject handPoint;
     [SerializeField]
-    private GameObject beltPoint, grapplingBase, grapplingAnchor;
+    private GameObject beltPoint, grapplingBase, grapplingAnchor, grapplingHand;
 
     private Vector3 ogBasePosition, ogBaseRotation, ogAnchorPosition, ogAnchorRotation;
 
@@ -164,7 +164,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         {
             SwingMovement();
             CableMovement();
-            GunMovement();
+            //GunMovement();
 
             //Count Timer
             if (grappleTimer < grappleForceCooldown)
@@ -260,9 +260,11 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                 ogBasePosition = grapplingBase.transform.localPosition;
                 ogBaseRotation = grapplingBase.transform.localEulerAngles;                
 
-                //grapplingBase.transform.SetParent(handPoint.transform);
-                //grapplingBase.transform.localPosition = Vector3.zero;
-                //grapplingBase.transform.rotation = Quaternion.identity;
+                grapplingBase.SetActive(false);
+                grapplingHand.SetActive(true);
+                /*grapplingBase.transform.SetParent(handPoint.transform);
+                grapplingBase.transform.localPosition = new Vector3(0.00061f, 0.0011f, 0.00146f);
+                grapplingBase.transform.rotation = Quaternion.Euler(new Vector3(-83.69f - -5.240816f, -311.77f - -25.72303f, 48.662f - -8.098086f));*/
 
                 ogAnchorPosition = grapplingAnchor.transform.localPosition;
                 ogAnchorRotation = grapplingAnchor.transform.localEulerAngles;
@@ -292,9 +294,9 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
     private void StopSwing()
     {
         lr.positionCount = 0;
-        
 
-        if(joint != null)
+
+        if (joint != null)
             Destroy(joint);
         else
         {
@@ -313,6 +315,9 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         grapplingAnchor.transform.SetParent(beltPoint.transform);
         grapplingAnchor.transform.localPosition = ogAnchorPosition;
         grapplingAnchor.transform.localEulerAngles = ogAnchorRotation;
+
+        grapplingBase.SetActive(true);
+        grapplingHand.SetActive(false);
 
     }
     private void SwingMovement()

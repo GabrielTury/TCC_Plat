@@ -327,7 +327,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3215,10 +3215,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6719966718222377910, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
-      propertyPath: angularSpeed
-      value: 900
-      objectReference: {fileID: 0}
     - target: {fileID: 7888798056975644334, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -3491,7 +3487,6 @@ SceneRoots:
   - {fileID: 13202382}
   - {fileID: 1522056222}
   - {fileID: 5908065119027323809}
-  - {fileID: 2877285712752728604}
   - {fileID: 1145426567}
   - {fileID: 1885675865}
   - {fileID: 1137059160}
@@ -3519,3 +3514,4 @@ SceneRoots:
   - {fileID: 1344292582}
   - {fileID: 450329962}
   - {fileID: 484146320}
+  - {fileID: 2877285712752728604}
