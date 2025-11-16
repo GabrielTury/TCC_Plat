@@ -114,6 +114,17 @@ public class S_SaveManager : MonoBehaviour
 
         int maxResolutionIndex = resolutions.FindLastIndex(res => res.width <= Screen.currentResolution.width);
 
+        // print all available resolutions and if they are less than or equal to the current resolution
+        if (maxResolutionIndex > 0)
+        {
+            Debug.LogWarning("Available Resolutions:");
+            for (int i = 0; i < resolutions.Count; i++)
+            {
+                var res = resolutions[i];
+                Debug.LogWarning($"{i}: {res.width}x{res.height} {(res.width <= Screen.currentResolution.width ? "(Supported)" : "(Not Supported)")}");
+            }
+        }
+
         defaultSettings = new SettingsData(maxResolutionIndex, 1, false, 80, 80, "en");
 
         SettingsData loadedSettingsData;
@@ -313,7 +324,7 @@ public class S_SaveManager : MonoBehaviour
     public void SavePlayerData(PlayerData playerData)
     {
         string jsonString = JsonUtility.ToJson(playerData, true);
-        string path = Application.persistentDataPath + "/playerdata.playerdata";
+        string path = Application.persistentDataPath + "/playerdatanew.playerdata";
         File.WriteAllText(path, jsonString);
     }
 
@@ -327,7 +338,7 @@ public class S_SaveManager : MonoBehaviour
         bool worked = true;
         try
         {
-            FileInfo info = dir.GetFiles("playerdata.playerdata")[0];
+            FileInfo info = dir.GetFiles("playerdatanew.playerdata")[0];
             string fileContents = File.ReadAllText(info.FullName);
             var userData = JsonUtility.FromJson<PlayerData>(fileContents);
             return (userData, worked);
@@ -346,7 +357,7 @@ public class S_SaveManager : MonoBehaviour
     public void SaveSettingsData(SettingsData settingsData)
     {
         string jsonString = JsonUtility.ToJson(settingsData, true);
-        string path = Application.persistentDataPath + "/settingsdata.settingsdata";
+        string path = Application.persistentDataPath + "/settingsdatanew.settingsdata";
         File.WriteAllText(path, jsonString);
     }
 
@@ -360,7 +371,7 @@ public class S_SaveManager : MonoBehaviour
         bool worked = true;
         try
         {
-            FileInfo info = dir.GetFiles("settingsdata.settingsdata")[0];
+            FileInfo info = dir.GetFiles("settingsdatanew.settingsdata")[0];
             string fileContents = File.ReadAllText(info.FullName);
             var settingsData = JsonUtility.FromJson<SettingsData>(fileContents);
             return (settingsData, worked);

@@ -43,7 +43,7 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
     private Image flagIcon;
 
     //[SerializeField]
-    private Coroutine[] buttonAnimationCoroutine = new Coroutine[4];
+    private Coroutine[] buttonAnimationCoroutine = new Coroutine[5];
 
     [SerializeField]
     private int lastButtonHighlighted = 0;
@@ -71,6 +71,20 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
     [SerializeField]
     private UIControllerIcons[] inputIcons; // The icons for each input type
+
+    [SerializeField]
+    private TextMeshProUGUI creditsText;
+
+    [SerializeField, TextArea]
+    private string creditsContentEn = "Game developed by:\n\nJohn Doe\nJane Smith\n\nSpecial Thanks to:\nCommunity Contributors\nOpen Source Libraries";
+
+    [SerializeField, TextArea]
+    private string creditsContentBr = "Jogo desenvolvido por:\n\nJohn Doe\nJane Smith\n\nAgradecimentos especiais a:\nColaboradores da comunidade\nBibliotecas de código aberto";
+
+    private bool isInCredits = false;
+
+    [SerializeField]
+    private GameObject creditsPanel;
 
     private void Awake()
     {
@@ -133,6 +147,18 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         ScrollBackgroundShadow(0.001f);
     }
 
+    void DetectMouseMovement()
+    {
+        if (Mouse.current.delta.ReadValue().magnitude > 0.1f)
+        {
+            //Debug.Log("Mouse moved");
+
+            inputGuideIcons.navigateUpDown.sprite = inputIcons[0].updown;
+            inputGuideIcons.confirm.sprite = inputIcons[0].a;
+            inputGuideIcons.cancel.sprite = inputIcons[0].b;
+        }
+    }
+
     private void InitializeSceneObjects()
     {
         mainCamera.transform.position = new Vector3(0, 6, 35);
@@ -142,6 +168,8 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
         gameLogo.rectTransform.anchoredPosition = new Vector2(-570, 750);
         gameLogo.rectTransform.localScale = new Vector2(0, 0);
+
+        creditsPanel.SetActive(false);
 
         int distance = 140;
 
@@ -188,8 +216,8 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         StartCoroutine(HF.SmoothScale(gameLogo, new Vector2(1f, 1f), 1.5f));
 
         // Move the buttons to the left
-        int distance = 140;
-        float[] timeDiff = new float[4] { 1.5f, 1.8f, 2.1f, 2.4f };
+        int distance = 100;
+        float[] timeDiff = new float[5] { 1.5f, 1.8f, 2.1f, 2.4f, 2.6f };
 
         for (int i = 0; i < buttons.Count; i++)
         {
@@ -207,6 +235,7 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
     private void CheckPlayerInput()
     {
+        DetectMouseMovement();
         if (Time.timeSinceLevelLoad < 1.5f || isThisMenuActive == false || mainPanel.anchoredPosition.x < -100)
         {
             return;
@@ -215,7 +244,7 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
         {
             ChangeLanguage();
         }
-        if (inputs.UI.Navigate.WasPressedThisFrame())
+        if (inputs.UI.Navigate.WasPressedThisFrame() & !isInCredits)
         {
             if (inputs.UI.Navigate.ReadValue<Vector2>().y > 0)
             {
@@ -260,17 +289,27 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
             }
         }
 
-        if (inputs.UI.Submit.WasPressedThisFrame() && selectionIndex >= 0 && selectionIndex < buttons.Count)
+        if (inputs.UI.Submit.WasPressedThisFrame() && selectionIndex >= 0 && selectionIndex < buttons.Count & !isInCredits)
         {
             if (buttons[selectionIndex] != null)
             {
                 buttons[selectionIndex].onClick.Invoke();
             }
         }
+
+        if (isInCredits && inputs.UI.Cancel.WasPressedThisFrame())
+        {
+            isInCredits = false;
+            creditsPanel.SetActive(false);
+        }
     }
 
     private void HighlightButton(int buttonIndex)
     {
+        if (isInCredits)
+        {
+            return;
+        }
         if (buttonIndex < 0 || buttonIndex >= buttons.Count || buttons[buttonIndex] == null)
         {
             Debug.LogWarning($"Invalid button index: {buttonIndex}. Skipping highlight.");
@@ -404,23 +443,41 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
     public void ContinueGame()
     {
+        if (isInCredits) { return; }
         S_TransitionManager.instance.GoToLevel("HubWorld");
     }
 
     public void NewGame()
     {
+        if (isInCredits) { return; }
         S_SaveManager.instance.ResetPlayerData();
         S_TransitionManager.instance.GoToLevel("HubWorld");
     }
 
+    public void OpenCredits()
+    {
+        if (isInCredits) { return; }
+        isInCredits = true;
+        creditsPanel.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        if (!isInCredits) { return; }
+        isInCredits = false;
+        creditsPanel.SetActive(false);
+    }
+
     public void QuitGame()
     {
+        if (isInCredits) { return; }
         Application.Quit();
         Debug.Log("Quit Game");
     }
 
     public void ChangeLanguage()
     {
+        if (isInCredits) { return; }
         if (currentLanguage == "en")
         {
             currentLanguage = "br";
@@ -452,11 +509,14 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
             
             buttons[1].GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
             buttons[2].GetComponentInChildren<TextMeshProUGUI>().text = "Settings";
-            buttons[3].GetComponentInChildren<TextMeshProUGUI>().text = "Quit Game";
+            buttons[3].GetComponentInChildren<TextMeshProUGUI>().text = "Credits";
+            buttons[4].GetComponentInChildren<TextMeshProUGUI>().text = "Quit Game";
 
             inputGuideText[0].text = "Navigate";
             inputGuideText[1].text = "Confirm";
             inputGuideText[2].text = "Return";
+
+            creditsText.text = creditsContentEn;
         }
         else if (currentLanguage == "br")
         {
@@ -466,17 +526,21 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
             }
             buttons[1].GetComponentInChildren<TextMeshProUGUI>().text = "Novo Jogo";
             buttons[2].GetComponentInChildren<TextMeshProUGUI>().text = "Configurações";
-            buttons[3].GetComponentInChildren<TextMeshProUGUI>().text = "Sair do Jogo";
+            buttons[3].GetComponentInChildren<TextMeshProUGUI>().text = "Créditos";
+            buttons[4].GetComponentInChildren<TextMeshProUGUI>().text = "Sair do Jogo";
 
             inputGuideText[0].text = "Navegar";
             inputGuideText[1].text = "Confirmar";
             inputGuideText[2].text = "Voltar";
+
+            creditsText.text = creditsContentBr;
         }
 
         flagIcon.sprite = currentLanguage == "en" ? flagImages[0] : flagImages[1];
     }
     public void ResumeOperation()
     {
+        if (isInCredits) { return; }
         isThisMenuActive = true;
         if (mainMenuAnimationCoroutine != null)
         {
@@ -487,6 +551,7 @@ public class S_MainMenuManager : MonoBehaviour, IMenuCaller
 
     public void OpenSettingsMenu()
     {
+        if (isInCredits) { return; }
         if (mainMenuAnimationCoroutine != null)
         {
             StopCoroutine(mainMenuAnimationCoroutine);

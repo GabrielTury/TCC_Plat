@@ -163,6 +163,18 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
         ScrollBackgroundShadow(0.001f);
     }
 
+    void DetectMouseMovement()
+    {
+        if (Mouse.current.delta.ReadValue().magnitude > 0.1f)
+        {
+            //Debug.Log("Mouse moved");
+
+            inputGuideIcons.navigateUpDown.sprite = inputIcons[0].updown;
+            inputGuideIcons.confirm.sprite = inputIcons[0].a;
+            inputGuideIcons.cancel.sprite = inputIcons[0].b;
+        }
+    }
+
     /*
     private void ManageOffset()
     {
@@ -233,6 +245,8 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
     private void CheckPlayerInput()
     {
+        DetectMouseMovement();
+
         S_MissionSelectManager missionSelectManager = FindFirstObjectByType<S_MissionSelectManager>();
 
         if (inputs.UI.Pause.WasPressedThisFrame() & missionSelectManager == null)
