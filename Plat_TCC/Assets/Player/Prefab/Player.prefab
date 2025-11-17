@@ -1450,7 +1450,6 @@ MonoBehaviour:
   grappable:
     serializedVersion: 2
     m_Bits: 128
-  enableObsoleteGrappling: 0
   maxHangingRangeMultiplier: 0.7
   minHangingRangeMultiplier: 0.2
   rotationSpeed: 20
@@ -1495,9 +1494,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1aae55a48aded44b7bdf954c941326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectSpeed: 2
-  objectDistance: 2
-  maxObjectDistance: 6
+  objectSpeed: 10
+  objectDistance: 4
+  maxObjectDistance: 7
   movableOffset: 0.5
 --- !u!114 &7888798056975644334
 MonoBehaviour:
