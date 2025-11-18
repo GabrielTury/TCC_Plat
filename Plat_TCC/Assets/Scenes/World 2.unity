@@ -1861,11 +1861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4167725391824508682, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: movableOffset
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4167725391824508682, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
-      propertyPath: objectDistance
-      value: 3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6415675410843183998, guid: 294ee10b25020ab4b8625423630f86c9, type: 3}
       propertyPath: m_Name
@@ -10616,11 +10612,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.1
+  far clip plane: 5000
   field of view: 70
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10720,8 +10716,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911557123}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11445008, y: 0.0000000104764935, z: -0.0000000012069666, w: 0.993429}
-  m_LocalPosition: {x: -5, y: 23.307056, z: -83.75717}
+  m_LocalRotation: {x: 0.022933302, y: 0.19633831, z: -0.0045933714, w: 0.9802573}
+  m_LocalPosition: {x: -9.5445175, y: 24.8568, z: -85.10958}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
