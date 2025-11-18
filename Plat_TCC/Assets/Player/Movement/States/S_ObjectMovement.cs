@@ -18,6 +18,9 @@ public class S_ObjectMovement : MonoBehaviour, IMoveState
     private float maxObjectDistance = 6;
     [SerializeField]
     private float movableOffset = 0.5f;
+
+    [Header("Visuals"), SerializeField]
+    private Transform hand;
     #region Interface Methods
     public void Activation(object inputPayload = null)
     {
@@ -114,7 +117,7 @@ public class S_ObjectMovement : MonoBehaviour, IMoveState
     public void StateUpdate()
     {
         Vector3 pos = movable.transform.position;
-        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(0, hand.position);
         lineRenderer.SetPosition(1, pos);
     }
     #endregion // Interface Methods

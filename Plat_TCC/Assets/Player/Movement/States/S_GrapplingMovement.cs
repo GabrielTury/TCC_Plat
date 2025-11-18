@@ -115,6 +115,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             inputDirection = this.inputDirection
         };
         playerMovement.ChangeState(typeof(S_GroundMovement), payload);
+        groundMovement.RefreshDoubleJump();
         ResetInput();
     }
 
@@ -138,19 +139,10 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         if(lastinputDir == Vector2.zero)
             lastinputDir = inputDirection * -1;
 
-        /*float dotProd = Vector3.Dot(inputDirection, lastinputDir);
-
-        if ( dotProd < 0.5 && grappleTimer >= grappleForceCooldown)
-        {
-            rb.AddForce(GetCameraRelativeDirection() * moveForce, ForceMode.Impulse);
-            grappleTimer = 0;
-            lastinputDir = inputDirection;
-        }*/
-
     }
     public void Skill_Perform(InputAction.CallbackContext obj)
     {
-        //playerMovement.ChangeState(typeof(S_SlowedMovement));
+        
     }
 
     public void StateFixedUpdate()
@@ -298,8 +290,6 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
         {
             ResetInput();
             playerMovement.ChangeState(typeof(S_GroundMovement)); //case it has no joint (case it missed)
-            if (groundMovement != null)
-                groundMovement.RefreshDoubleJump();
         }
 
         anim.SetBool("IsGrappling", false);

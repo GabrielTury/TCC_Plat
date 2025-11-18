@@ -261,7 +261,6 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
             Vector3 gravity = rb.linearVelocity;
             gravity.y = accelDown;
             rb.linearVelocity = gravity;
-            //rb.AddForce(Vector3.down * gravityForce,ForceMode.Acceleration);
     }
 
     private void ApplyPlatformMovement()
@@ -449,6 +448,8 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     public void RefreshDoubleJump()
     {
         doubleJump = false;
+        doubleJumping = false;
+        jump = false;
     }
 
     private void ResetMovementInput()
