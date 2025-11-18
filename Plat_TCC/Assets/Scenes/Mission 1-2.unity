@@ -1194,15 +1194,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4331267173634200277, guid: f4d61cff7b4933f44906ddd9e44c257b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.66239
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4331267173634200277, guid: f4d61cff7b4933f44906ddd9e44c257b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -80
+      value: -70
       objectReference: {fileID: 0}
     - target: {fileID: 4331267173634200277, guid: f4d61cff7b4933f44906ddd9e44c257b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 98.09501
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4331267173634200277, guid: f4d61cff7b4933f44906ddd9e44c257b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1232,6 +1232,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5239564460315728876, guid: f4d61cff7b4933f44906ddd9e44c257b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 190aa5d67c00c494784e8371caa546a6, type: 2}
     - target: {fileID: 7061440509253776846, guid: f4d61cff7b4933f44906ddd9e44c257b, type: 3}
       propertyPath: m_Name
       value: Fog
