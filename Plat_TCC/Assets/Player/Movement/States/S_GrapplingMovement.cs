@@ -251,7 +251,7 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
                 currentHookPoint = hookStart.position;
 
                 rb.linearVelocity = Vector3.zero;
-                rb.AddForce((anchorPoint - transform.position) * grappleForce, ForceMode.Impulse);
+                rb.AddForce((anchorPoint - transform.position).normalized * grappleForce, ForceMode.Impulse);
                 #region Grappling Gun Visuals
                 ogBasePosition = grapplingBase.transform.localPosition;
                 ogBaseRotation = grapplingBase.transform.localEulerAngles;                
