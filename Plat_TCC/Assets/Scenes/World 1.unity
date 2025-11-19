@@ -9081,14 +9081,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: VentilatorGround (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5190835241705604109, guid: ca81e6736737b7a4981d1b9a77714bbb, type: 3}
-      propertyPath: m_Size.y
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 5190835241705604109, guid: ca81e6736737b7a4981d1b9a77714bbb, type: 3}
-      propertyPath: m_Center.y
-      value: 10.825851
-      objectReference: {fileID: 0}
     - target: {fileID: 9024702075807880893, guid: ca81e6736737b7a4981d1b9a77714bbb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.27
@@ -11028,11 +11020,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 5000
+  near clip plane: 0.3
+  far clip plane: 1000
   field of view: 70
   orthographic: 0
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -11056,8 +11048,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990939130}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.18420765, y: 0.004865023, z: 0.0009117888, w: 0.98287493}
-  m_LocalPosition: {x: -2.6278994, y: -22.481113, z: -43.649246}
+  m_LocalRotation: {x: 0.11445003, y: 0.00000012009143, z: -0.000000013835381, w: 0.993429}
+  m_LocalPosition: {x: -2.51, y: -16.992943, z: -41.27717}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
