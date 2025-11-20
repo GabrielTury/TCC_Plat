@@ -23,12 +23,9 @@ public class S_Collectible : MonoBehaviour
         S_LevelManager.instance.AddCollectible("Apple", 1);
         AudioManager.instance.PlaySFX(appleCollected);
 
-        if (collectVFXPrefab != null)
-            collectedVFX = Instantiate(collectVFXPrefab, transform.position, Quaternion.identity);
+        collectedVFX = Instantiate(collectVFXPrefab, transform.position, Quaternion.identity);
 
-        mesh.enabled = false;
-        collider.enabled = false;
-        StartCoroutine(DestroyObject());
+        Destroy(gameObject);
     }
 
     private IEnumerator DestroyObject()
