@@ -803,7 +803,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 679.3521, y: 924.8406}
+  m_SizeDelta: {x: 869.4079, y: 924.8406}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &356879191
 MonoBehaviour:
@@ -3278,7 +3278,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 269.96, y: 389}
+  m_AnchoredPosition: {x: 360, y: 389}
   m_SizeDelta: {x: 95.21, y: 95.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1459188407
@@ -4146,7 +4146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -348}
+  m_AnchoredPosition: {x: 0, y: -355}
   m_SizeDelta: {x: 214.0386, y: 107.7737}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1665317001
@@ -4226,8 +4226,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 635.137, y: 840.0062}
+  m_AnchoredPosition: {x: 0, y: 54}
+  m_SizeDelta: {x: 745.1695, y: 840.0062}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1700856273
 MonoBehaviour:
@@ -4249,28 +4249,45 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Team</b>
+  m_text: '<b>Raider and the City in the Sky</b>
 
 
-    Artur Amorim
-
-    Gabriel Tury
-
-    Gabriel Woiciekoski
-
-    Mateus
-    Torres
-
-    Ryann Thierry Passos
-
-    Vitor Hickmann
+    <b>Team</b>
 
 
-    <b>Assets</b>
+    Artur Amorim:
+    3D Assets
+
+    Gabriel Tury: Team Lead, Main Programmer
+
+    Gabriel Woiciekoski:
+    Audio, VFX
+
+    Mateus Torres: Game Design, Level Design, 3D Assets
+
+    Ryann
+    Thierry Passos: UI/UX, Programmer
+
+    Vitor Hickmann: 3D Assets
 
 
-    Fantasy
-    Skybox FREE by Render Knight
+    <b>Special
+    Thanks</b>
+
+
+    Playtesters
+
+
+    <b>Tools and Assets</b>
+
+
+    Unity 6, Blender,
+    Photoshop
+
+    Substance, Visual Studio, FontForge
+
+    Fantasy Skybox FREE by
+    Render Knight
 
     Info Story by Khurasan'
   m_isRightToLeft: 0
@@ -4299,8 +4316,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6557,63 +6574,58 @@ PrefabInstance:
       objectReference: {fileID: 1609500654}
     - target: {fileID: 7096743370081029852, guid: fbde4092d1260b847a87031e38dfbb8c, type: 3}
       propertyPath: creditsContentBr
-      value: '<b>Equipe</b>
-
-
-        Artur Amorim
-
-        Gabriel Tury
-
-        Gabriel
-        Woiciekoski
-
-        Mateus Torres
-
-        Ryann Thierry Passos
-
-        Vitor
-        Hickmann
-
-
-        <b>Recursos</b>
-
-
-        Fantasy Skybox FREE por Render
-        Knight
-
-        Info Story por Khurasan
-
-'
+      value: "<b>Raider and the City in the Sky</b>\r\n\r\n<b>Equipe</b>\r\n\r\nArtur
+        Amorim: Assets 3D\r\nGabriel Tury: L\xEDder da Equipe, Programador Principal\r\nGabriel
+        Woiciekoski: Audio, VFX\r\nMateus Torres: Game Design, Level Design, Assets
+        3D\r\nRyann Thierry Passos: UI/UX, Programador\r\nVitor Hickmann: Assets
+        3D\r\n\r\n<b>Agradecimentos Especiais</b>\r\n\r\nPlaytesters\r\n\r\n<b>Ferramentas
+        e Assets</b>\r\n\r\nUnity 6, Blender, Photoshop\r\nSubstance, Visual Studio,
+        FontForge\r\nFantasy Skybox FREE por Render Knight\r\nInfo Story por Khurasan"
       objectReference: {fileID: 0}
     - target: {fileID: 7096743370081029852, guid: fbde4092d1260b847a87031e38dfbb8c, type: 3}
       propertyPath: creditsContentEn
-      value: '<b>Team</b>
+      value: '<b>Raider and the City in the Sky</b>
 
 
-        Artur Amorim
+        <b>Team</b>
 
-        Gabriel Tury
+
+        Artur
+        Amorim: 3D Assets
+
+        Gabriel Tury: Team Lead, Main Programmer
 
         Gabriel
-        Woiciekoski
+        Woiciekoski: Audio, VFX
 
-        Mateus Torres
+        Mateus Torres: Game Design, Level Design,
+        3D Assets
 
-        Ryann Thierry Passos
+        Ryann Thierry Passos: UI/UX, Programmer
 
         Vitor
-        Hickmann
+        Hickmann: 3D Assets
 
 
-        <b>Assets</b>
+        <b>Special Thanks</b>
 
 
-        Fantasy Skybox FREE by Render
-        Knight
+        Playtesters
 
-        Info Story by Khurasan
 
-'
+        <b>Tools
+        and Assets</b>
+
+
+        Unity 6, Blender, Photoshop
+
+        Substance,
+        Visual Studio, FontForge
+
+        Fantasy Skybox FREE by Render Knight
+
+        Info
+        Story by Khurasan'
       objectReference: {fileID: 0}
     - target: {fileID: 7096743370081029852, guid: fbde4092d1260b847a87031e38dfbb8c, type: 3}
       propertyPath: buttons.Array.size
