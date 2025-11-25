@@ -13,7 +13,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
     private Camera cam;
 
     private S_PlayerMovement playerMovement;
-    private S_GrapplingMovement grapplingMovement;//see S_PlayerMovement ChangeState() note
+
     #endregion
     #region Movement Variables
     [Header("Ground Movement")]
@@ -343,8 +343,7 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         anim = GetComponent<Animator>();
         cam = Camera.main;
 
-        playerMovement = GetComponent<S_PlayerMovement>();
-        grapplingMovement = GetComponent<S_GrapplingMovement>();
+        playerMovement = GetComponent<S_PlayerMovement>();        
         coyoteTime /= 1000; //Convert to miliseconds
     }
 
@@ -458,6 +457,11 @@ public class S_GroundMovement : MonoBehaviour, IMoveState
         moving = false;
         movingTime = 0;
         rb.angularVelocity = Vector3.zero;
+        if (stopMovement != null)
+        {
+            StopCoroutine(stopMovement);
+            stopMovement = null;
+        }
     }
 
 #if UNITY_EDITOR

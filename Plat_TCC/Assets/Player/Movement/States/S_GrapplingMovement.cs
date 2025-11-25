@@ -71,9 +71,6 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
 
     private float grappleTimer = 0;
 
-    [SerializeField]
-    private float maxSpeed;
-
     [InspectorLabel("Hook Extend Speed")]
     [SerializeField, Tooltip("Speed which the player can extend the cable")]
     private float cableSpeed;
@@ -156,11 +153,12 @@ public class S_GrapplingMovement : MonoBehaviour, IMoveState
             //Count Timer
             if (grappleTimer < grappleForceCooldown)
                 grappleTimer += Time.fixedDeltaTime;
-
-            anchorPoint = closestCollider.transform.position;
-
-            joint.connectedAnchor = anchorPoint;
-
+            Vector3 closestColPos = closestCollider.transform.position;
+            if(anchorPoint != closestColPos)
+            {
+                anchorPoint = closestColPos;
+                joint.connectedAnchor = anchorPoint;
+            }
 
             Vector3 moveDir = GetCameraRelativeDirection();
 
