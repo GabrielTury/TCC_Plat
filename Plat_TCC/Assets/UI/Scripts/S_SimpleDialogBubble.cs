@@ -81,15 +81,19 @@ public class S_SimpleDialogBubble : MonoBehaviour
             var lastControl = inputAction.activeControl;
             var lastDevice = lastControl.device;
 
+            //Debug.Log("Last device: " + lastDevice.displayName);
+            //Debug.Log("Device description: " + lastDevice.description);
+            //Debug.Log("Device manufacturer: " + lastDevice.description.manufacturer);
+
             // Or you can check the device type directly
             if (lastDevice is Gamepad)
             {
                 // Check for specific gamepad types
-                if (lastDevice.description.manufacturer.Contains("Sony"))
+                if (lastDevice.description.manufacturer.Contains("Sony") || lastDevice.displayName.Contains("Play"))
                 {
                     iconIndex = 2;
                 }
-                else if (lastDevice.description.manufacturer.Contains("Microsoft"))
+                else if (lastDevice.description.manufacturer.Contains("Microsoft") || lastDevice.displayName.Contains("Xbox"))
                 {
                     // Xbox controller
                     iconIndex = 1;
@@ -97,7 +101,7 @@ public class S_SimpleDialogBubble : MonoBehaviour
                 else
                 {
                     // Generic gamepad
-                    iconIndex = 0;
+                    iconIndex = 1;
                 }
             }
             else if (lastDevice is Keyboard)

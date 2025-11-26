@@ -126,17 +126,17 @@ public class S_WorldPortal : MonoBehaviour
                 if (lastDevice.description.manufacturer.Contains("Sony"))
                 {
                     // PlayStation controller
-                    inputGuideIcons.confirm.sprite = inputIcons[2].a;
+                    inputGuideIcons.confirm.sprite = inputIcons[1].a;
                 }
-                else if (lastDevice.description.manufacturer.Contains("Microsoft"))
+                else if (lastDevice.description.manufacturer.Contains("Microsoft") || lastDevice.displayName.Contains("Xbox"))
                 {
                     // Xbox controller
-                    inputGuideIcons.confirm.sprite = inputIcons[1].a;
+                    inputGuideIcons.confirm.sprite = inputIcons[2].a;
                 }
                 else
                 {
                     // Generic gamepad
-                    inputGuideIcons.confirm.sprite = inputIcons[1].a;
+                    inputGuideIcons.confirm.sprite = inputIcons[2].a;
                 }
             }
             else if (lastDevice is Keyboard)
