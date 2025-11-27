@@ -348,13 +348,34 @@ public class S_PauseManager : MonoBehaviour, IMenuCaller
 
             if (missionIndex == 1)
             {
-                AddCollectibleTracking(2, 3); // Keys: 0/1
+                AddCollectibleTracking(2, 3); // Keys: 0/3
+                UpdateCollectibleTracking(2, 0);
+            }
+
+            //if (missionIndex == 2)
+            //{
+            //    AddCollectibleTracking(2, 0); // Keys: 0/0
+            //    UpdateCollectibleTracking(2, 0);
+            //}
+        }
+
+        if (worldInfo.worldId == 2)
+        {
+            //if (missionIndex == 0)
+            //{
+            //    AddCollectibleTracking(2, 0); // Keys: 0/0
+            //    UpdateCollectibleTracking(2, 0);
+            //}
+
+            if (missionIndex == 1)
+            {
+                AddCollectibleTracking(2, 1); // Keys: 0/1
                 UpdateCollectibleTracking(2, 0);
             }
 
             if (missionIndex == 2)
             {
-                AddCollectibleTracking(2, 0); // Keys: 0/1
+                AddCollectibleTracking(2, 3); // Keys: 0/3
                 UpdateCollectibleTracking(2, 0);
             }
         }
