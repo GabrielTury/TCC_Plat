@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8143434577758190957}
@@ -93,9 +93,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   path:
-  - {x: -45.27, y: 0.4, z: 4.73}
-  - {x: -39.5, y: 0.75, z: 0.24}
-  - {x: -36.06, y: 0.75, z: 4}
+  - {x: 50.100002, y: -0.5, z: 30.44}
+  - {x: 50.100002, y: -0.5, z: 17.68}
+  - {x: 37.58, y: -0.5, z: 17.68}
+  - {x: 37.58, y: -0.5, z: 30.44}
   handler: {fileID: 0}
 --- !u!1001 &4683010416138997997
 PrefabInstance:
@@ -162,6 +163,84 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8259747277046012631, guid: f384b1a90458bb94e994aeb80492e173, type: 3}
   m_PrefabInstance: {fileID: 4683010416138997997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6927602694222990443
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7197126791897722471}
+    m_Modifications:
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.016666666
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.016666666
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.016666666
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.019848093
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00034182006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000008940697
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -6.123235e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -6.1232336e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3374922645391279076, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+      propertyPath: m_Name
+      value: Fruit (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+--- !u!4 &9172479145099115070 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2263332440950765141, guid: 3fed7974fb2a8ac449df4a04523b21d0, type: 3}
+  m_PrefabInstance: {fileID: 6927602694222990443}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8541626342625876614
 PrefabInstance:
@@ -241,7 +320,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -7680705235209734943, guid: f2c63c9e039910d4097429c48beff7e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9172479145099115070}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f2c63c9e039910d4097429c48beff7e8, type: 3}
       insertIndex: -1
@@ -256,6 +338,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1009217220743389198}
   m_SourcePrefab: {fileID: 100100000, guid: f2c63c9e039910d4097429c48beff7e8, type: 3}
+--- !u!4 &7197126791897722471 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7680705235209734943, guid: f2c63c9e039910d4097429c48beff7e8, type: 3}
+  m_PrefabInstance: {fileID: 8541626342625876614}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8143434577758190957 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f2c63c9e039910d4097429c48beff7e8, type: 3}
@@ -336,7 +423,7 @@ AudioSource:
   m_GameObject: {fileID: 8811462231164757975}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6777605474915160019, guid: d5eec1078d8ff514c8cbcddf0782c9db, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -360,7 +447,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0.3888889
-      value: 0.5
+      value: 0.1
       inSlope: -0.41746286
       outSlope: -0.41746286
       tangentMode: 0

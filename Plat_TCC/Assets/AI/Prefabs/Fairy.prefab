@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &484247149756409160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3362324144740349067}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3362324144740349067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484247149756409160}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.56, y: 0, z: 3.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 873179754251600471}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7528343054600244832
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,11 +61,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.91, y: 6.23, z: 1.08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1699662760912006270}
   - {fileID: 6046565628573284460}
+  - {fileID: 3362324144740349067}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &943550420893953238
@@ -60,10 +92,10 @@ MonoBehaviour:
   speed: 5
   angularSpeed: 180
   path:
-  - {x: -13.83, y: 6, z: 4.73}
-  - {x: -21.47, y: 6, z: 5.86}
-  - {x: -21.47, y: 6, z: -5.74}
-  pathEditor: {fileID: 0}
+  - {x: -75.28, y: 4, z: 231.8}
+  - {x: -104.4, y: 4, z: 237.94}
+  knockBackForce: 20
+  pathEditor: {fileID: 484247149756409160}
 --- !u!135 &4511173315266149900
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -95,7 +127,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6777605474915160019, guid: d5eec1078d8ff514c8cbcddf0782c9db, type: 2}
-  m_audioClip: {fileID: 8300000, guid: bc9b4d15a44cc1344b0ee152dcae0a26, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: bc9b4d15a44cc1344b0ee152dcae0a26, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
